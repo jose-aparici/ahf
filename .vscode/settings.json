@@ -1,0 +1,55 @@
+{
+  // Now, vscode won't provide the "disable eslint rule" whenever a lint error appears
+  "eslint.codeAction.disableRuleComment": {
+    "enable": false
+  },
+
+  // We want imports sorted and prettier and eslint are not responsible for that (ESlint is working on it so in the future...)
+  "importSorter.generalConfiguration.sortOnBeforeSave": true,
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.type": "newLineEachExpressionAfterCountLimitExceptIfOnlyOne",
+  "importSorter.importStringConfiguration.maximumNumberOfImportExpressionsPerLine.count": 80,
+  "importSorter.importStringConfiguration.trailingComma": "multiLine",
+  "importSorter.importStringConfiguration.tabSize": 2,
+  "importSorter.sortConfiguration.removeUnusedImports": true,
+  "importSorter.sortConfiguration.customOrderingRules.rules": [
+    {
+      "type": "importMember",
+      "regex": "^$",
+      "orderLevel": 10,
+      "disableSort": true
+    },
+    {
+      "regex": "^[@]",
+      "orderLevel": 30
+    },
+    {
+      "regex": "^(api|domain|modules|pages|services|styles)",
+      "orderLevel": 40
+    },
+    {
+      "regex": "^[.]",
+      "orderLevel": 50
+    }
+  ],
+
+  "editor.tabSize": 2,
+  // This is a new vscode rule that gives us more flexibility (theorically)
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  // Since we want json files to be formatted as well and the previous rule is not enough, we need this rule
+  "editor.formatOnSave": true,
+  // The following rules prevent the formatter to run twice. 1 the editor, 2 ESLint. We only need ESLint for these files.
+  "[javascript]": {
+    "editor.formatOnSave": false
+  },
+  "[javascriptreact]": {
+    "editor.formatOnSave": false
+  },
+  "[typescript]": {
+    "editor.formatOnSave": false
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": false
+  }
+}
