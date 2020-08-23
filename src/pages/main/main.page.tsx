@@ -1,13 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 
-import { AhFPage } from '../ahf.page';
-import { AppRoutes } from '../App.routes';
+import { AhfMainContainer } from 'modules/main/main.container';
+import { AhFPage } from 'pages/ahf.page';
 
 export const AhfMainPage: React.FC = () => {
   return (
     <AhFPage>
-      <Link to={AppRoutes.CarouselPage}>Carousel</Link>
+      <AhfMainContainer />
     </AhFPage>
   );
 };
