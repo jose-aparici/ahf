@@ -3,19 +3,18 @@ import SwipeableViews from 'react-swipeable-views';
 
 import { Carousel } from 'domain/carousel/carouse.type';
 
-import { AhfCarouselItemContainer } from './item/carousel.item.cotainer';
+import { useCarousel } from './carousel.hook';
+import { AhfCarouselItemContainer } from './item/carousel.item.container';
 
 export const AhfCarouselContainer: React.FC = () => {
   const [carousel, setCarousel] = useState<Carousel>({ items: [] });
+  const { retrieveCarouselData } = useCarousel();
 
   useEffect(() => {
-    setCarousel({
-      items: [
-        { cards: [{ title: 'title1', description: 'description1' }] },
-        { cards: [{ title: 'title2', description: 'description2' }] },
-      ],
-    });
+    const carouselData$ = retrieveCarouselData().subscribe(setCarousel);
+    return () => carouselData$.unsubscribe();
   }, []);
+
   return (
     <SwipeableViews enableMouseEvents>
       {carousel.items.map((item, index) => (
