@@ -5,6 +5,7 @@ export const useAhfPageStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     minHeight: '100vh',
     flexDirection: 'column',
+    background: theme.palette.background.default,
   },
   container: {
     padding: '64px 0px',
