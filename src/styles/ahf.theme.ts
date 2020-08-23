@@ -10,5 +10,8 @@ export const ahfTheme = createMuiTheme({
     secondary: {
       main: AHF_COLORS.main.secondary,
     },
+    background: {
+      default: AHF_COLORS.background,
+    },
   },
 });
