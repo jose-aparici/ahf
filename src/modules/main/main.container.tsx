@@ -4,5 +4,5 @@ import { Link } from 'react-router-dom';
 import { AppRoutes } from 'pages/App.routes';
 
 export const AhfMainContainer: React.FC = () => (
-  <Link to={AppRoutes.ParamsGroupsPage}>Carousel</Link>
+  <Link to={AppRoutes.ParamsGroupsPage}>Parameters group</Link>
 );
