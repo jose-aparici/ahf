@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
-import { AhfCarouselPage } from 'pages/carousel/carousel.page';
+import { AhfParamsGroupsPage } from 'pages/params-groups/params-groups.page';
 
 import { AppRoutes } from './pages/App.routes';
 import { AhfMainPage } from './pages/main/main.page';
@@ -12,9 +12,9 @@ const App: React.FC = () => {
       <Switch>
         <Route path={AppRoutes.MainPage} exact component={AhfMainPage} />
         <Route
-          path={AppRoutes.CarouselPage}
+          path={AppRoutes.ParamsGroupsPage}
           exact
-          component={AhfCarouselPage}
+          component={AhfParamsGroupsPage}
         />
       </Switch>
     </BrowserRouter>
