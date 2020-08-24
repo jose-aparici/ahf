@@ -1,4 +1,4 @@
 export const AppRoutes = {
   MainPage: '/',
-  CarouselPage: '/carousel',
+  ParamsGroupsPage: '/params-groups',
 };

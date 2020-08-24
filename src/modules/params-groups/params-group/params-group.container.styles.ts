@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useCarouselItemContainerStyles = makeStyles(() => ({
+export const useParamsGroupContainerStyles = makeStyles(() => ({
   gridContainer: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
