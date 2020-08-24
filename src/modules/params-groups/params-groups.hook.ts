@@ -1,6 +1,6 @@
 import { Observable } from 'rxjs';
 
-import { getParamsGroup } from 'api/params-group.api';
+import { getParamsGroups } from 'api/params-groups.api';
 import { ParamsGroup } from 'domain/params-group/params-group.type';
 
 interface ParamsGroupsHook {
@@ -8,7 +8,7 @@ interface ParamsGroupsHook {
 }
 
 const retrieveParamsGroupsData = (): Observable<Array<ParamsGroup>> =>
-  getParamsGroup();
+  getParamsGroups();
 
 export const useParamsGroups = (): ParamsGroupsHook => {
   return {
