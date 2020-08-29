@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { ParamsGroup } from 'domain/device/params-group.type';
+import { AppRoutes } from 'pages/App.routes';
 
 import { AhfDeviceCarouselContainer } from './carousel/device-carousel.container';
 import { useDevice } from './device.hook';
@@ -16,5 +18,10 @@ export const AhfDeviceContainer: React.FC = () => {
     return () => paramsGroupsData$.unsubscribe();
   }, [retrieveParamsGroupsData]);
 
-  return <AhfDeviceCarouselContainer paramsGroups={paramsGroups} />;
+  return (
+    <>
+      <Link to={AppRoutes.DevicesPage}> Devices</Link>
+      <AhfDeviceCarouselContainer paramsGroups={paramsGroups} />
+    </>
+  );
 };

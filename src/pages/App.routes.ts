@@ -1,3 +1,5 @@
 export const AppRoutes = {
-  DevicePage: '/',
+  MainPage: '/',
+  DevicesPage: '/devices',
+  DevicePage: '/devices/:id',
 };
