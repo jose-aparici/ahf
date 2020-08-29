@@ -1,6 +1,6 @@
 import { Observable, of } from 'rxjs';
 
-import { ParamsGroup } from 'domain/params-group/params-group.type';
+import { ParamsGroup } from 'domain/device/params-group.type';
 
 export const getParamsGroups = (): Observable<Array<ParamsGroup>> =>
   of([
