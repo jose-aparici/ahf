@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
 
-import { Param } from 'domain/device/params-group.type';
+import { Param } from 'domain/param/param.types';
 
 interface Props {
   param: Param;

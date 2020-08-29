@@ -1,17 +1,16 @@
 import { Observable } from 'rxjs';
 
-import { getParamsGroups } from 'api/params-groups.api';
-import { ParamsGroup } from 'domain/device/params-group.type';
+import { getDeviceData } from 'api/device.api';
+import { Device } from 'domain/device/device.types';
 
 interface DeviceHook {
-  retrieveParamsGroupsData: () => Observable<Array<ParamsGroup>>;
+  retrieveDeviceData: () => Observable<Device>;
 }
 
-const retrieveParamsGroupsData = (): Observable<Array<ParamsGroup>> =>
-  getParamsGroups();
+const retrieveDeviceData = (): Observable<Device> => getDeviceData();
 
 export const useDevice = (): DeviceHook => {
   return {
-    retrieveParamsGroupsData,
+    retrieveDeviceData,
   };
 };
