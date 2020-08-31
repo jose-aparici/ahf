@@ -1,4 +1,5 @@
-import React from 'react';
+import { useSocketHook } from 'hooks/socket-hook';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { AppRoutes } from 'pages/App.routes';
@@ -6,6 +7,11 @@ import { AhfDevicePage } from 'pages/device/device.page';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 
 const App: React.FC = () => {
+  const { init, scan } = useSocketHook();
+  useEffect(() => {
+    init();
+    scan();
+  }, [init, scan]);
   return (
     <BrowserRouter>
       <Switch>
