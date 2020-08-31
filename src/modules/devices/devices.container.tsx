@@ -10,11 +10,14 @@ export const AhfDevicesContainer: React.FC = () => {
 
   return (
     <>
-      {Object.keys(state.devices).map((deviceKey, index) => (
-        <Link key={index} to={`${AppRoutes.DevicesPage}/${deviceKey}`}>
-          {(state.devices[+deviceKey].info as DevInfo).ID}
-        </Link>
-      ))}
+      {Object.keys(state.devices).map((deviceKey, index) => {
+        const deviceInfo = state.devices[+deviceKey].info as DevInfo;
+        return (
+          <Link key={index} to={`${AppRoutes.DevicesPage}/${deviceKey}`}>
+            {deviceInfo.ID} Status: {deviceInfo.Status}
+          </Link>
+        );
+      })}
     </>
   );
 };
