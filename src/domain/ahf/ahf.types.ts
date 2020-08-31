@@ -1,7 +1,7 @@
 export enum Command {
   VERSION = 'WSVer',
   SCAN = 'Scan',
-  DEV_INFO = 'DevInfo',
+  DEVICE_INFO = 'DevInfo',
   FOLDER_STRUCT = 'FolderStruct',
   FOLDER_SELECT = 'FolderSelect',
 }

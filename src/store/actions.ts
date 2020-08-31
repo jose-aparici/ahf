@@ -1,9 +1,9 @@
 import { DeviceInfo } from 'domain/ahf/ahf.types';
 
-import { DEV_INFO } from './types';
+import { DEVICE_INFO } from './types';
 
 export interface DevInfoAction {
-  type: DEV_INFO;
+  type: DEVICE_INFO;
   payload: DeviceInfo;
 }
 

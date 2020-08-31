@@ -1,6 +1,6 @@
 import { useCallback, useContext } from 'react';
 import { AhfContext } from 'store/context';
-import { DEV_INFO } from 'store/types';
+import { DEVICE_INFO } from 'store/types';
 
 import { Command, DeviceInfo } from 'domain/ahf/ahf.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
@@ -19,8 +19,8 @@ export const useSocketHook = (): SocketHook => {
       .subscribe((data) => {
         console.log(data);
         switch (data.Cmd) {
-          case Command.DEV_INFO:
-            dispatch({ type: DEV_INFO, payload: data.Data as DeviceInfo });
+          case Command.DEVICE_INFO:
+            dispatch({ type: DEVICE_INFO, payload: data.Data as DeviceInfo });
         }
       });
   }, [dispatch]);
