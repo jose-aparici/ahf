@@ -1,6 +1,6 @@
 export interface State {
-  data: Array<any>;
+  devices: any;
 }
 export const initialState: State = {
-  data: [],
+  devices: {},
 };

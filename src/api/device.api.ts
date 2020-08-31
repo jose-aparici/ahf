@@ -1,8 +1,8 @@
 import { Observable, of } from 'rxjs';
 
-import { Device } from 'domain/device/device.types';
 
-export const getDeviceData = (): Observable<Device> =>
+
+export const getDeviceData = (): Observable<any> =>
   of({
     data: [
       [

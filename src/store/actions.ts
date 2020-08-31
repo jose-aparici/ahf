@@ -1,8 +1,10 @@
-import { ADD_DATA } from './types';
+import { DevInfo } from 'domain/ahf/ahf.types';
 
-export interface AddData {
-  type: ADD_DATA;
-  payload: Array<any>;
+import { DEV_INFO } from './types';
+
+export interface DevInfoAction {
+  type: DEV_INFO;
+  payload: DevInfo;
 }
 
-export type Action = AddData;
+export type Action = DevInfoAction;
