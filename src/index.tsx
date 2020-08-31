@@ -2,6 +2,7 @@ import './index.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { AhfProvider } from 'store/context';
 
 import { ThemeProvider } from '@material-ui/core';
 
@@ -10,9 +11,11 @@ import * as serviceWorker from './serviceWorker';
 import { ahfTheme } from './styles/ahf.theme';
 
 ReactDOM.render(
-  <ThemeProvider theme={ahfTheme}>
-    <App />
-  </ThemeProvider>,
+  <AhfProvider>
+    <ThemeProvider theme={ahfTheme}>
+      <App />
+    </ThemeProvider>
+  </AhfProvider>,
   document.getElementById('root'),
 );
 
