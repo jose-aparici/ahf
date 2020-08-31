@@ -2,7 +2,7 @@ export enum Command {
   VERSION = 'WSVer',
   SCAN = 'Scan',
   DEVICE_INFO = 'DevInfo',
-  FOLDER_STRUCT = 'FolderStruct',
+  DEVICE_STRUCTURE = 'FolderStruct',
   FOLDER_SELECT = 'FolderSelect',
 }
 
@@ -14,6 +14,10 @@ export interface DeviceInfo {
   Type: string;
 }
 
+export interface DeviceStructure {
+  DeviceID: number;
+}
+
 export interface FolderSelect {
   Device: number;
   Folder: number;
@@ -21,5 +25,5 @@ export interface FolderSelect {
 
 export interface AhfMessage {
   Cmd: string;
-  Data?: DeviceInfo | FolderSelect;
+  Data?: DeviceInfo | DeviceStructure;
 }
