@@ -1,12 +1,21 @@
 import { Action } from './actions';
 import { State } from './initialState';
-import { ADD_DATA } from './types';
+import { DEV_INFO } from './types';
 
 export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
   switch (type) {
-    case ADD_DATA:
-      return { ...state, data: payload };
+    case DEV_INFO:
+      return {
+        ...state,
+        devices: {
+          ...state.devices,
+          [payload.ID]: {
+            ...state.devices[payload.ID],
+            info: payload,
+          },
+        },
+      };
     default:
       return state;
   }

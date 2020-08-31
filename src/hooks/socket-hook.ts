@@ -1,4 +1,8 @@
-import { Command } from 'domain/ahf/ahf.types';
+import { useCallback, useContext } from 'react';
+import { AhfContext } from 'store/context';
+import { DEV_INFO } from 'store/types';
+
+import { Command, DevInfo } from 'domain/ahf/ahf.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {
@@ -7,15 +11,24 @@ interface SocketHook {
 }
 
 export const useSocketHook = (): SocketHook => {
-  const init = (): void => {
+  const { dispatch } = useContext(AhfContext);
+
+  const init = useCallback((): void => {
     AhfSocket.getInstance()
       .asObservable()
-      .subscribe((data) => console.log(data));
-  };
+      .subscribe((data) => {
+        console.log(data);
+        switch (data.Cmd) {
+          case Command.DEV_INFO:
+            dispatch({ type: DEV_INFO, payload: data.Data as DevInfo });
+        }
+      });
+  }, [dispatch]);
 
-  const scan = (): void => {
+  const scan = useCallback((): void => {
+    console.log('entra');
     AhfSocket.getInstance().next({ Cmd: Command.SCAN });
-  };
+  }, []);
 
   return { init, scan };
 };

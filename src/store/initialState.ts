@@ -1,6 +1,8 @@
+import { Device } from 'domain/device/device.types';
+
 export interface State {
-  data: Array<any>;
+  devices: Record<number, Device>;
 }
 export const initialState: State = {
-  data: [],
+  devices: {},
 };
