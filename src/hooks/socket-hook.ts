@@ -17,6 +17,7 @@ export const useSocketHook = (): SocketHook => {
     AhfSocket.getInstance()
       .asObservable()
       .subscribe((data) => {
+        console.log(data);
         switch (data.Cmd) {
           case Command.DEV_INFO:
             dispatch({ type: DEV_INFO, payload: data.Data as DevInfo });
