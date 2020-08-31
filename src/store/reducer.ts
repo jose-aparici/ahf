@@ -33,6 +33,7 @@ export const reducer = (state: State, action: Action): State => {
               ...state.devices[deviceStructure.DeviceID].info,
               Status: 1,
             },
+            structure: payload,
           } as Device,
         },
       };

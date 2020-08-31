@@ -16,6 +16,7 @@ export interface DeviceInfo {
 
 export interface DeviceStructure {
   DeviceID: number;
+  FolderNames: Array<string>;
 }
 
 export interface FolderSelect {
