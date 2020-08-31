@@ -6,7 +6,7 @@ export enum Command {
   FOLDER_SELECT = 'FolderSelect',
 }
 
-export interface DevInfo {
+export interface DeviceInfo {
   Company: string;
   FW: string;
   ID: number;
@@ -21,5 +21,5 @@ export interface FolderSelect {
 
 export interface AhfMessage {
   Cmd: string;
-  Data?: DevInfo | FolderSelect;
+  Data?: DeviceInfo | FolderSelect;
 }

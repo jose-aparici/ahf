@@ -1,5 +1,5 @@
-import { DevInfo } from 'domain/ahf/ahf.types';
+import { DeviceInfo } from 'domain/ahf/ahf.types';
 
 export interface Device {
-  info: DevInfo;
+  info: DeviceInfo;
 }
