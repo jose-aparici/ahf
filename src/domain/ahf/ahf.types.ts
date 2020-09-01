@@ -23,6 +23,7 @@ export interface Param {
   ParamEnumText: Array<string>;
   ParamID: number;
   ParamType: string;
+  Unit: string;
   Value: number | string | undefined;
 }
 

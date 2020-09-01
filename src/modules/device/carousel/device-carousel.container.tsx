@@ -27,7 +27,7 @@ export const AhfDeviceCarouselContainer: React.FC<Props> = ({
 
   useEffect(() => {
     update(deviceId.toString(), '0');
-  }, []);
+  }, [update, deviceId]);
 
   return (
     <>
