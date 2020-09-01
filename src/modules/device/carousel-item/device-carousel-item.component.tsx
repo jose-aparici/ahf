@@ -13,9 +13,12 @@ export const AhfDeviceCarouselItemComponent: React.FC<Props> = ({
   paramsGroup,
   className,
 }: Props) => (
-  <div className={className}>
-    {paramsGroup.ParData.map((param, index) => (
-      <AhfParamCardComponent key={index} param={param} />
-    ))}
-  </div>
+  <>
+    <div>Params items: {Object.keys(paramsGroup.ParData).length}</div>
+    <div className={className}>
+      {paramsGroup.ParData.map((param, index) => (
+        <AhfParamCardComponent key={index} param={param} />
+      ))}
+    </div>
+  </>
 );
