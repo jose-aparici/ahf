@@ -14,7 +14,7 @@ export const AhfParamCardComponent: React.FC<Props> = ({ param }: Props) => (
       <Typography>{param.ParamID}</Typography>
     </CardContent>
     <CardActions>
-      <Typography>{param.Description}</Typography>
+      <Typography>{param.Description[1]}</Typography>
     </CardActions>
   </Card>
 );
