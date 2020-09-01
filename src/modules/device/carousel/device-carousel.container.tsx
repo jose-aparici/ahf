@@ -1,28 +1,28 @@
 import React from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
-import { Device } from 'domain/device/device.types';
+import { DeviceParams } from 'domain/ahf/ahf.types';
 
+import { AhfDeviceCarouselItemComponent } from '../carousel-item/device-carousel-item.component';
 import { useDeviceCarouselContainerStyles } from './device-carousel.container.styles';
 
 interface Props {
-  device: Device;
+  deviceParamsGroups: Record<string, DeviceParams>;
 }
 
 export const AhfDeviceCarouselContainer: React.FC<Props> = ({
-  device,
+  deviceParamsGroups,
 }: Props) => {
   const classes = useDeviceCarouselContainerStyles();
   return (
-    <div>ssss</div>
-    /*   <SwipeableViews enableMouseEvents>
-      {device.data.map((paramsGroup, index) => (
+    <SwipeableViews enableMouseEvents>
+      {Object.keys(deviceParamsGroups).map((key, index) => (
         <AhfDeviceCarouselItemComponent
           key={index}
           className={classes.carouselItemContainer}
-          paramsGroup={paramsGroup}
+          paramsGroup={deviceParamsGroups[key]}
         />
       ))}
-    </SwipeableViews> */
+    </SwipeableViews>
   );
 };

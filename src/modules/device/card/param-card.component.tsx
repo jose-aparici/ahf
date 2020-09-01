@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Card, CardActions, CardContent, Typography } from '@material-ui/core';
 
-import { Param } from 'domain/param/param.types';
+import { Param } from 'domain/ahf/ahf.types';
 
 interface Props {
   param: Param;
@@ -11,10 +11,10 @@ interface Props {
 export const AhfParamCardComponent: React.FC<Props> = ({ param }: Props) => (
   <Card variant="elevation">
     <CardContent>
-      <Typography>{param.title}</Typography>
+      <Typography>{param.ParamID}</Typography>
     </CardContent>
     <CardActions>
-      <Typography>{param.description}</Typography>
+      <Typography>{param.Description}</Typography>
     </CardActions>
   </Card>
 );
