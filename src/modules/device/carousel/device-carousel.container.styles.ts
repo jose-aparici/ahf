@@ -6,6 +6,5 @@ export const useDeviceCarouselContainerStyles = makeStyles(() => ({
     gridTemplateColumns: '1fr 1fr 1fr',
     columnGap: '30px',
     rowGap: '24px',
-    background: 'red',
   },
 }));

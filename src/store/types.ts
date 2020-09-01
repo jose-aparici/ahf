@@ -1,7 +1,7 @@
 import { Command } from 'domain/ahf/ahf.types';
 
-export const ADD_DATA = 'ADD_DATA';
-export type ADD_DATA = typeof ADD_DATA;
+export const DEVICE_INFO = Command.DEVICE_INFO;
+export type DEVICE_INFO = typeof DEVICE_INFO;
 
-export const DEV_INFO = Command.DEV_INFO;
-export type DEV_INFO = typeof DEV_INFO;
+export const DEVICE_STRUCTURE = Command.DEVICE_STRUCTURE;
+export type DEVICE_STRUCTURE = typeof DEVICE_STRUCTURE;

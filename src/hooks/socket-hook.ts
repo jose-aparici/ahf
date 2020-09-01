@@ -1,8 +1,8 @@
 import { useCallback, useContext } from 'react';
 import { AhfContext } from 'store/context';
-import { DEV_INFO } from 'store/types';
+import { DEVICE_INFO, DEVICE_STRUCTURE } from 'store/types';
 
-import { Command, DevInfo } from 'domain/ahf/ahf.types';
+import { Command, DeviceInfo, DeviceStructure } from 'domain/ahf/ahf.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {
@@ -19,8 +19,15 @@ export const useSocketHook = (): SocketHook => {
       .subscribe((data) => {
         console.log(data);
         switch (data.Cmd) {
-          case Command.DEV_INFO:
-            dispatch({ type: DEV_INFO, payload: data.Data as DevInfo });
+          case Command.DEVICE_INFO:
+            dispatch({ type: DEVICE_INFO, payload: data.Data as DeviceInfo });
+            break;
+          case Command.DEVICE_STRUCTURE:
+            dispatch({
+              type: DEVICE_STRUCTURE,
+              payload: data.Data as DeviceStructure,
+            });
+            break;
         }
       });
   }, [dispatch]);

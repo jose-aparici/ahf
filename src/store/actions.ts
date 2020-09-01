@@ -1,10 +1,15 @@
-import { DevInfo } from 'domain/ahf/ahf.types';
+import { DeviceInfo, DeviceStructure } from 'domain/ahf/ahf.types';
 
-import { DEV_INFO } from './types';
+import { DEVICE_INFO, DEVICE_STRUCTURE } from './types';
 
-export interface DevInfoAction {
-  type: DEV_INFO;
-  payload: DevInfo;
+export interface DeviceInfoAction {
+  type: DEVICE_INFO;
+  payload: DeviceInfo;
 }
 
-export type Action = DevInfoAction;
+export interface DeviceStructureAction {
+  type: DEVICE_STRUCTURE;
+  payload: DeviceStructure;
+}
+
+export type Action = DeviceInfoAction | DeviceStructureAction;
