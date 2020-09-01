@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { useSocketHook } from 'hooks/socket-hook';
+import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
@@ -19,11 +20,16 @@ import { useDevicesContainerStyles } from './devices-container.styles';
 export const AhfDevicesContainer: React.FC = () => {
   const classes = useDevicesContainerStyles();
   const { state } = useContext(AhfContext);
+  const { stopUpdate } = useSocketHook();
   const history = useHistory();
 
   const handleClickDevice = (id: number, status: number) => {
     status > 0 && history.push(`${AppRoutes.DevicesPage}/${id}`);
   };
+
+  useEffect(() => {
+    stopUpdate();
+  }, [stopUpdate]);
 
   return (
     <div className={classes.root}>

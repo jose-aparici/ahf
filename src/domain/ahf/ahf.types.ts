@@ -4,6 +4,7 @@ export enum Command {
   DEVICE_INFO = 'DevInfo',
   DEVICE_STRUCTURE = 'FolderStruct',
   FOLDER_SELECT = 'FolderSelect',
+  PARAM_UPDATE = 'WriteParam',
 }
 
 export interface DeviceInfo {
@@ -22,6 +23,7 @@ export interface Param {
   ParamEnumText: Array<string>;
   ParamID: number;
   ParamType: string;
+  Value: number | string | undefined;
 }
 
 export interface DeviceParams {
@@ -34,12 +36,21 @@ export interface DeviceStructure {
   FolderData: Record<string, DeviceParams>;
 }
 
-export interface FolderSelect {
-  Device: number;
-  Folder: number;
+export interface DeviceUpdate {
+  Device: string;
+  Folder?: string;
+}
+
+export interface DeviceParamUpdate {
+  DeviceID: number;
+  FolderName: string;
+  Marker: number;
+  ParamID: number;
+  ParamPos: number;
+  Value: number | string;
 }
 
 export interface AhfMessage {
   Cmd: string;
-  Data?: DeviceInfo | DeviceStructure;
+  Data?: DeviceInfo | DeviceStructure | DeviceUpdate | DeviceParamUpdate;
 }

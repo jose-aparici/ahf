@@ -20,6 +20,7 @@ export const AhfDeviceContainer: React.FC = () => {
       <Link to={AppRoutes.DevicesPage}> Devices</Link>
       {state?.devices[+deviceId]?.structure && (
         <AhfDeviceCarouselContainer
+          deviceId={state.devices[+deviceId].structure.DeviceID}
           deviceParamsGroups={
             state.devices[+deviceId].structure.FolderData as Record<
               string,
