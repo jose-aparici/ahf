@@ -16,5 +16,8 @@ export const AhfParamCardComponent: React.FC<Props> = ({ param }: Props) => (
     <CardActions>
       <Typography>{param.Description[1]}</Typography>
     </CardActions>
+    <CardActions>
+      <Typography>{param.Value === undefined ? '---' : param.Value}</Typography>
+    </CardActions>
   </Card>
 );
