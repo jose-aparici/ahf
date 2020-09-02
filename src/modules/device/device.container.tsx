@@ -1,9 +1,8 @@
 import React, { useContext } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { DeviceParams } from 'domain/ahf/ahf.types';
-import { AppRoutes } from 'pages/App.routes';
 
 import { AhfDeviceCarouselContainer } from './carousel/device-carousel.container';
 
@@ -17,7 +16,6 @@ export const AhfDeviceContainer: React.FC = () => {
 
   return (
     <>
-      <Link to={AppRoutes.DevicesPage}> Devices</Link>
       {state?.devices[+deviceId]?.structure && (
         <AhfDeviceCarouselContainer
           deviceId={state.devices[+deviceId].structure.DeviceID}
