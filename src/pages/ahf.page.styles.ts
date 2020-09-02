@@ -8,15 +8,9 @@ export const useAhfPageStyles = makeStyles((theme: Theme) => ({
     background: theme.palette.background.default,
   },
   container: {
-    padding: '64px 0px',
+    padding: '8px',
     display: 'flex',
     flexDirection: 'column',
     flex: 1,
-    [theme.breakpoints.down('md')]: {
-      padding: '64px 40px',
-    },
-    [theme.breakpoints.only('xs')]: {
-      padding: '32px 15px',
-    },
   },
 }));

@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
-export const useParamCardComponentStyles = makeStyles(() => ({
+export const useParamCardComponentStyles = makeStyles((theme: Theme) => ({
   contentContainer: {
     padding: '4px',
     '&:last-child': {
@@ -23,6 +23,9 @@ export const useParamCardComponentStyles = makeStyles(() => ({
   value: {
     textAlign: 'center',
     fontSize: '40px',
+    [theme.breakpoints.down('md')]: {
+      fontSize: '32px',
+    },
   },
   unit: {
     fontSize: '20px',
