@@ -27,51 +27,56 @@ export const reducer = (state: State, action: Action): State => {
 
     case DEVICE_STRUCTURE:
       const deviceStructure = payload as DeviceStructure;
-      return {
-        ...state,
-        devices: {
-          ...state.devices,
-          [deviceStructure.DeviceID]: {
-            ...state.devices[deviceStructure.DeviceID],
-            info: {
-              ...state.devices[deviceStructure.DeviceID].info,
-              Status: 1,
+      return state.devices[deviceStructure.DeviceID] &&
+        state.devices[deviceStructure.DeviceID].info
+        ? {
+            ...state,
+            devices: {
+              ...state.devices,
+              [deviceStructure.DeviceID]: {
+                ...state.devices[deviceStructure.DeviceID],
+                info: {
+                  ...state.devices[deviceStructure.DeviceID].info,
+                  Status: 1,
+                },
+                structure: deviceStructure,
+              } as Device,
             },
-            structure: deviceStructure,
-          } as Device,
-        },
-      };
+          }
+        : state;
     case DEVICE_PARAM_UPDATE:
       const paramUpdate = payload as DeviceParamUpdate;
-      return {
-        ...state,
-        devices: {
-          ...state.devices,
-          [paramUpdate.DeviceID]: {
-            ...state.devices[paramUpdate.DeviceID],
-            structure: {
-              ...state.devices[paramUpdate.DeviceID].structure,
-              FolderData: {
-                ...state.devices[paramUpdate.DeviceID].structure.FolderData,
-                [paramUpdate.FolderName]: {
-                  ...state.devices[paramUpdate.DeviceID].structure.FolderData[
-                    paramUpdate.FolderName
-                  ],
-                  ParData: state.devices[
-                    paramUpdate.DeviceID
-                  ].structure.FolderData[
-                    paramUpdate.FolderName
-                  ].ParData.map((param) =>
-                    param.ParamID === paramUpdate.ParamID
-                      ? { ...param, Value: paramUpdate.Value }
-                      : param,
-                  ),
+      return state.devices[paramUpdate.DeviceID] &&
+        state.devices[paramUpdate.DeviceID].structure
+        ? {
+            ...state,
+            devices: {
+              ...state.devices,
+              [paramUpdate.DeviceID]: {
+                ...state.devices[paramUpdate.DeviceID],
+                structure: {
+                  ...state.devices[paramUpdate.DeviceID].structure,
+                  FolderData: {
+                    ...state.devices[paramUpdate.DeviceID].structure.FolderData,
+                    [paramUpdate.FolderName]: {
+                      ...state.devices[paramUpdate.DeviceID].structure
+                        .FolderData[paramUpdate.FolderName],
+                      ParData: state.devices[
+                        paramUpdate.DeviceID
+                      ].structure.FolderData[
+                        paramUpdate.FolderName
+                      ].ParData.map((param) =>
+                        param.ParamID === paramUpdate.ParamID
+                          ? { ...param, Value: paramUpdate.Value }
+                          : param,
+                      ),
+                    },
+                  },
                 },
-              },
+              } as Device,
             },
-          } as Device,
-        },
-      };
+          }
+        : state;
 
     default:
       return state;
