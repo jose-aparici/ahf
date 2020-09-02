@@ -4,13 +4,13 @@ import { useHistory } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import {
+  Avatar,
   Card,
-  CardActionArea,
   CardContent,
-  CardMedia,
   CircularProgress,
   Typography,
 } from '@material-ui/core';
+import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import { DeviceInfo } from 'domain/ahf/ahf.types';
 import { AppRoutes } from 'pages/App.routes';
@@ -38,6 +38,35 @@ export const AhfDevicesContainer: React.FC = () => {
         return (
           <Card
             key={index}
+            variant="elevation"
+            onClick={() => handleClickDevice(deviceInfo.ID, deviceInfo.Status)}
+          >
+            <CardContent className={classes.contentContainer}>
+              <div className={classes.infoContainer}>
+                <Avatar
+                  className={classes.avatar}
+                  src="/assets/images/AHFViewer1.ico"
+                ></Avatar>
+                <Typography>{deviceInfo.Type}</Typography>
+                {deviceInfo.Status === 0 ? (
+                  <CircularProgress size={20} />
+                ) : (
+                  <CheckCircleOutlineIcon htmlColor={'green'} />
+                )}
+              </div>
+              <div className={classes.unitContainer}>
+                <Typography component="h1" className={classes.value}>
+                  {deviceInfo.FW}
+                </Typography>
+                <Typography className={classes.unit}>
+                  MbId {deviceInfo.ID}
+                </Typography>
+              </div>
+              <Typography>{deviceInfo.Company}</Typography>
+            </CardContent>
+          </Card>
+          /*  <Card
+            key={index}
             onClick={() => handleClickDevice(deviceInfo.ID, deviceInfo.Status)}
           >
             <CardActionArea>
@@ -53,7 +82,7 @@ export const AhfDevicesContainer: React.FC = () => {
                 {deviceInfo.Status === 0 && <CircularProgress />}
               </CardContent>
             </CardActionArea>
-          </Card>
+          </Card> */
         );
       })}
     </div>

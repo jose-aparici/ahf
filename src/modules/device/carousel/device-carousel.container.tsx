@@ -30,24 +30,19 @@ export const AhfDeviceCarouselContainer: React.FC<Props> = ({
   }, [update, deviceId]);
 
   return (
-    <>
-      <div>Carousel items: {Object.keys(deviceParamsGroups).length}</div>
-      <SwipeableViews
-        enableMouseEvents
-        onChangeIndex={handleCarouselItemChange}
-      >
-        {Object.keys(deviceParamsGroups).map((key, index) =>
-          index === currentCarouselItem ? (
-            <AhfDeviceCarouselItemComponent
-              key={index}
-              className={classes.carouselItemContainer}
-              paramsGroup={deviceParamsGroups[key]}
-            />
-          ) : (
-            <React.Fragment key={key}></React.Fragment>
-          ),
-        )}
-      </SwipeableViews>
-    </>
+    <SwipeableViews enableMouseEvents onChangeIndex={handleCarouselItemChange}>
+      {Object.keys(deviceParamsGroups).map((key, index) =>
+        index === currentCarouselItem ? (
+          <AhfDeviceCarouselItemComponent
+            key={index}
+            className={classes.carouselItemContainer}
+            paramsGroupName={key}
+            paramsGroup={deviceParamsGroups[key]}
+          />
+        ) : (
+          <React.Fragment key={key}></React.Fragment>
+        ),
+      )}
+    </SwipeableViews>
   );
 };
