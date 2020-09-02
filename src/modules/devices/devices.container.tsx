@@ -65,24 +65,6 @@ export const AhfDevicesContainer: React.FC = () => {
               <Typography>{deviceInfo.Company}</Typography>
             </CardContent>
           </Card>
-          /*  <Card
-            key={index}
-            onClick={() => handleClickDevice(deviceInfo.ID, deviceInfo.Status)}
-          >
-            <CardActionArea>
-              <CardMedia
-                className={classes.media}
-                image="/assets/images/AHFViewer1.ico"
-                title="Contemplative Reptile"
-              ></CardMedia>
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="h2">
-                  {deviceInfo.ID} {deviceInfo.Type}
-                </Typography>
-                {deviceInfo.Status === 0 && <CircularProgress />}
-              </CardContent>
-            </CardActionArea>
-          </Card> */
         );
       })}
     </div>

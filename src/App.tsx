@@ -2,6 +2,7 @@ import { useSocketHook } from 'hooks/socket-hook';
 import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
+import { AhfAppBarContainer } from 'modules/shared/app-bar/app-bar.container';
 import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicePage } from 'pages/device/device.page';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
@@ -14,13 +15,20 @@ const App: React.FC = () => {
     scan();
   }, [init, scan, stopUpdate]);
   return (
-    <BrowserRouter>
-      <Switch>
-        <Route path={AppRoutes.MainPage} exact component={AhfDevicesPage} />
-        <Route path={AppRoutes.DevicesPage} exact component={AhfDevicesPage} />
-        <Route path={AppRoutes.DevicePage} exact component={AhfDevicePage} />
-      </Switch>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <AhfAppBarContainer />
+        <Switch>
+          <Route path={AppRoutes.MainPage} exact component={AhfDevicesPage} />
+          <Route
+            path={AppRoutes.DevicesPage}
+            exact
+            component={AhfDevicesPage}
+          />
+          <Route path={AppRoutes.DevicePage} exact component={AhfDevicePage} />
+        </Switch>
+      </BrowserRouter>
+    </>
   );
 };
 export default App;
