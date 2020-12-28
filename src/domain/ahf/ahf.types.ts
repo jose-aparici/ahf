@@ -52,6 +52,6 @@ export interface DeviceParamUpdate {
 }
 
 export interface AhfMessage {
-  Cmd: string;
+  Cmd: Command;
   Data?: DeviceInfo | DeviceStructure | DeviceUpdate | DeviceParamUpdate;
 }
