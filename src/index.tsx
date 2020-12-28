@@ -11,11 +11,11 @@ import * as serviceWorker from './serviceWorker';
 import { ahfTheme } from './styles/ahf.theme';
 
 ReactDOM.render(
-  <AhfProvider>
-    <ThemeProvider theme={ahfTheme}>
+  <ThemeProvider theme={ahfTheme}>
+    <AhfProvider>
       <App />
-    </ThemeProvider>
-  </AhfProvider>,
+    </AhfProvider>
+  </ThemeProvider>,
   document.getElementById('root'),
 );
 
