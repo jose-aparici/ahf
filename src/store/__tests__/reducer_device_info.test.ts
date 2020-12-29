@@ -1,18 +1,11 @@
-import { initialState } from 'store/initialState';
+import { buildDevice } from '__mocks__/buildDevice';
+import { buildState } from 'store/__mocks__/buildState';
 import { deviceInfoReducer } from 'store/reducer_device_info';
-
-import { DeviceInfo } from 'domain/ahf/ahf.types';
 
 describe('reducer device info', () => {
   it('should set device info', () => {
-    const state = initialState;
-    const payload: DeviceInfo = {
-      Company: '1',
-      FW: 'FW',
-      ID: 1,
-      Status: 1,
-      Type: 'type',
-    };
+    const state = buildState({ devices: {} });
+    const payload = buildDevice().info;
 
     const result = deviceInfoReducer(state, payload);
     expect(result).toEqual({

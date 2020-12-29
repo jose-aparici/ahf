@@ -1,38 +1,17 @@
+import { buildDevice } from '__mocks__/buildDevice';
+import { buildState } from 'store/__mocks__/buildState';
 import { State } from 'store/initialState';
 import { deviceParamUpdateReducer } from 'store/reducer_device_param_update';
 
-import { DeviceInfo, DeviceParamUpdate } from 'domain/ahf/ahf.types';
+import { DeviceParamUpdate } from 'domain/ahf/ahf.types';
 
 describe('reducer device param update', () => {
   it('should update device param', () => {
-    const state: State = {
+    const state: State = buildState({
       devices: {
-        1: {
-          info: {} as DeviceInfo,
-          structure: {
-            DeviceID: 1,
-            FolderNames: ['folder1', 'folder2', 'folder3'],
-            FolderData: {
-              folder1: {
-                ParData: [
-                  {
-                    AccessType: '1',
-                    Description: ['description1Eng', 'description1Ger'],
-                    Name: ['name1Eng', 'name1Ger'],
-                    ParamEnumNumb: 1,
-                    ParamEnumText: ['1'],
-                    ParamID: 1,
-                    ParamType: 'paramType1',
-                    Unit: 'unit1',
-                    Value: 'value1',
-                  },
-                ],
-              },
-            },
-          },
-        },
+        1: buildDevice(),
       },
-    };
+    });
 
     const payload: DeviceParamUpdate = {
       DeviceID: 1,
