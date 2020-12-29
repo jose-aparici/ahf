@@ -6,13 +6,12 @@ import { State } from './initialState';
 export const deviceInfoReducer = (
   state: State,
   deviceInfo: DeviceInfo,
-): State => ({
-  ...state,
-  devices: {
-    ...state.devices,
-    [deviceInfo.ID]: {
-      ...state.devices[deviceInfo.ID],
-      info: deviceInfo,
-    } as Device,
-  },
-});
+): State => {
+  state.devices[deviceInfo.ID] = {
+    info: deviceInfo,
+  } as Device;
+
+  return {
+    ...state,
+  };
+};

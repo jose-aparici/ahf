@@ -1,9 +1,9 @@
+import { buildState } from 'store/__mocks__/buildState';
 import {
   DeviceInfoAction,
   DeviceStructureAction,
   DeviceUpdateParamAction,
 } from 'store/actions';
-import { initialState } from 'store/initialState';
 import { reducer } from 'store/reducer';
 import {
   DEVICE_INFO,
@@ -28,11 +28,10 @@ describe('reducer', () => {
 
   describe('device info', () => {
     it('should be called', () => {
-      const state = initialState;
-      const deviceInfoReducerMock = jest.spyOn(
-        DeviceInfoReducerModule,
-        'deviceInfoReducer',
-      );
+      const state = buildState();
+      const deviceInfoReducerMock = jest
+        .spyOn(DeviceInfoReducerModule, 'deviceInfoReducer')
+        .mockReturnValue(buildState());
       const action: DeviceInfoAction = {
         type: DEVICE_INFO,
         payload: {} as DeviceInfo,
@@ -46,11 +45,10 @@ describe('reducer', () => {
 
   describe('device structure', () => {
     it('should be called', () => {
-      const state = initialState;
-      const deviceStructureReducerMock = jest.spyOn(
-        DeviceStructureReducerModule,
-        'deviceStructureReducer',
-      );
+      const state = buildState();
+      const deviceStructureReducerMock = jest
+        .spyOn(DeviceStructureReducerModule, 'deviceStructureReducer')
+        .mockReturnValue(buildState());
       const action: DeviceStructureAction = {
         type: DEVICE_STRUCTURE,
         payload: {} as DeviceStructure,
@@ -67,11 +65,10 @@ describe('reducer', () => {
 
   describe('device param update', () => {
     it('should be called', () => {
-      const state = initialState;
-      const deviceParamUpdateReducerMock = jest.spyOn(
-        DeviceParamUpdateReducerModule,
-        'deviceParamUpdateReducer',
-      );
+      const state = buildState();
+      const deviceParamUpdateReducerMock = jest
+        .spyOn(DeviceParamUpdateReducerModule, 'deviceParamUpdateReducer')
+        .mockReturnValue(buildState());
       const action: DeviceUpdateParamAction = {
         type: DEVICE_PARAM_UPDATE,
         payload: {} as DeviceParamUpdate,
