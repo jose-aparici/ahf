@@ -1,6 +1,6 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-export const useAppBarComponentStyles = makeStyles((theme: Theme) => ({
+export const useAppBarComponentStyles = makeStyles(() => ({
   toolBarContainer: {
     paddingRight: '0',
   },
