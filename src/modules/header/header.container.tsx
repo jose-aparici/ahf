@@ -12,10 +12,10 @@ export const AhfHeaderContainer: FC = () => {
 
   return (
     <div className={classes.root}>
-      <AhfAppBarComponent onSideBarOpen={handleToggleSideBar} />
+      <AhfAppBarComponent onToggleSideBar={handleToggleSideBar} />
       <AhfSideBarComponent
         isOpen={sideBarOpen}
-        onSideBarClose={handleToggleSideBar}
+        onToggleSideBar={handleToggleSideBar}
       />
     </div>
   );
