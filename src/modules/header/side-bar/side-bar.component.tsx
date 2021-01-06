@@ -1,23 +1,28 @@
 import React from 'react';
 
-import { Divider, Drawer, IconButton } from '@material-ui/core';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import { IconButton, SwipeableDrawer } from '@material-ui/core';
+import CloseIcon from '@material-ui/icons/Close';
 
 interface Props {
   isOpen: boolean;
-  onSideBarClose: () => void;
+  onToggleSideBar: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   isOpen,
-  onSideBarClose,
+  onToggleSideBar,
 }: Props) => (
-  <Drawer variant="persistent" anchor="left" open={isOpen}>
+  <SwipeableDrawer
+    anchor={'left'}
+    open={isOpen}
+    onClose={onToggleSideBar}
+    onOpen={onToggleSideBar}
+  >
     <div>
-      <IconButton onClick={onSideBarClose}>
-        <ChevronLeftIcon />
+      <IconButton onClick={onToggleSideBar}>
+        <CloseIcon />
       </IconButton>
     </div>
-    <Divider />
-  </Drawer>
+    this is the content
+  </SwipeableDrawer>
 );
