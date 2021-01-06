@@ -1,17 +1,13 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 export const useAppBarComponentStyles = makeStyles((theme: Theme) => ({
-  root: {
-    flexGrow: 1,
+  toolBarContainer: {
+    paddingRight: '0',
   },
-  appBar: {
-    backgroundColor: 'black',
-  },
-  homeButton: {
-    marginRight: theme.spacing(2),
-    color: 'white',
-  },
-  title: {
-    flexGrow: 1,
+  navContainer: {
+    display: 'flex',
+    alignItems: 'baseline',
+    width: '100%',
+    justifyContent: 'flex-end',
   },
 }));
