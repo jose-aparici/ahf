@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-export const useDeviceAppContainerStyles = makeStyles((theme: Theme) => ({
+export const useAppBarComponentStyles = makeStyles((theme: Theme) => ({
   root: {
     flexGrow: 1,
   },
