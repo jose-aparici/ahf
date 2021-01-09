@@ -8,8 +8,11 @@
     "@types/jest": "^26.0.19",
     "@types/react-router-dom": "^5.1.5",
     "@types/react-swipeable-views": "^0.13.0",
+    "i18next": "^19.8.4",
+    "i18next-http-backend": "^1.0.21",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-i18next": "^11.8.5",
     "react-router-dom": "^5.2.0",
     "react-swipeable-views": "^0.13.9",
     "rxjs": "^6.6.2"
