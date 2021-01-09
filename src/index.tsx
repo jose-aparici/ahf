@@ -1,6 +1,7 @@
 import './index.css';
+import './i18n';
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { AhfProvider } from 'store/context';
 
@@ -11,11 +12,13 @@ import * as serviceWorker from './serviceWorker';
 import { ahfTheme } from './styles/ahf.theme';
 
 ReactDOM.render(
-  <ThemeProvider theme={ahfTheme}>
-    <AhfProvider>
-      <App />
-    </AhfProvider>
-  </ThemeProvider>,
+  <Suspense fallback="loading">
+    <ThemeProvider theme={ahfTheme}>
+      <AhfProvider>
+        <App />
+      </AhfProvider>
+    </ThemeProvider>
+  </Suspense>,
   document.getElementById('root'),
 );
 
