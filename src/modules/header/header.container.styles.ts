@@ -1,6 +1,6 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-export const useHeaderContainerStyles = makeStyles((theme: Theme) => ({
+export const useHeaderContainerStyles = makeStyles(() => ({
   root: {
     display: 'flex',
   },
