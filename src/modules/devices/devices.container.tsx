@@ -49,7 +49,7 @@ export const AhfDevicesContainer: React.FC = () => {
                 ></Avatar>
                 <Typography>{deviceInfo.Type}</Typography>
                 {deviceInfo.Status === 0 ? (
-                  <CircularProgress size={20} />
+                  <CircularProgress size={20} color="secondary" />
                 ) : (
                   <CheckCircleOutlineIcon htmlColor={'green'} />
                 )}
