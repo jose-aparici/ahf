@@ -1,17 +1,14 @@
 import { buildState } from 'store/__mocks__/buildState';
 import { Action } from 'store/actions';
 import { reducer } from 'store/reducer';
-import {
-  DEVICE_INFO,
-  DEVICE_PARAM_UPDATE,
-  DEVICE_STRUCTURE,
-} from 'store/types';
+import { DEVICE_INFO, DEVICE_STRUCTURE, PARAM_READ } from 'store/types';
 
-import { DeviceInfo, DeviceStructure, ParamUpdate } from 'domain/ahf/ahf.types';
+import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
+import { ParamRead } from 'domain/param/param.types';
 
 import * as DeviceInfoReducerModule from '../reducer_device_info';
-import * as DeviceParamUpdateReducerModule from '../reducer_device_param_update';
 import * as DeviceStructureReducerModule from '../reducer_device_structure';
+import * as ParamReadReducerModule from '../reducer_param_read';
 
 describe('reducer', () => {
   beforeEach(() => {
@@ -58,22 +55,22 @@ describe('reducer', () => {
     });
   });
 
-  describe('device param update', () => {
+  describe('param read', () => {
     it('should be called', () => {
       const state = buildState();
-      const deviceParamUpdateReducerMock = jest
-        .spyOn(DeviceParamUpdateReducerModule, 'deviceParamUpdateReducer')
+      const paramReadReducerMock = jest
+        .spyOn(ParamReadReducerModule, 'paramReadReducer')
         .mockReturnValue(buildState());
-      const deviceUpdateParamAction: Action = {
-        type: DEVICE_PARAM_UPDATE,
-        payload: {} as ParamUpdate,
+      const paramReadAction: Action = {
+        type: PARAM_READ,
+        payload: {} as ParamRead,
       };
-      reducer(state, deviceUpdateParamAction);
+      reducer(state, paramReadAction);
 
-      expect(deviceParamUpdateReducerMock).toHaveBeenCalledTimes(1);
-      expect(deviceParamUpdateReducerMock).toHaveBeenCalledWith(
+      expect(paramReadReducerMock).toHaveBeenCalledTimes(1);
+      expect(paramReadReducerMock).toHaveBeenCalledWith(
         state,
-        deviceUpdateParamAction.payload,
+        paramReadAction.payload,
       );
     });
   });

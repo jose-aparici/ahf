@@ -6,5 +6,5 @@ export type DEVICE_INFO = typeof DEVICE_INFO;
 export const DEVICE_STRUCTURE = Command.DEVICE_STRUCTURE;
 export type DEVICE_STRUCTURE = typeof DEVICE_STRUCTURE;
 
-export const DEVICE_PARAM_UPDATE = Command.PARAM_READ;
-export type DEVICE_PARAM_UPDATE = typeof DEVICE_PARAM_UPDATE;
+export const PARAM_READ = Command.PARAM_READ;
+export type PARAM_READ = typeof PARAM_READ;

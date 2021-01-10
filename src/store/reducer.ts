@@ -4,9 +4,9 @@ import { ParamRead } from 'domain/param/param.types';
 import { Action } from './actions';
 import { State } from './initialState';
 import { deviceInfoReducer } from './reducer_device_info';
-import { deviceParamUpdateReducer } from './reducer_device_param_update';
 import { deviceStructureReducer } from './reducer_device_structure';
-import { DEVICE_INFO, DEVICE_PARAM_UPDATE, DEVICE_STRUCTURE } from './types';
+import { paramReadReducer } from './reducer_param_read';
+import { DEVICE_INFO, DEVICE_STRUCTURE, PARAM_READ } from './types';
 
 export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
@@ -17,8 +17,8 @@ export const reducer = (state: State, action: Action): State => {
     case DEVICE_STRUCTURE:
       return deviceStructureReducer(state, payload as DeviceStructure);
 
-    case DEVICE_PARAM_UPDATE:
-      return deviceParamUpdateReducer(state, payload as ParamRead);
+    case PARAM_READ:
+      return paramReadReducer(state, payload as ParamRead);
 
     default:
       return state;

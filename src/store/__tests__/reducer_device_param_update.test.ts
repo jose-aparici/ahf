@@ -1,9 +1,9 @@
 import { buildDevice } from '__mocks__/buildDevice';
 import { buildState } from 'store/__mocks__/buildState';
 import { State } from 'store/initialState';
-import { deviceParamUpdateReducer } from 'store/reducer_device_param_update';
+import { paramReadReducer } from 'store/reducer_param_read';
 
-import { ParamUpdate } from 'domain/ahf/ahf.types';
+import { ParamRead } from 'domain/param/param.types';
 
 describe('reducer device param update', () => {
   it('should update device param', () => {
@@ -13,7 +13,7 @@ describe('reducer device param update', () => {
       },
     });
 
-    const payload: ParamUpdate = {
+    const payload: ParamRead = {
       DeviceID: 1,
       FolderName: 'folder1',
       Marker: 1,
@@ -22,7 +22,7 @@ describe('reducer device param update', () => {
       Value: 'valueUpdated',
     };
 
-    const result = deviceParamUpdateReducer(state, payload);
+    const result = paramReadReducer(state, payload);
 
     const stateUpdated = {
       ...state,
