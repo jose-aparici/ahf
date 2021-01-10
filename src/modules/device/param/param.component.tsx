@@ -4,18 +4,18 @@ import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
 
 import { Param } from 'domain/param/param.types';
 
-import { useParamCardComponentStyles } from './param-card.component.styles';
+import { useParamComponentStyles } from './param.component.styles';
 
 interface Props {
   param: Param;
   currentLanguage: number;
 }
 
-export const AhfParamCardComponent: React.FC<Props> = ({
+export const AhfParamComponent: React.FC<Props> = ({
   param,
   currentLanguage,
 }: Props) => {
-  const classes = useParamCardComponentStyles();
+  const classes = useParamComponentStyles();
   return (
     <Card variant="elevation">
       <CardContent className={classes.contentContainer}>
