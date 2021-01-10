@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useParams } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
-import { DeviceParams } from 'domain/ahf/ahf.types';
+import { FolderParams } from 'domain/folder/folder.types';
 
 import { AhfDeviceCarouselContainer } from './carousel/device-carousel.container';
 
@@ -22,7 +22,7 @@ export const AhfDeviceContainer: React.FC = () => {
           deviceParamsGroups={
             state.devices[+deviceId].structure.FolderData as Record<
               string,
-              DeviceParams
+              FolderParams
             >
           }
         />

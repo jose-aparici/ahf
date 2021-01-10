@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
-import { DeviceInfo } from 'domain/ahf/ahf.types';
+import { DeviceInfo } from 'domain/device/device.types';
 import { AppRoutes } from 'pages/App.routes';
 
 import { useDevicesContainerStyles } from './devices-container.styles';

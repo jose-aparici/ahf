@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import SwipeableViews from 'react-swipeable-views';
 
-import { DeviceParams } from 'domain/ahf/ahf.types';
+import { FolderParams } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 
@@ -12,7 +12,7 @@ import { useDeviceCarouselContainerStyles } from './device-carousel.container.st
 
 interface Props {
   deviceId: number;
-  deviceParamsGroups: Record<string, DeviceParams>;
+  deviceParamsGroups: Record<string, FolderParams>;
 }
 
 export const AhfDeviceCarouselContainer: React.FC<Props> = ({

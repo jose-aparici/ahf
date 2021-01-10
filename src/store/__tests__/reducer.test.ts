@@ -7,11 +7,7 @@ import {
   DEVICE_STRUCTURE,
 } from 'store/types';
 
-import {
-  DeviceInfo,
-  DeviceParamUpdate,
-  DeviceStructure,
-} from 'domain/ahf/ahf.types';
+import { DeviceInfo, DeviceStructure, ParamUpdate } from 'domain/ahf/ahf.types';
 
 import * as DeviceInfoReducerModule from '../reducer_device_info';
 import * as DeviceParamUpdateReducerModule from '../reducer_device_param_update';
@@ -70,7 +66,7 @@ describe('reducer', () => {
         .mockReturnValue(buildState());
       const deviceUpdateParamAction: Action = {
         type: DEVICE_PARAM_UPDATE,
-        payload: {} as DeviceParamUpdate,
+        payload: {} as ParamUpdate,
       };
       reducer(state, deviceUpdateParamAction);
 

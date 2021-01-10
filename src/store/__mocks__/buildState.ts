@@ -1,6 +1,6 @@
 import { State } from 'store/initialState';
 
-import { DeviceInfo, DeviceStructure } from 'domain/ahf/ahf.types';
+import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
 
 const DEFAULT_STATE: State = {
   devices: {

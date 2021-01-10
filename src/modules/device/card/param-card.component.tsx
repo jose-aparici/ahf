@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
 
-import { Param } from 'domain/ahf/ahf.types';
+import { Param } from 'domain/param/param.types';
 
 import { useParamCardComponentStyles } from './param-card.component.styles';
 

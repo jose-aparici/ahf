@@ -1,8 +1,5 @@
-import {
-  DeviceInfo,
-  DeviceParamUpdate,
-  DeviceStructure,
-} from 'domain/ahf/ahf.types';
+import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
+import { ParamRead } from 'domain/param/param.types';
 
 import { Action } from './actions';
 import { State } from './initialState';
@@ -21,7 +18,7 @@ export const reducer = (state: State, action: Action): State => {
       return deviceStructureReducer(state, payload as DeviceStructure);
 
     case DEVICE_PARAM_UPDATE:
-      return deviceParamUpdateReducer(state, payload as DeviceParamUpdate);
+      return deviceParamUpdateReducer(state, payload as ParamRead);
 
     default:
       return state;

@@ -1,10 +1,10 @@
-import { DeviceParamUpdate } from 'domain/ahf/ahf.types';
+import { ParamRead } from 'domain/param/param.types';
 
 import { State } from './initialState';
 
 export const deviceParamUpdateReducer = (
   state: State,
-  paramUpdate: DeviceParamUpdate,
+  paramUpdate: ParamRead,
 ): State => {
   if (
     state.devices[paramUpdate.DeviceID] &&

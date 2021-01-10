@@ -1,4 +1,4 @@
-import { DeviceStructure } from 'domain/ahf/ahf.types';
+import { DeviceStructure } from 'domain/device/device.types';
 
 import { State } from './initialState';
 
