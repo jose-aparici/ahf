@@ -1,9 +1,5 @@
 import { buildState } from 'store/__mocks__/buildState';
-import {
-  DeviceInfoAction,
-  DeviceStructureAction,
-  DeviceUpdateParamAction,
-} from 'store/actions';
+import { Action } from 'store/actions';
 import { reducer } from 'store/reducer';
 import {
   DEVICE_INFO,
@@ -32,14 +28,17 @@ describe('reducer', () => {
       const deviceInfoReducerMock = jest
         .spyOn(DeviceInfoReducerModule, 'deviceInfoReducer')
         .mockReturnValue(buildState());
-      const action: DeviceInfoAction = {
+      const deviceInfoAction: Action = {
         type: DEVICE_INFO,
         payload: {} as DeviceInfo,
       };
-      reducer(state, action);
+      reducer(state, deviceInfoAction);
 
       expect(deviceInfoReducerMock).toHaveBeenCalledTimes(1);
-      expect(deviceInfoReducerMock).toHaveBeenCalledWith(state, action.payload);
+      expect(deviceInfoReducerMock).toHaveBeenCalledWith(
+        state,
+        deviceInfoAction.payload,
+      );
     });
   });
 
@@ -49,16 +48,16 @@ describe('reducer', () => {
       const deviceStructureReducerMock = jest
         .spyOn(DeviceStructureReducerModule, 'deviceStructureReducer')
         .mockReturnValue(buildState());
-      const action: DeviceStructureAction = {
+      const deviceStructureAction: Action = {
         type: DEVICE_STRUCTURE,
         payload: {} as DeviceStructure,
       };
-      reducer(state, action);
+      reducer(state, deviceStructureAction);
 
       expect(deviceStructureReducerMock).toHaveBeenCalledTimes(1);
       expect(deviceStructureReducerMock).toHaveBeenCalledWith(
         state,
-        action.payload,
+        deviceStructureAction.payload,
       );
     });
   });
@@ -69,16 +68,16 @@ describe('reducer', () => {
       const deviceParamUpdateReducerMock = jest
         .spyOn(DeviceParamUpdateReducerModule, 'deviceParamUpdateReducer')
         .mockReturnValue(buildState());
-      const action: DeviceUpdateParamAction = {
+      const deviceUpdateParamAction: Action = {
         type: DEVICE_PARAM_UPDATE,
         payload: {} as DeviceParamUpdate,
       };
-      reducer(state, action);
+      reducer(state, deviceUpdateParamAction);
 
       expect(deviceParamUpdateReducerMock).toHaveBeenCalledTimes(1);
       expect(deviceParamUpdateReducerMock).toHaveBeenCalledWith(
         state,
-        action.payload,
+        deviceUpdateParamAction.payload,
       );
     });
   });
