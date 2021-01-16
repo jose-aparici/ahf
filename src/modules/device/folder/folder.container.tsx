@@ -1,30 +1,40 @@
-import i18n from 'i18n';
-import React from 'react';
+import { useSocketHook } from 'hooks/socket-hook';
+import React, { useContext, useEffect } from 'react';
 
-import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
-import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
 
 import { AhfParamComponent } from '../param/param.component';
 import { useFolderContainerStyles } from './folder.container.styles';
+import { AhfFolderContext, AhfFolderProvider } from './store/context';
 
 interface Props {
+  folderIndex: number;
   params: Param[];
 }
 
 export const AhfFolderContainer: React.FC<Props> = ({ params }: Props) => {
   const classes = useFolderContainerStyles();
-  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
-    .position;
+  const { init } = useSocketHook();
+
+  const { state, dispatch } = useContext(AhfFolderContext);
+
+  useEffect(() => {
+    debugger;
+    const subscription = init(dispatch);
+    return () => subscription.unsubscribe();
+  }, [dispatch, init]);
+
   return (
-    <div className={classes.root}>
-      {params.map((param) => (
-        <AhfParamComponent
-          key={param.ParamID}
-          param={param}
-          currentLanguage={currentLanguage}
-        />
-      ))}
-    </div>
+    <AhfFolderProvider params={params}>
+      <div className={classes.root}>
+        {state.params.map((param) => (
+          <AhfParamComponent
+            key={param.ParamID}
+            param={param}
+            currentLanguage={0}
+          />
+        ))}
+      </div>
+    </AhfFolderProvider>
   );
 };

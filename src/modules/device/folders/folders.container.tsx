@@ -23,6 +23,9 @@ export const AhfFoldersContainer: React.FC<Props> = ({
     update(deviceId.toString(), folderIndex.toString());
   };
 
+  /*  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position; */
+
   useEffect(() => {
     update(deviceId.toString(), '0');
   }, [update, deviceId]);
@@ -34,8 +37,9 @@ export const AhfFoldersContainer: React.FC<Props> = ({
           <React.Fragment key={folderName}>
             <div>{folderName}</div>
             <AhfFolderContainer
+              folderIndex={currentFolderIndex}
               params={folders[folderName].ParData}
-            ></AhfFolderContainer>
+            />
           </React.Fragment>
         ) : (
           <React.Fragment key={folderName}></React.Fragment>

@@ -1,6 +1,7 @@
 import { useSocketHook } from 'hooks/socket-hook';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { AhfContext } from 'store/context';
 
 import { AhfHeaderContainer } from 'modules/header/header.container';
 import { AppRoutes } from 'pages/App.routes';
@@ -9,11 +10,13 @@ import { AhfDevicesPage } from 'pages/devices/devices.page';
 
 const App: React.FC = () => {
   const { init, scan, stopUpdate } = useSocketHook();
+  const { dispatch } = useContext(AhfContext);
+
   useEffect(() => {
-    init();
+    init(dispatch);
     stopUpdate();
     scan();
-  }, [init, scan, stopUpdate]);
+  }, [init, scan, stopUpdate, dispatch]);
   return (
     <>
       <BrowserRouter>
