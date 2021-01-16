@@ -33,7 +33,6 @@ export const AhfFoldersContainer: React.FC<Props> = ({
       {Object.keys(folders).map((folderName, folderIndex) =>
         folderIndex === currentFolderIndex ? (
           <React.Fragment key={folderName}>
-            <div>{folderName}</div>
             <AhfFolderProvider name={folderName} params={folders[folderName]}>
               <AhfFolderContainer />
             </AhfFolderProvider>

@@ -24,14 +24,17 @@ export const AhfFolderContainer: React.FC = () => {
   }, [dispatch, init]);
 
   return (
-    <div className={classes.root}>
-      {state.params.ParData.map((param) => (
-        <AhfParamComponent
-          key={param.ParamID}
-          param={param}
-          currentLanguage={currentLanguage}
-        />
-      ))}
-    </div>
+    <>
+      <div>{state.name}</div>
+      <div className={classes.root}>
+        {state.params.ParData.map((param) => (
+          <AhfParamComponent
+            key={param.ParamID}
+            param={param}
+            currentLanguage={currentLanguage}
+          />
+        ))}
+      </div>
+    </>
   );
 };
