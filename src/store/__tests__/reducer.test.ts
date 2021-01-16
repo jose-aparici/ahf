@@ -1,14 +1,12 @@
 import { buildState } from 'store/__mocks__/buildState';
 import { Action } from 'store/actions';
 import { reducer } from 'store/reducer';
-import { DEVICE_INFO, DEVICE_STRUCTURE, PARAM_READ } from 'store/types';
+import { DEVICE_INFO, DEVICE_STRUCTURE } from 'store/types';
 
 import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
-import { ParamRead } from 'domain/param/param.types';
 
 import * as DeviceInfoReducerModule from '../reducer_device_info';
 import * as DeviceStructureReducerModule from '../reducer_device_structure';
-import * as ParamReadReducerModule from '../reducer_param_read';
 
 describe('reducer', () => {
   beforeEach(() => {
@@ -51,26 +49,6 @@ describe('reducer', () => {
       expect(deviceStructureReducerMock).toHaveBeenCalledWith(
         state,
         deviceStructureAction.payload,
-      );
-    });
-  });
-
-  describe('param read', () => {
-    it('should be called', () => {
-      const state = buildState();
-      const paramReadReducerMock = jest
-        .spyOn(ParamReadReducerModule, 'paramReadReducer')
-        .mockReturnValue(buildState());
-      const paramReadAction: Action = {
-        type: PARAM_READ,
-        payload: {} as ParamRead,
-      };
-      reducer(state, paramReadAction);
-
-      expect(paramReadReducerMock).toHaveBeenCalledTimes(1);
-      expect(paramReadReducerMock).toHaveBeenCalledWith(
-        state,
-        paramReadAction.payload,
       );
     });
   });

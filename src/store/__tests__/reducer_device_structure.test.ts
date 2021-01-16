@@ -3,7 +3,7 @@ import { buildState } from 'store/__mocks__/buildState';
 import { State } from 'store/initialState';
 import { deviceStructureReducer } from 'store/reducer_device_structure';
 
-import { DeviceStructure } from 'domain/ahf/ahf.types';
+import { DeviceStructure } from 'domain/device/device.types';
 
 describe('reducer device structure', () => {
   it('should set device structure', () => {
