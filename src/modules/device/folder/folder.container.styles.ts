@@ -1,7 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-export const useDeviceCarouselContainerStyles = makeStyles((theme: Theme) => ({
-  carouselItemContainer: {
+export const useFolderContainerStyles = makeStyles((theme: Theme) => ({
+  root: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
     columnGap: '8px',

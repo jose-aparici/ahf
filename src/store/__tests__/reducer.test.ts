@@ -1,24 +1,11 @@
 import { buildState } from 'store/__mocks__/buildState';
-import {
-  DeviceInfoAction,
-  DeviceStructureAction,
-  DeviceUpdateParamAction,
-} from 'store/actions';
+import { Action } from 'store/actions';
 import { reducer } from 'store/reducer';
-import {
-  DEVICE_INFO,
-  DEVICE_PARAM_UPDATE,
-  DEVICE_STRUCTURE,
-} from 'store/types';
+import { DEVICE_INFO, DEVICE_STRUCTURE } from 'store/types';
 
-import {
-  DeviceInfo,
-  DeviceParamUpdate,
-  DeviceStructure,
-} from 'domain/ahf/ahf.types';
+import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
 
 import * as DeviceInfoReducerModule from '../reducer_device_info';
-import * as DeviceParamUpdateReducerModule from '../reducer_device_param_update';
 import * as DeviceStructureReducerModule from '../reducer_device_structure';
 
 describe('reducer', () => {
@@ -32,14 +19,17 @@ describe('reducer', () => {
       const deviceInfoReducerMock = jest
         .spyOn(DeviceInfoReducerModule, 'deviceInfoReducer')
         .mockReturnValue(buildState());
-      const action: DeviceInfoAction = {
+      const deviceInfoAction: Action = {
         type: DEVICE_INFO,
         payload: {} as DeviceInfo,
       };
-      reducer(state, action);
+      reducer(state, deviceInfoAction);
 
       expect(deviceInfoReducerMock).toHaveBeenCalledTimes(1);
-      expect(deviceInfoReducerMock).toHaveBeenCalledWith(state, action.payload);
+      expect(deviceInfoReducerMock).toHaveBeenCalledWith(
+        state,
+        deviceInfoAction.payload,
+      );
     });
   });
 
@@ -49,36 +39,16 @@ describe('reducer', () => {
       const deviceStructureReducerMock = jest
         .spyOn(DeviceStructureReducerModule, 'deviceStructureReducer')
         .mockReturnValue(buildState());
-      const action: DeviceStructureAction = {
+      const deviceStructureAction: Action = {
         type: DEVICE_STRUCTURE,
         payload: {} as DeviceStructure,
       };
-      reducer(state, action);
+      reducer(state, deviceStructureAction);
 
       expect(deviceStructureReducerMock).toHaveBeenCalledTimes(1);
       expect(deviceStructureReducerMock).toHaveBeenCalledWith(
         state,
-        action.payload,
-      );
-    });
-  });
-
-  describe('device param update', () => {
-    it('should be called', () => {
-      const state = buildState();
-      const deviceParamUpdateReducerMock = jest
-        .spyOn(DeviceParamUpdateReducerModule, 'deviceParamUpdateReducer')
-        .mockReturnValue(buildState());
-      const action: DeviceUpdateParamAction = {
-        type: DEVICE_PARAM_UPDATE,
-        payload: {} as DeviceParamUpdate,
-      };
-      reducer(state, action);
-
-      expect(deviceParamUpdateReducerMock).toHaveBeenCalledTimes(1);
-      expect(deviceParamUpdateReducerMock).toHaveBeenCalledWith(
-        state,
-        action.payload,
+        deviceStructureAction.payload,
       );
     });
   });

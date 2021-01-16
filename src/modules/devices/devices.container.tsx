@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
-import { DeviceInfo } from 'domain/ahf/ahf.types';
+import { DeviceInfo } from 'domain/device/device.types';
 import { AppRoutes } from 'pages/App.routes';
 
 import { useDevicesContainerStyles } from './devices-container.styles';
@@ -49,7 +49,7 @@ export const AhfDevicesContainer: React.FC = () => {
                 ></Avatar>
                 <Typography>{deviceInfo.Type}</Typography>
                 {deviceInfo.Status === 0 ? (
-                  <CircularProgress size={20} />
+                  <CircularProgress size={20} color="secondary" />
                 ) : (
                   <CheckCircleOutlineIcon htmlColor={'green'} />
                 )}

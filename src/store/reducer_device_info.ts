@@ -1,5 +1,4 @@
-import { DeviceInfo } from 'domain/ahf/ahf.types';
-import { Device } from 'domain/device/device.types';
+import { Device, DeviceInfo } from 'domain/device/device.types';
 
 import { State } from './initialState';
 
