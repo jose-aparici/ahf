@@ -6,7 +6,7 @@ import React, {
   useReducer,
 } from 'react';
 
-import { Param } from 'domain/param/param.types';
+import { FolderParams } from 'domain/folder/folder.types';
 
 import { Action } from './actions';
 import { initialState, State } from './initialState';
@@ -22,17 +22,19 @@ export const AhfFolderContext = createContext<Props>({
 });
 
 interface ProviderProps {
-  params: Param[];
+  name: string;
+  params: FolderParams;
   children: ReactNode;
 }
 
 export const AhfFolderProvider = ({
+  name,
   params,
   children,
 }: ProviderProps): ReactElement => {
   debugger;
   const [state, dispatch] = useReducer(reducer, initialState, () => {
-    return { params };
+    return { ...initialState, name, params };
   });
   return (
     <AhfFolderContext.Provider value={{ state, dispatch }}>

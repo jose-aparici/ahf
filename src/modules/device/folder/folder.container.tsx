@@ -5,7 +5,7 @@ import { Param } from 'domain/param/param.types';
 
 import { AhfParamComponent } from '../param/param.component';
 import { useFolderContainerStyles } from './folder.container.styles';
-import { AhfFolderContext, AhfFolderProvider } from './store/context';
+import { AhfFolderContext } from './store/context';
 
 interface Props {
   folderIndex: number;
@@ -25,16 +25,14 @@ export const AhfFolderContainer: React.FC<Props> = ({ params }: Props) => {
   }, [dispatch, init]);
 
   return (
-    <AhfFolderProvider params={params}>
-      <div className={classes.root}>
-        {state.params.map((param) => (
-          <AhfParamComponent
-            key={param.ParamID}
-            param={param}
-            currentLanguage={0}
-          />
-        ))}
-      </div>
-    </AhfFolderProvider>
+    <div className={classes.root}>
+      {state.params.ParData.map((param) => (
+        <AhfParamComponent
+          key={param.ParamID}
+          param={param}
+          currentLanguage={0}
+        />
+      ))}
+    </div>
   );
 };

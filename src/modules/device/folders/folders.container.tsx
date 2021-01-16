@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { FolderParams } from 'domain/folder/folder.types';
 
 import { AhfFolderContainer } from '../folder/folder.container';
+import { AhfFolderProvider } from '../folder/store/context';
 
 interface Props {
   deviceId: number;
@@ -36,10 +37,12 @@ export const AhfFoldersContainer: React.FC<Props> = ({
         folderIndex === currentFolderIndex ? (
           <React.Fragment key={folderName}>
             <div>{folderName}</div>
-            <AhfFolderContainer
-              folderIndex={currentFolderIndex}
-              params={folders[folderName].ParData}
-            />
+            <AhfFolderProvider name={folderName} params={folders[folderName]}>
+              <AhfFolderContainer
+                folderIndex={currentFolderIndex}
+                params={folders[folderName].ParData}
+              />
+            </AhfFolderProvider>
           </React.Fragment>
         ) : (
           <React.Fragment key={folderName}></React.Fragment>
