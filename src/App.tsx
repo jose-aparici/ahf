@@ -9,14 +9,15 @@ import { AhfDevicePage } from 'pages/device/device.page';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 
 const App: React.FC = () => {
-  const { init, scan, stopUpdate } = useSocketHook();
+  const { init, listen, scan, stopUpdate } = useSocketHook();
   const { dispatch } = useContext(AhfContext);
 
   useEffect(() => {
-    init(dispatch);
+    init();
     stopUpdate();
+    listen(dispatch);
     scan();
-  }, [init, scan, stopUpdate, dispatch]);
+  }, [init, listen, scan, stopUpdate, dispatch]);
   return (
     <>
       <BrowserRouter>

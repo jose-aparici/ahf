@@ -6,14 +6,19 @@ import { AhfAction, AhfPayload } from 'domain/context/context.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {
-  init: (dispatch: Dispatch<AhfAction>) => Subscription;
+  init: () => void;
+  listen: (dispatch: Dispatch<AhfAction>) => Subscription;
   scan: () => void;
   update: (deviceId: string, folderId: string) => void;
   stopUpdate: () => void;
 }
 
 export const useSocketHook = (): SocketHook => {
-  const init = useCallback((dispatch: Dispatch<AhfAction>): Subscription => {
+  const init = useCallback((): void => {
+    AhfSocket.getInstance();
+  }, []);
+
+  const listen = useCallback((dispatch: Dispatch<AhfAction>): Subscription => {
     return AhfSocket.getInstance()
       .asObservable()
       .subscribe((data) => {
@@ -42,5 +47,5 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
-  return { init, scan, update, stopUpdate };
+  return { init, listen, scan, update, stopUpdate };
 };

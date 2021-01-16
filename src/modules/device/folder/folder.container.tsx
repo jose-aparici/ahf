@@ -11,7 +11,7 @@ import { AhfFolderContext } from './store/context';
 
 export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
-  const { init } = useSocketHook();
+  const { listen } = useSocketHook();
 
   const { state, dispatch } = useContext(AhfFolderContext);
 
@@ -19,9 +19,9 @@ export const AhfFolderContainer: React.FC = () => {
     .position;
 
   useEffect(() => {
-    const subscription = init(dispatch);
+    const subscription = listen(dispatch);
     return () => subscription.unsubscribe();
-  }, [dispatch, init]);
+  }, [dispatch, listen]);
 
   return (
     <>
