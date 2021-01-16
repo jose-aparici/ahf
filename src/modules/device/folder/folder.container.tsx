@@ -1,25 +1,24 @@
 import { useSocketHook } from 'hooks/socket-hook';
+import i18n from 'i18n';
 import React, { useContext, useEffect } from 'react';
 
-import { Param } from 'domain/param/param.types';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
 
 import { AhfParamComponent } from '../param/param.component';
 import { useFolderContainerStyles } from './folder.container.styles';
 import { AhfFolderContext } from './store/context';
 
-interface Props {
-  folderIndex: number;
-  params: Param[];
-}
-
-export const AhfFolderContainer: React.FC<Props> = ({ params }: Props) => {
+export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
   const { init } = useSocketHook();
 
   const { state, dispatch } = useContext(AhfFolderContext);
 
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
+
   useEffect(() => {
-    debugger;
     const subscription = init(dispatch);
     return () => subscription.unsubscribe();
   }, [dispatch, init]);
@@ -30,7 +29,7 @@ export const AhfFolderContainer: React.FC<Props> = ({ params }: Props) => {
         <AhfParamComponent
           key={param.ParamID}
           param={param}
-          currentLanguage={0}
+          currentLanguage={currentLanguage}
         />
       ))}
     </div>

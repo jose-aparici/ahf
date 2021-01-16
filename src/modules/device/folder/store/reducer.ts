@@ -7,8 +7,7 @@ import { PARAM_READ } from './types';
 
 export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
-  debugger;
-  console.log('entra');
+
   switch (type) {
     case PARAM_READ:
       return paramReadReducer(state, payload as ParamRead);

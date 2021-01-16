@@ -32,7 +32,6 @@ export const AhfFolderProvider = ({
   params,
   children,
 }: ProviderProps): ReactElement => {
-  debugger;
   const [state, dispatch] = useReducer(reducer, initialState, () => {
     return { ...initialState, name, params };
   });
