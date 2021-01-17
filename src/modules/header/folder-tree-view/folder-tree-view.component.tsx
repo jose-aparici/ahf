@@ -17,14 +17,13 @@ import { useFolderTreeViewComponentStyles } from './folder-tree-view.styles';
 
 interface Props {
   devices: Record<string, Device>;
+  onToggleSideBar: () => void;
 }
 
-interface RenderTree {
-  name: string;
-  children?: RenderTree[];
-}
-
-export const AhfFolderTreeView: React.FC<Props> = ({ devices }: Props) => {
+export const AhfFolderTreeViewComponent: React.FC<Props> = ({
+  devices,
+  onToggleSideBar,
+}: Props) => {
   const classes = useFolderTreeViewComponentStyles();
 
   return (
@@ -58,6 +57,7 @@ export const AhfFolderTreeView: React.FC<Props> = ({ devices }: Props) => {
                           {folderName}
                         </NavLink>
                       }
+                      onLabelClick={onToggleSideBar}
                     ></TreeItem>
                   );
                 },

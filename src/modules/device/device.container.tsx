@@ -7,16 +7,10 @@ import { AhfFoldersContainer } from './folders/folders.container';
 
 interface Props {
   deviceId: string;
-  folderIndex?: number;
 }
 
-export const AhfDeviceContainer: React.FC<Props> = ({
-  deviceId,
-  folderIndex = 0,
-}: Props) => {
+export const AhfDeviceContainer: React.FC<Props> = ({ deviceId }: Props) => {
   const { state } = useContext(AhfContext);
-
-  debugger;
 
   return (
     <>
@@ -29,7 +23,6 @@ export const AhfDeviceContainer: React.FC<Props> = ({
               FolderParams
             >
           }
-          folderIndex={folderIndex}
         />
       )}
     </>
