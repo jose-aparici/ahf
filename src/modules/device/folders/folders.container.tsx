@@ -10,14 +10,15 @@ import { AhfFolderProvider } from '../folder/store/context';
 interface Props {
   deviceId: number;
   folders: Record<string, FolderParams>;
-  folderIndex?: number;
+  folderIndex: number;
 }
 
 export const AhfFoldersContainer: React.FC<Props> = ({
   deviceId,
   folders,
-  folderIndex = 0,
+  folderIndex,
 }: Props) => {
+  debugger;
   const { update } = useSocketHook();
   const [currentFolderIndex, setCurrentFolderIndex] = useState<number>(
     folderIndex,
@@ -29,11 +30,15 @@ export const AhfFoldersContainer: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    update(deviceId.toString(), '0');
-  }, [update, deviceId]);
+    update(deviceId.toString(), folderIndex.toString());
+  }, [update, deviceId, folderIndex]);
 
   return (
-    <SwipeableViews enableMouseEvents onChangeIndex={handleFolderChange}>
+    <SwipeableViews
+      enableMouseEvents
+      onChangeIndex={handleFolderChange}
+      index={currentFolderIndex}
+    >
       {Object.keys(folders).map((folderName, folderIndex) =>
         folderIndex === currentFolderIndex ? (
           <React.Fragment key={folderName}>
@@ -42,7 +47,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
             </AhfFolderProvider>
           </React.Fragment>
         ) : (
-          <React.Fragment key={folderName}></React.Fragment>
+          <React.Fragment key={folderName} />
         ),
       )}
     </SwipeableViews>

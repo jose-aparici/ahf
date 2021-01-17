@@ -1,23 +1,22 @@
 import React, { useContext } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { FolderParams } from 'domain/folder/folder.types';
 
 import { AhfFoldersContainer } from './folders/folders.container';
 
-interface ParamTypes {
+interface Props {
   deviceId: string;
+  folderIndex?: number;
 }
 
-export const AhfDeviceContainer: React.FC = () => {
-  const { deviceId } = useParams<ParamTypes>();
-  const location = useLocation();
-
+export const AhfDeviceContainer: React.FC<Props> = ({
+  deviceId,
+  folderIndex = 0,
+}: Props) => {
   const { state } = useContext(AhfContext);
-  const queryParams = new URLSearchParams(location.search);
 
-  const sectionUri = queryParams.get('section');
+  debugger;
 
   return (
     <>
@@ -30,7 +29,7 @@ export const AhfDeviceContainer: React.FC = () => {
               FolderParams
             >
           }
-          folderIndex={0}
+          folderIndex={folderIndex}
         />
       )}
     </>

@@ -27,22 +27,12 @@ interface RenderTree {
 export const AhfFolderTreeView: React.FC<Props> = ({ devices }: Props) => {
   const classes = useFolderTreeViewComponentStyles();
 
-  const handleNodeSelect = (
-    event: React.ChangeEvent<Record<string, never>>,
-    nodeIds: string[],
-  ) => {
-    debugger;
-    console.log(event, nodeIds);
-    //history.push(`devices/${nodeIds[0].split('.')[0]}`);
-  };
-
   return (
     <TreeView
       className={classes.root}
       defaultCollapseIcon={<ExpandMoreIcon />}
       defaultExpanded={['root']}
       defaultExpandIcon={<ChevronRightIcon />}
-      onNodeSelect={handleNodeSelect}
     >
       {Object.keys(devices).map((deviceKey) => {
         return (
