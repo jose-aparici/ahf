@@ -5,10 +5,12 @@ export interface Device {
   structure: DeviceStructure;
 }
 
+export type FolderData = Record<string, FolderParams>;
+
 export interface DeviceStructure {
   DeviceID: number;
   FolderNames: Array<string>;
-  FolderData: Record<string, FolderParams>;
+  FolderData: FolderData;
 }
 
 export interface DeviceInfo {

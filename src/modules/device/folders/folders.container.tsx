@@ -1,8 +1,10 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
 import { FolderParams } from 'domain/folder/folder.types';
+import { extractFolderIndex } from 'domain/navigation/navigation.utils';
 
 import { AhfFolderContainer } from '../folder/folder.container';
 import { AhfFolderProvider } from '../folder/store/context';
@@ -17,7 +19,17 @@ export const AhfFoldersContainer: React.FC<Props> = ({
   folders,
 }: Props) => {
   const { update } = useSocketHook();
-  const [currentFolderIndex, setCurrentFolderIndex] = useState<number>(0);
+  const location = useLocation();
+  const [currentFolderIndex, setCurrentFolderIndex] = useState<number>();
+
+  useEffect(() => {
+    if (!location.search) {
+      setCurrentFolderIndex(0);
+    } else {
+      const queryParams = new URLSearchParams(location.search);
+      setCurrentFolderIndex(extractFolderIndex(queryParams));
+    }
+  }, [location.search]);
 
   const handleFolderChange = (folderIndex: number) => {
     setCurrentFolderIndex(folderIndex);
@@ -25,11 +37,16 @@ export const AhfFoldersContainer: React.FC<Props> = ({
   };
 
   useEffect(() => {
-    update(deviceId.toString(), '0');
-  }, [update, deviceId]);
+    currentFolderIndex !== undefined &&
+      update(deviceId.toString(), currentFolderIndex.toString());
+  }, [update, deviceId, currentFolderIndex]);
 
   return (
-    <SwipeableViews enableMouseEvents onChangeIndex={handleFolderChange}>
+    <SwipeableViews
+      enableMouseEvents
+      onChangeIndex={handleFolderChange}
+      index={currentFolderIndex}
+    >
       {Object.keys(folders).map((folderName, folderIndex) =>
         folderIndex === currentFolderIndex ? (
           <React.Fragment key={folderName}>
@@ -38,7 +55,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
             </AhfFolderProvider>
           </React.Fragment>
         ) : (
-          <React.Fragment key={folderName}></React.Fragment>
+          <React.Fragment key={folderName} />
         ),
       )}
     </SwipeableViews>
