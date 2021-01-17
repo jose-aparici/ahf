@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { useParams } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { FolderParams } from 'domain/folder/folder.types';
@@ -12,7 +12,12 @@ interface ParamTypes {
 
 export const AhfDeviceContainer: React.FC = () => {
   const { deviceId } = useParams<ParamTypes>();
+  const location = useLocation();
+
   const { state } = useContext(AhfContext);
+  const queryParams = new URLSearchParams(location.search);
+
+  const sectionUri = queryParams.get('section');
 
   return (
     <>
@@ -25,6 +30,7 @@ export const AhfDeviceContainer: React.FC = () => {
               FolderParams
             >
           }
+          folderIndex={0}
         />
       )}
     </>

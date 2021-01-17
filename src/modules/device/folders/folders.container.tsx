@@ -10,14 +10,18 @@ import { AhfFolderProvider } from '../folder/store/context';
 interface Props {
   deviceId: number;
   folders: Record<string, FolderParams>;
+  folderIndex?: number;
 }
 
 export const AhfFoldersContainer: React.FC<Props> = ({
   deviceId,
   folders,
+  folderIndex = 0,
 }: Props) => {
   const { update } = useSocketHook();
-  const [currentFolderIndex, setCurrentFolderIndex] = useState<number>(0);
+  const [currentFolderIndex, setCurrentFolderIndex] = useState<number>(
+    folderIndex,
+  );
 
   const handleFolderChange = (folderIndex: number) => {
     setCurrentFolderIndex(folderIndex);

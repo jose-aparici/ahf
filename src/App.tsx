@@ -1,6 +1,6 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { AhfHeaderContainer } from 'modules/header/header.container';
@@ -23,7 +23,9 @@ const App: React.FC = () => {
       <BrowserRouter>
         <AhfHeaderContainer />
         <Switch>
-          <Route path={AppRoutes.MainPage} exact component={AhfDevicesPage} />
+          <Route path={AppRoutes.MainPage} exact>
+            <Redirect to={AppRoutes.DevicesPage} />
+          </Route>
           <Route
             path={AppRoutes.DevicesPage}
             exact
