@@ -1,40 +1,43 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
 import { FolderParams } from 'domain/folder/folder.types';
-import { extractFolderIndex } from 'domain/navigation/navigation.utils';
 
-import { AhfFolderContainer } from '../folder/folder.container';
-import { AhfFolderProvider } from '../folder/store/context';
+import { AhfFolderContainer } from './folder/folder.container';
+import { AhfFolderProvider } from './folder/store/context';
 
 interface Props {
   deviceId: number;
+  folderId: number;
   folders: Record<string, FolderParams>;
 }
 
 export const AhfFoldersContainer: React.FC<Props> = ({
   deviceId,
+  folderId,
   folders,
 }: Props) => {
   const { update } = useSocketHook();
-  const location = useLocation();
-  const [currentFolderIndex, setCurrentFolderIndex] = useState<number>();
-
-  useEffect(() => {
-    if (!location.search) {
-      setCurrentFolderIndex(0);
-    } else {
-      const queryParams = new URLSearchParams(location.search);
-      setCurrentFolderIndex(extractFolderIndex(queryParams));
-    }
-  }, [location.search]);
+  const history = useHistory();
+  const [currentFolderIndex, setCurrentFolderIndex] = useState<number>(
+    folderId,
+  );
 
   const handleFolderChange = (folderIndex: number) => {
-    setCurrentFolderIndex(folderIndex);
     update(deviceId.toString(), folderIndex.toString());
+    setCurrentFolderIndex(folderIndex);
+    window.history.replaceState(
+      null,
+      '',
+      history.location.pathname.replace(/.$/, folderIndex.toString()),
+    );
   };
+
+  useEffect(() => {
+    setCurrentFolderIndex(folderId);
+  }, [folderId]);
 
   useEffect(() => {
     currentFolderIndex !== undefined &&

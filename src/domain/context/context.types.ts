@@ -3,7 +3,7 @@ import { Action, Payload } from 'store/actions';
 import {
   Action as FolderAction,
   Payload as FolderPayload,
-} from 'modules/device/folder/store/actions';
+} from 'modules/folders/folder/store/actions';
 
 export type AhfAction = Action | FolderAction;
 

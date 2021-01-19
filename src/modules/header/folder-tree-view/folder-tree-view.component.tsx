@@ -7,10 +7,7 @@ import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 
 import { Device } from 'domain/device/device.types';
-import {
-  FOLDER_QUERY_PARAM,
-  TREE_NODES_SEPARATOR,
-} from 'domain/navigation/navigation.constants';
+import { TREE_NODES_SEPARATOR } from 'domain/navigation/navigation.constants';
 import { AppRoutes } from 'pages/App.routes';
 
 import { useFolderTreeViewComponentStyles } from './folder-tree-view.styles';
@@ -49,10 +46,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
                       nodeId={`${deviceKey}${TREE_NODES_SEPARATOR}${index}`}
                       label={
                         <NavLink
-                          to={{
-                            pathname: `${AppRoutes.DevicesPage}/${deviceKey}`,
-                            search: `?${FOLDER_QUERY_PARAM}=${index}`,
-                          }}
+                          to={`${AppRoutes.DevicesPage}/${deviceKey}/${index}`}
                         >
                           {folderName}
                         </NavLink>
