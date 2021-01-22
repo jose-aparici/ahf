@@ -18,6 +18,8 @@ export const AhfFolderContainer: React.FC = () => {
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
+  const handleClickParam = (paramId: number) => console.log(paramId);
+
   useEffect(() => {
     const subscription = listen(dispatch);
     return () => subscription.unsubscribe();
@@ -32,6 +34,7 @@ export const AhfFolderContainer: React.FC = () => {
             key={param.ParamID}
             param={param}
             currentLanguage={currentLanguage}
+            onClickParam={handleClickParam}
           />
         ))}
       </div>
