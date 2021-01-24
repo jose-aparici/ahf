@@ -8,6 +8,7 @@ import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicePage } from 'pages/device/device.page';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfFoldersPage } from 'pages/folders/folders.page';
+import { AhfParamPage } from 'pages/param/param.page';
 
 const App: React.FC = () => {
   const { init, listen, scan, stopUpdate } = useSocketHook();
@@ -38,6 +39,7 @@ const App: React.FC = () => {
             exact
             component={AhfFoldersPage}
           />
+          <Route path={AppRoutes.ParamPage} exact component={AhfParamPage} />
         </Switch>
       </BrowserRouter>
     </>

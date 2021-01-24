@@ -13,7 +13,7 @@ import {
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 
 import { DeviceInfo } from 'domain/device/device.types';
-import { AppRoutes } from 'pages/App.routes';
+import { DEVICES } from 'pages/App.routes';
 
 import { useDevicesContainerStyles } from './devices-container.styles';
 
@@ -24,7 +24,7 @@ export const AhfDevicesContainer: React.FC = () => {
   const history = useHistory();
 
   const handleClickDevice = (id: number, status: number) => {
-    status > 0 && history.push(`${AppRoutes.DevicesPage}/${id}`);
+    status > 0 && history.push(`${DEVICES}/${id}`);
   };
 
   useEffect(() => {

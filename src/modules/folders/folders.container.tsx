@@ -28,9 +28,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
   const handleFolderChange = (folderIndex: number) => {
     update(deviceId.toString(), folderIndex.toString());
     setCurrentFolderIndex(folderIndex);
-    window.history.replaceState(
-      null,
-      '',
+    history.replace(
       history.location.pathname.replace(/.$/, folderIndex.toString()),
     );
   };
@@ -54,7 +52,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
         folderIndex === currentFolderIndex ? (
           <React.Fragment key={folderName}>
             <AhfFolderProvider name={folderName} params={folders[folderName]}>
-              <AhfFolderContainer />
+              <AhfFolderContainer folderId={currentFolderIndex} />
             </AhfFolderProvider>
           </React.Fragment>
         ) : (
