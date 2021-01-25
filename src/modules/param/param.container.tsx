@@ -1,10 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AhfContext } from 'store/context';
+import i18n from 'i18n';
+import React, { useState } from 'react';
 
-import { Param } from 'domain/param/param.types';
-import { findParamById } from 'domain/param/param.utils';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { Value } from 'domain/param/param.types';
 
-import { AhfParamDetailComponent } from './param-detail/param.component';
+import { AhfParamDetailComponent } from './param-detail/param-detail.component';
 
 interface Props {
   deviceId: string;
@@ -12,29 +13,48 @@ interface Props {
   paramId: string;
 }
 
-export const AhfParamContainer: React.FC<Props> = ({
-  deviceId,
-  folderId,
-  paramId,
-}: Props) => {
-  const { state } = useContext(AhfContext);
-  const [param, setParam] = useState<Param>();
+export const AhfParamContainer: React.FC<Props> = () => {
+  const initParam = {
+    AccessType: 'READ_ONLY',
+    Description: [
+      'Momentanwert der verketteten Netzspannung U12 ',
+      'Instantaneous value of line to line voltage U12',
+      'Instantaneous value of line to line voltage U12',
+      'Valeur instantanée tension secteur U12',
+    ],
+    Name: [
+      'Netzspannung U12',
+      'Line voltage U12',
+      '相瞬时电压 U12',
+      'Tension sect U12',
+    ],
+    ParamEnumNumb: 4,
+    ParamEnumText: ['OK', 'Error', 'Too high', 'Too low'],
+    ParamID: 113,
+    ParamType: 'string',
+    Unit: 'V',
+    Value: 1103.42,
+  };
 
-  useEffect(() => {
-    if (state.devices[+deviceId] && state.devices[+deviceId].structure) {
-      const param = findParamById(
-        state.devices[+deviceId].structure,
-        folderId,
-        paramId,
-      );
-      setParam(param);
-    }
-  }, [deviceId, folderId, paramId, state]);
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
+
+  const [value, setValue] = useState<Value>(initParam.Value);
+
+  const handleValueChange = (value: string) => {
+    console.log('entra', value);
+    setValue(value);
+  };
 
   return (
     <>
-      {param && (
-        <AhfParamDetailComponent param={param}></AhfParamDetailComponent>
+      {initParam && (
+        <AhfParamDetailComponent
+          param={initParam}
+          value={value}
+          onValueChange={handleValueChange}
+          language={currentLanguage}
+        ></AhfParamDetailComponent>
       )}
     </>
   );

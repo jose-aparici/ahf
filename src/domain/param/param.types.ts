@@ -1,3 +1,5 @@
+export type Value = number | string | undefined;
+
 export interface Param {
   AccessType: string;
   Description: Array<string>;
@@ -7,7 +9,7 @@ export interface Param {
   ParamID: number;
   ParamType: string;
   Unit: string;
-  Value: number | string | undefined;
+  Value: Value;
 }
 
 export interface ParamRead {
