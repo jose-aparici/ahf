@@ -12,10 +12,10 @@ import { useFolderContainerStyles } from './folder.container.styles';
 import { AhfFolderContext } from './store/context';
 
 interface Props {
-  folderId: number;
+  folderName: string;
 }
 
-export const AhfFolderContainer: React.FC<Props> = ({ folderId }: Props) => {
+export const AhfFolderContainer: React.FC<Props> = ({ folderName }: Props) => {
   const classes = useFolderContainerStyles();
   const { listen } = useSocketHook();
   const history = useHistory();
@@ -26,7 +26,7 @@ export const AhfFolderContainer: React.FC<Props> = ({ folderId }: Props) => {
     .position;
 
   const handleClickParam = (paramId: number) => {
-    history.push(`${folderId}/${PARAM}/${paramId}`);
+    history.push(`${folderName}/${PARAM}/${paramId}`);
   };
 
   useEffect(() => {

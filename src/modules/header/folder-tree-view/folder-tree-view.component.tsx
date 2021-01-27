@@ -46,7 +46,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
                       nodeId={`${deviceKey}${TREE_NODES_SEPARATOR}${index}`}
                       label={
                         <NavLink
-                          to={`${AppRoutes.DevicesPage}/${deviceKey}/${FOLDER}/${index}`}
+                          to={`${AppRoutes.DevicesPage}/${deviceKey}/${FOLDER}/${folderName}`}
                         >
                           {folderName}
                         </NavLink>
