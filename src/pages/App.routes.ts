@@ -7,5 +7,5 @@ export const AppRoutes = {
   DevicesPage: `/${DEVICES}`,
   DevicePage: `/${DEVICES}/:deviceId`,
   FoldersPage: `/${DEVICES}/:deviceId/${FOLDER}/:folderName`,
-  ParamPage: `/${DEVICES}/:deviceId/${FOLDER}/:folderName/${PARAM}/:paramId`,
+  ParamsPage: `/${DEVICES}/:deviceId/${FOLDER}/:folderName/${PARAM}/:paramId`,
 };

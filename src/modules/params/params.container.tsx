@@ -13,7 +13,7 @@ interface Props {
   paramId: string;
 }
 
-export const AhfParamContainer: React.FC<Props> = () => {
+export const AhfParamsContainer: React.FC<Props> = () => {
   const initParam = {
     AccessType: 'READ_ONLY',
     Description: [
