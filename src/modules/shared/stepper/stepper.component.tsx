@@ -10,7 +10,7 @@ interface Props {
   onBack: () => void;
 }
 
-export const AhfParamStepperComponent: React.FC<Props> = ({
+export const AhfStepperComponent: React.FC<Props> = ({
   totalSteps,
   currentStep,
   onNext,

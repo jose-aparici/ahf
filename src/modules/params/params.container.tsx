@@ -7,9 +7,9 @@ import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, Value } from 'domain/param/param.types';
 import { findParamIndexById } from 'domain/param/param.utils';
+import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
 
 import { AhfParamDetailComponent } from './param-detail/param-detail.component';
-import { AhfParamStepperComponent } from './param-stepper/param-stepper.component';
 
 interface Props {
   deviceId: string;
@@ -58,7 +58,7 @@ export const AhfParamsContainer: React.FC<Props> = ({
 
   return (
     <>
-      <AhfParamStepperComponent
+      <AhfStepperComponent
         totalSteps={params.length}
         currentStep={currentParam.index}
         onNext={handleNextParam}

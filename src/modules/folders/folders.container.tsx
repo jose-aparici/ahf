@@ -5,6 +5,7 @@ import SwipeableViews from 'react-swipeable-views';
 
 import { FolderParams } from 'domain/folder/folder.types';
 import { findFolderIndexByName } from 'domain/folder/folder.utils';
+import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
 
 import { AhfFolderContainer } from './folder/folder.container';
 import { AhfFolderProvider } from './folder/store/context';
@@ -52,23 +53,36 @@ export const AhfFoldersContainer: React.FC<Props> = ({
       update(deviceId.toString(), currentFolder.index.toString());
   }, [update, deviceId, currentFolder]);
 
+  const handleNextParam = (): void =>
+    handleFolderChange(currentFolder.index + 1);
+  const handlePreviousParam = (): void =>
+    handleFolderChange(currentFolder.index - 1);
+
   return (
-    <SwipeableViews
-      enableMouseEvents
-      onChangeIndex={handleFolderChange}
-      index={currentFolder.index}
-    >
-      {Object.keys(folders).map((folderName, folderIndex) =>
-        folderIndex === currentFolder.index ? (
-          <React.Fragment key={folderName}>
-            <AhfFolderProvider name={folderName} params={folders[folderName]}>
-              <AhfFolderContainer folderName={currentFolder.name} />
-            </AhfFolderProvider>
-          </React.Fragment>
-        ) : (
-          <React.Fragment key={folderName} />
-        ),
-      )}
-    </SwipeableViews>
+    <>
+      <AhfStepperComponent
+        totalSteps={Object.keys(folders).length}
+        currentStep={currentFolder.index}
+        onNext={handleNextParam}
+        onBack={handlePreviousParam}
+      />
+      <SwipeableViews
+        enableMouseEvents
+        onChangeIndex={handleFolderChange}
+        index={currentFolder.index}
+      >
+        {Object.keys(folders).map((folderName, folderIndex) =>
+          folderIndex === currentFolder.index ? (
+            <React.Fragment key={folderName}>
+              <AhfFolderProvider name={folderName} params={folders[folderName]}>
+                <AhfFolderContainer folderName={currentFolder.name} />
+              </AhfFolderProvider>
+            </React.Fragment>
+          ) : (
+            <React.Fragment key={folderName} />
+          ),
+        )}
+      </SwipeableViews>
+    </>
   );
 };
