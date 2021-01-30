@@ -1,61 +1,88 @@
 import i18n from 'i18n';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import SwipeableViews from 'react-swipeable-views';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Value } from 'domain/param/param.types';
+import { Param, Value } from 'domain/param/param.types';
+import { findParamIndexById } from 'domain/param/param.utils';
 
 import { AhfParamDetailComponent } from './param-detail/param-detail.component';
+import { AhfParamStepperComponent } from './param-stepper/param-stepper.component';
 
 interface Props {
   deviceId: string;
-  folderId: string;
+  folderName: string;
   paramId: string;
+  params: Param[];
 }
 
-export const AhfParamsContainer: React.FC<Props> = () => {
-  const initParam = {
-    AccessType: 'READ_ONLY',
-    Description: [
-      'Momentanwert der verketteten Netzspannung U12 ',
-      'Instantaneous value of line to line voltage U12',
-      'Instantaneous value of line to line voltage U12',
-      'Valeur instantanée tension secteur U12',
-    ],
-    Name: [
-      'Netzspannung U12',
-      'Line voltage U12',
-      '相瞬时电压 U12',
-      'Tension sect U12',
-    ],
-    ParamEnumNumb: 4,
-    ParamEnumText: ['OK', 'Error', 'Too high', 'Too low'],
-    ParamID: 113,
-    ParamType: 'string',
-    Unit: 'V',
-    Value: 1103.42,
-  };
+type CurrentParam = {
+  index: number;
+  param: Param;
+};
 
+export const AhfParamsContainer: React.FC<Props> = ({
+  params,
+  paramId,
+}: Props) => {
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const [value, setValue] = useState<Value>(initParam.Value);
+  const history = useHistory();
 
+  const [currentParam, setCurrentParam] = useState<CurrentParam>(() => {
+    const index = findParamIndexById(params, paramId);
+    return { index, param: { ...params[index] } };
+  });
+  const [value, setValue] = useState<Value>(currentParam.param.Value);
+
+  const handleParamChange = (paramIndex: number) => {
+    setCurrentParam({
+      index: paramIndex,
+      param: params[paramIndex],
+    });
+    const paramId = params[paramIndex].ParamID;
+    history.replace(
+      history.location.pathname.replace(/[^]*$/, paramId.toString()),
+    );
+  };
   const handleValueChange = (value: string) => {
-    console.log('entra', value);
     setValue(value);
   };
 
+  const handleNextParam = (): void => handleParamChange(currentParam.index + 1);
+  const handlePreviousParam = (): void =>
+    handleParamChange(currentParam.index - 1);
+
   return (
     <>
-      {initParam && (
-        <AhfParamDetailComponent
-          param={initParam}
-          value={value}
-          onValueChange={handleValueChange}
-          language={currentLanguage}
-        ></AhfParamDetailComponent>
-      )}
+      <AhfParamStepperComponent
+        totalSteps={params.length}
+        currentStep={currentParam.index}
+        onNext={handleNextParam}
+        onBack={handlePreviousParam}
+      />
+      <SwipeableViews
+        enableMouseEvents
+        onChangeIndex={handleParamChange}
+        index={currentParam.index}
+      >
+        {params.map((param, paramIndex) => {
+          return paramIndex === currentParam.index ? (
+            <AhfParamDetailComponent
+              key={param.ParamID}
+              param={param}
+              value={value}
+              onValueChange={handleValueChange}
+              language={currentLanguage}
+            ></AhfParamDetailComponent>
+          ) : (
+            <React.Fragment key={param.ParamID}></React.Fragment>
+          );
+        })}
+      </SwipeableViews>
     </>
   );
 };

@@ -7,14 +7,14 @@ import { AhFPage } from 'pages/ahf.page';
 
 interface ParamTypes {
   deviceId: string;
-  folderId: string;
+  folderName: string;
   paramId: string;
 }
 
 export const AhfParamsPage: React.FC = () => {
   const { state } = useContext(AhfContext);
 
-  const { deviceId, folderId, paramId } = useParams<ParamTypes>();
+  const { deviceId, folderName, paramId } = useParams<ParamTypes>();
 
   return (
     <AhFPage>
@@ -22,8 +22,11 @@ export const AhfParamsPage: React.FC = () => {
         {state?.devices[+deviceId]?.structure?.FolderData && (
           <AhfParamsContainer
             deviceId={deviceId}
-            folderId={folderId}
+            folderName={folderName}
             paramId={paramId}
+            params={
+              state.devices[+deviceId].structure.FolderData[folderName].ParData
+            }
           />
         )}
       </>

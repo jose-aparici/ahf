@@ -48,7 +48,6 @@ export const AhfFoldersContainer: React.FC<Props> = ({
   }, [folderName, folders]);
 
   useEffect(() => {
-    debugger;
     currentFolder !== undefined &&
       update(deviceId.toString(), currentFolder.index.toString());
   }, [update, deviceId, currentFolder]);
@@ -67,9 +66,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
             </AhfFolderProvider>
           </React.Fragment>
         ) : (
-          <React.Fragment key={folderName}>
-            {currentFolder.index}
-          </React.Fragment>
+          <React.Fragment key={folderName} />
         ),
       )}
     </SwipeableViews>
