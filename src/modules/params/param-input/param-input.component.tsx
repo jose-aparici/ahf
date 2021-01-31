@@ -17,7 +17,6 @@ export const AhfParamInputComponent: React.FC<Props> = ({
   selectValues,
   onValueChange,
 }: Props) => {
-  debugger;
   switch (type) {
     case 'string':
       return (

@@ -1,5 +1,5 @@
-import i18n from 'i18n';
 import React, { FC, useContext, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { AhfContext } from 'store/context';
 
 import { AppBar, Toolbar } from '@material-ui/core';
@@ -18,12 +18,20 @@ import { AhfSideBarComponent } from './side-bar/side-bar.component';
 
 export const AhfHeaderContainer: FC = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const { i18n } = useTranslation();
+  const [language, setLanguage] = useState(
+    i18n.language || DEFAULT_LANGUAGE.locale,
+  );
 
   const { state } = useContext(AhfContext);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
-  const handleChangeLanguage = (locale = DEFAULT_LANGUAGE.locale) =>
-    i18n.changeLanguage(locale);
+  const handleChangeLanguage = (locale = DEFAULT_LANGUAGE.locale) => {
+    debugger;
+    i18n.changeLanguage(locale).then(() => {
+      setLanguage(i18n.language);
+    });
+  };
 
   return (
     <>
@@ -32,9 +40,9 @@ export const AhfHeaderContainer: FC = () => {
           <AhfSideBarButtonComponent onToggleSideBar={handleToggleSideBar} />
 
           <AhfNavigationButtonsComponent />
-          {i18n.language && (
+          {language && (
             <AhfLanguageSelectorComponent
-              currentLanguage={i18n.language}
+              currentLanguage={language}
               languages={AHF_LANGUAGES}
               onChangeLanguage={handleChangeLanguage}
             />

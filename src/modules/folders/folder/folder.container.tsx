@@ -1,6 +1,6 @@
 import { useSocketHook } from 'hooks/socket-hook';
-import i18n from 'i18n';
 import React, { useContext, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
@@ -19,6 +19,7 @@ export const AhfFolderContainer: React.FC<Props> = ({ folderName }: Props) => {
   const classes = useFolderContainerStyles();
   const { listen } = useSocketHook();
   const history = useHistory();
+  const { i18n } = useTranslation();
 
   const { state, dispatch } = useContext(AhfFolderContext);
 
