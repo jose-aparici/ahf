@@ -9209,6 +9209,11 @@ react-scripts@^3.4.3:
   optionalDependencies:
     fsevents "2.1.2"
 
+react-simple-keyboard@^2.5.121:
+  version "2.5.121"
+  resolved "https://registry.yarnpkg.com/react-simple-keyboard/-/react-simple-keyboard-2.5.121.tgz#cd9429251eb4bc5c00ad8590d4125cab34851a16"
+  integrity sha512-HItgVIylw3/kN23NSkCfQnSqOdrHLWXkYcfjHsdqsm5eeyo0ZrZqxFvIvi2ExlcVesOqOLjkjEnPmGnDp4R8fQ==
+
 react-swipeable-views-core@^0.13.7:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/react-swipeable-views-core/-/react-swipeable-views-core-0.13.7.tgz#c082b553f26e83fd20fc17f934200eb717023c8a"

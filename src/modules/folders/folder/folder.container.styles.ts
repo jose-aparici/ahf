@@ -10,5 +10,9 @@ export const useFolderContainerStyles = makeStyles((theme: Theme) => ({
       gridTemplateColumns: '1fr',
       rowGap: '4px',
     },
+    [theme.breakpoints.down('md')]: {
+      gridTemplateColumns: '1fr 1fr',
+      rowGap: '4px',
+    },
   },
 }));

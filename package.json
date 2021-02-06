@@ -15,6 +15,7 @@
     "react-dom": "^16.13.1",
     "react-i18next": "^11.8.5",
     "react-router-dom": "^5.2.0",
+    "react-simple-keyboard": "^2.5.121",
     "react-swipeable-views": "^0.13.9",
     "rxjs": "^6.6.2"
   },
