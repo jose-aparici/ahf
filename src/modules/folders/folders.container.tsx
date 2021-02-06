@@ -3,12 +3,16 @@ import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 
+import { IconButton } from '@material-ui/core';
+import HighlightOffIcon from '@material-ui/icons/HighlightOff';
+
 import { FolderParams } from 'domain/folder/folder.types';
 import { findFolderIndexByName } from 'domain/folder/folder.utils';
 import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
 
 import { AhfFolderContainer } from './folder/folder.container';
 import { AhfFolderProvider } from './folder/store/context';
+import { useFoldersContainerStyles } from './folders.container.styles';
 
 interface Props {
   deviceId: number;
@@ -26,6 +30,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
   folderName,
   folders,
 }: Props) => {
+  const classes = useFoldersContainerStyles();
   const { update } = useSocketHook();
   const history = useHistory();
   const [currentFolder, setCurrentFolder] = useState<CurrentFolder>(() => {
@@ -57,9 +62,15 @@ export const AhfFoldersContainer: React.FC<Props> = ({
     handleFolderChange(currentFolder.index + 1);
   const handlePreviousParam = (): void =>
     handleFolderChange(currentFolder.index - 1);
+  const handleClose = () => history.goBack();
 
   return (
     <>
+      <div className={classes.closeButton}>
+        <IconButton aria-label="cancel" onClick={handleClose}>
+          <HighlightOffIcon />
+        </IconButton>
+      </div>
       <AhfStepperComponent
         totalSteps={Object.keys(folders).length}
         currentStep={currentFolder.index}

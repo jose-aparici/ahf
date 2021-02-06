@@ -26,13 +26,10 @@ export const AhfHeaderContainer: FC = () => {
   const { state } = useContext(AhfContext);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
-  const handleChangeLanguage = (locale = DEFAULT_LANGUAGE.locale) => {
-    debugger;
+  const handleChangeLanguage = (locale = DEFAULT_LANGUAGE.locale) =>
     i18n.changeLanguage(locale).then(() => {
       setLanguage(i18n.language);
     });
-  };
-
   return (
     <>
       <AppBar>

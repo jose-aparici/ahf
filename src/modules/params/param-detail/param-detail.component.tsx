@@ -12,6 +12,7 @@ interface Props {
   value: Value;
   language: number;
   onValueChange: (value: string) => void;
+  onToggleKeyboard: (showKeyboard: boolean) => void;
 }
 
 export const AhfParamDetailComponent: React.FC<Props> = ({
@@ -19,6 +20,7 @@ export const AhfParamDetailComponent: React.FC<Props> = ({
   value,
   language,
   onValueChange,
+  onToggleKeyboard,
 }: Props) => {
   const classes = useParamDetailComponentStyles();
   return (
@@ -37,6 +39,8 @@ export const AhfParamDetailComponent: React.FC<Props> = ({
           type={param.ParamType}
           value={value}
           selectValues={param.ParamEnumText}
+          onBlur={onToggleKeyboard}
+          onFocus={onToggleKeyboard}
           onValueChange={onValueChange}
         />
       </FormControl>

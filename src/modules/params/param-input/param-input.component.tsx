@@ -9,6 +9,8 @@ interface Props {
   value: Value;
   selectValues?: string[];
   onValueChange: (value: string) => void;
+  onFocus: (value: boolean) => void;
+  onBlur: (value: boolean) => void;
 }
 
 export const AhfParamInputComponent: React.FC<Props> = ({
@@ -16,6 +18,8 @@ export const AhfParamInputComponent: React.FC<Props> = ({
   value,
   selectValues,
   onValueChange,
+  onFocus,
+  onBlur,
 }: Props) => {
   switch (type) {
     case 'string':
@@ -43,6 +47,8 @@ export const AhfParamInputComponent: React.FC<Props> = ({
           value={value}
           type="number"
           onChange={(event) => onValueChange(event.target.value as string)}
+          onBlur={() => onBlur(false)}
+          onFocus={() => onFocus(true)}
         />
       );
 
@@ -51,6 +57,8 @@ export const AhfParamInputComponent: React.FC<Props> = ({
         <Input
           value={value}
           onChange={(event) => onValueChange(event.target.value as string)}
+          onBlur={() => onBlur(false)}
+          onFocus={() => onFocus(true)}
         />
       );
   }
