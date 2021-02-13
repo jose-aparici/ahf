@@ -6,4 +6,17 @@ export const useFolderTreeViewComponentStyles = makeStyles(() => ({
     flexGrow: 1,
     maxWidth: 400,
   },
+  parentTreeItem: {
+    fontSize: '0.875rem',
+    fontWeight: 600,
+    lineHeight: '1.75',
+    textTransform: 'capitalize',
+  },
+  chilTreeItemContent: {
+    display: 'block',
+  },
+  chilTreeItemButton: {
+    textTransform: 'capitalize',
+    fontWeight: 400,
+  },
 }));

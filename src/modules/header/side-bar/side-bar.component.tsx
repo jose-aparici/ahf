@@ -1,7 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { IconButton, SwipeableDrawer } from '@material-ui/core';
-import CloseIcon from '@material-ui/icons/Close';
+import { SwipeableDrawer } from '@material-ui/core';
 
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
@@ -27,9 +26,8 @@ export const AhfSideBarComponent: React.FC<Props> = ({
       classes={{ paper: classes.root }}
     >
       <div>
-        <IconButton onClick={onToggleSideBar}>
-          <CloseIcon />
-        </IconButton>
+        <div>Schaffner</div>
+        <hr className={classes.divider}></hr>
       </div>
       {children}
     </SwipeableDrawer>
