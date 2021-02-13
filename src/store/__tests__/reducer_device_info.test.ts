@@ -10,7 +10,7 @@ describe('reducer device info', () => {
     const result = deviceInfoReducer(state, payload);
     expect(result).toEqual({
       devices: {
-        2: {
+        1: {
           info: payload,
         },
       },
