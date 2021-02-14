@@ -1,5 +1,3 @@
-
-
 import { Device } from 'domain/device/device.types';
 
 export interface State {
