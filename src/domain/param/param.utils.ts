@@ -8,7 +8,7 @@ export const findParamById = (
   paramId: string,
 ): Param => {
   const folderName = deviceStructure.FolderNames[+folderId];
-  const param = deviceStructure.FolderData[folderName].ParData.find(
+  const param = deviceStructure.FolderData[folderName].Params.ParData.find(
     (param: Param) => param.ParamID === +paramId,
   );
 

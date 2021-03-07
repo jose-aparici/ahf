@@ -9,7 +9,7 @@ export const paramReadReducer = (state: State, paramRead: ParamRead): State => {
   ) {
     const findParamToUpdate = state.devices[
       paramRead.DeviceID
-    ].structure.FolderData[paramRead.FolderName].ParData.find(
+    ].structure.FolderData[paramRead.FolderName].Params.ParData.find(
       (param) => param.ParamID === paramRead.ParamID,
     );
     if (findParamToUpdate) {

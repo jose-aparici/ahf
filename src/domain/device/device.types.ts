@@ -1,11 +1,20 @@
-import { FolderParams } from 'domain/folder/folder.types';
+import { Param } from 'domain/param/param.types';
 
 export interface Device {
   info: DeviceInfo;
   structure: DeviceStructure;
 }
 
-export type FolderData = Record<string, FolderParams>;
+export type Params = {
+  ParData: Array<Param>;
+};
+
+export type Folder = {
+  Folders: FolderData;
+  Params: Params;
+};
+
+export type FolderData = Record<string, Folder>;
 
 export interface DeviceStructure {
   DeviceID: number;
