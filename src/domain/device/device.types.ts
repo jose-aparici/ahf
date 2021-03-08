@@ -1,6 +1,6 @@
 import { Param } from 'domain/param/param.types';
 
-export interface DeviceNodes {
+export interface Device {
   info: DeviceInfo;
   structure: DeviceNode;
 }

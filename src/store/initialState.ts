@@ -1,7 +1,7 @@
-import { DeviceNodes } from 'domain/device/device.types';
+import { Device } from 'domain/device/device.types';
 
 export interface State {
-  devices: Record<number, DeviceNodes>;
+  devices: Record<number, Device>;
 }
 export const initialState: State = {
   devices: {},
