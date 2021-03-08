@@ -1,4 +1,4 @@
-import { Device, DeviceInfo } from 'domain/device/device.types';
+import { DeviceInfo, DeviceNodes } from 'domain/device/device.types';
 
 import { State } from './initialState';
 
@@ -8,7 +8,7 @@ export const deviceInfoReducer = (
 ): State => {
   state.devices[deviceInfo.ID] = {
     info: deviceInfo,
-  } as Device;
+  } as DeviceNodes;
 
   return {
     ...state,

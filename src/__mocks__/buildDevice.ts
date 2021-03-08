@@ -1,6 +1,6 @@
-import { Device } from 'domain/device/device.types';
+import { DeviceAhf } from 'domain/device/device.types';
 
-const DEFAULT_DEVICE: Device = {
+const DEFAULT_DEVICE: DeviceAhf = {
   info: {
     Company: '1',
     FW: 'FW',
@@ -58,7 +58,7 @@ const DEFAULT_DEVICE: Device = {
   },
 };
 
-export const buildDevice = (overrides = {}): Device => ({
+export const buildDevice = (overrides = {}): DeviceAhf => ({
   ...DEFAULT_DEVICE,
   ...overrides,
 });

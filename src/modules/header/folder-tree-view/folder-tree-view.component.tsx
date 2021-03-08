@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 
 import { Button, CircularProgress } from '@material-ui/core';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 
-import { Device } from 'domain/device/device.types';
-import { TREE_NODES_SEPARATOR } from 'domain/navigation/navigation.constants';
-import { AppRoutes, FOLDER } from 'pages/App.routes';
+import { DeviceAhf } from 'domain/device/device.types';
 
 import { useFolderTreeViewComponentStyles } from './folder-tree-view.styles';
 
 interface Props {
-  devices: Record<string, Device>;
+  devices: Record<string, DeviceAhf>;
   onToggleSideBar: () => void;
 }
 
@@ -53,7 +50,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
               </Button>
             }
           >
-            {devices[deviceKey].structure &&
+            {/*  {devices[deviceKey].structure &&
               Object.keys(devices[deviceKey].structure.FolderData).map(
                 (folderName, index) => {
                   return (
@@ -74,7 +71,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
                     ></TreeItem>
                   );
                 },
-              )}
+              )} */}
           </TreeItem>
         );
       })}

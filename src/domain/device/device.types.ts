@@ -5,7 +5,7 @@ export interface DeviceNodes {
   structure: DeviceNode;
 }
 
-export interface Device {
+export interface DeviceAhf {
   info: DeviceInfo;
   structure: DeviceStructure;
 }

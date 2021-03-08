@@ -9,7 +9,6 @@ import {
   DEFAULT_LANGUAGE,
 } from 'domain/languages/languages.constants';
 
-import { AhfFolderTreeViewComponent } from './folder-tree-view/folder-tree-view.component';
 import { AhfLanguageSelectorComponent } from './language-selector/language-selector.component';
 import { AhfNavigationButtonsComponent } from './navigation-buttons/navigation-buttons.component';
 import { AhfNavigationIconsComponent } from './navigation-icons/navigation-icons.component';
@@ -52,10 +51,10 @@ export const AhfHeaderContainer: FC = () => {
         isOpen={sideBarOpen}
         onToggleSideBar={handleToggleSideBar}
       >
-        <AhfFolderTreeViewComponent
+        {/*  <AhfFolderTreeViewComponent
           devices={state.devices}
           onToggleSideBar={handleToggleSideBar}
-        />
+        /> */}
       </AhfSideBarComponent>
     </>
   );

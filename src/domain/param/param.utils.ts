@@ -7,7 +7,8 @@ export const findParamById = (
   folderId: string,
   paramId: string,
 ): Param => {
-  const folderName = deviceStructure.FolderNames[+folderId];
+  throw new Error('param not found');
+  /* const folderName = deviceStructure.FolderNames[+folderId];
   const param = deviceStructure.FolderData[folderName].Params.ParData.find(
     (param: Param) => param.ParamID === +paramId,
   );
@@ -15,8 +16,8 @@ export const findParamById = (
   if (param) {
     return param;
   } else {
-    throw new Error('param not found');
-  }
+    throw new Error('param not found'); 
+  }*/
 };
 
 export const findParamIndexById = (
