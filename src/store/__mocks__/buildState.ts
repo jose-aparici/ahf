@@ -1,12 +1,12 @@
 import { State } from 'store/initialState';
 
-import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
+import { DeviceInfo, DeviceNode } from 'domain/device/device.types';
 
 const DEFAULT_STATE: State = {
   devices: {
     1: {
       info: {} as DeviceInfo,
-      structure: {} as DeviceStructure,
+      structure: {} as DeviceNode,
     },
   },
 };

@@ -1,9 +1,21 @@
 import { Param } from 'domain/param/param.types';
 
+export interface DeviceNodes {
+  info: DeviceInfo;
+  structure: DeviceNode;
+}
+
 export interface Device {
   info: DeviceInfo;
   structure: DeviceStructure;
 }
+
+export type DeviceNode = {
+  id: string;
+  label: string;
+  children: DeviceNode[];
+  params: Param[];
+};
 
 export type Params = {
   ParData: Array<Param>;
@@ -11,7 +23,7 @@ export type Params = {
 
 export type Folder = {
   Folders: FolderData;
-  Params: Params;
+  Params: Params | null;
 };
 
 export type FolderData = Record<string, Folder>;
@@ -19,7 +31,7 @@ export type FolderData = Record<string, Folder>;
 export interface DeviceStructure {
   DeviceID: number;
   FolderNames: Array<string>;
-  FolderData: FolderData;
+  FolderData: Record<string, Folder>;
 }
 
 export interface DeviceInfo {
