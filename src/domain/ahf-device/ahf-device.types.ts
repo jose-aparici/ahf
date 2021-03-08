@@ -1,11 +1,11 @@
 import { Param } from 'domain/param/param.types';
 
 export interface DeviceAhf {
-  info: DeviceInfo;
-  structure: DeviceStructure;
+  info: DeviceInfoAhf;
+  structure: DeviceStructureAhf;
 }
 
-export interface DeviceInfo {
+export interface DeviceInfoAhf {
   Company: string;
   FW: string;
   ID: number;
@@ -13,19 +13,19 @@ export interface DeviceInfo {
   Type: string;
 }
 
-export interface DeviceStructure {
+export interface DeviceStructureAhf {
   DeviceID: number;
   FolderNames: Array<string>;
-  FolderData: Record<string, Folder>;
+  FolderData: Record<string, FolderAhf>;
 }
 
-export type Params = {
+export type ParamsAhf = {
   ParData: Array<Param>;
 };
 
-export type Folder = {
+export type FolderAhf = {
   Folders: FolderData;
-  Params: Params | null;
+  Params: ParamsAhf | null;
 };
 
-export type FolderData = Record<string, Folder>;
+export type FolderData = Record<string, FolderAhf>;

@@ -1,4 +1,7 @@
-import { DeviceStructure, FolderData } from 'domain/device/device.types';
+import {
+  DeviceStructureAhf,
+  FolderData,
+} from 'domain/ahf-device/ahf-device.types';
 
 import { DeviceNode } from '../domain/device/device.types';
 import { State } from './initialState';
@@ -13,7 +16,7 @@ const transformFolderDataToNode = (folderData: FolderData): DeviceNode[] =>
       : [],
   }));
 
-const transformStructureToNode = (structure: DeviceStructure) =>
+const transformStructureToNode = (structure: DeviceStructureAhf) =>
   Object.entries(structure.FolderData).reduce(
     (_, current) => ({
       id: current[0],
@@ -26,13 +29,13 @@ const transformStructureToNode = (structure: DeviceStructure) =>
 
 export const deviceStructureReducer = (
   state: State,
-  deviceStructure: DeviceStructure,
+  deviceStructure: DeviceStructureAhf,
 ): State => {
   if (
     state.devices[deviceStructure.DeviceID] &&
     state.devices[deviceStructure.DeviceID].info
   ) {
-    state.devices[deviceStructure.DeviceID].info.Status = 1;
+    state.devices[deviceStructure.DeviceID].info.status = 1;
     state.devices[
       deviceStructure.DeviceID
     ].structure = transformStructureToNode(deviceStructure);

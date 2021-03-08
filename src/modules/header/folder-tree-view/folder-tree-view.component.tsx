@@ -5,12 +5,12 @@ import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 
-import { DeviceAhf } from 'domain/device/device.types';
+import { Device } from 'domain/device/device.types';
 
 import { useFolderTreeViewComponentStyles } from './folder-tree-view.styles';
 
 interface Props {
-  devices: Record<string, DeviceAhf>;
+  devices: Record<string, Device>;
   onToggleSideBar: () => void;
 }
 
@@ -39,7 +39,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
                 color="secondary"
                 className={classes.parentTreeItem}
                 startIcon={
-                  devices[deviceKey].info.Status === 0 ? (
+                  devices[deviceKey].info.status === 0 ? (
                     <CircularProgress size={20} color="secondary" />
                   ) : (
                     <CheckCircleOutlineIcon htmlColor={'green'} />

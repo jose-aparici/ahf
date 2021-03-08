@@ -1,4 +1,7 @@
-import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
+import {
+  DeviceInfoAhf,
+  DeviceStructureAhf,
+} from 'domain/ahf-device/ahf-device.types';
 
 import { Action } from './actions';
 import { State } from './initialState';
@@ -11,10 +14,10 @@ export const reducer = (state: State, action: Action): State => {
 
   switch (type) {
     case DEVICE_INFO:
-      return deviceInfoReducer(state, payload as DeviceInfo);
+      return deviceInfoReducer(state, payload as DeviceInfoAhf);
 
     case DEVICE_STRUCTURE:
-      return deviceStructureReducer(state, payload as DeviceStructure);
+      return deviceStructureReducer(state, payload as DeviceStructureAhf);
 
     default:
       return state;

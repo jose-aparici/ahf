@@ -1,9 +1,16 @@
-import { DeviceInfo } from 'domain/ahf-device/ahf-device.types';
 import { Param } from 'domain/param/param.types';
 
 export interface Device {
   info: DeviceInfo;
   structure: DeviceNode;
+}
+
+export interface DeviceInfo {
+  company: string;
+  fw: string;
+  id: number;
+  status: number;
+  type: string;
 }
 
 export type DeviceNode = {

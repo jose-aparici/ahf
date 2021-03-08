@@ -1,9 +1,9 @@
-import { DeviceStructure } from 'domain/device/device.types';
+import { DeviceStructureAhf } from 'domain/ahf-device/ahf-device.types';
 
 import { Param } from './param.types';
 
 export const findParamById = (
-  deviceStructure: DeviceStructure,
+  deviceStructure: DeviceStructureAhf,
   folderId: string,
   paramId: string,
 ): Param => {
