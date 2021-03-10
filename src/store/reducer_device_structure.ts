@@ -8,9 +8,10 @@ import { State } from './initialState';
 
 const transformFolderDataToNode = (folderData: FolderData): DeviceNode[] =>
   Object.entries(folderData).map((entry) => ({
-    id: entry[0],
+    id: Date.now().toString() + Math.random(),
     label: entry[0],
     params: entry[1].Params ? entry[1].Params.ParData : [],
+    root: false,
     children: entry[1].Folders
       ? transformFolderDataToNode(entry[1].Folders)
       : [],
@@ -19,12 +20,19 @@ const transformFolderDataToNode = (folderData: FolderData): DeviceNode[] =>
 const transformStructureToNode = (structure: DeviceStructureAhf) =>
   Object.entries(structure.FolderData).reduce(
     (_, current) => ({
-      id: current[0],
+      id: Date.now().toString() + Math.random(),
       label: current[0],
       params: current[1].Params ? current[1].Params.ParData : [],
+      root: true,
       children: transformFolderDataToNode(current[1].Folders),
     }),
-    { id: '', label: '', params: [], children: [] } as DeviceNode,
+    {
+      id: Date.now().toString() + Math.random(),
+      label: '',
+      params: [],
+      children: [],
+      root: true,
+    } as DeviceNode,
   );
 
 export const deviceStructureReducer = (
