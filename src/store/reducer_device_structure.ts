@@ -1,3 +1,5 @@
+import { flatten } from 'flattree';
+
 import {
   DeviceStructureAhf,
   FolderData,
@@ -15,7 +17,6 @@ const transformFolderDataToNode = (
     id: `${previousPath}/${entry[0]}`,
     label: entry[0],
     params: entry[1].Params ? entry[1].Params.ParData : [],
-    root: false,
     children: entry[1].Folders
       ? transformFolderDataToNode(
           entry[1].Folders,
@@ -30,7 +31,6 @@ const transformStructureToNode = (structure: DeviceStructureAhf) =>
       id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,
       label: current[0],
       params: current[1].Params ? current[1].Params.ParData : [],
-      root: true,
       children: transformFolderDataToNode(
         current[1].Folders,
         `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,
@@ -41,7 +41,6 @@ const transformStructureToNode = (structure: DeviceStructureAhf) =>
       label: '',
       params: [],
       children: [],
-      root: true,
     } as DeviceNode,
   );
 
@@ -54,9 +53,9 @@ export const deviceStructureReducer = (
     state.devices[deviceStructure.DeviceID].info
   ) {
     state.devices[deviceStructure.DeviceID].info.status = 1;
-    state.devices[
-      deviceStructure.DeviceID
-    ].structure = transformStructureToNode(deviceStructure);
+    state.devices[deviceStructure.DeviceID].structure = flatten(
+      transformStructureToNode(deviceStructure),
+    )[0];
   }
 
   return { ...state };

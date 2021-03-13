@@ -11,7 +11,8 @@ describe('reducer device structure', () => {
     const payload: DeviceStructureAhf = buildDeviceAhf().structure;
 
     const result = deviceStructureReducer(state, payload);
-    expect(result).toEqual({
+
+    expect(result).toMatchObject({
       devices: {
         1: {
           info: {
@@ -20,17 +21,14 @@ describe('reducer device structure', () => {
           structure: {
             id: '/devices/1',
             label: 'folder1',
-            root: true,
             children: [
               {
                 id: '/devices/1/folder1.1',
                 label: 'folder1.1',
-                root: false,
                 children: [
                   {
                     id: '/devices/1/folder1.1/folder1.2',
                     label: 'folder1.2',
-                    root: false,
                     children: [],
                     params: [
                       {

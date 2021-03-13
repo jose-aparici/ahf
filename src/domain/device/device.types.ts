@@ -18,5 +18,4 @@ export type DeviceNode = {
   label: string;
   children: DeviceNode[];
   params: Param[];
-  root: boolean;
 };
