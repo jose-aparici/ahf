@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
@@ -25,10 +26,24 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
       ? setCurrentExpanded([])
       : setCurrentExpanded([nodeId]);
 
-  const renderTree = (nodes: DeviceNode) => (
-    <TreeItem key={nodes.id} nodeId={nodes.id} label={nodes.label}>
+  const renderTree = (nodes: DeviceNode, deviceId: string) => (
+    <TreeItem
+      key={nodes.id}
+      nodeId={nodes.id}
+      label={
+        <NavLink
+          activeStyle={{
+            fontWeight: 'bold',
+            color: 'red',
+          }}
+          to={`${encodeURI(nodes.id)}`}
+        >
+          {nodes.label}
+        </NavLink>
+      }
+    >
       {Array.isArray(nodes.children)
-        ? nodes.children.map((node) => renderTree(node))
+        ? nodes.children.map((node) => renderTree(node, deviceId))
         : null}
     </TreeItem>
   );
@@ -44,7 +59,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
         (deviceKey) =>
           devices[deviceKey].info.status === 1 &&
           devices[deviceKey].structure &&
-          renderTree(devices[deviceKey].structure),
+          renderTree(devices[deviceKey].structure, deviceKey),
       )}
     </TreeView>
   );

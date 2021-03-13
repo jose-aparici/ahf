@@ -1,5 +1,6 @@
 import React, { FC, useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useLocation } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { AppBar, Toolbar } from '@material-ui/core';
@@ -18,6 +19,8 @@ import { AhfSideBarComponent } from './side-bar/side-bar.component';
 
 export const AhfHeaderContainer: FC = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
+  const location = useLocation();
+
   const { i18n } = useTranslation();
   const [language, setLanguage] = useState(
     i18n.language || DEFAULT_LANGUAGE.locale,
@@ -45,6 +48,7 @@ export const AhfHeaderContainer: FC = () => {
             />
           )}
           <AhfNavigationIconsComponent />
+          <div> {location.pathname}</div>
         </Toolbar>
       </AppBar>
       <Toolbar />
