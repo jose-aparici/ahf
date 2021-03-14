@@ -1,5 +1,6 @@
 import { Param } from 'domain/param/param.types';
 
+//TODO rename to device folder
 export interface Device {
   info: DeviceInfo;
   structure: DeviceNode;

@@ -1,5 +1,26 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useParams, useRouteMatch } from 'react-router-dom';
+import { AhfContext } from 'store/context';
+
+import { DeviceNode } from 'domain/device/device.types';
+import { findFolderById } from 'domain/folder/folder.utils';
+
+interface ParamTypes {
+  deviceId: string;
+}
 
 export const AhfFolderContainer: React.FC = () => {
-  return <div>this is a folder container</div>;
+  const { state } = useContext(AhfContext);
+  const { deviceId } = useParams<ParamTypes>();
+  const [currentFolder, setCurrentFolder] = useState<DeviceNode>();
+  const { url } = useRouteMatch();
+
+  useEffect(() => {
+    if (state?.devices[+deviceId]?.structure) {
+      const folder = findFolderById(url, state.devices[+deviceId].structure);
+      folder && setCurrentFolder(folder);
+    }
+  }, [deviceId, state]);
+
+  return <div>this is a folder container {currentFolder?.id}</div>;
 };

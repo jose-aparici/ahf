@@ -3,7 +3,10 @@ import { Action } from 'store/actions';
 import { reducer } from 'store/reducer';
 import { DEVICE_INFO, DEVICE_STRUCTURE } from 'store/types';
 
-import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
+import {
+  DeviceInfoAhf,
+  DeviceStructureAhf,
+} from 'domain/ahf-device/ahf-device.types';
 
 import * as DeviceInfoReducerModule from '../reducer_device_info';
 import * as DeviceStructureReducerModule from '../reducer_device_structure';
@@ -21,7 +24,7 @@ describe('reducer', () => {
         .mockReturnValue(buildState());
       const deviceInfoAction: Action = {
         type: DEVICE_INFO,
-        payload: {} as DeviceInfo,
+        payload: {} as DeviceInfoAhf,
       };
       reducer(state, deviceInfoAction);
 
@@ -41,7 +44,7 @@ describe('reducer', () => {
         .mockReturnValue(buildState());
       const deviceStructureAction: Action = {
         type: DEVICE_STRUCTURE,
-        payload: {} as DeviceStructure,
+        payload: {} as DeviceStructureAhf,
       };
       reducer(state, deviceStructureAction);
 

@@ -1,16 +1,12 @@
 import React from 'react';
-import { useRouteMatch } from 'react-router-dom';
 
-interface ParamTypes {
-  folderName: string;
-}
+import { AhfFolderContainer } from 'modules/folder/folder.container';
 
 export const AhfFolderPage: React.FC = () => {
-  const { url } = useRouteMatch();
-
   return (
     <>
-      <div>this is the folder page {`${url}`}</div>
+      <div>this is the folder page </div>
+      <AhfFolderContainer />
       {/* <Switch>
         <Route exact path={`${url}/:folderName`}>
           <div>this is the folder page {`${url}`}</div>
