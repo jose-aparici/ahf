@@ -1,4 +1,4 @@
-import { DeviceNode } from 'domain/device/device.types';
+import { Folder } from 'domain/device/device.types';
 import { FolderNode } from 'domain/folder-node/folder-node.types';
 
 export const findFolderIndexByName = (
@@ -11,14 +11,14 @@ export const findFolderIndexByName = (
 
 export const findFolderById = (
   folderPath: string,
-  rootNode: DeviceNode,
-): DeviceNode | undefined => {
+  rootFolder: Folder,
+): Folder | undefined => {
   debugger;
-  if (rootNode.id === folderPath) {
-    return rootNode;
+  if (rootFolder.id === folderPath) {
+    return rootFolder;
   } else {
-    if (((rootNode as unknown) as FolderNode).hasChildren()) {
-      const nodeFound = rootNode.children.find((node) => {
+    if (((rootFolder as unknown) as FolderNode).hasChildren()) {
+      const nodeFound = rootFolder.children.find((node) => {
         debugger;
         return folderPath.startsWith(node.id);
       });

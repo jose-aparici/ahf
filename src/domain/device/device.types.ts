@@ -3,7 +3,7 @@ import { Param } from 'domain/param/param.types';
 //TODO rename to device folder
 export interface Device {
   info: DeviceInfo;
-  structure: DeviceNode;
+  structure: Folder;
 }
 
 export interface DeviceInfo {
@@ -14,9 +14,9 @@ export interface DeviceInfo {
   type: string;
 }
 
-export type DeviceNode = {
+export type Folder = {
   id: string;
   label: string;
-  children: DeviceNode[];
+  children: Folder[];
   params: Param[];
 };

@@ -4,6 +4,12 @@ import {
 } from 'domain/ahf-device/ahf-device.types';
 import { FolderSelect } from 'domain/folder/folder.types';
 import { ParamRead } from 'domain/param/param.types';
+import {
+  Action as FolderAction,
+  Payload as FolderPayload,
+} from 'modules/folders/folder/store/actions';
+
+import { Action, Payload } from '../../modules/folders/folder/store/actions';
 
 export enum Command {
   VERSION = 'WSVer',
@@ -17,3 +23,7 @@ export interface AhfMessage {
   Cmd: Command;
   Data?: DeviceInfoAhf | DeviceStructureAhf | FolderSelect | ParamRead;
 }
+
+export type AhfAction = Action | FolderAction;
+
+export type AhfPayload = Payload | FolderPayload;

@@ -5,14 +5,14 @@ import {
   FolderData,
 } from 'domain/ahf-device/ahf-device.types';
 
-import { DeviceNode } from '../domain/device/device.types';
+import { Folder } from '../domain/device/device.types';
 import { AppRoutes } from '../pages/App.routes';
 import { State } from './initialState';
 
 const transformFolderDataToNode = (
   folderData: FolderData,
   previousPath: string,
-): DeviceNode[] =>
+): Folder[] =>
   Object.entries(folderData).map((entry) => ({
     id: `${previousPath}/${entry[0]}`,
     label: entry[0],
@@ -41,7 +41,7 @@ const transformStructureToNode = (structure: DeviceStructureAhf) =>
       label: '',
       params: [],
       children: [],
-    } as DeviceNode,
+    } as Folder,
   );
 
 export const deviceStructureReducer = (

@@ -6,7 +6,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 
-import { Device, DeviceNode } from 'domain/device/device.types';
+import { Device, Folder } from 'domain/device/device.types';
 
 import { useFolderTreeViewComponentStyles } from './folder-tree-view.styles';
 
@@ -26,24 +26,24 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
       ? setCurrentExpanded([])
       : setCurrentExpanded([nodeId]);
 
-  const renderTree = (nodes: DeviceNode, deviceId: string) => (
+  const renderTree = (folder: Folder, deviceId: string) => (
     <TreeItem
-      key={nodes.id}
-      nodeId={nodes.id}
+      key={folder.id}
+      nodeId={folder.id}
       label={
         <NavLink
           activeStyle={{
             fontWeight: 'bold',
             color: 'red',
           }}
-          to={`${encodeURI(nodes.id)}`}
+          to={`${encodeURI(folder.id)}`}
         >
-          {nodes.label}
+          {folder.label}
         </NavLink>
       }
     >
-      {Array.isArray(nodes.children)
-        ? nodes.children.map((node) => renderTree(node, deviceId))
+      {Array.isArray(folder.children)
+        ? folder.children.map((children) => renderTree(children, deviceId))
         : null}
     </TreeItem>
   );

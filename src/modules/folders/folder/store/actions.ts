@@ -1,5 +1,4 @@
-import { Command } from 'domain/ahf/ahf.types';
-import { AhfPayload } from 'domain/context/context.types';
+import { AhfPayload, Command } from 'domain/ahf/ahf.types';
 import { ParamRead } from 'domain/param/param.types';
 
 export type Action = {

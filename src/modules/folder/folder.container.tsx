@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
-import { DeviceNode } from 'domain/device/device.types';
+import { Folder } from 'domain/device/device.types';
 import { findFolderById } from 'domain/folder/folder.utils';
 
 interface ParamTypes {
@@ -12,7 +12,7 @@ interface ParamTypes {
 export const AhfFolderContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
-  const [currentFolder, setCurrentFolder] = useState<DeviceNode>();
+  const [currentFolder, setCurrentFolder] = useState<Folder>();
   const { url } = useRouteMatch();
 
   useEffect(() => {
@@ -20,7 +20,7 @@ export const AhfFolderContainer: React.FC = () => {
       const folder = findFolderById(url, state.devices[+deviceId].structure);
       folder && setCurrentFolder(folder);
     }
-  }, [deviceId, state]);
+  }, [deviceId, state, url]);
 
   return <div>this is a folder container {currentFolder?.id}</div>;
 };
