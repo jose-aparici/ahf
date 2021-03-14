@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
-import { Folder } from 'domain/device/device.types';
+import { Folder } from 'domain/folder/folder.types';
 import { findFolderById } from 'domain/folder/folder.utils';
 
 interface ParamTypes {

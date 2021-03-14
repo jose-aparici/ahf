@@ -6,7 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import { FolderParams } from 'domain/folder/folder.types';
+import { FolderParams } from 'domain/ahf-folder/ahf-folder.types';
 import { findFolderIndexByName } from 'domain/folder/folder.utils';
 import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
 

@@ -1,6 +1,5 @@
-import { Param } from 'domain/param/param.types';
+import { Folder } from 'domain/folder/folder.types';
 
-//TODO rename to device folder
 export interface Device {
   info: DeviceInfo;
   structure: Folder;
@@ -13,10 +12,3 @@ export interface DeviceInfo {
   status: number;
   type: string;
 }
-
-export type Folder = {
-  id: string;
-  label: string;
-  children: Folder[];
-  params: Param[];
-};

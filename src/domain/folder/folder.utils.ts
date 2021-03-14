@@ -1,5 +1,6 @@
-import { Folder } from 'domain/device/device.types';
 import { FolderNode } from 'domain/folder-node/folder-node.types';
+
+import { Folder } from './folder.types';
 
 export const findFolderIndexByName = (
   folderNames: string[],

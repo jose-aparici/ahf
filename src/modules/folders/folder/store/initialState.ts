@@ -1,4 +1,4 @@
-import { FolderParams } from 'domain/folder/folder.types';
+import { FolderParams } from 'domain/ahf-folder/ahf-folder.types';
 
 export interface State {
   name: string;

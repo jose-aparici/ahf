@@ -2,7 +2,7 @@ import {
   DeviceInfoAhf,
   DeviceStructureAhf,
 } from 'domain/ahf-device/ahf-device.types';
-import { FolderSelect } from 'domain/folder/folder.types';
+import { FolderSelect } from 'domain/ahf-folder/ahf-folder.types';
 import { ParamRead } from 'domain/param/param.types';
 import {
   Action as FolderAction,
