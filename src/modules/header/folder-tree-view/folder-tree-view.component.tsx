@@ -6,7 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TreeItem from '@material-ui/lab/TreeItem';
 import TreeView from '@material-ui/lab/TreeView';
 
-import { Device, Folder } from 'domain/device/device.types';
+import { Device } from 'domain/device/device.types';
+import { Folder } from 'domain/folder/folder.types';
 
 import { useFolderTreeViewComponentStyles } from './folder-tree-view.styles';
 

@@ -4,8 +4,8 @@ import {
   DeviceStructureAhf,
   FolderData,
 } from 'domain/ahf-device/ahf-device.types';
+import { Folder } from 'domain/folder/folder.types';
 
-import { Folder } from '../domain/device/device.types';
 import { AppRoutes } from '../pages/App.routes';
 import { State } from './initialState';
 
