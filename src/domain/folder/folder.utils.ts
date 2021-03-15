@@ -1,4 +1,4 @@
-import { FolderNode } from 'domain/folder-node/folder-node.types';
+import { FolderNode } from 'domain/folder-navigation/folder-navigation.types';
 
 import { Folder } from './folder.types';
 
