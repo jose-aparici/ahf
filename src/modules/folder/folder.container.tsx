@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useParams, useRouteMatch } from 'react-router-dom';
+import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { Folder } from 'domain/folder/folder.types';
@@ -16,6 +16,8 @@ export const AhfFolderContainer: React.FC = () => {
   const { deviceId } = useParams<ParamTypes>();
   const [currentFolder, setCurrentFolder] = useState<Folder>();
   const { url } = useRouteMatch();
+  const history = useHistory();
+
   const { goNext, goPrevious } = useFolderNavigation();
 
   useEffect(() => {
@@ -27,12 +29,17 @@ export const AhfFolderContainer: React.FC = () => {
 
   const handleNext = () => {
     const nextFolder = currentFolder && goNext(currentFolder);
-    nextFolder?.id && setCurrentFolder(nextFolder);
+    nextFolder?.id && handleFolderChange(nextFolder);
   };
 
   const handlePrevious = () => {
     const previousFolder = currentFolder && goPrevious(currentFolder);
-    previousFolder?.id && setCurrentFolder(previousFolder);
+    previousFolder?.id && handleFolderChange(previousFolder);
+  };
+
+  const handleFolderChange = (folder: Folder) => {
+    setCurrentFolder(folder);
+    history.replace(history.location.pathname.replace(/[^]*$/, folder.id));
   };
 
   return (
