@@ -30,10 +30,7 @@ export const AhfBreadcrumbs: React.FC<Props> = ({ breadcrumbs }: Props) => {
             to={breadcrumb.path}
             exact
             component={NavLink}
-            activeStyle={{
-              fontWeight: 'bold',
-              color: 'red',
-            }}
+            activeClassName={classes.active}
           >
             <Typography>{breadcrumb.label}</Typography>
           </Link>
