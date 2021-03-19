@@ -20,7 +20,6 @@ export const findFolderById = (
   } else {
     if (((rootFolder as unknown) as FolderNode).hasChildren()) {
       const nodeFound = rootFolder.children.find((node) => {
-        debugger;
         return folderPath.startsWith(node.id);
       });
 
