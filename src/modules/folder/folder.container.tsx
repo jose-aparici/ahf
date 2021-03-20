@@ -1,3 +1,4 @@
+import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
@@ -21,6 +22,8 @@ export const AhfFolderContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
   const [currentFolder, setCurrentFolder] = useState<Folder>();
+  const { update } = useSocketHook();
+
   const { url } = useRouteMatch();
   const history = useHistory();
   const { i18n } = useTranslation();
@@ -45,6 +48,7 @@ export const AhfFolderContainer: React.FC = () => {
   };
 
   const handleFolderChange = (folder: Folder) => {
+    update(deviceId, folder.label);
     setCurrentFolder(folder);
     history.replace(history.location.pathname.replace(/[^]*$/, folder.id));
   };
