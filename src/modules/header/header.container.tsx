@@ -35,7 +35,9 @@ export const AhfHeaderContainer: FC = () => {
 
           {/*  <AhfNavigationButtonsComponent /> */}
           {breadcrumbs && <AhfBreadcrumbs breadcrumbs={breadcrumbs} />}
-          <AhfNavigationIconsComponent classes={classes.iconsSection} />
+          <div className={classes.iconsSection}>
+            <AhfNavigationIconsComponent />
+          </div>
         </Toolbar>
       </AppBar>
       <Toolbar />

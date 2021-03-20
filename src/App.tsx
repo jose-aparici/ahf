@@ -3,6 +3,7 @@ import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
+import { AhfFooterContainer } from 'modules/footer/footer.container';
 import { AhfHeaderContainer } from 'modules/header/header.container';
 import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicePage } from 'pages/device/device.page';
@@ -35,6 +36,7 @@ const App: React.FC = () => {
           <Route path={AppRoutes.DevicePage} exact component={AhfDevicePage} />
           <Route path={AppRoutes.FolderPage} component={AhfFolderPage} />
         </Switch>
+        <AhfFooterContainer />
       </BrowserRouter>
     </>
   );

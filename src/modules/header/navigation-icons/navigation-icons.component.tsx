@@ -6,21 +6,13 @@ import SettingsIcon from '@material-ui/icons/Settings';
 
 import { AppRoutes } from 'pages/App.routes';
 
-interface Props {
-  classes: string;
-}
-
-export const AhfNavigationIconsComponent: React.FC<Props> = ({
-  classes,
-}: Props) => (
-  <div className={classes}>
-    <IconButton
-      component={Link}
-      to={AppRoutes.DevicesPage}
-      color="inherit"
-      aria-label="menu"
-    >
-      <SettingsIcon />
-    </IconButton>
-  </div>
+export const AhfNavigationIconsComponent: React.FC = () => (
+  <IconButton
+    component={Link}
+    to={AppRoutes.DevicesPage}
+    color="inherit"
+    aria-label="menu"
+  >
+    <SettingsIcon />
+  </IconButton>
 );
