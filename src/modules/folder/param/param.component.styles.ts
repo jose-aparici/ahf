@@ -6,6 +6,7 @@ export const useParamComponentStyles = makeStyles((theme: Theme) => ({
     '&:last-child': {
       padding: '4px',
     },
+    color: 'black',
   },
   infoContainer: {
     padding: '4px',
