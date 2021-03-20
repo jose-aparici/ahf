@@ -29,7 +29,7 @@ export const AhfHeaderContainer: FC = () => {
 
   return (
     <>
-      <AppBar>
+      <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
           <AhfSideBarButtonComponent onToggleSideBar={handleToggleSideBar} />
 
