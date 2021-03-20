@@ -17,6 +17,9 @@ export const useParamComponentStyles = makeStyles((theme: Theme) => ({
     backgroundColor: 'black',
     marginRight: '4px',
   },
+  editIcon: {
+    marginLeft: 'auto',
+  },
   unitContainer: {
     display: 'flex',
     justifyContent: 'space-between',

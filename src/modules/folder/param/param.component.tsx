@@ -25,7 +25,7 @@ export const AhfParamComponent: React.FC<Props> = ({
         <div className={classes.infoContainer}>
           <Avatar className={classes.avatar}>{param.ParamID}</Avatar>
           <Typography>{param.Name[currentLanguage]}</Typography>
-          <EditIcon />
+          <EditIcon className={classes.editIcon} />
         </div>
         <div className={classes.unitContainer}>
           <Typography component="h1" className={classes.value}>
@@ -33,7 +33,6 @@ export const AhfParamComponent: React.FC<Props> = ({
           </Typography>
           <Typography className={classes.unit}>{param.Unit}</Typography>
         </div>
-        <Typography>{param.Description[currentLanguage]}</Typography>
       </CardContent>
     </Card>
   );
