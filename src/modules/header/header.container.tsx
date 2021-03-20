@@ -40,7 +40,6 @@ export const AhfHeaderContainer: FC = () => {
           </div>
         </Toolbar>
       </AppBar>
-      <Toolbar />
       <AhfSideBarComponent
         isOpen={sideBarOpen}
         onToggleSideBar={handleToggleSideBar}

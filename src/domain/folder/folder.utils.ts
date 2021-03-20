@@ -14,7 +14,6 @@ export const findFolderById = (
   folderPath: string,
   rootFolder: Folder,
 ): Folder | undefined => {
-  debugger;
   if (rootFolder.id === folderPath) {
     return rootFolder;
   } else {
