@@ -48,7 +48,7 @@ export const AhfFolderContainer: React.FC = () => {
   };
 
   const handleFolderChange = (folder: Folder) => {
-    update(deviceId, folder.label);
+    update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
     setCurrentFolder(folder);
     history.replace(history.location.pathname.replace(/[^]*$/, folder.id));
   };

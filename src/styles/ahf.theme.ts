@@ -19,6 +19,6 @@ export const ahfTheme = createMuiTheme({
     },
   },
   typography: {
-    fontFamily: ['Myriad'].join(','),
+    fontFamily: ['Myriad pro'].join(','),
   },
 });

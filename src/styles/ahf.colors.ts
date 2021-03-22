@@ -5,8 +5,8 @@ export const AHF_COLORS = {
       secondary: '#e32119',
     },
     text: {
-      primary: '#ffffff',
-      secondary: '#000000',
+      primary: '#000000',
+      secondary: '#ffffff',
     },
     background: '#f5f5f5',
   },
