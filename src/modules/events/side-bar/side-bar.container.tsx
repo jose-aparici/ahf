@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { SwipeableDrawer } from '@material-ui/core';
+
 import { AhfSideBarComponent } from './components/side-bar.component';
 
 export const AhfSideBarContainer: React.FC = () => {
@@ -8,9 +10,13 @@ export const AhfSideBarContainer: React.FC = () => {
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   return (
-    <AhfSideBarComponent
-      onToggleSideBar={handleToggleSideBar}
-      isOpen={isOpen}
-    ></AhfSideBarComponent>
+    <SwipeableDrawer
+      anchor={'right'}
+      open={isOpen}
+      onClose={() => handleToggleSideBar(isOpen)}
+      onOpen={() => handleToggleSideBar(isOpen)}
+    >
+      <AhfSideBarComponent />
+    </SwipeableDrawer>
   );
 };
