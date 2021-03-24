@@ -22,7 +22,7 @@ export const AhfFolderContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
   const [currentFolder, setCurrentFolder] = useState<Folder>();
-  const { update } = useSocketHook();
+  const { update, stopUpdate } = useSocketHook();
 
   const { url } = useRouteMatch();
   const history = useHistory();
@@ -34,8 +34,16 @@ export const AhfFolderContainer: React.FC = () => {
     if (state?.devices[+deviceId]?.structure) {
       const folder = findFolderById(url, state.devices[+deviceId].structure);
       folder && setCurrentFolder(folder);
+      folder &&
+        update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
     }
-  }, [deviceId, state, url]);
+  }, [deviceId, state, url, stopUpdate]);
+
+  useEffect(() => {
+    return () => {
+      stopUpdate();
+    };
+  }, [stopUpdate]);
 
   const handleNext = () => {
     const nextFolder = currentFolder && goNext(currentFolder);
