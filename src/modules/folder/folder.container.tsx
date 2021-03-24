@@ -12,6 +12,7 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
 import { AhfParamComponent } from './param/param.component';
+import { AhfFolderContext } from './store/context';
 
 interface ParamTypes {
   deviceId: string;
@@ -22,7 +23,9 @@ export const AhfFolderContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
   const [currentFolder, setCurrentFolder] = useState<Folder>();
-  const { update, stopUpdate } = useSocketHook();
+  const { folderState, dispatch } = useContext(AhfFolderContext);
+
+  const { update, stopUpdate, listen } = useSocketHook();
 
   const { url } = useRouteMatch();
   const history = useHistory();
@@ -31,19 +34,23 @@ export const AhfFolderContainer: React.FC = () => {
   const { goNext, goPrevious } = useFolderNavigation();
 
   useEffect(() => {
+    debugger;
+    const subscription = listen(dispatch);
+
+    return () => {
+      stopUpdate();
+      subscription.unsubscribe();
+    };
+  }, [dispatch, listen, stopUpdate]);
+
+  useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
       const folder = findFolderById(url, state.devices[+deviceId].structure);
       folder && setCurrentFolder(folder);
       folder &&
         update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
     }
-  }, [deviceId, state, url, stopUpdate]);
-
-  useEffect(() => {
-    return () => {
-      stopUpdate();
-    };
-  }, [stopUpdate]);
+  }, [deviceId, state, url, update, stopUpdate]);
 
   const handleNext = () => {
     const nextFolder = currentFolder && goNext(currentFolder);
