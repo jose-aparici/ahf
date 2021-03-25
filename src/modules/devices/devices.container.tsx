@@ -39,7 +39,7 @@ export const AhfDevicesContainer: React.FC = () => {
           <Card
             key={index}
             variant="elevation"
-            onClick={() => handleClickDevice(deviceInfo.ID, deviceInfo.Status)}
+            onClick={() => handleClickDevice(deviceInfo.id, deviceInfo.status)}
           >
             <CardContent className={classes.contentContainer}>
               <div className={classes.infoContainer}>
@@ -47,8 +47,8 @@ export const AhfDevicesContainer: React.FC = () => {
                   className={classes.avatar}
                   src="/assets/images/AHFViewer1.ico"
                 ></Avatar>
-                <Typography>{deviceInfo.Type}</Typography>
-                {deviceInfo.Status === 0 ? (
+                <Typography>{deviceInfo.type}</Typography>
+                {deviceInfo.status === 0 ? (
                   <CircularProgress size={20} color="secondary" />
                 ) : (
                   <CheckCircleOutlineIcon htmlColor={'green'} />
@@ -56,13 +56,13 @@ export const AhfDevicesContainer: React.FC = () => {
               </div>
               <div className={classes.unitContainer}>
                 <Typography component="h1" className={classes.value}>
-                  {deviceInfo.FW}
+                  {deviceInfo.fw}
                 </Typography>
                 <Typography className={classes.unit}>
-                  MbId {deviceInfo.ID}
+                  MbId {deviceInfo.id}
                 </Typography>
               </div>
-              <Typography>{deviceInfo.Company}</Typography>
+              <Typography>{deviceInfo.company}</Typography>
             </CardContent>
           </Card>
         );

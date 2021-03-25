@@ -1,8 +1,13 @@
 export const AHF_COLORS = {
-  main: {
-    primary: '#ffffff',
-    secondary: '#000000',
-    tertiary: '#e41d18',
+  palette: {
+    main: {
+      primary: '#1a171b',
+      secondary: '#e32119',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#ffffff',
+    },
+    background: '#f5f5f5',
   },
-  background: '#f5f5f5',
 };

@@ -1,12 +1,13 @@
 import { State } from 'store/initialState';
 
-import { DeviceInfo, DeviceStructure } from 'domain/device/device.types';
+import { DeviceInfo } from 'domain/device/device.types';
+import { Folder } from 'domain/folder/folder.types';
 
 const DEFAULT_STATE: State = {
   devices: {
     1: {
       info: {} as DeviceInfo,
-      structure: {} as DeviceStructure,
+      structure: {} as Folder,
     },
   },
 };

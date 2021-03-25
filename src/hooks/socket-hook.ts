@@ -1,8 +1,7 @@
 import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
-import { Command } from 'domain/ahf/ahf.types';
-import { AhfAction, AhfPayload } from 'domain/context/context.types';
+import { AhfAction, AhfPayload, Command } from 'domain/ahf/ahf.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {

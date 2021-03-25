@@ -21,6 +21,7 @@ export const useDevicesContainerStyles = makeStyles((theme: Theme) => ({
     '&:last-child': {
       padding: '4px 8px 4px 8px',
     },
+    color: 'black',
   },
   infoContainer: {
     padding: '4px',

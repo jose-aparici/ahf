@@ -1,9 +1,8 @@
 import { Param } from 'domain/param/param.types';
 
-export interface FolderParams {
-  ParData: Array<Param>;
-}
-export interface FolderSelect {
-  Device: string;
-  Folder?: string;
-}
+export type Folder = {
+  id: string;
+  label: string;
+  children: Folder[];
+  params: Param[];
+};

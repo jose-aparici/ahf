@@ -6,7 +6,7 @@ import React, {
   useReducer,
 } from 'react';
 
-import { FolderParams } from 'domain/folder/folder.types';
+import { FolderParams } from 'domain/ahf-folder/ahf-folder.types';
 
 import { Action } from './actions';
 import { initialState, State } from './initialState';
