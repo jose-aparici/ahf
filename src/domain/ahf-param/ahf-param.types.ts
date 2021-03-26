@@ -1,6 +1,6 @@
 export type Value = number | string | undefined;
 
-export interface Param {
+export interface ParamAhf {
   AccessType: string;
   Description: Array<string>;
   Name: Array<string>;
@@ -12,7 +12,7 @@ export interface Param {
   Value: Value;
 }
 
-export interface ParamRead {
+export interface ParamReadAhf {
   DeviceID: number;
   FolderName: string;
   Marker: number;

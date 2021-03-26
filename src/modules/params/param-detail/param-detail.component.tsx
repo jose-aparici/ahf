@@ -2,13 +2,13 @@ import React from 'react';
 
 import { FormControl, Input, InputLabel, TextField } from '@material-ui/core';
 
-import { Param, Value } from 'domain/param/param.types';
+import { ParamAhf, Value } from 'domain/ahf-param/ahf-param.types';
 
 import { AhfParamInputComponent } from '../param-input/param-input.component';
 import { useParamDetailComponentStyles } from './param-detail.component.styles';
 
 interface Props {
-  param: Param;
+  param: ParamAhf;
   value: Value;
   language: number;
   onValueChange: (value: string) => void;

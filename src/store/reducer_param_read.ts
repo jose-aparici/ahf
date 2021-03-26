@@ -1,8 +1,11 @@
-import { ParamRead } from 'domain/param/param.types';
+import { ParamReadAhf } from 'domain/ahf-param/ahf-param.types';
 
 import { State } from './initialState';
 
-export const paramReadReducer = (state: State, paramRead: ParamRead): State => {
+export const paramReadReducer = (
+  state: State,
+  paramRead: ParamReadAhf,
+): State => {
   if (
     state.devices[paramRead.DeviceID] &&
     state.devices[paramRead.DeviceID].structure

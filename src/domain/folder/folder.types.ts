@@ -1,8 +1,8 @@
-import { Param } from 'domain/param/param.types';
+import { ParamAhf } from 'domain/ahf-param/ahf-param.types';
 
 export type Folder = {
   id: string;
   label: string;
   children: Folder[];
-  params: Param[];
+  params: ParamAhf[];
 };

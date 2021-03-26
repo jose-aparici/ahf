@@ -1,9 +1,16 @@
-import { Param } from 'domain/param/param.types';
+import { ParamsAhf } from 'domain/ahf-device/ahf-device.types';
+import { ParamAhf } from 'domain/ahf-param/ahf-param.types';
 
-export interface FolderParams {
-  ParData: Array<Param>;
+export type FolderAhf = {
+  Folders: FolderDataAhf;
+  Params: ParamsAhf | null;
+};
+export interface FolderParamsAhf {
+  ParData: Array<ParamAhf>;
 }
-export interface FolderSelect {
+export interface FolderSelectAhf {
   Device: string;
   Folder?: string;
 }
+
+export type FolderDataAhf = Record<string, FolderAhf>;

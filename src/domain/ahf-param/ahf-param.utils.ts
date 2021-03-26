@@ -1,12 +1,12 @@
 import { DeviceStructureAhf } from 'domain/ahf-device/ahf-device.types';
 
-import { Param } from './param.types';
+import { ParamAhf } from './ahf-param.types';
 
 export const findParamById = (
   deviceStructure: DeviceStructureAhf,
   folderId: string,
   paramId: string,
-): Param => {
+): ParamAhf => {
   throw new Error('param not found');
   /* const folderName = deviceStructure.FolderNames[+folderId];
   const param = deviceStructure.FolderData[folderName].Params.ParData.find(
@@ -21,7 +21,7 @@ export const findParamById = (
 };
 
 export const findParamIndexById = (
-  params: Param[],
+  params: ParamAhf[],
   paramId: string,
 ): number => {
   const paramIndex = params.findIndex((param) => param.ParamID === +paramId);

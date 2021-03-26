@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Input, MenuItem, Select } from '@material-ui/core';
 
-import { Value } from 'domain/param/param.types';
+import { Value } from 'domain/ahf-param/ahf-param.types';
 
 interface Props {
   type: string;
