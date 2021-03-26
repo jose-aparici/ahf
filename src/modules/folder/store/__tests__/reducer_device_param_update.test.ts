@@ -1,4 +1,4 @@
-import { ParamRead } from 'domain/param/param.types';
+import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 
 import { buildState } from '../__mocks__/buildState';
 import { State } from '../initialState';
@@ -8,7 +8,7 @@ describe('reducer device param update', () => {
   it('should update device param', () => {
     const state: State = buildState();
 
-    const payload: ParamRead = {
+    const payload: AhfParamRead = {
       DeviceID: 1,
       FolderName: 'folder1',
       Marker: 1,

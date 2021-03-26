@@ -1,11 +1,11 @@
-import { Param } from 'domain/param/param.types';
+import { AhfFolder } from 'domain/ahf-folder/ahf-folder.types';
 
-export interface DeviceAhf {
-  info: DeviceInfoAhf;
-  structure: DeviceStructureAhf;
+export interface AhfDevice {
+  info: AhfDeviceInfo;
+  structure: AhfDeviceStructure;
 }
 
-export interface DeviceInfoAhf {
+export interface AhfDeviceInfo {
   Company: string;
   FW: string;
   ID: number;
@@ -13,19 +13,8 @@ export interface DeviceInfoAhf {
   Type: string;
 }
 
-export interface DeviceStructureAhf {
+export interface AhfDeviceStructure {
   DeviceID: number;
   FolderNames: Array<string>;
-  FolderData: Record<string, FolderAhf>;
+  FolderData: Record<string, AhfFolder>;
 }
-
-export type ParamsAhf = {
-  ParData: Array<Param>;
-};
-
-export type FolderAhf = {
-  Folders: FolderData;
-  Params: ParamsAhf | null;
-};
-
-export type FolderData = Record<string, FolderAhf>;

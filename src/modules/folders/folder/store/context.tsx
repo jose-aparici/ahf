@@ -6,7 +6,7 @@ import React, {
   useReducer,
 } from 'react';
 
-import { FolderParams } from 'domain/ahf-folder/ahf-folder.types';
+import { AhfParams } from 'domain/ahf-param/ahf-param.types';
 
 import { Action } from './actions';
 import { initialState, State } from './initialState';
@@ -23,7 +23,7 @@ export const AhfFolderContext = createContext<Props>({
 
 interface ProviderProps {
   name: string;
-  params: FolderParams;
+  params: AhfParams;
   children: ReactNode;
 }
 

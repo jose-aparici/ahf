@@ -1,7 +1,7 @@
 import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
-import { AhfAction, AhfPayload, Command } from 'domain/ahf/ahf.types';
+import { AhfAction, AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {
@@ -22,26 +22,26 @@ export const useSocketHook = (): SocketHook => {
       .asObservable()
       .subscribe((data) => {
         dispatch({
-          type: data.Cmd as Command,
+          type: data.Cmd as AhfCommand,
           payload: data.Data as AhfPayload,
         });
       });
   }, []);
 
   const scan = useCallback((): void => {
-    AhfSocket.getInstance().next({ Cmd: Command.SCAN });
+    AhfSocket.getInstance().next({ Cmd: AhfCommand.SCAN });
   }, []);
 
   const update = useCallback((deviceId: string, folderId: string) => {
     AhfSocket.getInstance().next({
-      Cmd: Command.FOLDER_SELECT,
+      Cmd: AhfCommand.FOLDER_SELECT,
       Data: { Device: deviceId, Folder: folderId },
     });
   }, []);
 
   const stopUpdate = useCallback(() => {
     AhfSocket.getInstance().next({
-      Cmd: Command.FOLDER_SELECT,
+      Cmd: AhfCommand.FOLDER_SELECT,
       Data: { Device: '0', Folder: '0' },
     });
   }, []);

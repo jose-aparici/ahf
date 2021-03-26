@@ -1,8 +1,11 @@
-import { ParamRead } from 'domain/param/param.types';
+import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 
 import { State } from './initialState';
 
-export const paramReadReducer = (state: State, paramRead: ParamRead): State => {
+export const paramReadReducer = (
+  state: State,
+  paramRead: AhfParamRead,
+): State => {
   debugger;
   const findParamToUpdate = state.params.ParData.find(
     (param) => param.ParamID === paramRead.ParamID,

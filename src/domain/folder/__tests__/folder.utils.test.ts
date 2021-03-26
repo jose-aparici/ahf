@@ -1,7 +1,7 @@
 import { buildDeviceAhf } from '__mocks__/buildDevice';
 import { deviceStructureReducer } from 'store/reducer_device_structure';
 
-import { DeviceAhf } from 'domain/ahf-device/ahf-device.types';
+import { AhfDevice } from 'domain/ahf-device/ahf-device.types';
 
 import { initialState, State } from '../../../store/initialState';
 import { deviceInfoReducer } from '../../../store/reducer_device_info';
@@ -11,7 +11,7 @@ describe('folder utils', () => {
   describe('find by id', () => {
     let state: State;
     beforeEach(() => {
-      const deviceAhf: DeviceAhf = buildDeviceAhf();
+      const deviceAhf: AhfDevice = buildDeviceAhf();
       const deviceInfoState = deviceInfoReducer(initialState, deviceAhf.info);
       state = deviceStructureReducer(deviceInfoState, deviceAhf.structure);
     });
