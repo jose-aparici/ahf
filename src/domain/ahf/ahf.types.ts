@@ -24,6 +24,7 @@ export interface AhfMessage {
   Data?: AhfDeviceInfo | AhfDeviceStructure | AhfFolderSelect | AhfParamRead;
 }
 
+//TODO check Action and payload types naming
 export type AhfAction = Action | FolderAction;
 
 export type AhfPayload = Payload | FolderPayload;

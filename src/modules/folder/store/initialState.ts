@@ -1,8 +1,8 @@
-import { AhfFolderParams } from 'domain/ahf-folder/ahf-folder.types';
+import { AhfParams } from 'domain/ahf-param/ahf-param.types';
 
 export interface State {
   name: string;
-  params: AhfFolderParams;
+  params: AhfParams;
 }
 export const initialState: State = {
   name: '',

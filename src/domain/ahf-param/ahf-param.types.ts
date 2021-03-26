@@ -1,5 +1,9 @@
 export type Value = number | string | undefined;
 
+export interface AhfParams {
+  ParData: Array<AhfParam>;
+}
+
 export interface AhfParam {
   AccessType: string;
   Description: Array<string>;

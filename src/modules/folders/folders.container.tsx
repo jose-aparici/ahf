@@ -6,7 +6,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import { AhfFolderParams } from 'domain/ahf-folder/ahf-folder.types';
+import { AhfParams } from 'domain/ahf-param/ahf-param.types';
 import { findFolderIndexByName } from 'domain/folder/folder.utils';
 import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
 
@@ -17,7 +17,7 @@ import { useFoldersContainerStyles } from './folders.container.styles';
 interface Props {
   deviceId: number;
   folderName: string;
-  folders: Record<string, AhfFolderParams>;
+  folders: Record<string, AhfParams>;
 }
 
 type CurrentFolder = {
