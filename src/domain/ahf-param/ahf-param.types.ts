@@ -1,4 +1,4 @@
-export type Value = number | string | undefined;
+export type AhfParamValue = number | string | undefined;
 
 export interface AhfParams {
   ParData: Array<AhfParam>;
@@ -13,7 +13,7 @@ export interface AhfParam {
   ParamID: number;
   ParamType: string;
   Unit: string;
-  Value: Value;
+  Value: AhfParamValue;
 }
 
 export interface AhfParamRead {

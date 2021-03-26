@@ -2,14 +2,14 @@ import React from 'react';
 
 import { FormControl, Input, InputLabel, TextField } from '@material-ui/core';
 
-import { AhfParam, Value } from 'domain/ahf-param/ahf-param.types';
+import { Param, ParamValue } from 'domain/param/param.types';
 
 import { AhfParamInputComponent } from '../param-input/param-input.component';
 import { useParamDetailComponentStyles } from './param-detail.component.styles';
 
 interface Props {
-  param: AhfParam;
-  value: Value;
+  param: Param;
+  value: ParamValue;
   language: number;
   onValueChange: (value: string) => void;
   onToggleKeyboard: (showKeyboard: boolean) => void;
@@ -27,18 +27,18 @@ export const AhfParamDetailComponent: React.FC<Props> = ({
     <div className={classes.root}>
       <FormControl disabled fullWidth>
         <InputLabel>Number</InputLabel>
-        <Input value={param.ParamID} />
+        <Input value={param.paramId} />
       </FormControl>
       <FormControl disabled fullWidth>
         <InputLabel>Name</InputLabel>
-        <Input value={param.Name[language]} />
+        <Input value={param.name[language]} />
       </FormControl>
       <FormControl fullWidth>
         <InputLabel>Value</InputLabel>
         <AhfParamInputComponent
-          type={param.ParamType}
+          type={param.paramType}
           value={value}
-          selectValues={param.ParamEnumText}
+          selectValues={param.paramEnumText}
           onBlur={onToggleKeyboard}
           onFocus={onToggleKeyboard}
           onValueChange={onValueChange}
@@ -49,7 +49,7 @@ export const AhfParamDetailComponent: React.FC<Props> = ({
         <FormControl disabled fullWidth>
           <TextField
             label="Description"
-            value={param.Description[language]}
+            value={param.description[language]}
             margin="normal"
             variant="outlined"
             multiline

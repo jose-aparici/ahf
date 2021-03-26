@@ -1,4 +1,5 @@
 import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
+import { Param } from 'domain/param/param.types';
 
 import { AhfParam } from './ahf-param.types';
 
@@ -21,10 +22,10 @@ export const findParamById = (
 };
 
 export const findParamIndexById = (
-  params: AhfParam[],
+  params: Param[],
   paramId: string,
 ): number => {
-  const paramIndex = params.findIndex((param) => param.ParamID === +paramId);
+  const paramIndex = params.findIndex((param) => param.paramId === +paramId);
   if (paramIndex >= 0) {
     return paramIndex;
   } else {

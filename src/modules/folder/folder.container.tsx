@@ -82,7 +82,7 @@ export const AhfFolderContainer: React.FC = () => {
         <div className={classes.paramsContainer}>
           {currentFolder.params.map((param) => (
             <AhfParamComponent
-              key={param.ParamID}
+              key={param.paramId}
               currentLanguage={currentLanguage}
               param={param}
               onClickParam={handleClickParam}
