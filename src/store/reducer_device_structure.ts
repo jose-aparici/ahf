@@ -1,16 +1,14 @@
 import { flatten } from 'flattree';
 
-import {
-  DeviceStructureAhf,
-  FolderData,
-} from 'domain/ahf-device/ahf-device.types';
+import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
+import { AhfFolderData } from 'domain/ahf-folder/ahf-folder.types';
 import { Folder } from 'domain/folder/folder.types';
 
 import { AppRoutes } from '../pages/App.routes';
 import { State } from './initialState';
 
 const transformFolderDataToNode = (
-  folderData: FolderData,
+  folderData: AhfFolderData,
   previousPath: string,
 ): Folder[] =>
   Object.entries(folderData).map((entry) => ({
@@ -25,7 +23,7 @@ const transformFolderDataToNode = (
       : [],
   }));
 
-const transformStructureToNode = (structure: DeviceStructureAhf) =>
+const transformStructureToNode = (structure: AhfDeviceStructure) =>
   Object.entries(structure.FolderData).reduce(
     (_, current) => ({
       id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,
@@ -46,7 +44,7 @@ const transformStructureToNode = (structure: DeviceStructureAhf) =>
 
 export const deviceStructureReducer = (
   state: State,
-  deviceStructure: DeviceStructureAhf,
+  deviceStructure: AhfDeviceStructure,
 ): State => {
   if (
     state.devices[deviceStructure.DeviceID] &&

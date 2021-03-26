@@ -1,6 +1,6 @@
 import { PARAM_READ } from 'store/types';
 
-import { ParamReadAhf } from 'domain/ahf-param/ahf-param.types';
+import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 import { AhfAction } from 'domain/ahf/ahf.types';
 
 import { buildState } from '../__mocks__/buildState';
@@ -20,7 +20,7 @@ describe('reducer', () => {
         .mockReturnValue(buildState());
       const paramReadAction: AhfAction = {
         type: PARAM_READ,
-        payload: {} as ParamReadAhf,
+        payload: {} as AhfParamRead,
       };
       reducer(state, paramReadAction);
 

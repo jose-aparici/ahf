@@ -7,7 +7,7 @@ import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import { ParamAhf, Value } from 'domain/ahf-param/ahf-param.types';
+import { AhfParam, Value } from 'domain/ahf-param/ahf-param.types';
 import { findParamIndexById } from 'domain/ahf-param/ahf-param.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
@@ -25,12 +25,12 @@ interface Props {
   deviceId: string;
   folderName: string;
   paramId: string;
-  params: ParamAhf[];
+  params: AhfParam[];
 }
 
 type CurrentParam = {
   index: number;
-  param: ParamAhf;
+  param: AhfParam;
 };
 
 export const AhfParamsContainer: React.FC<Props> = ({

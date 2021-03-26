@@ -3,12 +3,12 @@ import { buildState } from 'store/__mocks__/buildState';
 import { State } from 'store/initialState';
 import { deviceStructureReducer } from 'store/reducer_device_structure';
 
-import { DeviceStructureAhf } from 'domain/ahf-device/ahf-device.types';
+import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
 
 describe('reducer device structure', () => {
   it('should set device structure', () => {
     const state: State = buildState();
-    const payload: DeviceStructureAhf = buildDeviceAhf().structure;
+    const payload: AhfDeviceStructure = buildDeviceAhf().structure;
 
     const result = deviceStructureReducer(state, payload);
 

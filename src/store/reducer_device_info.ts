@@ -1,11 +1,11 @@
-import { DeviceInfoAhf } from 'domain/ahf-device/ahf-device.types';
+import { AhfDeviceInfo } from 'domain/ahf-device/ahf-device.types';
 import { Device } from 'domain/device/device.types';
 
 import { State } from './initialState';
 
 export const deviceInfoReducer = (
   state: State,
-  deviceInfo: DeviceInfoAhf,
+  deviceInfo: AhfDeviceInfo,
 ): State => {
   state.devices[deviceInfo.ID] = {
     info: {

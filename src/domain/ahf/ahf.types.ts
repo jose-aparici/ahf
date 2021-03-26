@@ -1,17 +1,17 @@
 import { Action, Payload } from 'store/actions';
 
 import {
-  DeviceInfoAhf,
-  DeviceStructureAhf,
+  AhfDeviceInfo,
+  AhfDeviceStructure,
 } from 'domain/ahf-device/ahf-device.types';
-import { FolderSelectAhf } from 'domain/ahf-folder/ahf-folder.types';
-import { ParamReadAhf } from 'domain/ahf-param/ahf-param.types';
+import { AhfFolderSelect } from 'domain/ahf-folder/ahf-folder.types';
+import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 import {
   Action as FolderAction,
   Payload as FolderPayload,
 } from 'modules/folders/folder/store/actions';
 
-export enum Command {
+export enum AhfCommand {
   VERSION = 'WSVer',
   SCAN = 'Scan',
   DEVICE_INFO = 'DevInfo',
@@ -20,8 +20,8 @@ export enum Command {
   PARAM_READ = 'WriteParam',
 }
 export interface AhfMessage {
-  Cmd: Command;
-  Data?: DeviceInfoAhf | DeviceStructureAhf | FolderSelectAhf | ParamReadAhf;
+  Cmd: AhfCommand;
+  Data?: AhfDeviceInfo | AhfDeviceStructure | AhfFolderSelect | AhfParamRead;
 }
 
 export type AhfAction = Action | FolderAction;

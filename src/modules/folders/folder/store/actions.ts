@@ -1,9 +1,9 @@
-import { ParamReadAhf } from 'domain/ahf-param/ahf-param.types';
-import { AhfPayload, Command } from 'domain/ahf/ahf.types';
+import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
+import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 
 export type Action = {
-  type: Command;
+  type: AhfCommand;
   payload: AhfPayload;
 };
 
-export type Payload = ParamReadAhf;
+export type Payload = AhfParamRead;

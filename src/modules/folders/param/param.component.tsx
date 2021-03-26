@@ -3,12 +3,12 @@ import React from 'react';
 import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { ParamAhf } from 'domain/ahf-param/ahf-param.types';
+import { AhfParam } from 'domain/ahf-param/ahf-param.types';
 
 import { useParamComponentStyles } from './param.component.styles';
 
 interface Props {
-  param: ParamAhf;
+  param: AhfParam;
   currentLanguage: number;
   onClickParam: (paramId: number) => void;
 }

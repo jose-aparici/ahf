@@ -1,4 +1,4 @@
-import { ParamReadAhf } from 'domain/ahf-param/ahf-param.types';
+import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 
 import { Action } from './actions';
 import { State } from './initialState';
@@ -11,7 +11,7 @@ export const reducer = (state: State, action: Action): State => {
 
   switch (type) {
     case PARAM_READ:
-      return paramReadReducer(state, payload as ParamReadAhf);
+      return paramReadReducer(state, payload as AhfParamRead);
 
     default:
       return state;
