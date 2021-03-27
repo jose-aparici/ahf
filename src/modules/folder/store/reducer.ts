@@ -7,7 +7,6 @@ import { PARAM_READ } from './types';
 
 export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
-  debugger;
 
   switch (type) {
     case PARAM_READ:

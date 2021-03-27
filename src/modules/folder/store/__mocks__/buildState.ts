@@ -42,8 +42,12 @@ import { State } from '../initialState';
 }; */
 
 const DEFAULT_STATE: State = {
-  name: 'device1',
-  params: [],
+  folder: {
+    id: '',
+    label: '',
+    children: [],
+    params: [],
+  },
 };
 
 export const buildState = (overrides = {}): State => ({

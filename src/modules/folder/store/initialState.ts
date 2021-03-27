@@ -1,10 +1,15 @@
-import { Param } from 'domain/param/param.types';
+import { Folder } from 'domain/folder/folder.types';
 
 export interface State {
-  name: string;
-  params: Param[];
+  //name: string;
+  //params: Param[];
+  folder: Folder;
 }
 export const initialState: State = {
-  name: '',
-  params: [],
+  folder: {
+    id: '',
+    label: '',
+    children: [],
+    params: [],
+  },
 };

@@ -6,6 +6,8 @@ import React, {
   useReducer,
 } from 'react';
 
+import { Folder } from 'domain/folder/folder.types';
+
 import { Action } from './actions';
 import { initialState, State } from './initialState';
 import { reducer } from './reducer';
@@ -20,14 +22,16 @@ export const AhfFolderContext = createContext<Props>({
 });
 
 interface ProviderProps {
+  folder: Folder;
   children: ReactNode;
 }
 
 export const AhfFolderProvider = ({
+  folder,
   children,
 }: ProviderProps): ReactElement => {
   const [folderState, dispatch] = useReducer(reducer, initialState, () => {
-    return { ...initialState };
+    return { ...initialState, folder };
   });
   return (
     <AhfFolderContext.Provider value={{ folderState, dispatch }}>

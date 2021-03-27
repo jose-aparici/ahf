@@ -7,7 +7,7 @@ export const paramReadReducer = (
   paramRead: AhfParamRead,
 ): State => {
   debugger;
-  const findParamToUpdate = state.params.find(
+  const findParamToUpdate = state.folder.params.find(
     (param) => param.paramId === paramRead.ParamID,
   );
 

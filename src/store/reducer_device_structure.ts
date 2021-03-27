@@ -18,7 +18,7 @@ const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
         name: ahfParam.Name,
         paramEnumNumb: ahfParam.ParamEnumNumb,
         paramEnumText: ahfParam.ParamEnumText,
-        paramID: ahfParam.ParamID,
+        paramId: ahfParam.ParamID,
         paramType: ahfParam.ParamType,
         unit: ahfParam.Unit,
         value: ahfParam.Value,
