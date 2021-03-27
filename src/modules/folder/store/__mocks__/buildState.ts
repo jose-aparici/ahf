@@ -1,6 +1,6 @@
 import { State } from '../initialState';
 
-const DEFAULT_STATE: State = {
+/* const DEFAULT_STATE: State = {
   name: 'device1',
   params: {
     ParData: [
@@ -38,6 +38,15 @@ const DEFAULT_STATE: State = {
         Value: 3,
       },
     ],
+  },
+}; */
+
+const DEFAULT_STATE: State = {
+  folder: {
+    id: '',
+    label: '',
+    children: [],
+    params: [],
   },
 };
 

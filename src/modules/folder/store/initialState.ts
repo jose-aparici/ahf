@@ -1,12 +1,15 @@
-import { AhfParams } from 'domain/ahf-param/ahf-param.types';
+import { Folder } from 'domain/folder/folder.types';
 
 export interface State {
-  name: string;
-  params: AhfParams;
+  //name: string;
+  //params: Param[];
+  folder: Folder;
 }
 export const initialState: State = {
-  name: '',
-  params: {
-    ParData: [],
+  folder: {
+    id: '',
+    label: '',
+    children: [],
+    params: [],
   },
 };

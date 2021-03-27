@@ -2,10 +2,28 @@ import { flatten } from 'flattree';
 
 import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
 import { AhfFolderData } from 'domain/ahf-folder/ahf-folder.types';
+import { AhfParam } from 'domain/ahf-param/ahf-param.types';
 import { Folder } from 'domain/folder/folder.types';
+import { Param } from 'domain/param/param.types';
 
 import { AppRoutes } from '../pages/App.routes';
 import { State } from './initialState';
+
+const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
+  ahfParams.map(
+    (ahfParam) =>
+      (({
+        accessType: ahfParam.AccessType,
+        description: ahfParam.Description,
+        name: ahfParam.Name,
+        paramEnumNumb: ahfParam.ParamEnumNumb,
+        paramEnumText: ahfParam.ParamEnumText,
+        paramId: ahfParam.ParamID,
+        paramType: ahfParam.ParamType,
+        unit: ahfParam.Unit,
+        value: ahfParam.Value,
+      } as unknown) as Param),
+  );
 
 const transformFolderDataToNode = (
   folderData: AhfFolderData,
@@ -14,7 +32,9 @@ const transformFolderDataToNode = (
   Object.entries(folderData).map((entry) => ({
     id: `${previousPath}/${entry[0]}`,
     label: entry[0],
-    params: entry[1].Params ? entry[1].Params.ParData : [],
+    params: entry[1].Params
+      ? transformAhfParamsToParam(entry[1].Params.ParData)
+      : [],
     children: entry[1].Folders
       ? transformFolderDataToNode(
           entry[1].Folders,
@@ -28,7 +48,9 @@ const transformStructureToNode = (structure: AhfDeviceStructure) =>
     (_, current) => ({
       id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,
       label: current[0],
-      params: current[1].Params ? current[1].Params.ParData : [],
+      params: current[1].Params
+        ? transformAhfParamsToParam(current[1].Params.ParData)
+        : [],
       children: transformFolderDataToNode(
         current[1].Folders,
         `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,

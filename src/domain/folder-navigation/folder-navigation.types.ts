@@ -12,16 +12,3 @@ export type FolderNode = {
   hasChildren: () => boolean;
   isLastChild: () => boolean;
 };
-
-/* export type FolderApi = {
-  contains: (source: Folder, node: Folder) => boolean;
-  getChildAt: (source: Folder, index: number) => Folder | undefined;
-  getChildren: (source: Folder) => Folder[];
-  getFirstChild: (source: Folder) => Folder | undefined;
-  getLastChild: (source: Folder) => Folder | undefined;
-  getNextSibling: (source: Folder) => Folder | undefined;
-  getParent: (source: Folder) => Folder | undefined;
-  getPreviousSibling: (source: Folder) => Folder | undefined;
-  hasChildren: (source: Folder) => boolean;
-  isLastChild: (source: Folder) => boolean;
-}; */

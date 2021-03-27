@@ -1,11 +1,9 @@
 import { useSocketHook } from 'hooks/socket-hook';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
-import { AhfContext } from 'store/context';
+import { useHistory, useParams } from 'react-router-dom';
 
 import { Folder } from 'domain/folder/folder.types';
-import { findFolderById } from 'domain/folder/folder.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 
@@ -18,53 +16,60 @@ interface ParamTypes {
   deviceId: string;
 }
 
-export const AhfFolderContainer: React.FC = () => {
+interface Props {
+  folder: Folder;
+}
+
+export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
   const classes = useFolderContainerStyles();
-  const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
-  const [currentFolder, setCurrentFolder] = useState<Folder>();
   const { folderState, dispatch } = useContext(AhfFolderContext);
 
   const { update, stopUpdate, listen } = useSocketHook();
 
-  const { url } = useRouteMatch();
   const history = useHistory();
   const { i18n } = useTranslation();
 
   const { goNext, goPrevious } = useFolderNavigation();
 
   useEffect(() => {
-    debugger;
+    dispatch({ type: 'FOLDER_CHANGE', payload: folder });
+  }, [folder, dispatch]);
+
+  useEffect(() => {
+    update(
+      deviceId,
+      folderState.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),
+    );
     const subscription = listen(dispatch);
 
     return () => {
       stopUpdate();
       subscription.unsubscribe();
     };
-  }, [dispatch, listen, stopUpdate]);
-
-  useEffect(() => {
-    if (state?.devices[+deviceId]?.structure) {
-      const folder = findFolderById(url, state.devices[+deviceId].structure);
-      folder && setCurrentFolder(folder);
-      folder &&
-        update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
-    }
-  }, [deviceId, state, url, update, stopUpdate]);
+  }, [
+    dispatch,
+    listen,
+    stopUpdate,
+    update,
+    deviceId,
+    folderState.folder,
+    folderState.folder.id,
+  ]);
 
   const handleNext = () => {
-    const nextFolder = currentFolder && goNext(currentFolder);
+    const nextFolder = goNext(folderState.folder);
     nextFolder?.id && handleFolderChange(nextFolder);
   };
 
   const handlePrevious = () => {
-    const previousFolder = currentFolder && goPrevious(currentFolder);
+    const previousFolder = goPrevious(folderState.folder);
     previousFolder?.id && handleFolderChange(previousFolder);
   };
 
   const handleFolderChange = (folder: Folder) => {
     update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
-    setCurrentFolder(folder);
+    dispatch({ type: 'FOLDER_CHANGE', payload: folder });
     history.replace(history.location.pathname.replace(/[^]*$/, folder.id));
   };
 
@@ -78,11 +83,11 @@ export const AhfFolderContainer: React.FC = () => {
       <button onClick={handlePrevious}>Previous</button>
       <button onClick={handleNext}>Next</button>
 
-      {currentFolder && currentFolder.params.length > 0 ? (
+      {folderState && folderState.folder.params.length > 0 ? (
         <div className={classes.paramsContainer}>
-          {currentFolder.params.map((param) => (
+          {folderState.folder.params.map((param) => (
             <AhfParamComponent
-              key={param.ParamID}
+              key={param.paramId}
               currentLanguage={currentLanguage}
               param={param}
               onClickParam={handleClickParam}

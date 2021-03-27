@@ -7,10 +7,10 @@ import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
-import { AhfParam, Value } from 'domain/ahf-param/ahf-param.types';
 import { findParamIndexById } from 'domain/ahf-param/ahf-param.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { Param, ParamValue } from 'domain/param/param.types';
 import {
   LAYOUT_TYPE,
   LAYOUTS,
@@ -25,12 +25,12 @@ interface Props {
   deviceId: string;
   folderName: string;
   paramId: string;
-  params: AhfParam[];
+  params: Param[];
 }
 
 type CurrentParam = {
   index: number;
-  param: AhfParam;
+  param: Param;
 };
 
 export const AhfParamsContainer: React.FC<Props> = ({
@@ -49,7 +49,9 @@ export const AhfParamsContainer: React.FC<Props> = ({
     const index = findParamIndexById(params, paramId);
     return { index, param: { ...params[index] } };
   });
-  const [value, setValue] = useState<Value>(currentParam.param.Value || '');
+  const [value, setValue] = useState<ParamValue>(
+    currentParam.param.value || '',
+  );
   const [showKeyboard, setShowKeyboard] = useState(false);
 
   const handleParamChange = (paramIndex: number) => {
@@ -57,7 +59,7 @@ export const AhfParamsContainer: React.FC<Props> = ({
       index: paramIndex,
       param: params[paramIndex],
     });
-    const paramId = params[paramIndex].ParamID;
+    const paramId = params[paramIndex].paramId;
     history.replace(
       history.location.pathname.replace(/[^]*$/, paramId.toString()),
     );
@@ -99,9 +101,9 @@ export const AhfParamsContainer: React.FC<Props> = ({
       >
         {params.map((param, paramIndex) => {
           return paramIndex === currentParam.index ? (
-            <React.Fragment key={param.ParamID}>
+            <React.Fragment key={param.paramId}>
               <AhfParamDetailComponent
-                key={param.ParamID}
+                key={param.paramId}
                 param={param}
                 value={value}
                 onValueChange={handleValueChange}
@@ -113,7 +115,7 @@ export const AhfParamsContainer: React.FC<Props> = ({
                   keyboardRef={keyboard}
                   onChange={setValue}
                   layout={
-                    param.ParamType === 'number'
+                    param.paramType === 'number'
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
                       : LAYOUTS[currentLanguage.keyboard]
                   }
@@ -121,7 +123,7 @@ export const AhfParamsContainer: React.FC<Props> = ({
               )}
             </React.Fragment>
           ) : (
-            <React.Fragment key={param.ParamID}></React.Fragment>
+            <React.Fragment key={param.paramId}></React.Fragment>
           );
         })}
       </SwipeableViews>

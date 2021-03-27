@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Input, MenuItem, Select } from '@material-ui/core';
 
-import { Value } from 'domain/ahf-param/ahf-param.types';
+import { ParamValue } from 'domain/param/param.types';
 
 interface Props {
   type: string;
-  value: Value;
+  value: ParamValue;
   selectValues?: string[];
   onValueChange: (value: string) => void;
   onFocus: (value: boolean) => void;
