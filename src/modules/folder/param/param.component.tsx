@@ -20,7 +20,11 @@ export const AhfParamComponent: React.FC<Props> = ({
 }: Props) => {
   const classes = useParamComponentStyles();
   return (
-    <Card variant="elevation" onClick={() => onClickParam(param.paramId)}>
+    <Card
+      variant="elevation"
+      onClick={() => onClickParam(param.paramId)}
+      className={classes.cardContainer}
+    >
       <CardContent className={classes.contentContainer}>
         <div className={classes.infoContainer}>
           <Avatar className={classes.avatar} variant="square">

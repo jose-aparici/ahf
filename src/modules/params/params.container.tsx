@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import Keyboard from 'react-simple-keyboard';
-import SwipeableViews from 'react-swipeable-views';
 
+//import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
@@ -11,14 +11,8 @@ import { findParamIndexById } from 'domain/ahf-param/ahf-param.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamValue } from 'domain/param/param.types';
-import {
-  LAYOUT_TYPE,
-  LAYOUTS,
-} from 'domain/virtual-keyboard/virtual-keyboard.constants';
 import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
-import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
-import { AhfParamDetailComponent } from './param-detail/param-detail.component';
 import { useParamsContainerStyles } from './params.container.styles';
 
 interface Props {
@@ -94,7 +88,7 @@ export const AhfParamsContainer: React.FC<Props> = ({
         onNext={handleNextParam}
         onBack={handlePreviousParam}
       />
-      <SwipeableViews
+      {/* <SwipeableViews
         enableMouseEvents
         onChangeIndex={handleParamChange}
         index={currentParam.index}
@@ -126,7 +120,7 @@ export const AhfParamsContainer: React.FC<Props> = ({
             <React.Fragment key={param.paramId}></React.Fragment>
           );
         })}
-      </SwipeableViews>
+      </SwipeableViews> */}
     </>
   );
 };

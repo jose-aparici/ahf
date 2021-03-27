@@ -14,4 +14,14 @@ export const useFolderContainerStyles = makeStyles((theme: Theme) => ({
       gridTemplateColumns: '1fr 1fr 1fr',
     },
   },
+  masonryGrid: {
+    display: 'flex',
+    //marginLeft: '-30px',
+    width: 'auto',
+  },
+  masonryGridColumn: {
+    margin: '6px',
+    //paddingLeft: '-30px',
+    //backgroundClip: ' padding-box',
+  },
 }));

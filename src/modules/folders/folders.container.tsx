@@ -1,8 +1,8 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import SwipeableViews from 'react-swipeable-views';
 
+//import SwipeableViews from 'react-swipeable-views';
 import { IconButton } from '@material-ui/core';
 import HighlightOffIcon from '@material-ui/icons/HighlightOff';
 
@@ -10,8 +10,6 @@ import { AhfParams } from 'domain/ahf-param/ahf-param.types';
 import { findFolderIndexByName } from 'domain/folder/folder.utils';
 import { AhfStepperComponent } from 'modules/shared/stepper/stepper.component';
 
-import { AhfFolderContainer } from './folder/folder.container';
-import { AhfFolderProvider } from './folder/store/context';
 import { useFoldersContainerStyles } from './folders.container.styles';
 
 interface Props {
@@ -77,7 +75,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
         onNext={handleNextParam}
         onBack={handlePreviousParam}
       />
-      <SwipeableViews
+      {/*  <SwipeableViews
         enableMouseEvents
         onChangeIndex={handleFolderChange}
         index={currentFolder.index}
@@ -93,7 +91,7 @@ export const AhfFoldersContainer: React.FC<Props> = ({
             <React.Fragment key={folderName} />
           ),
         )}
-      </SwipeableViews>
+      </SwipeableViews> */}
     </>
   );
 };
