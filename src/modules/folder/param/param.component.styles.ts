@@ -11,11 +11,14 @@ export const useParamComponentStyles = makeStyles((theme: Theme) => ({
   infoContainer: {
     padding: '4px',
     display: 'flex',
-    alignItems: 'center',
   },
   avatar: {
-    backgroundColor: 'black',
+    backgroundColor: theme.palette.background.default,
     marginRight: '4px',
+    color: theme.palette.primary.main,
+    fontWeight: 'bold',
+    width: '32px',
+    height: '28px',
   },
   editIcon: {
     marginLeft: 'auto',
@@ -27,11 +30,9 @@ export const useParamComponentStyles = makeStyles((theme: Theme) => ({
   value: {
     textAlign: 'center',
     fontSize: '40px',
+    fontWeight: 'bold',
     [theme.breakpoints.down('md')]: {
-      fontSize: '32px',
+      fontSize: '16px',
     },
-  },
-  unit: {
-    fontSize: '20px',
   },
 }));
