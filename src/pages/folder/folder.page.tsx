@@ -5,7 +5,10 @@ import { AhfContext } from 'store/context';
 import { Folder } from 'domain/folder/folder.types';
 import { findFolderById } from 'domain/folder/folder.utils';
 import { AhfFolderContainer } from 'modules/folder/folder.container';
-import { AhfFolderProvider } from 'modules/folder/store/context';
+import {
+  AhfFolderContext,
+  AhfFolderProvider,
+} from 'modules/folder/store/context';
 import { AhfPage } from 'pages/ahf.page';
 
 interface ParamTypes {
@@ -16,25 +19,24 @@ export const AhfFolderPage: React.FC = () => {
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
   const [currentFolder, setCurrentFolder] = useState<Folder>();
+  const { dispatch } = useContext(AhfFolderContext);
 
   useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
       const folder = findFolderById(url, state.devices[+deviceId].structure);
       if (folder) {
+        console.log('entra');
+        debugger;
         setCurrentFolder(folder);
       }
     }
-  }, [deviceId, state, url]);
+  }, [deviceId, state, url, dispatch]);
 
   return (
     <AhfPage>
-      <>
-        {currentFolder && (
-          <AhfFolderProvider folder={currentFolder}>
-            <AhfFolderContainer />
-          </AhfFolderProvider>
-        )}
-      </>
+      <AhfFolderProvider>
+        {currentFolder && <AhfFolderContainer folder={currentFolder} />}
+      </AhfFolderProvider>
     </AhfPage>
   );
 };

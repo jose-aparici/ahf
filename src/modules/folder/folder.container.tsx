@@ -16,20 +16,25 @@ interface ParamTypes {
   deviceId: string;
 }
 
-export const AhfFolderContainer: React.FC = () => {
+interface Props {
+  folder: Folder;
+}
+
+export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
   const classes = useFolderContainerStyles();
-  //const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
-  //const [currentFolder, setCurrentFolder] = useState<Folder>();
   const { folderState, dispatch } = useContext(AhfFolderContext);
 
   const { update, stopUpdate, listen } = useSocketHook();
 
-  // const { url } = useRouteMatch();
   const history = useHistory();
   const { i18n } = useTranslation();
 
   const { goNext, goPrevious } = useFolderNavigation();
+
+  useEffect(() => {
+    dispatch({ type: 'FOLDER_CHANGE', payload: folder });
+  }, [folder, dispatch]);
 
   useEffect(() => {
     update(
@@ -42,17 +47,15 @@ export const AhfFolderContainer: React.FC = () => {
       stopUpdate();
       subscription.unsubscribe();
     };
-  }, [dispatch, listen, stopUpdate, update, deviceId, folderState.folder.id]);
-
-  /* useEffect(() => {
-    if (state?.devices[+deviceId]?.structure) {
-      const folder = findFolderById(url, state.devices[+deviceId].structure);
-      if (folder) {
-        setCurrentFolder(folder);
-        update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
-      }
-    }
-  }, [deviceId, state, url, update]); */
+  }, [
+    dispatch,
+    listen,
+    stopUpdate,
+    update,
+    deviceId,
+    folderState.folder,
+    folderState.folder.id,
+  ]);
 
   const handleNext = () => {
     const nextFolder = goNext(folderState.folder);
@@ -66,9 +69,7 @@ export const AhfFolderContainer: React.FC = () => {
 
   const handleFolderChange = (folder: Folder) => {
     update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
-    // setCurrentFolder(folder);
-    //dispatch({});
-    debugger;
+    dispatch({ type: 'FOLDER_CHANGE', payload: folder });
     history.replace(history.location.pathname.replace(/[^]*$/, folder.id));
   };
 
