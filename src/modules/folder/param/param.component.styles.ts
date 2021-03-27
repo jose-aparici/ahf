@@ -9,7 +9,6 @@ export const useParamComponentStyles = makeStyles((theme: Theme) => ({
     color: 'black',
   },
   infoContainer: {
-    padding: '4px',
     display: 'flex',
   },
   avatar: {
