@@ -25,8 +25,6 @@ export const AhfFolderPage: React.FC = () => {
     if (state?.devices[+deviceId]?.structure) {
       const folder = findFolderById(url, state.devices[+deviceId].structure);
       if (folder) {
-        console.log('entra');
-        debugger;
         setCurrentFolder(folder);
       }
     }
