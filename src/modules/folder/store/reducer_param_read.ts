@@ -7,12 +7,12 @@ export const paramReadReducer = (
   paramRead: AhfParamRead,
 ): State => {
   debugger;
-  const findParamToUpdate = state.params.ParData.find(
-    (param) => param.ParamID === paramRead.ParamID,
+  const findParamToUpdate = state.params.find(
+    (param) => param.paramId === paramRead.ParamID,
   );
 
   if (findParamToUpdate) {
-    findParamToUpdate.Value = paramRead.Value;
+    findParamToUpdate.value = paramRead.Value;
   }
 
   return { ...state };

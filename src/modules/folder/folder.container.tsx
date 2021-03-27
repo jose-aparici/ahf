@@ -34,7 +34,6 @@ export const AhfFolderContainer: React.FC = () => {
   const { goNext, goPrevious } = useFolderNavigation();
 
   useEffect(() => {
-    debugger;
     const subscription = listen(dispatch);
 
     return () => {
@@ -46,9 +45,10 @@ export const AhfFolderContainer: React.FC = () => {
   useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
       const folder = findFolderById(url, state.devices[+deviceId].structure);
-      folder && setCurrentFolder(folder);
-      folder &&
+      if (folder) {
+        setCurrentFolder(folder);
         update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
+      }
     }
   }, [deviceId, state, url, update, stopUpdate]);
 
@@ -78,9 +78,9 @@ export const AhfFolderContainer: React.FC = () => {
       <button onClick={handlePrevious}>Previous</button>
       <button onClick={handleNext}>Next</button>
 
-      {currentFolder && currentFolder.params.length > 0 ? (
+      {folderState && folderState.params.length > 0 ? (
         <div className={classes.paramsContainer}>
-          {currentFolder.params.map((param) => (
+          {folderState.params.map((param) => (
             <AhfParamComponent
               key={param.paramId}
               currentLanguage={currentLanguage}

@@ -1,6 +1,6 @@
 import { State } from '../initialState';
 
-const DEFAULT_STATE: State = {
+/* const DEFAULT_STATE: State = {
   name: 'device1',
   params: {
     ParData: [
@@ -39,6 +39,11 @@ const DEFAULT_STATE: State = {
       },
     ],
   },
+}; */
+
+const DEFAULT_STATE: State = {
+  name: 'device1',
+  params: [],
 };
 
 export const buildState = (overrides = {}): State => ({

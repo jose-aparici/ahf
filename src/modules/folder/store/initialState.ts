@@ -1,12 +1,10 @@
-import { AhfParams } from 'domain/ahf-param/ahf-param.types';
+import { Param } from 'domain/param/param.types';
 
 export interface State {
   name: string;
-  params: AhfParams;
+  params: Param[];
 }
 export const initialState: State = {
   name: '',
-  params: {
-    ParData: [],
-  },
+  params: [],
 };
