@@ -1,6 +1,7 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
+import Masonry from 'react-masonry-css';
 import { useHistory, useParams } from 'react-router-dom';
 
 import { Folder } from 'domain/folder/folder.types';
@@ -84,7 +85,11 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
       <button onClick={handleNext}>Next</button>
 
       {folderState && folderState.folder.params.length > 0 ? (
-        <div className={classes.paramsContainer}>
+        <Masonry
+          breakpointCols={3}
+          className={classes.masonryGrid}
+          columnClassName={classes.masonryGridColumn}
+        >
           {folderState.folder.params.map((param) => (
             <AhfParamComponent
               key={param.paramId}
@@ -93,7 +98,7 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
               onClickParam={handleClickParam}
             />
           ))}
-        </div>
+        </Masonry>
       ) : (
         <div>Empty folder</div>
       )}

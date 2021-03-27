@@ -2,17 +2,26 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 export const useFolderContainerStyles = makeStyles((theme: Theme) => ({
   paramsContainer: {
+    margin: '16px',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
-    columnGap: '8px',
+    columnGap: '12px',
     rowGap: '8px',
     [theme.breakpoints.down('sm')]: {
       gridTemplateColumns: '1fr',
-      rowGap: '4px',
     },
     [theme.breakpoints.down('md')]: {
-      gridTemplateColumns: '1fr 1fr',
-      rowGap: '4px',
+      gridTemplateColumns: '1fr 1fr 1fr',
     },
+  },
+  masonryGrid: {
+    display: 'flex',
+    //marginLeft: '-30px',
+    width: 'auto',
+  },
+  masonryGridColumn: {
+    margin: '6px',
+    //paddingLeft: '-30px',
+    //backgroundClip: ' padding-box',
   },
 }));

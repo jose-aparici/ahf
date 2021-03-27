@@ -19,6 +19,6 @@ describe('reducer device param update', () => {
 
     const result = paramReadReducer(state, payload);
 
-    expect(result.params.ParData[0].Value).toEqual(payload.Value);
+    expect(result.folder.params[0].value).toEqual(payload.Value);
   });
 });
