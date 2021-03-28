@@ -15,22 +15,18 @@ export const useAhfDeviceCardComponentStyles = makeStyles((theme: Theme) => ({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
-  avatar: {
-    backgroundColor: 'black',
-    marginRight: '4px',
-  },
-  unitContainer: {
-    display: 'flex',
-    justifyContent: 'space-between',
-  },
   value: {
     textAlign: 'center',
-    fontSize: '40px',
-    [theme.breakpoints.down('md')]: {
-      fontSize: '32px',
-    },
+    fontSize: '24px',
+    fontWeight: 'bold',
   },
   unit: {
     fontSize: '20px',
+  },
+  deviceIconContainer: {
+    textAlign: 'right',
+  },
+  deviceIcon: {
+    fontSize: '40px',
   },
 }));

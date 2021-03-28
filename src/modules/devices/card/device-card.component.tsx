@@ -1,13 +1,13 @@
 import React from 'react';
 
 import {
-  Avatar,
   Card,
   CardContent,
   CircularProgress,
   Typography,
 } from '@material-ui/core';
-import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import RadioIcon from '@material-ui/icons/Radio';
 
 import { DeviceInfo } from 'domain/device/device.types';
 
@@ -30,24 +30,19 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
     >
       <CardContent className={classes.contentContainer}>
         <div className={classes.infoContainer}>
-          <Avatar
-            className={classes.avatar}
-            src="/assets/images/AHFViewer1.ico"
-          ></Avatar>
-          <Typography>{deviceInfo.type}</Typography>
-          {deviceInfo.status === 0 ? (
-            <CircularProgress size={20} color="secondary" />
-          ) : (
-            <CheckCircleOutlineIcon htmlColor={'green'} />
-          )}
-        </div>
-        <div className={classes.unitContainer}>
           <Typography component="h1" className={classes.value}>
             {deviceInfo.fw}
           </Typography>
-          <Typography className={classes.unit}>MbId {deviceInfo.id}</Typography>
+          {deviceInfo.status === 0 ? (
+            <CircularProgress size={24} color="primary" />
+          ) : (
+            <CheckCircleIcon fontSize="large" htmlColor={'green'} />
+          )}
         </div>
-        <Typography>{deviceInfo.company}</Typography>
+        <Typography className={classes.unit}>MbId {deviceInfo.id}</Typography>
+        <div className={classes.deviceIconContainer}>
+          <RadioIcon className={classes.deviceIcon} />
+        </div>
       </CardContent>
     </Card>
   );
