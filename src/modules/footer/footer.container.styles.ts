@@ -5,6 +5,7 @@ export const useFooterContainerStyles = makeStyles(() => ({
     top: 'auto',
     bottom: 0,
     position: 'sticky',
+    height: '36px',
   },
   toolBar: {
     display: 'flex',
