@@ -18,8 +18,6 @@ export const mockedState: State = deviceStructureReducer(
   deviceAhf.structure,
 );
 
-console.log(mockedState);
-
 export const initialState: State = {
-  devices: mockedState.devices,
+  devices: {},
 };
