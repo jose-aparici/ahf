@@ -8,7 +8,7 @@ import { pathToBreadCrumbs } from 'domain/breadcrumbs/breadcrumb.utils';
 import { Breadcrumb } from 'domain/breadcrumbs/breadcrumbs.types';
 import { AppRoutes } from 'pages/App.routes';
 
-import { AhfBreadcrumbs } from './breadcrumbs/breadcrumbs.component';
+import { AhfBreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AhfFolderTreeViewComponent } from './folder-tree-view/folder-tree-view.component';
 import { useHeaderContainerStyles } from './header.container.styles';
 import { AhfNavigationIconsComponent } from './navigation-icons/navigation-icons.component';
@@ -39,7 +39,9 @@ export const AhfHeaderContainer: FC = () => {
                 onToggleSideBar={handleToggleSideBar}
               />
 
-              {breadcrumbs && <AhfBreadcrumbs breadcrumbs={breadcrumbs} />}
+              {breadcrumbs && (
+                <AhfBreadcrumbsComponent breadcrumbs={breadcrumbs} />
+              )}
             </>
           )}
 

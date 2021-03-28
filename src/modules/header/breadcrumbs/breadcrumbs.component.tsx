@@ -6,15 +6,15 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import { Breadcrumb } from 'domain/breadcrumbs/breadcrumbs.types';
 
-import { useBreadcrumbsContainerStyles } from './breadcrumbs.container.styles';
-
-const handleClick = () => console.log('hola');
+import { useBreadcrumbsComponentStyles } from './breadcrumbs.component.styles';
 
 interface Props {
   breadcrumbs: Breadcrumb[];
 }
-export const AhfBreadcrumbs: React.FC<Props> = ({ breadcrumbs }: Props) => {
-  const classes = useBreadcrumbsContainerStyles();
+export const AhfBreadcrumbsComponent: React.FC<Props> = ({
+  breadcrumbs,
+}: Props) => {
+  const classes = useBreadcrumbsComponentStyles();
   return (
     <Breadcrumbs
       aria-label="breadcrumb"
@@ -26,7 +26,6 @@ export const AhfBreadcrumbs: React.FC<Props> = ({ breadcrumbs }: Props) => {
           <Link
             key={index}
             color="inherit"
-            onClick={handleClick}
             to={breadcrumb.path}
             exact
             component={NavLink}
