@@ -5,7 +5,7 @@ import { AhfDevice } from 'domain/ahf-device/ahf-device.types';
 
 import { initialState, State } from '../../../store/initialState';
 import { deviceInfoReducer } from '../../../store/reducer_device_info';
-import { findFolderById } from '../folder.utils';
+import { findFolderById, getIdsWithChildren } from '../folder.utils';
 
 describe('folder utils', () => {
   describe('find by id', () => {
@@ -32,6 +32,20 @@ describe('folder utils', () => {
         state.devices[1].structure,
       );
       expect(result).toBe(undefined);
+    });
+  });
+
+  describe('get ids with children', () => {
+    let state: State;
+    beforeEach(() => {
+      const deviceAhf: AhfDevice = buildDeviceAhf();
+      const deviceInfoState = deviceInfoReducer(initialState, deviceAhf.info);
+      state = deviceStructureReducer(deviceInfoState, deviceAhf.structure);
+    });
+
+    it('should return the ids with children', () => {
+      const result = getIdsWithChildren(state.devices[1].structure, []);
+      expect(result).toEqual(['/devices/1', '/devices/1/folder1.1']);
     });
   });
 });
