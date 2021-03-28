@@ -25,10 +25,6 @@ export const AhfSideBarComponent: React.FC<Props> = ({
       onOpen={onToggleSideBar}
       classes={{ paper: classes.root }}
     >
-      <div>
-        <div>Schaffner</div>
-        <hr className={classes.divider}></hr>
-      </div>
       {children}
     </SwipeableDrawer>
   );

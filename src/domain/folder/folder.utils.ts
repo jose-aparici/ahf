@@ -2,6 +2,7 @@ import { FolderNode } from 'domain/folder-navigation/folder-navigation.types';
 
 import { Folder } from './folder.types';
 
+// TODO remove this
 export const findFolderIndexByName = (
   folderNames: string[],
   name: string,
@@ -30,5 +31,20 @@ export const findFolderById = (
     } else {
       return undefined;
     }
+  }
+};
+
+export const getIdsWithChildren = (
+  folder: Folder,
+  folderIds: string[],
+): string[] => {
+  if (folder.children.length > 0) {
+    folderIds.push(folder.id);
+    folder.children.forEach((child) => {
+      getIdsWithChildren(child, folderIds);
+    });
+    return folderIds;
+  } else {
+    return [];
   }
 };

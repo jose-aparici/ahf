@@ -4,6 +4,7 @@ export const useSideBarComponentStyles = makeStyles(() => ({
   root: {
     minWidth: '30%',
     paddingRight: '4px',
+    top: '39px',
   },
   divider: {
     border: 'none',
