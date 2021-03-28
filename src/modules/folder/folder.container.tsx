@@ -7,6 +7,8 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
+import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
 import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
@@ -81,24 +83,25 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
 
   return (
     <>
-      <button onClick={handlePrevious}>Previous</button>
-      <button onClick={handleNext}>Next</button>
-
       {folderState && folderState.folder.params.length > 0 ? (
-        <Masonry
-          breakpointCols={3}
-          className={classes.masonryGrid}
-          columnClassName={classes.masonryGridColumn}
-        >
-          {folderState.folder.params.map((param) => (
-            <AhfParamComponent
-              key={param.paramId}
-              currentLanguage={currentLanguage}
-              param={param}
-              onClickParam={handleClickParam}
-            />
-          ))}
-        </Masonry>
+        <>
+          <Masonry
+            breakpointCols={3}
+            className={classes.masonryGrid}
+            columnClassName={classes.masonryGridColumn}
+          >
+            {folderState.folder.params.map((param) => (
+              <AhfParamComponent
+                key={param.paramId}
+                currentLanguage={currentLanguage}
+                param={param}
+                onClickParam={handleClickParam}
+              />
+            ))}
+          </Masonry>
+          <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
+          <AhfNavigationNextComponent onNext={handleNext} />
+        </>
       ) : (
         <div>Empty folder</div>
       )}
