@@ -6,6 +6,7 @@ import { AppBar, Toolbar } from '@material-ui/core';
 
 import { pathToBreadCrumbs } from 'domain/breadcrumbs/breadcrumb.utils';
 import { Breadcrumb } from 'domain/breadcrumbs/breadcrumbs.types';
+import { AppRoutes } from 'pages/App.routes';
 
 import { AhfBreadcrumbs } from './breadcrumbs/breadcrumbs.component';
 import { AhfFolderTreeViewComponent } from './folder-tree-view/folder-tree-view.component';
@@ -22,6 +23,7 @@ export const AhfHeaderContainer: FC = () => {
   const location = useLocation();
 
   useEffect(() => {
+    console.log(location.pathname);
     setBreadcrumbs(pathToBreadCrumbs(location.pathname));
   }, [location.pathname]);
 
@@ -31,24 +33,34 @@ export const AhfHeaderContainer: FC = () => {
     <>
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
-          <AhfSideBarButtonComponent onToggleSideBar={handleToggleSideBar} />
+          {location.pathname !== AppRoutes.DevicesPage && (
+            <>
+              <AhfSideBarButtonComponent
+                onToggleSideBar={handleToggleSideBar}
+              />
 
-          {/*  <AhfNavigationButtonsComponent /> */}
-          {breadcrumbs && <AhfBreadcrumbs breadcrumbs={breadcrumbs} />}
+              {breadcrumbs && <AhfBreadcrumbs breadcrumbs={breadcrumbs} />}
+            </>
+          )}
+
           <div className={classes.iconsSection}>
             <AhfNavigationIconsComponent />
           </div>
         </Toolbar>
       </AppBar>
-      <AhfSideBarComponent
-        isOpen={sideBarOpen}
-        onToggleSideBar={handleToggleSideBar}
-      >
-        <AhfFolderTreeViewComponent
-          devices={state.devices}
-          onToggleSideBar={handleToggleSideBar}
-        />
-      </AhfSideBarComponent>
+      {location.pathname !== AppRoutes.DevicesPage && (
+        <>
+          <AhfSideBarComponent
+            isOpen={sideBarOpen}
+            onToggleSideBar={handleToggleSideBar}
+          >
+            <AhfFolderTreeViewComponent
+              devices={state.devices}
+              onToggleSideBar={handleToggleSideBar}
+            />
+          </AhfSideBarComponent>
+        </>
+      )}
     </>
   );
 };

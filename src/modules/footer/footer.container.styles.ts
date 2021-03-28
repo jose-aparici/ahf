@@ -8,7 +8,7 @@ export const useFooterContainerStyles = makeStyles(() => ({
   },
   toolBar: {
     display: 'flex',
-    minHeight: '0',
+    minHeight: '40px',
   },
   iconsSection: {
     marginLeft: 'auto',
