@@ -7,10 +7,13 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
+import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
+import { AhfFolderCardComponent } from './folder-card/folder-card.component';
 import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
-import { AhfParamComponent } from './param/param.component';
+import { AhfParamCardComponent } from './param-card/param-card.component';
 import { AhfFolderContext } from './store/context';
 
 interface ParamTypes {
@@ -76,31 +79,50 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
 
   const handleClickParam = () => console.log('clicked');
 
+  const handleClickFolder = (folder: Folder) => handleFolderChange(folder);
+
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
+  const folderCards = folderState.folder.children.map((folder) => {
+    return (
+      <AhfFolderCardComponent
+        key={folder.id}
+        folder={folder}
+        onClickFolder={handleClickFolder}
+      />
+    );
+  });
+
+  const paramsCards = folderState.folder.params.map((param) => {
+    return (
+      <AhfParamCardComponent
+        key={param.paramId}
+        currentLanguage={currentLanguage}
+        param={param}
+        onClickParam={handleClickParam}
+      />
+    );
+  });
+
   return (
     <>
-      <button onClick={handlePrevious}>Previous</button>
-      <button onClick={handleNext}>Next</button>
-
-      {folderState && folderState.folder.params.length > 0 ? (
-        <Masonry
-          breakpointCols={3}
-          className={classes.masonryGrid}
-          columnClassName={classes.masonryGridColumn}
-        >
-          {folderState.folder.params.map((param) => (
-            <AhfParamComponent
-              key={param.paramId}
-              currentLanguage={currentLanguage}
-              param={param}
-              onClickParam={handleClickParam}
-            />
-          ))}
-        </Masonry>
-      ) : (
-        <div>Empty folder</div>
+      {folderState.folder.id && (
+        <>
+          <Masonry
+            breakpointCols={3}
+            className={classes.masonryGrid}
+            columnClassName={classes.masonryGridColumn}
+          >
+            {[...folderCards, ...paramsCards].map((card) => card)}
+          </Masonry>
+          {goPrevious(folderState.folder) && (
+            <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
+          )}
+          {goNext(folderState.folder) && (
+            <AhfNavigationNextComponent onNext={handleNext} />
+          )}
+        </>
       )}
     </>
   );

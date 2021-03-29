@@ -16,12 +16,9 @@ export const useFolderContainerStyles = makeStyles((theme: Theme) => ({
   },
   masonryGrid: {
     display: 'flex',
-    //marginLeft: '-30px',
     width: 'auto',
   },
   masonryGridColumn: {
     margin: '6px',
-    //paddingLeft: '-30px',
-    //backgroundClip: ' padding-box',
   },
 }));
