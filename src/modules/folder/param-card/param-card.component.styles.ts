@@ -1,6 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-export const useParamComponentStyles = makeStyles((theme: Theme) => ({
+export const useParamCardComponentStyles = makeStyles((theme: Theme) => ({
   cardContainer: {
     marginBottom: '8px',
   },

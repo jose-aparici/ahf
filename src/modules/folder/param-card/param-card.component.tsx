@@ -5,7 +5,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { Param } from 'domain/param/param.types';
 
-import { useParamComponentStyles } from './param.component.styles';
+import { useParamCardComponentStyles } from './param-card.component.styles';
 
 interface Props {
   param: Param;
@@ -13,12 +13,12 @@ interface Props {
   onClickParam: (paramId: number) => void;
 }
 
-export const AhfParamComponent: React.FC<Props> = ({
+export const AhfParamCardComponent: React.FC<Props> = ({
   param,
   currentLanguage,
   onClickParam,
 }: Props) => {
-  const classes = useParamComponentStyles();
+  const classes = useParamCardComponentStyles();
   return (
     <Card
       variant="elevation"
