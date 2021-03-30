@@ -19,17 +19,23 @@ describe('reducer device structure', () => {
             status: 1,
           },
           structure: {
-            id: '/devices/1',
+            id: '/devices/folder1',
             label: 'folder1',
+            deviceId: '1',
+            isMainFolder: true,
             children: [
               {
-                id: '/devices/1/folder1.1',
+                id: '/devices/folder1/folder1.1',
                 label: 'folder1.1',
+                deviceId: '1',
+                isMainFolder: false,
                 children: [
                   {
-                    id: '/devices/1/folder1.1/folder1.2',
+                    id: '/devices/folder1/folder1.1/folder1.2',
                     label: 'folder1.2',
                     children: [],
+                    deviceId: '1',
+                    isMainFolder: false,
                     params: [
                       {
                         accessType: '1',

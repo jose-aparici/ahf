@@ -28,10 +28,13 @@ const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
 const transformFolderDataToNode = (
   folderData: AhfFolderData,
   previousPath: string,
+  deviceId: string,
 ): Folder[] =>
   Object.entries(folderData).map((entry) => ({
     id: `${previousPath}/${entry[0]}`,
     label: entry[0],
+    deviceId: deviceId,
+    isMainFolder: false,
     params: entry[1].Params
       ? transformAhfParamsToParam(entry[1].Params.ParData)
       : [],
@@ -39,6 +42,7 @@ const transformFolderDataToNode = (
       ? transformFolderDataToNode(
           entry[1].Folders,
           `${previousPath}/${entry[0]}`,
+          deviceId,
         )
       : [],
   }));
@@ -46,14 +50,17 @@ const transformFolderDataToNode = (
 const transformStructureToNode = (structure: AhfDeviceStructure) =>
   Object.entries(structure.FolderData).reduce(
     (_, current) => ({
-      id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,
+      id: `${AppRoutes.DevicesPage}/${current[0]}`,
       label: current[0],
+      deviceId: structure.DeviceID.toString(),
+      isMainFolder: true,
       params: current[1].Params
         ? transformAhfParamsToParam(current[1].Params.ParData)
         : [],
       children: transformFolderDataToNode(
         current[1].Folders,
-        `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}`,
+        `${AppRoutes.DevicesPage}/${current[0]}`,
+        structure.DeviceID.toString(),
       ),
     }),
     {
@@ -61,6 +68,8 @@ const transformStructureToNode = (structure: AhfDeviceStructure) =>
       label: '',
       params: [],
       children: [],
+      deviceId: '',
+      isMainFolder: true,
     } as Folder,
   );
 
