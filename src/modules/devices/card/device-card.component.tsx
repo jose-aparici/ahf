@@ -15,7 +15,7 @@ import { useAhfDeviceCardComponentStyles } from './device-card.component.styles'
 
 interface Props {
   deviceInfo: DeviceInfo;
-  onClickDevice: (id: number, status: number) => void;
+  onClickDevice: (id: number) => void;
 }
 
 export const AhfDeviceCardComponent: React.FC<Props> = ({
@@ -24,10 +24,7 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
 }: Props) => {
   const classes = useAhfDeviceCardComponentStyles();
   return (
-    <Card
-      variant="elevation"
-      onClick={() => onClickDevice(deviceInfo.id, deviceInfo.status)}
-    >
+    <Card variant="elevation" onClick={() => onClickDevice(deviceInfo.id)}>
       <CardContent className={classes.contentContainer}>
         <div className={classes.infoContainer}>
           <Typography component="h1" className={classes.value}>

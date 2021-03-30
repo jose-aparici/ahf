@@ -4,7 +4,6 @@ import { useHistory } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
 import { DeviceInfo } from 'domain/device/device.types';
-import { DEVICES } from 'pages/App.routes';
 
 import { AhfDeviceCardComponent } from './card/device-card.component';
 import { useDevicesContainerStyles } from './devices-container.styles';
@@ -15,8 +14,11 @@ export const AhfDevicesContainer: React.FC = () => {
   const { stopUpdate, scan } = useSocketHook();
   const history = useHistory();
 
-  const handleClickDevice = (id: number, status: number) => {
-    status > 0 && history.push(`${DEVICES}/${id}`);
+  const handleClickDevice = (id: number) => {
+    state.devices[id].info.status > 0 &&
+      state.devices[id].structure &&
+      state.devices[id].structure.isMainFolder &&
+      history.push(state.devices[id].structure.id);
   };
 
   useEffect(() => {

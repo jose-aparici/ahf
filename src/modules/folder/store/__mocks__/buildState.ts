@@ -4,6 +4,8 @@ const DEFAULT_STATE: State = {
   folder: {
     id: '',
     label: '',
+    isMainFolder: true,
+    deviceId: '1',
     children: [],
     params: [
       {

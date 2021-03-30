@@ -50,7 +50,9 @@ const transformFolderDataToNode = (
 const transformStructureToNode = (structure: AhfDeviceStructure) =>
   Object.entries(structure.FolderData).reduce(
     (_, current) => ({
-      id: `${AppRoutes.DevicesPage}/${current[0]}`,
+      id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
+        current[0]
+      }`,
       label: current[0],
       deviceId: structure.DeviceID.toString(),
       isMainFolder: true,
@@ -59,7 +61,9 @@ const transformStructureToNode = (structure: AhfDeviceStructure) =>
         : [],
       children: transformFolderDataToNode(
         current[1].Folders,
-        `${AppRoutes.DevicesPage}/${current[0]}`,
+        `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
+          current[0]
+        }`,
         structure.DeviceID.toString(),
       ),
     }),
