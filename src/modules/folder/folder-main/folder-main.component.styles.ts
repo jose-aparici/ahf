@@ -1,29 +1,27 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-export const useFolderMainComponentStyles = makeStyles((theme: Theme) => ({
+export const useFolderMainComponentStyles = makeStyles(() => ({
   root: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     height: '100%',
   },
   container: {
-    margin: '14px',
-    padding: '8px',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr 1fr 1fr 1fr',
-    backgroundColor: 'white',
   },
   containerTitle: {
     fontWeight: 'bold',
     fontSize: '22px',
   },
   parameterTitle: {
-    fontSize: '18px',
+    fontSize: '16px',
   },
   parameterValue: {
-    fontSize: '18px',
+    fontSize: '16px',
     fontWeight: 'bold',
     justifySelf: 'end',
+    marginBottom: '6px',
   },
   parameterLeft: {
     justifySelf: 'start',
@@ -36,5 +34,11 @@ export const useFolderMainComponentStyles = makeStyles((theme: Theme) => ({
   },
   threeCells: {
     gridColumn: 'span 3',
+  },
+  deviceIconContainer: {
+    justifySelf: 'end',
+  },
+  deviceIcon: {
+    fontSize: '40px',
   },
 }));
