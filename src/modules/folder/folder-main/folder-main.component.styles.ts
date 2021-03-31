@@ -39,6 +39,6 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
     justifySelf: 'end',
   },
   deviceIcon: {
-    fontSize: '40px',
+    fontSize: '100px',
   },
 }));

@@ -95,7 +95,7 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
                 : '-'}
             </Typography>
           ))}
-          <div className={classes.deviceIconContainer}>
+          <div className={clsx(classes.fullCell, classes.deviceIconContainer)}>
             <RadioIcon className={classes.deviceIcon} />
           </div>
         </CardContent>
