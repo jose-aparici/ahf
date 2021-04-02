@@ -45,7 +45,7 @@ export const getNextSibling = (source: Folder): Folder | undefined => {
 export const getParent = (source: Folder): Folder | undefined => {
   const folderNode = convertToFolderNode(source);
   const parent = folderNode.getParent();
-  return parent ? parent : undefined;
+  return parent && parent.id ? parent : undefined;
 };
 
 export const getPreviousSibling = (source: Folder): Folder | undefined => {
