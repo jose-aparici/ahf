@@ -3,7 +3,7 @@ import React from 'react';
 import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
-import { Param } from 'domain/param/param.types';
+import { AccessType, Param } from 'domain/param/param.types';
 
 import { useParamCardComponentStyles } from './param-card.component.styles';
 
@@ -31,7 +31,9 @@ export const AhfParamCardComponent: React.FC<Props> = ({
             {param.paramId}
           </Avatar>
           <Typography>{param.name[currentLanguage]}</Typography>
-          <EditIcon className={classes.editIcon} />
+          {param.accessType === AccessType.READ_WRITE && (
+            <EditIcon className={classes.editIcon} />
+          )}
         </div>
         <div className={classes.unitContainer}>
           <Typography className={classes.value}>

@@ -1,7 +1,11 @@
 export type ParamValue = number | string | undefined;
 
+export enum AccessType {
+  READ_ONLY = 'READ_ONLY',
+  READ_WRITE = 'READ_WRITE',
+}
 export interface Param {
-  accessType: string;
+  accessType: AccessType;
   description: Array<string>;
   name: Array<string>;
   paramEnumNumb: number;
