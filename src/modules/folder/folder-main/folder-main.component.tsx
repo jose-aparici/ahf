@@ -96,7 +96,54 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>xs=6</Paper>
+          <Paper className={classes.paper}>
+            <Grid item>
+              <Typography className={clsx(classes.containerTitle)}>
+                Filter parameters
+              </Typography>
+            </Grid>
+            <Grid container>
+              {[
+                { labels: ['State', 'Output'], paramsIndex: [11, 12] },
+                { labels: ['Current transformer', ''], paramsIndex: [13, 14] },
+                {
+                  labels: [
+                    'Harmonic compensation',
+                    'Reactive power compensation',
+                  ],
+                  paramsIndex: [15, 16],
+                },
+                {
+                  labels: ['Reactive power control', 'Load balancing'],
+                  paramsIndex: [17, 18],
+                },
+              ].map((row, index) => (
+                <React.Fragment key={index}>
+                  {row.labels.map((label) => (
+                    <React.Fragment key={label}>
+                      <Grid item xs={6}>
+                        <Typography className={clsx(classes.parameterTitle)}>
+                          {label}
+                        </Typography>
+                      </Grid>
+                    </React.Fragment>
+                  ))}
+                  {row.paramsIndex.map((paramIndex, index) => (
+                    <React.Fragment key={index}>
+                      <Grid item xs={6}>
+                        <Typography className={clsx(classes.parameterValue)}>
+                          {params[paramIndex].value
+                            ? `${params[paramIndex].value} ${params[paramIndex].unit}`
+                            : '-'}
+                        </Typography>
+                      </Grid>
+                    </React.Fragment>
+                  ))}
+                </React.Fragment>
+              ))}
+            </Grid>
+            <Grid container></Grid>
+          </Paper>
         </Grid>
       </Grid>
     </div>
