@@ -20,9 +20,6 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
     justifySelf: 'end',
     marginBottom: '6px',
   },
-  deviceIconContainer: {
-    justifySelf: 'end',
-  },
   deviceIcon: {
     fontSize: '100px',
   },

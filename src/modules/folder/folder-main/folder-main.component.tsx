@@ -20,7 +20,7 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
           <Paper className={classes.paper}>
             <Grid item>
               <Typography className={clsx(classes.containerTitle)}>
-                Mains parameter
+                Mains parameters
               </Typography>
             </Grid>
             <Grid container>
@@ -50,34 +50,47 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
               </Grid>
             </Grid>
             <Grid container>
-              <Grid item xs={12}>
-                <Typography className={clsx(classes.parameterTitle)}>
-                  Voltage
-                </Typography>
-              </Grid>
-              <Grid item container xs={12} spacing={2}>
-                {[2, 3, 4].map((item, index) => (
-                  <Grid
-                    key={item}
-                    item
-                    container
-                    xs={4}
-                    justify="space-between"
-                  >
-                    <Grid item>
-                      <Typography className={clsx(classes.parameterValue)}>
-                        {`L${index + 1}`}
-                      </Typography>
-                    </Grid>
-                    <Grid item>
-                      <Typography className={clsx(classes.parameterValue)}>
-                        {params[item].value && params[item].unit
-                          ? `${params[item].value} ${params[item].unit}`
-                          : ''}
-                      </Typography>
-                    </Grid>
+              {[
+                { title: 'Voltage', params: [2, 3, 4] },
+                { title: 'Currents', params: [5, 6, 7] },
+                { title: 'THDi', params: [8, 9, 10] },
+              ].map((row) => (
+                <React.Fragment key={row.title}>
+                  <Grid item xs={12}>
+                    <Typography className={clsx(classes.parameterTitle)}>
+                      {row.title}
+                    </Typography>
                   </Grid>
-                ))}
+                  <Grid item container xs={12} spacing={2}>
+                    {row.params.map((item, index) => (
+                      <Grid
+                        key={item}
+                        item
+                        container
+                        xs={4}
+                        justify="space-between"
+                      >
+                        <Grid item>
+                          <Typography className={clsx(classes.parameterValue)}>
+                            {`L${index + 1}`}
+                          </Typography>
+                        </Grid>
+                        <Grid item>
+                          <Typography className={clsx(classes.parameterValue)}>
+                            {params[item].value && params[item].unit
+                              ? `${params[item].value} ${params[item].unit}`
+                              : ''}
+                          </Typography>
+                        </Grid>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </React.Fragment>
+              ))}
+            </Grid>
+            <Grid container justify="flex-end">
+              <Grid item>
+                <RadioIcon className={classes.deviceIcon} />
               </Grid>
             </Grid>
           </Paper>
