@@ -142,7 +142,29 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
                 </React.Fragment>
               ))}
             </Grid>
-            <Grid container></Grid>
+            <Grid item>
+              <Typography className={clsx(classes.parameterTitle)}>
+                DPF
+              </Typography>
+            </Grid>
+            <Grid container>
+              {['Lower limit', 'Actual', 'Upper limit'].map((label) => (
+                <Grid item xs={4} key={label}>
+                  <Typography className={clsx(classes.parameterTitle)}>
+                    {label}
+                  </Typography>
+                </Grid>
+              ))}
+              {[19, 20, 21].map((paramIndex) => (
+                <Grid item xs={4} key={paramIndex}>
+                  <Typography className={clsx(classes.parameterValue)}>
+                    {params[paramIndex].value
+                      ? `${params[paramIndex].value} ${params[paramIndex].unit}`
+                      : '-'}
+                  </Typography>
+                </Grid>
+              ))}
+            </Grid>
           </Paper>
         </Grid>
       </Grid>
