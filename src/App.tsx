@@ -6,7 +6,6 @@ import { AhfContext } from 'store/context';
 import { AhfFooterContainer } from 'modules/footer/footer.container';
 import { AhfHeaderContainer } from 'modules/header/header.container';
 import { AppRoutes } from 'pages/App.routes';
-import { AhfDevicePage } from 'pages/device/device.page';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
 import { AhfFolderPage } from 'pages/folder/folder.page';
@@ -34,7 +33,6 @@ const App: React.FC = () => {
             exact
             component={AhfDevicesPage}
           />
-          <Route path={AppRoutes.DevicePage} exact component={AhfDevicePage} />
           <Route path={AppRoutes.EventsPage} exact component={AhfEventsPage} />
           <Route path={AppRoutes.FolderPage} component={AhfFolderPage} />
         </Switch>

@@ -11,6 +11,7 @@ import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navig
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
 import { AhfFolderCardComponent } from './folder-card/folder-card.component';
+import { AhfFolderMainComponent } from './folder-main/folder-main.component';
 import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
 import { AhfParamCardComponent } from './param-card/param-card.component';
@@ -109,13 +110,18 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
     <>
       {folderState.folder.id && (
         <>
-          <Masonry
-            breakpointCols={3}
-            className={classes.masonryGrid}
-            columnClassName={classes.masonryGridColumn}
-          >
-            {[...folderCards, ...paramsCards].map((card) => card)}
-          </Masonry>
+          {folderState.folder.isMainFolder ? (
+            <AhfFolderMainComponent params={folderState.folder.params} />
+          ) : (
+            <Masonry
+              breakpointCols={3}
+              className={classes.masonryGrid}
+              columnClassName={classes.masonryGridColumn}
+            >
+              {[...folderCards, ...paramsCards].map((card) => card)}
+            </Masonry>
+          )}
+
           {goPrevious(folderState.folder) && (
             <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
           )}

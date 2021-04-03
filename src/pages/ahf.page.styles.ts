@@ -1,11 +1,10 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-export const useAhfPageStyles = makeStyles((theme: Theme) => ({
+export const useAhfPageStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    minHeight: '100vh',
+    minHeight: '85vh',
     flexDirection: 'column',
-    background: theme.palette.background.default,
   },
   container: {
     padding: '8px',

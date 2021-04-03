@@ -1,13 +1,17 @@
+import { AccessType } from 'domain/param/param.types';
+
 import { State } from '../initialState';
 
 const DEFAULT_STATE: State = {
   folder: {
     id: '',
     label: '',
+    isMainFolder: true,
+    deviceId: '1',
     children: [],
     params: [
       {
-        accessType: 'accessType1',
+        accessType: AccessType.READ_ONLY,
         description: ['description1'],
         name: ['name1'],
         paramEnumNumb: 1,
@@ -18,7 +22,7 @@ const DEFAULT_STATE: State = {
         value: 'value',
       },
       {
-        accessType: 'accessType2',
+        accessType: AccessType.READ_ONLY,
         description: ['description2'],
         name: ['name2'],
         paramEnumNumb: 2,
@@ -29,7 +33,7 @@ const DEFAULT_STATE: State = {
         value: 2,
       },
       {
-        accessType: 'accessType3',
+        accessType: AccessType.READ_WRITE,
         description: ['description3'],
         name: ['name3'],
         paramEnumNumb: 3,

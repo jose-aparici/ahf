@@ -17,7 +17,7 @@ describe('folder utils', () => {
     });
 
     it('should return the finded folder', () => {
-      const validFolderPath = '/devices/1/folder1.1/folder1.2';
+      const validFolderPath = '/devices/1/folder1/folder1.1/folder1.2';
       const result = findFolderById(
         validFolderPath,
         state.devices[1].structure,
@@ -45,7 +45,10 @@ describe('folder utils', () => {
 
     it('should return the ids with children', () => {
       const result = getIdsWithChildren(state.devices[1].structure, []);
-      expect(result).toEqual(['/devices/1', '/devices/1/folder1.1']);
+      expect(result).toEqual([
+        '/devices/1/folder1',
+        '/devices/1/folder1/folder1.1',
+      ]);
     });
   });
 });
