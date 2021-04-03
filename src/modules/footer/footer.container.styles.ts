@@ -5,7 +5,7 @@ export const useFooterContainerStyles = makeStyles((theme: Theme) => ({
     backgroundColor: theme.palette.primary.main,
     top: 'auto',
     bottom: 0,
-    position: 'fixed',
+    position: 'sticky',
     height: '36px',
     padding: '0 24px',
   },
