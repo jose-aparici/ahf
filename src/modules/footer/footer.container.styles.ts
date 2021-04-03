@@ -1,17 +1,15 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
-export const useFooterContainerStyles = makeStyles(() => ({
-  appBar: {
+export const useFooterContainerStyles = makeStyles((theme: Theme) => ({
+  root: {
+    backgroundColor: theme.palette.primary.main,
     top: 'auto',
     bottom: 0,
-    position: 'sticky',
+    position: 'fixed',
     height: '36px',
+    padding: '0 24px',
   },
-  toolBar: {
-    display: 'flex',
-    minHeight: '40px',
-  },
-  iconsSection: {
-    marginLeft: 'auto',
+  text: {
+    color: theme.palette.text.secondary,
   },
 }));

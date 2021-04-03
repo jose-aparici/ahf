@@ -1,31 +1,31 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-import { AppBar, Toolbar, Typography } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 
 import { AppRoutes } from 'pages/App.routes';
 
 import { useFooterContainerStyles } from './footer.container.styles';
-import { AhfNavigationIconsContainer } from './navigation-icons/navigation-icons.component';
+import { AhfNavigationIconsComponent } from './navigation-icons/navigation-icons.component';
 
 export const AhfFooterContainer: React.FC = () => {
   const classes = useFooterContainerStyles();
   const location = useLocation();
 
   return (
-    <>
-      <AppBar className={classes.appBar}>
-        <Toolbar className={classes.toolBar}>
-          {location.pathname !== AppRoutes.DevicesPage && (
-            <>
-              <Typography>{new Date().toISOString()}</Typography>
-              <div className={classes.iconsSection}>
-                <AhfNavigationIconsContainer />
-              </div>
-            </>
-          )}
-        </Toolbar>
-      </AppBar>
-    </>
+    <Grid container className={classes.root} alignItems="center">
+      {location.pathname !== AppRoutes.DevicesPage && (
+        <>
+          <Grid item container xs={4} justify="flex-start">
+            <Typography className={classes.text}>
+              {new Date().toISOString()}
+            </Typography>
+          </Grid>
+          <Grid container item xs={8} justify="flex-end">
+            <AhfNavigationIconsComponent />
+          </Grid>
+        </>
+      )}
+    </Grid>
   );
 };
