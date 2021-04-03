@@ -10,7 +10,7 @@ import { useParamCardComponentStyles } from './param-card.component.styles';
 interface Props {
   param: Param;
   currentLanguage: number;
-  onClickParam: (paramId: number) => void;
+  onClickParam: (param: Param) => void;
 }
 
 export const AhfParamCardComponent: React.FC<Props> = ({
@@ -22,7 +22,7 @@ export const AhfParamCardComponent: React.FC<Props> = ({
   return (
     <Card
       variant="elevation"
-      onClick={() => onClickParam(param.paramId)}
+      onClick={() => onClickParam(param)}
       className={classes.cardContainer}
     >
       <CardContent className={classes.contentContainer}>

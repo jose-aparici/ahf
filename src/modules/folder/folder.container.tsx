@@ -7,6 +7,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { Param } from 'domain/param/param.types';
 import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
@@ -75,10 +76,11 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
   const handleFolderChange = (folder: Folder) => {
     update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
     dispatch({ type: 'FOLDER_CHANGE', payload: folder });
-    history.replace(history.location.pathname.replace(/[^]*$/, folder.id));
+    history.push(history.location.pathname.replace(/[^]*$/, folder.id));
   };
 
-  const handleClickParam = () => console.log('clicked');
+  const handleClickParam = (param: Param) =>
+    history.push(`${history.location.pathname}/${param.paramId.toString()}`);
 
   const handleClickFolder = (folder: Folder) => handleFolderChange(folder);
 
