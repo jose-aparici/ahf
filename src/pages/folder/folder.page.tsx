@@ -11,11 +11,11 @@ import {
   isParam,
 } from 'domain/resource/resource.utils';
 import { AhfFolderContainer } from 'modules/folder/folder.container';
+import { AhfParamDetailContainer } from 'modules/folder/param-detail/param-detail.container';
 import {
   AhfFolderContext,
   AhfFolderProvider,
 } from 'modules/folder/store/context';
-import { AhfParamDetailContainer } from 'modules/param-detail/param-detail.container';
 import { AhfPage } from 'pages/ahf.page';
 
 interface ParamTypes {
