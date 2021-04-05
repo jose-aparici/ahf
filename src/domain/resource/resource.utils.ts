@@ -34,12 +34,6 @@ export const findResourceByPath = (
           return findResourceByPath(folderPath, resourceFound as Folder);
         }
       }
-
-      /*  return !nodeFound
-        ? undefined
-        : nodeFound.id === folderPath
-        ? nodeFound
-        : findResourceByPath(folderPath, nodeFound); */
     } else {
       return rootFolder.params.find((param) => param.paramId === +paramId);
     }
