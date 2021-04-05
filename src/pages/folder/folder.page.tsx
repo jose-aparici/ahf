@@ -15,7 +15,7 @@ import {
   AhfFolderContext,
   AhfFolderProvider,
 } from 'modules/folder/store/context';
-import { AhfParamContainer } from 'modules/param/param.container';
+import { AhfParamDetailContainer } from 'modules/param-detail/param-detail.container';
 import { AhfPage } from 'pages/ahf.page';
 
 interface ParamTypes {
@@ -49,7 +49,7 @@ export const AhfFolderPage: React.FC = () => {
           <AhfFolderContainer folder={currentResource as Folder} />
         )}
         {currentResource && isParam(currentResource) && (
-          <AhfParamContainer param={currentResource as Param} />
+          <AhfParamDetailContainer param={currentResource as Param} />
         )}
       </AhfFolderProvider>
     </AhfPage>
