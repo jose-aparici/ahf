@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
 import { Dialog, Slide } from '@material-ui/core';
@@ -29,8 +29,15 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 }: Props) => {
   const classes = useParamEditContainerStyles();
 
-  const keyboardRef = useRef<Keyboard>();
-  const handleParamChange = () => console.log('changed');
+  const keyboardRef = useRef<Keyboard>(null);
+
+  const [input, setInput] = useState(param.value as string);
+
+  const handleParamChange = (value: string) => setInput(value);
+
+  const handleEnter = () => {
+    console.log('entra', input);
+  };
 
   return (
     <Dialog
@@ -40,8 +47,10 @@ export const AhfParamEditContainer: React.FC<Props> = ({
       TransitionComponent={Transition}
     >
       <AhfParamEditComponent
-        param={param}
+        value={input}
         onChange={handleParamChange}
+        onEnter={handleEnter}
+        onClose={onClose}
         keyboardRef={keyboardRef}
       />
     </Dialog>
