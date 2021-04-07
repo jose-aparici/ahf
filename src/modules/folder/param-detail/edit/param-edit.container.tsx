@@ -8,7 +8,6 @@ import SaveIcon from '@material-ui/icons/Save';
 import { Param } from 'domain/param/param.types';
 
 import { AhfParamEditComponent } from './component/param-edit.component';
-import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
   param: Param;
@@ -21,8 +20,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   isOpen,
   onClose,
 }: Props) => {
-  const classes = useParamEditContainerStyles();
-
   const keyboardRef = useRef<Keyboard>(null);
 
   const [input, setInput] = useState(param.value as string);
@@ -44,7 +41,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
       <DialogActions>
         <Button
           variant="contained"
-          color="primary"
           size="large"
           startIcon={<CancelIcon />}
           onClick={onClose}
@@ -53,7 +49,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
         </Button>
         <Button
           variant="contained"
-          color="primary"
           size="large"
           startIcon={<SaveIcon />}
           onClick={handleEnter}
