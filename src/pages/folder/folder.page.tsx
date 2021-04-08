@@ -2,20 +2,10 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams, useRouteMatch } from 'react-router-dom';
 import { AhfContext } from 'store/context';
 
-import { Folder } from 'domain/folder/folder.types';
-import { Param } from 'domain/param/param.types';
 import { Resource } from 'domain/resource/resource.type';
-import {
-  findResourceByPath,
-  isFolder,
-  isParam,
-} from 'domain/resource/resource.utils';
-import { AhfFolderContainer } from 'modules/folder/folder.container';
-import { AhfParamDetailContainer } from 'modules/folder/param-detail/param-detail.container';
-import {
-  AhfFolderContext,
-  AhfFolderProvider,
-} from 'modules/folder/store/context';
+import { findResourceByPath } from 'domain/resource/resource.utils';
+import { AhfResourceContainer } from 'modules/folder/resource.container';
+import { AhfFolderProvider } from 'modules/folder/store/context';
 import { AhfPage } from 'pages/ahf.page';
 
 interface ParamTypes {
@@ -27,7 +17,6 @@ export const AhfFolderPage: React.FC = () => {
   const { deviceId } = useParams<ParamTypes>();
 
   const [currentResource, setCurrentResource] = useState<Resource>();
-  const { dispatch } = useContext(AhfFolderContext);
 
   useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
@@ -40,17 +29,12 @@ export const AhfFolderPage: React.FC = () => {
         setCurrentResource(resource);
       }
     }
-  }, [deviceId, state, url, dispatch]);
+  }, [deviceId, state, url]);
 
   return (
     <AhfPage>
       <AhfFolderProvider>
-        {currentResource && isFolder(currentResource) && (
-          <AhfFolderContainer folder={currentResource as Folder} />
-        )}
-        {currentResource && isParam(currentResource) && (
-          <AhfParamDetailContainer param={currentResource as Param} />
-        )}
+        {currentResource && <AhfResourceContainer resource={currentResource} />}
       </AhfFolderProvider>
     </AhfPage>
   );

@@ -1,8 +1,7 @@
-import { useSocketHook } from 'hooks/socket-hook';
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
-import { useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
@@ -11,57 +10,21 @@ import { Param } from 'domain/param/param.types';
 import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
-import { AhfFolderCardComponent } from './folder-card/folder-card.component';
-import { AhfFolderMainComponent } from './folder-main/folder-main.component';
+import { AhfFolderCardComponent } from '../folder-card/folder-card.component';
+import { AhfFolderMainComponent } from '../folder-main/folder-main.component';
+import { AhfParamCardComponent } from '../param-card/param-card.component';
+import { AhfFolderContext } from '../store/context';
 import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
-import { AhfParamCardComponent } from './param-card/param-card.component';
-import { AhfFolderContext } from './store/context';
 
-interface ParamTypes {
-  deviceId: string;
-}
-
-interface Props {
-  folder: Folder;
-}
-
-export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
+export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
-  const { deviceId } = useParams<ParamTypes>();
-  const { folderState, dispatch } = useContext(AhfFolderContext);
-
-  const { update, stopUpdate, listen } = useSocketHook();
+  const { folderState } = useContext(AhfFolderContext);
 
   const history = useHistory();
   const { i18n } = useTranslation();
 
   const { goNext, goPrevious } = useFolderNavigation();
-
-  useEffect(() => {
-    dispatch({ type: 'FOLDER_CHANGE', payload: folder });
-  }, [folder, dispatch]);
-
-  useEffect(() => {
-    update(
-      deviceId,
-      folderState.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),
-    );
-    const subscription = listen(dispatch);
-
-    return () => {
-      stopUpdate();
-      subscription.unsubscribe();
-    };
-  }, [
-    dispatch,
-    listen,
-    stopUpdate,
-    update,
-    deviceId,
-    folderState.folder,
-    folderState.folder.id,
-  ]);
 
   const handleNext = () => {
     const nextFolder = goNext(folderState.folder);
@@ -74,8 +37,6 @@ export const AhfFolderContainer: React.FC<Props> = ({ folder }: Props) => {
   };
 
   const handleFolderChange = (folder: Folder) => {
-    update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
-    dispatch({ type: 'FOLDER_CHANGE', payload: folder });
     history.push(history.location.pathname.replace(/[^]*$/, folder.id));
   };
 
