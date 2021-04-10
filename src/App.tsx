@@ -8,7 +8,7 @@ import { AhfHeaderContainer } from 'modules/header/header.container';
 import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
-import { AhfFolderPage } from 'pages/folder/folder.page';
+import { AhfResourcePage } from 'pages/resource/resource.page';
 
 const App: React.FC = () => {
   const { init, listen, scan, stopUpdate } = useSocketHook();
@@ -34,7 +34,7 @@ const App: React.FC = () => {
             component={AhfDevicesPage}
           />
           <Route path={AppRoutes.EventsPage} exact component={AhfEventsPage} />
-          <Route path={AppRoutes.FolderPage} component={AhfFolderPage} />
+          <Route path={AppRoutes.ResourcePage} component={AhfResourcePage} />
         </Switch>
         <AhfFooterContainer />
       </BrowserRouter>

@@ -43,7 +43,7 @@ describe('reducer device structure', () => {
                         name: ['name1Eng', 'name1Ger'],
                         paramEnumNumb: 1,
                         paramEnumText: ['1'],
-                        paramId: 1,
+                        paramId: 2,
                         paramType: 'paramType1',
                         unit: 'unit1',
                         value: 'value1',

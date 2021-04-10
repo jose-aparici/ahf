@@ -14,13 +14,12 @@ export interface Param {
   paramType: string;
   unit: string;
   value: ParamValue;
+  read?: ParamRead;
 }
 
 export interface ParamRead {
   deviceId: number;
   folderName: string;
   marker: number;
-  paramId: number;
   paramPos: number;
-  value: number | string;
 }

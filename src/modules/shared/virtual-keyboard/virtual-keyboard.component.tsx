@@ -8,12 +8,14 @@ import { Layout } from 'domain/virtual-keyboard/virtual-keyboard.types';
 
 interface Props {
   onChange: (input: string) => void;
-  keyboardRef: MutableRefObject<Keyboard | undefined>;
+  onEnter: () => void;
+  keyboardRef: MutableRefObject<Keyboard>;
   layout?: Layout;
 }
 
 export const AhfVirtualKeyboardComponent: React.FC<Props> = ({
   onChange,
+  onEnter,
   keyboardRef,
   layout = LAYOUTS['ENGLISH'],
 }: Props) => {
@@ -22,6 +24,10 @@ export const AhfVirtualKeyboardComponent: React.FC<Props> = ({
   const onKeyPress = (button: string) => {
     if (button === '{shift}' || button === '{lock}') {
       setLayoutName(layoutName === 'default' ? 'shift' : 'default');
+    }
+
+    if (button === '{enter}') {
+      onEnter();
     }
   };
 

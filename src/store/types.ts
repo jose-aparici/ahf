@@ -6,5 +6,5 @@ export type DEVICE_INFO = typeof DEVICE_INFO;
 export const DEVICE_STRUCTURE = AhfCommand.DEVICE_STRUCTURE;
 export type DEVICE_STRUCTURE = typeof DEVICE_STRUCTURE;
 
-export const PARAM_READ = AhfCommand.PARAM_READ;
+export const PARAM_READ = AhfCommand.PARAM_DETAIL;
 export type PARAM_READ = typeof PARAM_READ;
