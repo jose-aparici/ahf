@@ -34,7 +34,8 @@ export const AhfParamDetailContainer: React.FC = () => {
   const handleEditClose = () => setOpenEdit(false);
 
   const param =
-    state.currentParamIndex && state.folder.params[state.currentParamIndex];
+    state.currentParamIndex !== undefined &&
+    state.folder.params[state.currentParamIndex];
 
   return (
     <>

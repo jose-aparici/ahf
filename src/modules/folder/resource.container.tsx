@@ -7,6 +7,7 @@ import { Resource } from 'domain/resource/resource.type';
 import { AhfFolderContainer } from './folder/folder.container';
 import { AhfParamDetailContainer } from './param-detail/param-detail.container';
 import { AhfFolderContext } from './store/context';
+import { RESOURCE_CHANGE } from './store/types';
 
 interface ParamTypes {
   deviceId: string;
@@ -22,8 +23,8 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
   const { dispatch } = useContext(AhfFolderContext);
 
   useEffect(() => {
+    dispatch({ type: RESOURCE_CHANGE, payload: resource });
     if (!resource.currentParamIndex) {
-      dispatch({ type: 'FOLDER_CHANGE', payload: resource.folder });
       update(
         deviceId,
         resource.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),
@@ -39,7 +40,7 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
 
   return (
     <>
-      {resource.currentParamIndex && resource.currentParamIndex >= 0 ? (
+      {resource.currentParamIndex !== undefined ? (
         <AhfParamDetailContainer />
       ) : (
         <AhfFolderContainer />
