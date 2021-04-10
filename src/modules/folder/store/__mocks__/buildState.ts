@@ -45,6 +45,7 @@ const DEFAULT_STATE: State = {
       },
     ],
   },
+  currentParamIndex: undefined,
 };
 
 export const buildState = (overrides = {}): State => ({

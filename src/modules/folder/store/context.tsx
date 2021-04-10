@@ -11,11 +11,11 @@ import { initialState, State } from './initialState';
 import { reducer } from './reducer';
 
 interface Props {
-  folderState: State;
+  state: State;
   dispatch: Dispatch<Action>;
 }
 export const AhfFolderContext = createContext<Props>({
-  folderState: initialState,
+  state: initialState,
   dispatch: () => true,
 });
 
@@ -26,11 +26,11 @@ interface ProviderProps {
 export const AhfFolderProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const [folderState, dispatch] = useReducer(reducer, initialState, () => {
+  const [state, dispatch] = useReducer(reducer, initialState, () => {
     return { ...initialState };
   });
   return (
-    <AhfFolderContext.Provider value={{ folderState, dispatch }}>
+    <AhfFolderContext.Provider value={{ state, dispatch }}>
       {children}
     </AhfFolderContext.Provider>
   );

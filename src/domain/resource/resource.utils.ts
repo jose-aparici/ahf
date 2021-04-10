@@ -1,6 +1,5 @@
 import { FolderNode } from 'domain/folder-navigation/folder-navigation.types';
 import { Folder } from 'domain/folder/folder.types';
-import { Param } from 'domain/param/param.types';
 
 import { Resource } from './resource.type';
 
@@ -9,7 +8,7 @@ export const findResourceByPath = (
   rootFolder: Folder,
 ): Resource | undefined => {
   if (rootFolder.id === folderPath) {
-    return rootFolder;
+    return { folder: rootFolder, currentParamIndex: undefined };
   } else {
     const paramId = folderPath.substring(folderPath.lastIndexOf('/') + 1);
 
@@ -17,31 +16,34 @@ export const findResourceByPath = (
       ((rootFolder as unknown) as FolderNode).hasChildren() ||
       rootFolder.params.length > 0
     ) {
-      const resourceFound =
-        rootFolder.params.find((param) => param.paramId === +paramId) ||
-        rootFolder.children.find((node) => folderPath.startsWith(node.id));
+      const currentParamIndex = rootFolder.params.findIndex(
+        (param) => param.paramId === +paramId,
+      );
 
-      if (!resourceFound) {
+      const folder = rootFolder.children.find((node) =>
+        folderPath.startsWith(node.id),
+      );
+
+      if (currentParamIndex < 0 && !folder) {
         return undefined;
       } else {
-        if (
-          isParam(resourceFound) ||
-          (isFolder(resourceFound) &&
-            (resourceFound as Folder).id === folderPath)
-        ) {
-          return resourceFound;
-        } else {
-          return findResourceByPath(folderPath, resourceFound as Folder);
+        if (currentParamIndex >= 0) {
+          return { folder: rootFolder, currentParamIndex };
+        }
+
+        if (folder) {
+          return folder.id === folderPath
+            ? { folder, currentParamIndex: undefined }
+            : findResourceByPath(folderPath, folder);
         }
       }
     } else {
-      return rootFolder.params.find((param) => param.paramId === +paramId);
+      const currentParamIndex = rootFolder.params.findIndex(
+        (param) => param.paramId === +paramId,
+      );
+      return { folder: rootFolder, currentParamIndex };
     }
   }
 };
 
-export const isFolder = (resource: Resource): boolean =>
-  (resource as Folder).id !== undefined;
-
-export const isParam = (resource: Resource): boolean =>
-  (resource as Param).paramId !== undefined;
+export const isFolder = (folder: Folder): boolean => folder.id !== undefined;

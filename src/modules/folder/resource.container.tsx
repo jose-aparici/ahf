@@ -2,10 +2,7 @@ import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Folder } from 'domain/folder/folder.types';
-import { Param } from 'domain/param/param.types';
 import { Resource } from 'domain/resource/resource.type';
-import { isFolder, isParam } from 'domain/resource/resource.utils';
 
 import { AhfFolderContainer } from './folder/folder.container';
 import { AhfParamDetailContainer } from './param-detail/param-detail.container';
@@ -25,10 +22,12 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
   const { dispatch } = useContext(AhfFolderContext);
 
   useEffect(() => {
-    if (isFolder(resource)) {
-      const folder = resource as Folder;
-      dispatch({ type: 'FOLDER_CHANGE', payload: folder });
-      update(deviceId, folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''));
+    if (!resource.currentParamIndex) {
+      dispatch({ type: 'FOLDER_CHANGE', payload: resource.folder });
+      update(
+        deviceId,
+        resource.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),
+      );
       const subscription = listen(dispatch);
 
       return () => {
@@ -40,9 +39,10 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
 
   return (
     <>
-      {resource && isFolder(resource) && <AhfFolderContainer />}
-      {resource && isParam(resource) && (
-        <AhfParamDetailContainer param={resource as Param} />
+      {resource.currentParamIndex && resource.currentParamIndex >= 0 ? (
+        <AhfParamDetailContainer />
+      ) : (
+        <AhfFolderContainer />
       )}
     </>
   );

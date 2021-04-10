@@ -2,6 +2,7 @@ import { Folder } from 'domain/folder/folder.types';
 
 export interface State {
   folder: Folder;
+  currentParamIndex: number | undefined;
 }
 export const initialState: State = {
   folder: {
@@ -12,4 +13,5 @@ export const initialState: State = {
     children: [],
     params: [],
   },
+  currentParamIndex: undefined,
 };

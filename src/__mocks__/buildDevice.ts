@@ -26,7 +26,7 @@ const DEFAULT_DEVICE_AHF: AhfDevice = {
                       Name: ['name1Eng', 'name1Ger'],
                       ParamEnumNumb: 1,
                       ParamEnumText: ['1'],
-                      ParamID: 1,
+                      ParamID: 2,
                       ParamType: 'paramType1',
                       Unit: 'unit1',
                       Value: 'value1',
