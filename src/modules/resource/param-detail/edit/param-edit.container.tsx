@@ -1,3 +1,4 @@
+import { useSocketHook } from 'hooks/socket-hook';
 import React, { useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
@@ -22,12 +23,15 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 }: Props) => {
   const keyboardRef = useRef<Keyboard>(null);
 
+  const { writeParam } = useSocketHook();
   const [input, setInput] = useState(param.value as string);
 
   const handleParamChange = (value: string) => setInput(value);
 
   const handleEnter = () => {
-    console.log('entra', input);
+    const paramChanged = { ...param };
+    paramChanged.value = input;
+    writeParam(paramChanged);
   };
 
   return (

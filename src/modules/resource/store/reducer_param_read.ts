@@ -12,6 +12,12 @@ export const paramReadReducer = (
 
   if (findParamToUpdate) {
     findParamToUpdate.value = paramRead.Value;
+    findParamToUpdate.read = {
+      deviceId: paramRead.DeviceID,
+      folderName: paramRead.FolderName,
+      marker: paramRead.Marker,
+      paramPos: paramRead.ParamPos,
+    };
   }
 
   return { ...state };

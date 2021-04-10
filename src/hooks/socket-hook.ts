@@ -2,6 +2,7 @@ import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
 import { AhfAction, AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
+import { Param } from 'domain/param/param.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {
@@ -10,6 +11,7 @@ interface SocketHook {
   scan: () => void;
   update: (deviceId: string, folderId: string) => void;
   stopUpdate: () => void;
+  writeParam: (param: Param) => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -46,5 +48,20 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
-  return { init, listen, scan, update, stopUpdate };
+  const writeParam = useCallback((param: Param) => {
+    param.read &&
+      AhfSocket.getInstance().next({
+        Cmd: AhfCommand.PARAM_DETAIL,
+        Data: {
+          DeviceID: param.read.deviceId,
+          FolderName: param.read.folderName,
+          Marker: param.read.marker,
+          ParamID: param.paramId,
+          ParamPos: param.read.paramPos,
+          Value: param.value as string,
+        },
+      });
+  }, []);
+
+  return { init, listen, scan, update, stopUpdate, writeParam };
 };
