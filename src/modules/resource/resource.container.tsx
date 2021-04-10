@@ -41,7 +41,9 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
   return (
     <>
       {resource.currentParamIndex !== undefined ? (
-        <AhfParamDetailContainer />
+        <AhfParamDetailContainer
+          param={resource.folder.params[resource.currentParamIndex]}
+        />
       ) : (
         <AhfFolderContainer />
       )}

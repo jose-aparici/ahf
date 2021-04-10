@@ -1,5 +1,6 @@
+import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
-import React, { useContext, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   Avatar,
@@ -16,31 +17,60 @@ import {
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { Param } from 'domain/param/param.types';
+import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
 
-import { AhfResourceContext } from '../store/context';
 import { AhfParamEditContainer } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 
-export const AhfParamDetailContainer: React.FC = () => {
+interface Props {
+  param: Param;
+}
+
+export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const classes = useParamDetailContainerStyles();
-  const { state } = useContext(AhfResourceContext);
+  const { writeParam } = useSocketHook();
+
+  const [openEdit, setOpenEdit] = useState(false);
+  const [openSpinner, setOpenSpinner] = useState(false);
+  const [nextMarker, setNexMarker] = useState(param.read?.marker);
 
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
-  const [openEdit, setOpenEdit] = useState(false);
+
+  useEffect(() => {
+    if (
+      openSpinner &&
+      nextMarker &&
+      param.read &&
+      param.read?.marker >= nextMarker
+    ) {
+      setOpenSpinner(false);
+      setNexMarker(param.read.marker);
+    }
+  }, [openSpinner, nextMarker, param.read]);
 
   const handleClickInput = () => setOpenEdit(true);
 
   const handleEditClose = () => setOpenEdit(false);
 
-  const param =
-    state.currentParamIndex !== undefined &&
-    state.folder.params[state.currentParamIndex];
+  const handleSave = (value: string) => {
+    setOpenEdit(false);
+    setOpenSpinner(true);
+    const nextMarker = param.read ? param.read.marker + 1 : undefined;
+    if (param.read && nextMarker) {
+      param.read.marker = nextMarker;
+      param.value = value;
+      setNexMarker(nextMarker);
+      writeParam(param);
+    }
+  };
 
   return (
     <>
-      {param && (
+      {
         <>
+          <AhfSpinnerComponent open={openSpinner} />
           <Grid container className={classes.gridContainer}>
             <Grid item xs={12}>
               <Card variant="elevation" className={classes.cardContainer}>
@@ -90,9 +120,10 @@ export const AhfParamDetailContainer: React.FC = () => {
             param={param}
             isOpen={openEdit}
             onClose={handleEditClose}
+            onSave={handleSave}
           />
         </>
-      )}
+      }
     </>
   );
 };

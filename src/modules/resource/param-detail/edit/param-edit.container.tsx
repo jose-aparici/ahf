@@ -1,4 +1,3 @@
-import { useSocketHook } from 'hooks/socket-hook';
 import React, { useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
@@ -14,25 +13,22 @@ interface Props {
   param: Param;
   isOpen: boolean;
   onClose: () => void;
+  onSave: (value: string) => void;
 }
 
 export const AhfParamEditContainer: React.FC<Props> = ({
   param,
   isOpen,
   onClose,
+  onSave,
 }: Props) => {
   const keyboardRef = useRef<Keyboard>(null);
 
-  const { writeParam } = useSocketHook();
   const [input, setInput] = useState(param.value as string);
 
   const handleParamChange = (value: string) => setInput(value);
 
-  const handleEnter = () => {
-    const paramChanged = { ...param };
-    paramChanged.value = input;
-    writeParam(paramChanged);
-  };
+  const handleEnter = () => onSave(input);
 
   return (
     <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
