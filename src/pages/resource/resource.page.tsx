@@ -4,14 +4,14 @@ import { AhfContext } from 'store/context';
 
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
-import { AhfResourceContainer } from 'modules/folder/resource.container';
-import { AhfFolderProvider } from 'modules/folder/store/context';
+import { AhfResourceContainer } from 'modules/resource/resource.container';
+import { AhfFolderProvider } from 'modules/resource/store/context';
 import { AhfPage } from 'pages/ahf.page';
 
 interface ParamTypes {
   deviceId: string;
 }
-export const AhfFolderPage: React.FC = () => {
+export const AhfResourcePage: React.FC = () => {
   const { url } = useRouteMatch();
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();

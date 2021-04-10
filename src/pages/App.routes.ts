@@ -6,6 +6,6 @@ export const AppRoutes = {
   MainPage: '/',
   DevicesPage: `/${DEVICES}`,
   DevicePage: `/${DEVICES}/:deviceId`,
-  FolderPage: `/${DEVICES}/:deviceId/:folderName*`,
+  ResourcePage: `/${DEVICES}/:deviceId/:folderName*`,
   EventsPage: `/${DEVICES}/:deviceId/events`,
 };
