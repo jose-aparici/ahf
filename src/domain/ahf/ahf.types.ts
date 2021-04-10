@@ -17,7 +17,7 @@ export enum AhfCommand {
   DEVICE_INFO = 'DevInfo',
   DEVICE_STRUCTURE = 'FolderStruct',
   FOLDER_SELECT = 'FolderSelect',
-  PARAM_READ = 'WriteParam',
+  PARAM_DETAIL = 'WriteParam',
 }
 export interface AhfMessage {
   Cmd: AhfCommand;
