@@ -13,13 +13,13 @@ import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previo
 import { AhfFolderCardComponent } from '../folder-card/folder-card.component';
 import { AhfFolderMainComponent } from '../folder-main/folder-main.component';
 import { AhfParamCardComponent } from '../param-card/param-card.component';
-import { AhfFolderContext } from '../store/context';
+import { AhfResourceContext } from '../store/context';
 import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
 
 export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
-  const { state } = useContext(AhfFolderContext);
+  const { state } = useContext(AhfResourceContext);
 
   const history = useHistory();
   const { i18n } = useTranslation();

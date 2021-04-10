@@ -17,13 +17,13 @@ import {
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 
-import { AhfFolderContext } from '../store/context';
+import { AhfResourceContext } from '../store/context';
 import { AhfParamEditContainer } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 
 export const AhfParamDetailContainer: React.FC = () => {
   const classes = useParamDetailContainerStyles();
-  const { state } = useContext(AhfFolderContext);
+  const { state } = useContext(AhfResourceContext);
 
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;

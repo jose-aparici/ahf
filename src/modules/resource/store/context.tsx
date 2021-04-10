@@ -14,7 +14,7 @@ interface Props {
   state: State;
   dispatch: Dispatch<Action>;
 }
-export const AhfFolderContext = createContext<Props>({
+export const AhfResourceContext = createContext<Props>({
   state: initialState,
   dispatch: () => true,
 });
@@ -23,15 +23,15 @@ interface ProviderProps {
   children: ReactNode;
 }
 
-export const AhfFolderProvider = ({
+export const AhfResourceProvider = ({
   children,
 }: ProviderProps): ReactElement => {
   const [state, dispatch] = useReducer(reducer, initialState, () => {
     return { ...initialState };
   });
   return (
-    <AhfFolderContext.Provider value={{ state, dispatch }}>
+    <AhfResourceContext.Provider value={{ state, dispatch }}>
       {children}
-    </AhfFolderContext.Provider>
+    </AhfResourceContext.Provider>
   );
 };

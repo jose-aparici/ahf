@@ -6,7 +6,7 @@ import { Resource } from 'domain/resource/resource.type';
 
 import { AhfFolderContainer } from './folder/folder.container';
 import { AhfParamDetailContainer } from './param-detail/param-detail.container';
-import { AhfFolderContext } from './store/context';
+import { AhfResourceContext } from './store/context';
 import { RESOURCE_CHANGE } from './store/types';
 
 interface ParamTypes {
@@ -20,7 +20,7 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
   const { deviceId } = useParams<ParamTypes>();
   const { update, stopUpdate, listen } = useSocketHook();
 
-  const { dispatch } = useContext(AhfFolderContext);
+  const { dispatch } = useContext(AhfResourceContext);
 
   useEffect(() => {
     dispatch({ type: RESOURCE_CHANGE, payload: resource });

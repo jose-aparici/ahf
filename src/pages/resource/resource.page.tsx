@@ -5,7 +5,7 @@ import { AhfContext } from 'store/context';
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
 import { AhfResourceContainer } from 'modules/resource/resource.container';
-import { AhfFolderProvider } from 'modules/resource/store/context';
+import { AhfResourceProvider } from 'modules/resource/store/context';
 import { AhfPage } from 'pages/ahf.page';
 
 interface ParamTypes {
@@ -33,9 +33,9 @@ export const AhfResourcePage: React.FC = () => {
 
   return (
     <AhfPage>
-      <AhfFolderProvider>
+      <AhfResourceProvider>
         {currentResource && <AhfResourceContainer resource={currentResource} />}
-      </AhfFolderProvider>
+      </AhfResourceProvider>
     </AhfPage>
   );
 };
