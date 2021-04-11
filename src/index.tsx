@@ -1,5 +1,6 @@
 import './index.css';
 import './i18n';
+import './fonts/index.css';
 
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
