@@ -18,7 +18,4 @@ export const ahfTheme = createMuiTheme({
       secondary: AHF_COLORS.palette.text.secondary,
     },
   },
-  typography: {
-    fontFamily: ['Myriad pro'].join(','),
-  },
 });
