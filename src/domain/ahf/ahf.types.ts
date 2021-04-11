@@ -6,10 +6,6 @@ import {
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfFolderSelect } from 'domain/ahf-folder/ahf-folder.types';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
-import {
-  Action as FolderAction,
-  Payload as FolderPayload,
-} from 'modules/folders/folder/store/actions';
 
 export enum AhfCommand {
   VERSION = 'WSVer',
@@ -25,6 +21,6 @@ export interface AhfMessage {
 }
 
 //TODO check Action and payload types naming
-export type AhfAction = Action | FolderAction;
+export type AhfAction = Action;
 
-export type AhfPayload = Payload | FolderPayload;
+export type AhfPayload = Payload;
