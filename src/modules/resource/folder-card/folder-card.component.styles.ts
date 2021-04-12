@@ -4,8 +4,8 @@ export const useFolderCardComponentStyles = makeStyles((theme: Theme) => ({
   cardContainer: {
     marginBottom: '8px',
     minHeight: '60px',
-    borderColor: theme.palette.secondary.main,
-    borderStyle: 'double',
+    borderColor: theme.palette.primary.main,
+    border: '1px solid',
   },
   contentContainer: {
     padding: '4px',
