@@ -2,7 +2,7 @@ import { makeStyles, Theme } from '@material-ui/core';
 
 export const useDevicesContainerStyles = makeStyles((theme: Theme) => ({
   root: {
-    margin: '16px',
+    margin: '16px 8px',
     display: 'grid',
     gridTemplateColumns: '1fr 1fr 1fr',
     columnGap: '16px',

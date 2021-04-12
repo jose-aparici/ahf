@@ -6,7 +6,7 @@ const DEFAULT_DEVICE_AHF: AhfDevice = {
     FW: 'FW',
     ID: 1,
     Status: 1,
-    Type: 'type',
+    Type: 'AHF Sync Module',
   },
   structure: {
     DeviceID: 1,

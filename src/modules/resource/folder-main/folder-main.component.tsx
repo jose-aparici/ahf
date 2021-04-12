@@ -1,17 +1,23 @@
 import clsx from 'clsx';
+import { ReactComponent as AhfHarmonicFilterSvg } from 'images/harmonic_filter.svg';
+import { ReactComponent as SyncModuleSvg } from 'images/sync_module.svg';
 import React from 'react';
 
 import { Grid, Paper, Typography } from '@material-ui/core';
-import RadioIcon from '@material-ui/icons/Radio';
 
+import { DeviceType } from 'domain/device/device.types';
 import { Param } from 'domain/param/param.types';
 
 import { useFolderMainComponentStyles } from './folder-main.component.styles';
 
 interface Props {
   params: Param[];
+  deviceType: DeviceType;
 }
-export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
+export const AhfFolderMainComponent: React.FC<Props> = ({
+  params,
+  deviceType,
+}: Props) => {
   const classes = useFolderMainComponentStyles();
   return (
     <div className={classes.root}>
@@ -19,30 +25,32 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Grid item>
-              <Typography className={clsx(classes.containerTitle)}>
+              <Typography variant="h2" className={clsx(classes.containerTitle)}>
                 Mains parameters
               </Typography>
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <Typography className={clsx(classes.parameterTitle)}>
-                  Main frequency
-                </Typography>
+                <Typography variant="h4">Main frequency</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography className={clsx(classes.parameterTitle)}>
-                  Rotating field
-                </Typography>
+                <Typography variant="h4">Rotating field</Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography className={clsx(classes.parameterValue)}>
+                <Typography
+                  variant="h5"
+                  className={clsx(classes.parameterValue)}
+                >
                   {params[0].value
                     ? `${params[0].value} ${params[0].unit}`
                     : '-'}
                 </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography className={clsx(classes.parameterValue)}>
+                <Typography
+                  variant="h5"
+                  className={clsx(classes.parameterValue)}
+                >
                   {params[1].value
                     ? `${params[1].value} ${params[1].unit}`
                     : '-'}
@@ -57,9 +65,7 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
               ].map((row) => (
                 <React.Fragment key={row.title}>
                   <Grid item xs={12}>
-                    <Typography className={clsx(classes.parameterTitle)}>
-                      {row.title}
-                    </Typography>
+                    <Typography variant="h4">{row.title}</Typography>
                   </Grid>
                   <Grid item container xs={12} spacing={2}>
                     {row.params.map((item, index) => (
@@ -71,12 +77,18 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
                         justify="space-between"
                       >
                         <Grid item>
-                          <Typography className={clsx(classes.parameterValue)}>
+                          <Typography
+                            variant="h5"
+                            className={clsx(classes.parameterValue)}
+                          >
                             {`L${index + 1}`}
                           </Typography>
                         </Grid>
                         <Grid item>
-                          <Typography className={clsx(classes.parameterValue)}>
+                          <Typography
+                            variant="h5"
+                            className={clsx(classes.parameterValue)}
+                          >
                             {params[item].value && params[item].unit
                               ? `${params[item].value} ${params[item].unit}`
                               : ''}
@@ -90,7 +102,11 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
             </Grid>
             <Grid container justify="flex-end">
               <Grid item>
-                <RadioIcon className={classes.deviceIcon} />
+                {deviceType === DeviceType.ACTIVE_HARMONIC_FILER ? (
+                  <AhfHarmonicFilterSvg className={classes.deviceIcon} />
+                ) : (
+                  <SyncModuleSvg className={classes.deviceIcon} />
+                )}
               </Grid>
             </Grid>
           </Paper>
@@ -98,7 +114,7 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
         <Grid item xs={6}>
           <Paper className={classes.paper}>
             <Grid item>
-              <Typography className={clsx(classes.containerTitle)}>
+              <Typography variant="h2" className={clsx(classes.containerTitle)}>
                 Filter parameters
               </Typography>
             </Grid>
@@ -122,16 +138,17 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
                   {row.labels.map((label) => (
                     <React.Fragment key={label}>
                       <Grid item xs={6}>
-                        <Typography className={clsx(classes.parameterTitle)}>
-                          {label}
-                        </Typography>
+                        <Typography variant="h4">{label}</Typography>
                       </Grid>
                     </React.Fragment>
                   ))}
                   {row.paramsIndex.map((paramIndex, index) => (
                     <React.Fragment key={index}>
                       <Grid item xs={6}>
-                        <Typography className={clsx(classes.parameterValue)}>
+                        <Typography
+                          variant="h5"
+                          className={clsx(classes.parameterValue)}
+                        >
                           {params[paramIndex].value
                             ? `${params[paramIndex].value} ${params[paramIndex].unit}`
                             : '-'}
@@ -143,21 +160,20 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
               ))}
             </Grid>
             <Grid item>
-              <Typography className={clsx(classes.parameterTitle)}>
-                DPF
-              </Typography>
+              <Typography variant="h4">DPF</Typography>
             </Grid>
             <Grid container>
               {['Lower limit', 'Actual', 'Upper limit'].map((label) => (
                 <Grid item xs={4} key={label}>
-                  <Typography className={clsx(classes.parameterTitle)}>
-                    {label}
-                  </Typography>
+                  <Typography variant="h4">{label}</Typography>
                 </Grid>
               ))}
               {[19, 20, 21].map((paramIndex) => (
                 <Grid item xs={4} key={paramIndex}>
-                  <Typography className={clsx(classes.parameterValue)}>
+                  <Typography
+                    variant="h5"
+                    className={clsx(classes.parameterValue)}
+                  >
                     {params[paramIndex].value
                       ? `${params[paramIndex].value} ${params[paramIndex].unit}`
                       : '-'}

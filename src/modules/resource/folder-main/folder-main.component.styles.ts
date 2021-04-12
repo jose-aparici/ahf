@@ -7,21 +7,21 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
   },
   paper: {
     padding: '12px 10px 4px 10px',
+    minHeight: '360px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   containerTitle: {
     fontWeight: 'bold',
-    fontSize: '22px',
-  },
-  parameterTitle: {
-    fontSize: '16px',
   },
   parameterValue: {
-    fontSize: '16px',
     fontWeight: 'bold',
     justifySelf: 'end',
     marginBottom: '6px',
   },
   deviceIcon: {
-    fontSize: '100px',
+    width: '124px',
+    height: '63px',
   },
 }));

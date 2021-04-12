@@ -1,32 +1,30 @@
-import { makeStyles, Theme } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
-export const useAhfDeviceCardComponentStyles = makeStyles((theme: Theme) => ({
+export const useAhfDeviceCardComponentStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+  },
   contentContainer: {
     cursor: 'pointer',
-    padding: '4px 8px 4px 8px',
+    padding: '12px 16px 8px 16px',
     '&:last-child': {
-      padding: '4px 8px 4px 8px',
+      padding: '12px 16px 8px 16px',
     },
-    color: 'black',
   },
-  infoContainer: {
-    padding: '4px',
+  titleContainer: {
     display: 'flex',
-    alignItems: 'flex-start',
     justifyContent: 'space-between',
   },
-  value: {
-    textAlign: 'center',
-    fontSize: '24px',
-    fontWeight: 'bold',
-  },
-  unit: {
-    fontSize: '20px',
+  infoContainer: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-end',
   },
   deviceIconContainer: {
-    textAlign: 'right',
-  },
-  deviceIcon: {
-    fontSize: '40px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
   },
 }));

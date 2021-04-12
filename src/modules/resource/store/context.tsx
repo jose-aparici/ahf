@@ -11,11 +11,11 @@ import { initialState, State } from './initialState';
 import { reducer } from './reducer';
 
 interface Props {
-  state: State;
+  resourceState: State;
   dispatch: Dispatch<Action>;
 }
 export const AhfResourceContext = createContext<Props>({
-  state: initialState,
+  resourceState: initialState,
   dispatch: () => true,
 });
 
@@ -26,11 +26,11 @@ interface ProviderProps {
 export const AhfResourceProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const [state, dispatch] = useReducer(reducer, initialState, () => {
+  const [resourceState, dispatch] = useReducer(reducer, initialState, () => {
     return { ...initialState };
   });
   return (
-    <AhfResourceContext.Provider value={{ state, dispatch }}>
+    <AhfResourceContext.Provider value={{ resourceState, dispatch }}>
       {children}
     </AhfResourceContext.Provider>
   );

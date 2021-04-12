@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { AhfContext } from 'store/context';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
+import { extractDeviceFromPath } from 'domain/path/path.utils';
 import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
@@ -19,7 +21,9 @@ import { useFolderContainerStyles } from './folder.container.styles';
 
 export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
-  const { state } = useContext(AhfResourceContext);
+  const { resourceState } = useContext(AhfResourceContext);
+  const location = useLocation();
+  const { state } = useContext(AhfContext);
 
   const history = useHistory();
   const { i18n } = useTranslation();
@@ -27,12 +31,12 @@ export const AhfFolderContainer: React.FC = () => {
   const { goNext, goPrevious } = useFolderNavigation();
 
   const handleNext = () => {
-    const nextFolder = goNext(state.folder);
+    const nextFolder = goNext(resourceState.folder);
     nextFolder?.id && handleFolderChange(nextFolder);
   };
 
   const handlePrevious = () => {
-    const previousFolder = goPrevious(state.folder);
+    const previousFolder = goPrevious(resourceState.folder);
     previousFolder?.id && handleFolderChange(previousFolder);
   };
 
@@ -48,7 +52,7 @@ export const AhfFolderContainer: React.FC = () => {
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const folderCards = state.folder.children.map((folder) => {
+  const folderCards = resourceState.folder.children.map((folder) => {
     return (
       <AhfFolderCardComponent
         key={folder.id}
@@ -58,7 +62,7 @@ export const AhfFolderContainer: React.FC = () => {
     );
   });
 
-  const paramsCards = state.folder.params.map((param) => {
+  const paramsCards = resourceState.folder.params.map((param) => {
     return (
       <AhfParamCardComponent
         key={param.paramId}
@@ -71,10 +75,16 @@ export const AhfFolderContainer: React.FC = () => {
 
   return (
     <>
-      {state.folder.id && (
+      {resourceState.folder.id && (
         <>
-          {state.folder.isMainFolder ? (
-            <AhfFolderMainComponent params={state.folder.params} />
+          {resourceState.folder.isMainFolder ? (
+            <AhfFolderMainComponent
+              params={resourceState.folder.params}
+              deviceType={
+                state.devices[+extractDeviceFromPath(location.pathname)].info
+                  .type
+              }
+            />
           ) : (
             <Masonry
               breakpointCols={3}
@@ -85,10 +95,10 @@ export const AhfFolderContainer: React.FC = () => {
             </Masonry>
           )}
 
-          {goPrevious(state.folder) && (
+          {goPrevious(resourceState.folder) && (
             <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
           )}
-          {goNext(state.folder) && (
+          {goNext(resourceState.folder) && (
             <AhfNavigationNextComponent onNext={handleNext} />
           )}
         </>
