@@ -58,11 +58,14 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     setOpenEdit(false);
     setOpenSpinner(true);
     const nextMarker = param.read ? param.read.marker + 1 : undefined;
-    if (param.read && nextMarker) {
-      param.read.marker = nextMarker;
-      param.value = value;
-      setNexMarker(nextMarker);
-      writeParam(param);
+    if (nextMarker) {
+      const paramToUpdate = JSON.parse(JSON.stringify(param));
+      if (paramToUpdate.read) {
+        paramToUpdate.read.marker = nextMarker;
+        paramToUpdate.value = value;
+        setNexMarker(nextMarker);
+        writeParam(paramToUpdate);
+      }
     }
   };
 

@@ -24,18 +24,16 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
 
   useEffect(() => {
     dispatch({ type: RESOURCE_CHANGE, payload: resource });
-    if (!resource.currentParamIndex) {
-      update(
-        deviceId,
-        resource.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),
-      );
-      const subscription = listen(dispatch);
+    update(
+      deviceId,
+      resource.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),
+    );
+    const subscription = listen(dispatch);
 
-      return () => {
-        stopUpdate();
-        subscription.unsubscribe();
-      };
-    }
+    return () => {
+      stopUpdate();
+      subscription.unsubscribe();
+    };
   }, [resource, dispatch, deviceId, listen, stopUpdate, update]);
 
   return (
