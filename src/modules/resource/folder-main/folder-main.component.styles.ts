@@ -7,6 +7,10 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
   },
   paper: {
     padding: '12px 10px 4px 10px',
+    minHeight: '360px',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
   },
   containerTitle: {
     fontWeight: 'bold',
@@ -17,6 +21,7 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
     marginBottom: '6px',
   },
   deviceIcon: {
-    fontSize: '100px',
+    width: '124px',
+    height: '63px',
   },
 }));

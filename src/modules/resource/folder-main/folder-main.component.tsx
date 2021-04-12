@@ -1,17 +1,23 @@
 import clsx from 'clsx';
+import { ReactComponent as AhfHarmonicFilterSvg } from 'images/harmonic_filter.svg';
+import { ReactComponent as SyncModuleSvg } from 'images/sync_module.svg';
 import React from 'react';
 
 import { Grid, Paper, Typography } from '@material-ui/core';
-import RadioIcon from '@material-ui/icons/Radio';
 
+import { DeviceType } from 'domain/device/device.types';
 import { Param } from 'domain/param/param.types';
 
 import { useFolderMainComponentStyles } from './folder-main.component.styles';
 
 interface Props {
   params: Param[];
+  deviceType: DeviceType;
 }
-export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
+export const AhfFolderMainComponent: React.FC<Props> = ({
+  params,
+  deviceType,
+}: Props) => {
   const classes = useFolderMainComponentStyles();
   return (
     <div className={classes.root}>
@@ -96,7 +102,11 @@ export const AhfFolderMainComponent: React.FC<Props> = ({ params }: Props) => {
             </Grid>
             <Grid container justify="flex-end">
               <Grid item>
-                <RadioIcon className={classes.deviceIcon} />
+                {deviceType === DeviceType.ACTIVE_HARMONIC_FILER ? (
+                  <AhfHarmonicFilterSvg className={classes.deviceIcon} />
+                ) : (
+                  <SyncModuleSvg className={classes.deviceIcon} />
+                )}
               </Grid>
             </Grid>
           </Paper>

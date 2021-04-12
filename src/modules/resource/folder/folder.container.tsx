@@ -1,12 +1,14 @@
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
+import { AhfContext } from 'store/context';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
+import { extractDeviceFromPath } from 'domain/path/path.utils';
 import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
@@ -20,6 +22,8 @@ import { useFolderContainerStyles } from './folder.container.styles';
 export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
   const { resourceState } = useContext(AhfResourceContext);
+  const location = useLocation();
+  const { state } = useContext(AhfContext);
 
   const history = useHistory();
   const { i18n } = useTranslation();
@@ -74,7 +78,13 @@ export const AhfFolderContainer: React.FC = () => {
       {resourceState.folder.id && (
         <>
           {resourceState.folder.isMainFolder ? (
-            <AhfFolderMainComponent params={resourceState.folder.params} />
+            <AhfFolderMainComponent
+              params={resourceState.folder.params}
+              deviceType={
+                state.devices[+extractDeviceFromPath(location.pathname)].info
+                  .type
+              }
+            />
           ) : (
             <Masonry
               breakpointCols={3}
