@@ -11,10 +11,7 @@ export const useAhfDeviceCardComponentStyles = makeStyles(() => ({
   },
   infoContainer: {
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: '12px',
-    minHeight: '35px',
   },
 
   deviceIconContainer: {
