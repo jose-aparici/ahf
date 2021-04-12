@@ -10,13 +10,8 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
   },
   containerTitle: {
     fontWeight: 'bold',
-    fontSize: '22px',
-  },
-  parameterTitle: {
-    fontSize: '16px',
   },
   parameterValue: {
-    fontSize: '16px',
     fontWeight: 'bold',
     justifySelf: 'end',
     marginBottom: '6px',

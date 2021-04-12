@@ -22,17 +22,24 @@ export const ahfTheme = createMuiTheme({
     h2: {
       fontSize: '24px',
       fontWeight: 'bold',
-      fontStretch: 'normal',
-      fontStyle: 'normal',
       letterSpacing: '0.18px',
     },
     h3: {
       fontSize: '18px',
       lineHeight: '20px',
-      fontStretch: 'normal',
-      fontStyle: 'normal',
       fontWeight: 'normal',
       letterSpacing: '0.32px',
+    },
+    h4: {
+      fontSize: '16px',
+      lineHeight: '1.5',
+      fontWeight: 500,
+      letterSpacing: '0.12px',
+    },
+    h5: {
+      fontSize: '15px',
+      lineHeight: '1.5',
+      letterSpacing: '0.09px',
     },
   },
 });
