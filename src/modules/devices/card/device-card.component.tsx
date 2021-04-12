@@ -28,7 +28,9 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
     <Card variant="elevation" onClick={() => onClickDevice(deviceInfo.id)}>
       <CardContent className={classes.contentContainer}>
         <div className={classes.infoContainer}>
-          <Typography variant="h2">{deviceInfo.id}</Typography>
+          <Typography variant="h2">
+            {deviceInfo.type} - {deviceInfo.id.toString().padStart(3, '0')}
+          </Typography>
           {deviceInfo.status === 0 ? (
             <CircularProgress size={24} color="primary" />
           ) : (
