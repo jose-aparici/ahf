@@ -1,3 +1,5 @@
+import { ReactComponent as AhfHarmonicFilterSvg } from 'images/harmonic_filter.svg';
+import { ReactComponent as SyncModuleSvg } from 'images/sync_module.svg';
 import React from 'react';
 
 import {
@@ -7,9 +9,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
-import RadioIcon from '@material-ui/icons/Radio';
 
-import { DeviceInfo } from 'domain/device/device.types';
+import { DeviceInfo, DeviceType } from 'domain/device/device.types';
 
 import { useAhfDeviceCardComponentStyles } from './device-card.component.styles';
 
@@ -27,18 +28,20 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
     <Card variant="elevation" onClick={() => onClickDevice(deviceInfo.id)}>
       <CardContent className={classes.contentContainer}>
         <div className={classes.infoContainer}>
-          <Typography component="h1" className={classes.value}>
-            {deviceInfo.fw}
-          </Typography>
+          <Typography variant="h2">{deviceInfo.id}</Typography>
           {deviceInfo.status === 0 ? (
             <CircularProgress size={24} color="primary" />
           ) : (
-            <CheckCircleIcon fontSize="large" htmlColor={'green'} />
+            <CheckCircleIcon fontSize="large" htmlColor={'#42be65'} />
           )}
         </div>
-        <Typography className={classes.unit}>MbId {deviceInfo.id}</Typography>
+        <Typography variant="h3">{deviceInfo.fw}</Typography>
         <div className={classes.deviceIconContainer}>
-          <RadioIcon className={classes.deviceIcon} />
+          {deviceInfo.type === DeviceType.ACTIVE_HARMONIC_FILER ? (
+            <AhfHarmonicFilterSvg className={classes.deviceIcon} />
+          ) : (
+            <SyncModuleSvg className={classes.deviceIcon} />
+          )}
         </div>
       </CardContent>
     </Card>

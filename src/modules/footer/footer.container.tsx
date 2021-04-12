@@ -13,19 +13,21 @@ export const AhfFooterContainer: React.FC = () => {
   const location = useLocation();
 
   return (
-    <Grid container className={classes.root} alignItems="center">
+    <>
       {location.pathname !== AppRoutes.DevicesPage && (
         <>
-          <Grid item container xs={4} justify="flex-start">
-            <Typography className={classes.text}>
-              {new Date().toISOString()}
-            </Typography>
-          </Grid>
-          <Grid container item xs={8} justify="flex-end">
-            <AhfNavigationIconsComponent />
+          <Grid container className={classes.root} alignItems="center">
+            <Grid item container xs={4} justify="flex-start">
+              <Typography className={classes.text}>
+                {new Date().toISOString()}
+              </Typography>
+            </Grid>
+            <Grid container item xs={8} justify="flex-end">
+              <AhfNavigationIconsComponent />
+            </Grid>
           </Grid>
         </>
       )}
-    </Grid>
+    </>
   );
 };

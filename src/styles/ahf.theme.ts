@@ -18,4 +18,21 @@ export const ahfTheme = createMuiTheme({
       secondary: AHF_COLORS.palette.text.secondary,
     },
   },
+  typography: {
+    h2: {
+      fontSize: '24px',
+      fontWeight: 'bold',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      letterSpacing: '0.18px',
+    },
+    h3: {
+      fontSize: '18px',
+      lineHeight: '20px',
+      fontStretch: 'normal',
+      fontStyle: 'normal',
+      fontWeight: 'normal',
+      letterSpacing: '0.32px',
+    },
+  },
 });
