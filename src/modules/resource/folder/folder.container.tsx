@@ -19,7 +19,7 @@ import { useFolderContainerStyles } from './folder.container.styles';
 
 export const AhfFolderContainer: React.FC = () => {
   const classes = useFolderContainerStyles();
-  const { state } = useContext(AhfResourceContext);
+  const { resourceState } = useContext(AhfResourceContext);
 
   const history = useHistory();
   const { i18n } = useTranslation();
@@ -27,12 +27,12 @@ export const AhfFolderContainer: React.FC = () => {
   const { goNext, goPrevious } = useFolderNavigation();
 
   const handleNext = () => {
-    const nextFolder = goNext(state.folder);
+    const nextFolder = goNext(resourceState.folder);
     nextFolder?.id && handleFolderChange(nextFolder);
   };
 
   const handlePrevious = () => {
-    const previousFolder = goPrevious(state.folder);
+    const previousFolder = goPrevious(resourceState.folder);
     previousFolder?.id && handleFolderChange(previousFolder);
   };
 
@@ -48,7 +48,7 @@ export const AhfFolderContainer: React.FC = () => {
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const folderCards = state.folder.children.map((folder) => {
+  const folderCards = resourceState.folder.children.map((folder) => {
     return (
       <AhfFolderCardComponent
         key={folder.id}
@@ -58,7 +58,7 @@ export const AhfFolderContainer: React.FC = () => {
     );
   });
 
-  const paramsCards = state.folder.params.map((param) => {
+  const paramsCards = resourceState.folder.params.map((param) => {
     return (
       <AhfParamCardComponent
         key={param.paramId}
@@ -71,10 +71,10 @@ export const AhfFolderContainer: React.FC = () => {
 
   return (
     <>
-      {state.folder.id && (
+      {resourceState.folder.id && (
         <>
-          {state.folder.isMainFolder ? (
-            <AhfFolderMainComponent params={state.folder.params} />
+          {resourceState.folder.isMainFolder ? (
+            <AhfFolderMainComponent params={resourceState.folder.params} />
           ) : (
             <Masonry
               breakpointCols={3}
@@ -85,10 +85,10 @@ export const AhfFolderContainer: React.FC = () => {
             </Masonry>
           )}
 
-          {goPrevious(state.folder) && (
+          {goPrevious(resourceState.folder) && (
             <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
           )}
-          {goNext(state.folder) && (
+          {goNext(resourceState.folder) && (
             <AhfNavigationNextComponent onNext={handleNext} />
           )}
         </>
