@@ -25,9 +25,13 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
 }: Props) => {
   const classes = useAhfDeviceCardComponentStyles();
   return (
-    <Card variant="elevation" onClick={() => onClickDevice(deviceInfo.id)}>
+    <Card
+      variant="elevation"
+      onClick={() => onClickDevice(deviceInfo.id)}
+      className={classes.root}
+    >
       <CardContent className={classes.contentContainer}>
-        <div className={classes.infoContainer}>
+        <div className={classes.titleContainer}>
           <Typography variant="h2">
             {deviceInfo.type} - {deviceInfo.id.toString().padStart(3, '0')}
           </Typography>
@@ -37,13 +41,15 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
             <CheckCircleIcon fontSize="large" htmlColor={'#42be65'} />
           )}
         </div>
-        <Typography variant="h3">{deviceInfo.fw}</Typography>
-        <div className={classes.deviceIconContainer}>
-          {deviceInfo.type === DeviceType.ACTIVE_HARMONIC_FILER ? (
-            <AhfHarmonicFilterSvg className={classes.deviceIcon} />
-          ) : (
-            <SyncModuleSvg className={classes.deviceIcon} />
-          )}
+        <div className={classes.infoContainer}>
+          <Typography variant="h3">{deviceInfo.fw}</Typography>
+          <div className={classes.deviceIconContainer}>
+            {deviceInfo.type === DeviceType.ACTIVE_HARMONIC_FILER ? (
+              <AhfHarmonicFilterSvg />
+            ) : (
+              <SyncModuleSvg />
+            )}
+          </div>
         </div>
       </CardContent>
     </Card>
