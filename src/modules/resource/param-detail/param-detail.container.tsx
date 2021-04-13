@@ -1,6 +1,6 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import {
   Avatar,
@@ -18,10 +18,14 @@ import {
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
+import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
+import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
 
+import { AhfResourceContext } from '../store/context';
 import { AhfParamEditContainer } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
+import { useParamNavigation } from './param-navigation.hook';
 
 interface Props {
   param: Param;
@@ -30,6 +34,13 @@ interface Props {
 export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const classes = useParamDetailContainerStyles();
   const { writeParam } = useSocketHook();
+  const { resourceState } = useContext(AhfResourceContext);
+  const {
+    hasNext,
+    hasPrevious,
+    handleNext,
+    handlePrevious,
+  } = useParamNavigation(resourceState.folder, param);
 
   const [openEdit, setOpenEdit] = useState(false);
   const [openSpinner, setOpenSpinner] = useState(false);
@@ -71,62 +82,62 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
 
   return (
     <>
-      {
-        <>
-          <AhfSpinnerComponent open={openSpinner} />
-          <Grid container className={classes.gridContainer}>
-            <Grid item xs={12}>
-              <Card variant="elevation" className={classes.cardContainer}>
-                <CardHeader
-                  avatar={
-                    <Avatar className={classes.avatar} variant="square">
-                      {param.paramId}
-                    </Avatar>
-                  }
-                  title={
-                    <Typography variant="h5">
-                      {param.name[currentLanguage]}
-                    </Typography>
-                  }
-                ></CardHeader>
-                <CardContent>
-                  <Grid item container>
-                    <FormControl fullWidth>
-                      <InputLabel disabled={true}>Value</InputLabel>
-                      <Input
-                        value={param.value}
-                        type="string"
-                        onClick={handleClickInput}
-                      />
-                    </FormControl>
-                  </Grid>
-                  <Grid item container>
-                    <FormControl disabled fullWidth>
-                      <TextField
-                        disabled
-                        className={classes.description}
-                        label="Description"
-                        defaultValue={param.description}
-                        placeholder=""
-                        multiline
-                        InputLabelProps={{
-                          disabled: true,
-                        }}
-                      />
-                    </FormControl>
-                  </Grid>
-                </CardContent>
-              </Card>
-            </Grid>
-          </Grid>
-          <AhfParamEditContainer
-            param={param}
-            isOpen={openEdit}
-            onClose={handleEditClose}
-            onSave={handleSave}
-          />
-        </>
-      }
+      <AhfSpinnerComponent open={openSpinner} />
+      <Grid container className={classes.gridContainer}>
+        <Grid item xs={12}>
+          <Card variant="elevation" className={classes.cardContainer}>
+            <CardHeader
+              avatar={
+                <Avatar className={classes.avatar} variant="square">
+                  {param.paramId}
+                </Avatar>
+              }
+              title={
+                <Typography variant="h5">
+                  {param.name[currentLanguage]}
+                </Typography>
+              }
+            ></CardHeader>
+            <CardContent>
+              <Grid item container>
+                <FormControl fullWidth>
+                  <InputLabel disabled={true}>Value</InputLabel>
+                  <Input
+                    value={param.value}
+                    type="string"
+                    onClick={handleClickInput}
+                  />
+                </FormControl>
+              </Grid>
+              <Grid item container>
+                <FormControl disabled fullWidth>
+                  <TextField
+                    disabled
+                    className={classes.description}
+                    label="Description"
+                    defaultValue={param.description}
+                    placeholder=""
+                    multiline
+                    InputLabelProps={{
+                      disabled: true,
+                    }}
+                  />
+                </FormControl>
+              </Grid>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+      <AhfParamEditContainer
+        param={param}
+        isOpen={openEdit}
+        onClose={handleEditClose}
+        onSave={handleSave}
+      />
+      {hasPrevious && (
+        <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
+      )}
+      {hasNext && <AhfNavigationNextComponent onNext={handleNext} />}
     </>
   );
 };
