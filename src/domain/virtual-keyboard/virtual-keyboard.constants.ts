@@ -10,7 +10,7 @@ export enum LAYOUT_TYPE {
 
 export const LAYOUTS: Record<LAYOUT_TYPE, Layout> = {
   NUMERIC: {
-    default: ['1 2 3', '4 5 6', '7 8 9', '{shift} 0 _', '{bksp}'],
+    default: ['7 8 9', '4 5 6', '1 2 3', '0 + -', '. {bksp}'],
     shift: ['! / #', '$ % ^', '& * (', '{shift} ) +', '{bksp}'],
   },
   CHINESE: {
