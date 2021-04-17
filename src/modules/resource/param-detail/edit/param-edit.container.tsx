@@ -11,14 +11,13 @@ import { AhfParamEditComponent } from './component/param-edit.component';
 
 interface Props {
   param: Param;
-  isOpen: boolean;
+
   onClose: () => void;
   onSave: (value: string) => void;
 }
 
 export const AhfParamEditContainer: React.FC<Props> = ({
   param,
-  isOpen,
   onClose,
   onSave,
 }: Props) => {
@@ -96,7 +95,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   };
 
   return (
-    <Dialog open={isOpen} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog open={true} onClose={onClose} maxWidth="sm" fullWidth>
       {renderEditComponent(param.paramType)}
       <DialogActions>
         <Button

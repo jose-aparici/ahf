@@ -40,7 +40,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     handlePrevious,
   } = useParamNavigation(resourceState.folder, param);
 
-  const [openEdit, setOpenEdit] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [openSpinner, setOpenSpinner] = useState(false);
   const [nextMarker, setNexMarker] = useState(param.read?.marker);
 
@@ -62,12 +62,12 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const handleClickInput = () =>
     param.accessType === AccessType.READ_WRITE &&
     param.value &&
-    setOpenEdit(true);
+    setOpenEditModal(true);
 
-  const handleEditClose = () => setOpenEdit(false);
+  const handleEditClose = () => setOpenEditModal(false);
 
   const handleSave = (value: string) => {
-    setOpenEdit(false);
+    setOpenEditModal(false);
     setOpenSpinner(true);
     const nextMarker = param.read ? param.read.marker + 1 : undefined;
     if (nextMarker) {
@@ -142,12 +142,13 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
           </Card>
         </Grid>
       </Grid>
-      <AhfParamEditContainer
-        param={param}
-        isOpen={openEdit}
-        onClose={handleEditClose}
-        onSave={handleSave}
-      />
+      {openEditModal && (
+        <AhfParamEditContainer
+          param={param}
+          onClose={handleEditClose}
+          onSave={handleSave}
+        />
+      )}
       {hasPrevious && (
         <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
       )}
