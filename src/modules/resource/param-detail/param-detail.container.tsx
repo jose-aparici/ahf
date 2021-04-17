@@ -160,7 +160,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                   <TextField
                     className={classes.description}
                     label="Description"
-                    defaultValue={param.description}
+                    defaultValue={param.description[currentLanguage]}
                     placeholder=""
                     multiline
                     InputLabelProps={{
