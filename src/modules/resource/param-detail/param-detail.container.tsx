@@ -9,15 +9,13 @@ import {
   CardHeader,
   FormControl,
   Grid,
-  Input,
-  InputLabel,
   TextField,
   Typography,
 } from '@material-ui/core';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Param } from 'domain/param/param.types';
+import { AccessType, Param } from 'domain/param/param.types';
 import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
@@ -61,7 +59,10 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     }
   }, [openSpinner, nextMarker, param.read]);
 
-  const handleClickInput = () => setOpenEdit(true);
+  const handleClickInput = () =>
+    param.accessType === AccessType.READ_WRITE &&
+    param.value &&
+    setOpenEdit(true);
 
   const handleEditClose = () => setOpenEdit(false);
 
@@ -101,11 +102,24 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
             <CardContent>
               <Grid item container>
                 <FormControl fullWidth>
-                  <InputLabel disabled={true}>Value</InputLabel>
-                  <Input
-                    value={param.value}
-                    type="string"
+                  <TextField
+                    disabled
+                    label="Value"
+                    value={
+                      param.value ? `${param.value} ${param.unit}` : ' -- '
+                    }
                     onClick={handleClickInput}
+                    className={
+                      param.accessType === AccessType.READ_WRITE
+                        ? classes.value
+                        : ''
+                    }
+                    placeholder=""
+                    InputLabelProps={{
+                      disabled: param.accessType === AccessType.READ_ONLY,
+                      shrink: true,
+                      classes: { root: classes.valueLabel },
+                    }}
                   />
                 </FormControl>
               </Grid>
