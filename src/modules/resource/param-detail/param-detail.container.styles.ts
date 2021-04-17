@@ -19,15 +19,6 @@ export const useParamDetailContainerStyles = makeStyles((theme: Theme) => ({
     marginTop: '16px',
   },
 
-  value: {
-    '& .MuiInputBase-root.Mui-disabled': {
-      color: 'black',
-    },
-    '& .MuiInput-underline:before': {
-      borderColor: 'black',
-      borderBottomStyle: 'solid',
-    },
-  },
   valueLabel: {
     color: 'black',
   },

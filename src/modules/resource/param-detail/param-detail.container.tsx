@@ -10,10 +10,12 @@ import {
   CardHeader,
   FormControl,
   Grid,
+  IconButton,
   Snackbar,
   TextField,
   Typography,
 } from '@material-ui/core';
+import EditIcon from '@material-ui/icons/Edit';
 import Alert, { Color } from '@material-ui/lab/Alert';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
@@ -130,27 +132,29 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                   {param.name[currentLanguage]}
                 </Typography>
               }
+              action={
+                param.accessType === AccessType.READ_WRITE && (
+                  <IconButton aria-label="settings">
+                    <EditIcon />
+                  </IconButton>
+                )
+              }
             ></CardHeader>
             <CardContent>
               <Grid item container>
                 <FormControl fullWidth>
                   <TextField
-                    disabled
                     label="Value"
                     value={
                       param.value ? `${param.value} ${param.unit}` : ' -- '
                     }
                     onClick={handleClickInput}
-                    className={
-                      param.accessType === AccessType.READ_WRITE
-                        ? classes.value
-                        : ''
-                    }
                     placeholder=""
                     InputLabelProps={{
-                      disabled: param.accessType === AccessType.READ_ONLY,
                       shrink: true,
-                      classes: { root: classes.valueLabel },
+                      classes: {
+                        root: classes.valueLabel,
+                      },
                     }}
                   />
                 </FormControl>
@@ -158,14 +162,16 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
               <Grid item container>
                 <FormControl disabled fullWidth>
                   <TextField
-                    disabled
                     className={classes.description}
                     label="Description"
                     defaultValue={param.description}
                     placeholder=""
                     multiline
                     InputLabelProps={{
-                      disabled: true,
+                      shrink: true,
+                      classes: {
+                        root: classes.valueLabel,
+                      },
                     }}
                   />
                 </FormControl>
