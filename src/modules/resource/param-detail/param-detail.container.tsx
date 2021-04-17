@@ -1,6 +1,7 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
 import React, { useContext, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   Avatar,
@@ -9,9 +10,11 @@ import {
   CardHeader,
   FormControl,
   Grid,
+  Snackbar,
   TextField,
   Typography,
 } from '@material-ui/core';
+import Alert, { Color } from '@material-ui/lab/Alert';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
@@ -31,6 +34,7 @@ interface Props {
 
 export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const classes = useParamDetailContainerStyles();
+  const { t } = useTranslation();
   const { writeParam } = useSocketHook();
   const { resourceState } = useContext(AhfResourceContext);
   const {
@@ -42,6 +46,8 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
 
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openSpinner, setOpenSpinner] = useState(false);
+  const [showToaster, setShowToaster] = useState(false);
+  const [toasterSeverity, setToasterSeverity] = useState<Color>();
   const [nextMarker, setNexMarker] = useState(param.read?.marker);
 
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
@@ -58,6 +64,30 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       setNexMarker(param.read.marker);
     }
   }, [openSpinner, nextMarker, param.read]);
+
+  useEffect(() => {
+    let timer: number | undefined = undefined;
+    if (!openSpinner && timer !== undefined) {
+      console.log('entra en timer spinner false');
+      setToasterSeverity('success');
+      setShowToaster(true);
+      window.clearTimeout(timer);
+    } else {
+      if (openSpinner) {
+        console.log('entra en timer spinner true');
+        timer = window.setTimeout(() => {
+          console.log('finish spinner');
+          setToasterSeverity('warning');
+          setShowToaster(true);
+          setOpenSpinner(false);
+        }, 5000);
+      }
+    }
+    return () => {
+      console.log('destroy', timer);
+      timer !== undefined && window.clearTimeout(timer);
+    };
+  }, [openSpinner]);
 
   const handleClickInput = () =>
     param.accessType === AccessType.READ_WRITE &&
@@ -80,6 +110,8 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       }
     }
   };
+
+  const handleToasterClose = () => setShowToaster(false);
 
   return (
     <>
@@ -153,6 +185,18 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
       )}
       {hasNext && <AhfNavigationNextComponent onNext={handleNext} />}
+      <Snackbar
+        open={showToaster}
+        autoHideDuration={4000}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        onClose={handleToasterClose}
+      >
+        <Alert elevation={6} variant="filled" severity={toasterSeverity}>
+          {toasterSeverity === 'success'
+            ? t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS')
+            : t('RESOURCE.PARAM_DETAIL.SAVE.WARNING')}
+        </Alert>
+      </Snackbar>
     </>
   );
 };

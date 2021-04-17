@@ -7,6 +7,10 @@
           "EMPTY": "Value mus be provided",
           "FORMAT": "Format is not valid"
         }
+      },
+      "SAVE": {
+        "SUCCESS": "Saved",
+        "WARNING": "Device did not respond, value could be not be saved"
       }
     }
   }
