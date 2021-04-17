@@ -50,6 +50,11 @@ export const AhfParamEditComponent: React.FC<Props> = ({
             onFocus={() => onFocus(value)}
             error={error ? true : false}
             helperText={error && t(error.text)}
+            InputProps={{
+              classes: {
+                input: classes.inputField,
+              },
+            }}
           />
         </FormControl>
       </Grid>

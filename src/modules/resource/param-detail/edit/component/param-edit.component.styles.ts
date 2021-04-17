@@ -7,4 +7,7 @@ export const useParamEditComponentStyles = makeStyles(() => ({
   keyboardContainer: {
     marginTop: 'auto',
   },
+  inputField: {
+    fontSize: '30px',
+  },
 }));
