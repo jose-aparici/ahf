@@ -69,14 +69,13 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   }, [openSpinner, nextMarker, param.read]);
 
   useEffect(() => {
-    if (!openSpinner && timeoutIdRef.current) {
+    if (!openSpinner && !showToaster && timeoutIdRef.current) {
       setToasterSeverity('success');
       setShowToaster(true);
       window.clearTimeout(timeoutIdRef.current);
     } else {
       if (openSpinner) {
         timeoutIdRef.current = window.setTimeout(() => {
-          console.log('finish spinner');
           setToasterSeverity('warning');
           setShowToaster(true);
           setOpenSpinner(false);
