@@ -5,7 +5,8 @@ import { Button, Dialog, DialogActions } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 
-import { Param, ParamType } from 'domain/param/param.types';
+import { Param, ParamError, ParamType } from 'domain/param/param.types';
+import { validateValue } from 'domain/param/param.utils';
 
 import { AhfParamEditComponent } from './component/param-edit.component';
 
@@ -24,10 +25,18 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   const keyboardRef = useRef<Keyboard>(null);
 
   const [input, setInput] = useState(param.value as string);
+  const [error, setError] = useState<ParamError | undefined>(undefined);
 
-  const handleParamChange = (value: string) => setInput(value);
+  const handleParamChange = (value: string) => {
+    setInput(value);
+    setError(validateValue(param.paramType, value));
+  };
 
-  const handleEnter = () => onSave(input);
+  const handleValueFocus = (value: string) => {
+    setError(validateValue(param.paramType, value));
+  };
+
+  const handleEnter = () => !error && onSave(input);
 
   const renderEditComponent = (type: ParamType) => {
     switch (type) {
@@ -39,7 +48,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             value={input}
             isNumeric
             onChange={handleParamChange}
+            onFocus={handleValueFocus}
             onEnter={handleEnter}
+            error={error}
             keyboardRef={keyboardRef}
           />
         );
@@ -49,7 +60,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             value={input}
             isNumeric
             onChange={handleParamChange}
+            onFocus={handleValueFocus}
             onEnter={handleEnter}
+            error={error}
             keyboardRef={keyboardRef}
           />
         );
@@ -59,7 +72,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             value={input}
             isNumeric
             onChange={handleParamChange}
+            onFocus={handleValueFocus}
             onEnter={handleEnter}
+            error={error}
             keyboardRef={keyboardRef}
           />
         );
@@ -69,7 +84,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             value={input}
             isNumeric
             onChange={handleParamChange}
+            onFocus={handleValueFocus}
             onEnter={handleEnter}
+            error={error}
             keyboardRef={keyboardRef}
           />
         );
@@ -78,6 +95,8 @@ export const AhfParamEditContainer: React.FC<Props> = ({
           <AhfParamEditComponent
             value={input}
             onChange={handleParamChange}
+            onFocus={handleValueFocus}
+            error={error}
             onEnter={handleEnter}
             keyboardRef={keyboardRef}
           />
@@ -87,7 +106,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
           <AhfParamEditComponent
             value={input}
             onChange={handleParamChange}
+            onFocus={handleValueFocus}
             onEnter={handleEnter}
+            error={error}
             keyboardRef={keyboardRef}
           />
         );

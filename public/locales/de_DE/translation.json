@@ -1,3 +1,13 @@
 {
-  "HEADER": "german"
+  "HEADER": "german",
+  "RESOURCE": {
+    "PARAM_DETAIL": {
+      "EDIT": {
+        "ERRORS": {
+          "EMPTY": "Value mus be provided",
+          "FORMAT": "Format is not valid"
+        }
+      }
+    }
+  }
 }

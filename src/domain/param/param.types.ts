@@ -32,3 +32,7 @@ export interface ParamRead {
   marker: number;
   paramPos: number;
 }
+
+export interface ParamError {
+  text: string;
+}

@@ -1,8 +1,10 @@
 import React, { MutableRefObject, RefObject, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
 
-import { FormControl, Grid, InputLabel, TextField } from '@material-ui/core';
+import { FormControl, Grid, TextField } from '@material-ui/core';
 
+import { ParamError } from 'domain/param/param.types';
 import {
   LAYOUT_TYPE,
   LAYOUTS,
@@ -16,16 +18,21 @@ interface Props {
   isNumeric?: boolean;
   keyboardRef: RefObject<Keyboard>;
   onChange: (value: string) => void;
+  onFocus: (value: string) => void;
   onEnter: () => void;
+  error: ParamError | undefined;
 }
 export const AhfParamEditComponent: React.FC<Props> = ({
   value,
   isNumeric = false,
   keyboardRef,
   onChange,
+  onFocus,
   onEnter,
+  error,
 }: Props) => {
   const classes = useParamEditComponentStyles();
+  const { t } = useTranslation();
 
   useEffect(() => {
     keyboardRef?.current?.setInput(value);
@@ -35,13 +42,14 @@ export const AhfParamEditComponent: React.FC<Props> = ({
     <Grid container direction="column" className={classes.root}>
       <Grid item>
         <FormControl fullWidth>
-          <InputLabel>Value</InputLabel>
           <TextField
             autoFocus
-            multiline
             value={value}
-            variant="outlined"
+            variant="filled"
             type="string"
+            onFocus={() => onFocus(value)}
+            error={error ? true : false}
+            helperText={error && t(error.text)}
           />
         </FormControl>
       </Grid>
