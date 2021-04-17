@@ -1,6 +1,6 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -46,6 +46,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     handlePrevious,
   } = useParamNavigation(resourceState.folder, param);
 
+  const timeoutIdRef = useRef<number>();
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openSpinner, setOpenSpinner] = useState(false);
   const [showToaster, setShowToaster] = useState(false);
@@ -68,16 +69,13 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   }, [openSpinner, nextMarker, param.read]);
 
   useEffect(() => {
-    let timer: number | undefined = undefined;
-    if (!openSpinner && timer !== undefined) {
-      console.log('entra en timer spinner false');
+    if (!openSpinner && timeoutIdRef.current) {
       setToasterSeverity('success');
       setShowToaster(true);
-      window.clearTimeout(timer);
+      window.clearTimeout(timeoutIdRef.current);
     } else {
       if (openSpinner) {
-        console.log('entra en timer spinner true');
-        timer = window.setTimeout(() => {
+        timeoutIdRef.current = window.setTimeout(() => {
           console.log('finish spinner');
           setToasterSeverity('warning');
           setShowToaster(true);
@@ -86,8 +84,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       }
     }
     return () => {
-      console.log('destroy', timer);
-      timer !== undefined && window.clearTimeout(timer);
+      window.clearTimeout(timeoutIdRef.current);
     };
   }, [openSpinner]);
 
