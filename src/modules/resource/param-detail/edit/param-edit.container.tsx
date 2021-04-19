@@ -1,14 +1,27 @@
-import React, { useRef, useState } from 'react';
+import React, { MutableRefObject, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
 
-import { Button, Dialog, DialogActions } from '@material-ui/core';
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  FormControl,
+  Grid,
+  TextField,
+} from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 
 import { Param, ParamError, ParamType } from 'domain/param/param.types';
-import { validateValue } from 'domain/param/param.utils';
+import { isNumericType, validateValue } from 'domain/param/param.utils';
+import {
+  LAYOUT_TYPE,
+  LAYOUTS,
+} from 'domain/virtual-keyboard/virtual-keyboard.constants';
+import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
-import { AhfParamEditComponent } from './component/param-edit.component';
+import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
   param: Param;
@@ -22,7 +35,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   onClose,
   onSave,
 }: Props) => {
+  const classes = useParamEditContainerStyles();
   const keyboardRef = useRef<Keyboard>(null);
+  const { t } = useTranslation();
 
   const [input, setInput] = useState(param.value as string);
   const [error, setError] = useState<ParamError | undefined>(undefined);
@@ -43,61 +58,43 @@ export const AhfParamEditContainer: React.FC<Props> = ({
       case ParamType.ENUM:
         return <div>enum</div>;
       case ParamType.FLOATING_POINT:
-        return (
-          <AhfParamEditComponent
-            value={input}
-            isNumeric
-            onChange={handleParamChange}
-            onFocus={handleValueFocus}
-            onEnter={handleEnter}
-            error={error}
-            keyboardRef={keyboardRef}
-          />
-        );
       case ParamType.UNSIGNED_INTEGER:
-        return (
-          <AhfParamEditComponent
-            value={input}
-            isNumeric
-            onChange={handleParamChange}
-            onFocus={handleValueFocus}
-            onEnter={handleEnter}
-            error={error}
-            keyboardRef={keyboardRef}
-          />
-        );
       case ParamType.SIGNED_INTEGER:
         return (
-          <AhfParamEditComponent
+          <TextField
+            autoFocus
             value={input}
-            isNumeric
-            onChange={handleParamChange}
-            onFocus={handleValueFocus}
-            onEnter={handleEnter}
-            error={error}
-            keyboardRef={keyboardRef}
+            variant="filled"
+            type="string"
+            onFocus={() => handleValueFocus(input)}
+            error={error ? true : false}
+            helperText={error && t(error.text)}
           />
         );
       case ParamType.STRING:
+      case ParamType.IP:
+      case ParamType.MAC:
         return (
-          <AhfParamEditComponent
+          <TextField
+            autoFocus
             value={input}
-            onChange={handleParamChange}
-            onFocus={handleValueFocus}
-            error={error}
-            onEnter={handleEnter}
-            keyboardRef={keyboardRef}
+            variant="filled"
+            type="string"
+            onFocus={() => handleValueFocus(input)}
+            error={error ? true : false}
+            helperText={error && t(error.text)}
           />
         );
       default:
         return (
-          <AhfParamEditComponent
+          <TextField
+            autoFocus
             value={input}
-            onChange={handleParamChange}
-            onFocus={handleValueFocus}
-            onEnter={handleEnter}
-            error={error}
-            keyboardRef={keyboardRef}
+            variant="filled"
+            type="string"
+            onFocus={() => handleValueFocus(input)}
+            error={error ? true : false}
+            helperText={error && t(error.text)}
           />
         );
     }
@@ -105,7 +102,26 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 
   return (
     <Dialog open={true} onClose={onClose} maxWidth="sm" fullWidth>
-      {renderEditComponent(param.paramType)}
+      <Grid container direction="column" className={classes.root}>
+        <Grid item>
+          <FormControl fullWidth>
+            {renderEditComponent(param.paramType)}
+          </FormControl>
+        </Grid>
+        <Grid item className={classes.keyboardContainer}>
+          <AhfVirtualKeyboardComponent
+            keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
+            layout={
+              isNumericType(param.paramType)
+                ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
+                : LAYOUTS.ENGLISH
+            }
+            onChange={handleParamChange}
+            onEnter={handleEnter}
+          />
+        </Grid>
+      </Grid>
+
       <DialogActions>
         <Button
           variant="contained"

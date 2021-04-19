@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useParamEditComponentStyles = makeStyles(() => ({
+export const useParamEditContainerStyles = makeStyles(() => ({
   root: {
     flex: '1',
   },
