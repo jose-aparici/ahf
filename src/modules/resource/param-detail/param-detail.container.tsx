@@ -85,12 +85,9 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     return () => {
       window.clearTimeout(timeoutIdRef.current);
     };
-  }, [openSpinner]);
+  }, [openSpinner, showToaster]);
 
-  const handleClickInput = () =>
-    param.accessType === AccessType.READ_WRITE &&
-    param.value &&
-    setOpenEditModal(true);
+  const handleClickInput = () => param.value && setOpenEditModal(true);
 
   const handleEditClose = () => setOpenEditModal(false);
 
@@ -126,6 +123,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
               title={
                 <Typography variant="h5">
                   {param.name[currentLanguage]}
+                  {param.paramType}
                 </Typography>
               }
               action={

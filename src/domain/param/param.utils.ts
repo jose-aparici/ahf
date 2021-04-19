@@ -3,11 +3,13 @@ import { ParamType, ParamValue } from 'domain/param/param.types';
 import { PARAMS_VALIDATION } from './param.constants';
 import { ParamError } from './param.types';
 
-export const isNumericType = (type: ParamType): boolean =>
-  type ===
-  (ParamType.FLOATING_POINT ||
-    ParamType.SIGNED_INTEGER ||
-    ParamType.UNSIGNED_INTEGER);
+export const isNumericType = (type: ParamType): boolean => {
+  return (
+    type === ParamType.FLOATING_POINT ||
+    type === ParamType.SIGNED_INTEGER ||
+    type === ParamType.UNSIGNED_INTEGER
+  );
+};
 
 export const validateValue = (
   type: ParamType,

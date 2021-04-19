@@ -1,6 +1,6 @@
 import 'react-simple-keyboard/build/css/index.css';
 
-import React, { MutableRefObject, useState } from 'react';
+import React, { MutableRefObject, useEffect, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
 import { LAYOUTS } from 'domain/virtual-keyboard/virtual-keyboard.constants';
@@ -11,6 +11,7 @@ interface Props {
   onEnter: () => void;
   keyboardRef: MutableRefObject<Keyboard>;
   layout?: Layout;
+  input: string;
 }
 
 export const AhfVirtualKeyboardComponent: React.FC<Props> = ({
@@ -18,8 +19,13 @@ export const AhfVirtualKeyboardComponent: React.FC<Props> = ({
   onEnter,
   keyboardRef,
   layout = LAYOUTS['ENGLISH'],
+  input,
 }: Props) => {
   const [layoutName, setLayoutName] = useState('default');
+
+  useEffect(() => {
+    keyboardRef?.current?.setInput(input);
+  }, [input, keyboardRef]);
 
   const onKeyPress = (button: string) => {
     if (button === '{shift}' || button === '{lock}') {
