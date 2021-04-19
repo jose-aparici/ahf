@@ -11,7 +11,7 @@ export interface AhfParam {
   ParamEnumNumb: number;
   ParamEnumText: Array<string>;
   ParamID: number;
-  ParamType: string;
+  ParamType: AhfParamType;
   Unit: string;
   Value: AhfParamValue;
 }
@@ -24,3 +24,14 @@ export interface AhfParamRead {
   ParamPos: number;
   Value: number | string;
 }
+
+export type AhfParamType =
+  | 'SignedInteger_8'
+  | 'SignedInteger_16'
+  | 'SignedInteger_32'
+  | 'UnsignedInteger_8'
+  | 'UnsignedInteger_16'
+  | 'UnsignedInteger_32'
+  | 'SinglePrecisionFloatingPoint'
+  | 'VisibleString'
+  | 'Date';

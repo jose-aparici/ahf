@@ -42,7 +42,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
     switch (type) {
       case ParamType.ENUM:
         return <div>enum</div>;
-      case ParamType.SINGLE_PRECISION_FLOATING_POINT:
+      case ParamType.FLOATING_POINT:
         return (
           <AhfParamEditComponent
             value={input}
@@ -54,7 +54,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             keyboardRef={keyboardRef}
           />
         );
-      case ParamType.UNSIGNED_INTEGER_16:
+      case ParamType.UNSIGNED_INTEGER:
         return (
           <AhfParamEditComponent
             value={input}
@@ -66,7 +66,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             keyboardRef={keyboardRef}
           />
         );
-      case ParamType.UNSIGNED_INTEGER_32:
+      case ParamType.SIGNED_INTEGER:
         return (
           <AhfParamEditComponent
             value={input}
@@ -78,19 +78,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             keyboardRef={keyboardRef}
           />
         );
-      case ParamType.UNSIGNED_INTEGER_8:
-        return (
-          <AhfParamEditComponent
-            value={input}
-            isNumeric
-            onChange={handleParamChange}
-            onFocus={handleValueFocus}
-            onEnter={handleEnter}
-            error={error}
-            keyboardRef={keyboardRef}
-          />
-        );
-      case ParamType.VISIBLE_STRING:
+      case ParamType.STRING:
         return (
           <AhfParamEditComponent
             value={input}

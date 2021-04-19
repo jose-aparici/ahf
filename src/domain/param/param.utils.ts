@@ -1,16 +1,17 @@
 import { ParamType, ParamValue } from 'domain/param/param.types';
 
+import { PARAMS_VALIDATION } from './param.constants';
 import { ParamError } from './param.types';
 
 export const validateValue = (
   type: ParamType,
   value: ParamValue,
 ): ParamError | undefined => {
-  if (value === '') {
+  if (!validateEmpty(value)) {
     return { text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.EMPTY' };
   }
 
-  if (value === undefined) {
+  if (!validateUndefined(value)) {
     return { text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.EMPTY' };
   }
 
@@ -21,12 +22,11 @@ export const validateValue = (
   return undefined;
 };
 
-const validateFormat = (type: ParamType, value: ParamValue): boolean => {
-  switch (type) {
-    case ParamType.SINGLE_PRECISION_FLOATING_POINT:
-      return new RegExp(/^[+-]?\d+(\.\d+)?$/).test(value as string);
+const validateEmpty = (value: ParamValue) => value !== '';
 
-    default:
-      return false;
-  }
+const validateUndefined = (value: ParamValue) => value !== undefined;
+
+const validateFormat = (type: ParamType, value: ParamValue): boolean => {
+  const regex = PARAMS_VALIDATION[type].regex;
+  return regex ? new RegExp(regex).test(value as string) : true;
 };

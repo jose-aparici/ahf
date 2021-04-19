@@ -17,7 +17,7 @@ const DEFAULT_STATE: State = {
         paramEnumNumb: 0,
         paramEnumText: ['paramEnumText1'],
         paramId: 1,
-        paramType: ParamType.SINGLE_PRECISION_FLOATING_POINT,
+        paramType: ParamType.FLOATING_POINT,
         unit: 'unit1',
         value: 1.1,
       },

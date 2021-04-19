@@ -6,12 +6,14 @@ export enum AccessType {
 }
 
 export enum ParamType {
-  SINGLE_PRECISION_FLOATING_POINT = 'SinglePrecisionFloatingPoint',
-  UNSIGNED_INTEGER_8 = 'UnsignedInteger_8',
-  UNSIGNED_INTEGER_16 = 'UnsignedInteger_16',
-  UNSIGNED_INTEGER_32 = 'UnsignedInteger_32',
-  VISIBLE_STRING = 'VisibleString',
+  SIGNED_INTEGER = 'SignedInteger',
+  UNSIGNED_INTEGER = 'UnsignedInteger',
+  FLOATING_POINT = 'FloatingPoint',
+  STRING = 'String',
+  DATE = 'Date',
   ENUM = 'Enum',
+  IP = 'Ip',
+  MAC = 'Mac',
 }
 export interface Param {
   accessType: AccessType;
@@ -35,4 +37,8 @@ export interface ParamRead {
 
 export interface ParamError {
   text: string;
+}
+
+export interface ParamValidation {
+  regex?: string;
 }
