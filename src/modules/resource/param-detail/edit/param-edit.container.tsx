@@ -1,5 +1,4 @@
 import React, { MutableRefObject, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
 
 import {
@@ -8,19 +7,23 @@ import {
   DialogActions,
   FormControl,
   Grid,
-  TextField,
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 
-import { Param, ParamError, ParamType } from 'domain/param/param.types';
-import { isNumericType, validateValue } from 'domain/param/param.utils';
+import { Param, ParamError } from 'domain/param/param.types';
+import {
+  isKeyboardType,
+  isNumericType,
+  validateValue,
+} from 'domain/param/param.utils';
 import {
   LAYOUT_TYPE,
   LAYOUTS,
 } from 'domain/virtual-keyboard/virtual-keyboard.constants';
 import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
+import { AhfParamEditFieldComponent } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
@@ -37,7 +40,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 }: Props) => {
   const classes = useParamEditContainerStyles();
   const keyboardRef = useRef<Keyboard>(null);
-  const { t } = useTranslation();
 
   const [input, setInput] = useState(param.value as string);
   const [error, setError] = useState<ParamError | undefined>(undefined);
@@ -53,72 +55,34 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 
   const handleEnter = () => !error && onSave(input);
 
-  const renderEditComponent = (type: ParamType) => {
-    switch (type) {
-      case ParamType.ENUM:
-        return <div>enum</div>;
-      case ParamType.FLOATING_POINT:
-      case ParamType.UNSIGNED_INTEGER:
-      case ParamType.SIGNED_INTEGER:
-        return (
-          <TextField
-            autoFocus
-            value={input}
-            variant="filled"
-            type="string"
-            onFocus={() => handleValueFocus(input)}
-            error={error ? true : false}
-            helperText={error && t(error.text)}
-          />
-        );
-      case ParamType.STRING:
-      case ParamType.IP:
-      case ParamType.MAC:
-        return (
-          <TextField
-            autoFocus
-            value={input}
-            variant="filled"
-            type="string"
-            onFocus={() => handleValueFocus(input)}
-            error={error ? true : false}
-            helperText={error && t(error.text)}
-          />
-        );
-      default:
-        return (
-          <TextField
-            autoFocus
-            value={input}
-            variant="filled"
-            type="string"
-            onFocus={() => handleValueFocus(input)}
-            error={error ? true : false}
-            helperText={error && t(error.text)}
-          />
-        );
-    }
-  };
-
   return (
-    <Dialog open={true} onClose={onClose} maxWidth="sm" fullWidth>
+    <Dialog open={true} onClose={onClose} maxWidth="sm">
       <Grid container direction="column" className={classes.root}>
         <Grid item>
           <FormControl fullWidth>
-            {renderEditComponent(param.paramType)}
+            <AhfParamEditFieldComponent
+              type={param.paramType}
+              value={input}
+              error={error}
+              onFocus={handleValueFocus}
+              onChange={handleParamChange}
+            />
           </FormControl>
         </Grid>
         <Grid item className={classes.keyboardContainer}>
-          <AhfVirtualKeyboardComponent
-            keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
-            layout={
-              isNumericType(param.paramType)
-                ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
-                : LAYOUTS.ENGLISH
-            }
-            onChange={handleParamChange}
-            onEnter={handleEnter}
-          />
+          {isKeyboardType(param.paramType) && (
+            <AhfVirtualKeyboardComponent
+              keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
+              layout={
+                isNumericType(param.paramType)
+                  ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
+                  : LAYOUTS.ENGLISH
+              }
+              onChange={handleParamChange}
+              onEnter={handleEnter}
+              input={input}
+            />
+          )}
         </Grid>
       </Grid>
 

@@ -11,6 +11,10 @@ export const isNumericType = (type: ParamType): boolean => {
   );
 };
 
+export const isKeyboardType = (type: ParamType): boolean => {
+  return type !== ParamType.ENUM && type !== ParamType.DATE;
+};
+
 export const validateValue = (
   type: ParamType,
   value: ParamValue,
