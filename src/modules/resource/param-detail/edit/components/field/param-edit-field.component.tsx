@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 
 import DateFnsUtils from '@date-io/date-fns';
 import { TextField } from '@material-ui/core';
-import { DatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { ParamError, ParamType } from 'domain/param/param.types';
 
@@ -28,8 +28,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
       case ParamType.DATE:
         return (
           <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
-              orientation="landscape"
+            <DateTimePicker
               variant="static"
               openTo="date"
               value={value}

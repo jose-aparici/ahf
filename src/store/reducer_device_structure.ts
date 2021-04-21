@@ -11,10 +11,15 @@ import { State } from './initialState';
 
 const transformAhfParamTypeToParamType = (
   ahfParamType: AhfParamType,
+  ahfParamId: number,
   enumCount: number,
 ): ParamType => {
   if (enumCount > 0) {
     return ParamType.ENUM;
+  }
+
+  if (ahfParamId === 8) {
+    return ParamType.MAC;
   }
 
   switch (ahfParamType) {
@@ -49,6 +54,7 @@ const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
         paramId: ahfParam.ParamID,
         paramType: transformAhfParamTypeToParamType(
           ahfParam.ParamType,
+          ahfParam.ParamID,
           ahfParam.ParamEnumNumb,
         ),
         unit: ahfParam.Unit,
