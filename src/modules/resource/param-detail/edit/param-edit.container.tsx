@@ -1,3 +1,4 @@
+import i18n from 'i18n';
 import React, { MutableRefObject, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
@@ -5,12 +6,15 @@ import {
   Button,
   Dialog,
   DialogActions,
+  DialogTitle,
   FormControl,
   Grid,
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamError } from 'domain/param/param.types';
 import {
   isKeyboardType,
@@ -49,6 +53,9 @@ export const AhfParamEditContainer: React.FC<Props> = ({
     setError(validateValue(param.paramType, value));
   };
 
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
+
   const handleValueFocus = (value: string) => {
     setError(validateValue(param.paramType, value));
   };
@@ -57,12 +64,16 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 
   return (
     <Dialog open={true} onClose={onClose} maxWidth="sm">
-      <Grid container direction="column" className={classes.root}>
+      {!isKeyboardType(param.paramType) && (
+        <DialogTitle>{param.name[currentLanguage]}</DialogTitle>
+      )}
+      <Grid container direction="column" className={classes.mainGrid}>
         <Grid item>
           <FormControl fullWidth>
             <AhfParamEditFieldComponent
               type={param.paramType}
               value={input}
+              values={param.paramEnumText}
               error={error}
               onFocus={handleValueFocus}
               onChange={handleParamChange}

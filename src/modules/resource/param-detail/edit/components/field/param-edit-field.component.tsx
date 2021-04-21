@@ -2,13 +2,21 @@ import React from 'react';
 import { useTranslation } from 'react-i18next';
 
 import DateFnsUtils from '@date-io/date-fns';
-import { TextField } from '@material-ui/core';
+import {
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  TextField,
+} from '@material-ui/core';
 import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { ParamError, ParamType } from 'domain/param/param.types';
 
+import { useParamEditFieldComponentStyles } from './param-edit.component.styles';
+
 interface Props {
   value: string;
+  values: string[];
   type: ParamType;
   error: ParamError | undefined;
   onFocus: (value: string) => void;
@@ -17,11 +25,13 @@ interface Props {
 export const AhfParamEditFieldComponent: React.FC<Props> = ({
   type,
   value,
+  values,
   error,
   onFocus,
   onChange,
 }: Props) => {
   const { t } = useTranslation();
+  const classes = useParamEditFieldComponentStyles();
 
   const renderEditComponent = () => {
     switch (type) {
@@ -37,6 +47,24 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
           </MuiPickersUtilsProvider>
         );
       case ParamType.ENUM:
+        return (
+          <RadioGroup
+            value={value}
+            onChange={(_, value) => onChange(value)}
+            classes={{ root: classes.radioGroup }}
+          >
+            {values.map((value, index) => {
+              return (
+                <FormControlLabel
+                  key={index}
+                  value={value}
+                  control={<Radio classes={{ root: classes.radio }} />}
+                  label={value}
+                />
+              );
+            })}
+          </RadioGroup>
+        );
       case ParamType.FLOATING_POINT:
       case ParamType.UNSIGNED_INTEGER:
       case ParamType.SIGNED_INTEGER:
