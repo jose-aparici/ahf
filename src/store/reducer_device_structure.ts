@@ -18,6 +18,10 @@ const transformAhfParamTypeToParamType = (
     return ParamType.ENUM;
   }
 
+  if (ahfParamId === 240 || ahfParamId === 242 || ahfParamId === 243) {
+    return ParamType.IP;
+  }
+
   if (ahfParamId === 8) {
     return ParamType.MAC;
   }

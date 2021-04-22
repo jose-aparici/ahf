@@ -15,7 +15,7 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Param, ParamError } from 'domain/param/param.types';
+import { Param, ParamError, ParamType } from 'domain/param/param.types';
 import {
   isKeyboardType,
   isNumericType,
@@ -64,8 +64,11 @@ export const AhfParamEditContainer: React.FC<Props> = ({
 
   return (
     <Dialog open={true} onClose={onClose} maxWidth="sm">
-      {!isKeyboardType(param.paramType) && (
-        <DialogTitle>{param.name[currentLanguage]}</DialogTitle>
+      {!isKeyboardType(param.paramType) && param.paramType !== ParamType.DATE && (
+        <DialogTitle>
+          {param.name[currentLanguage]}
+          {param.paramType}
+        </DialogTitle>
       )}
       <Grid container direction="column" className={classes.mainGrid}>
         <Grid item>
