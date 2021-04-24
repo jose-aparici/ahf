@@ -9,6 +9,7 @@ import {
   DialogTitle,
   FormControl,
   Grid,
+  GridList,
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
@@ -63,13 +64,83 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   const handleEnter = () => !error && onSave(input);
 
   return (
-    <Dialog open={true} onClose={onClose} maxWidth="sm">
-      {!isKeyboardType(param.paramType) && param.paramType !== ParamType.DATE && (
-        <DialogTitle>
-          {param.name[currentLanguage]}
-          {param.paramType}
-        </DialogTitle>
-      )}
+    <Dialog
+      open={true}
+      onClose={onClose}
+      classes={{ paper: classes.dialogContainer }}
+    >
+      <Grid container className={classes.mainGrid}>
+        <Grid item container xs={5} className={classes.leftContainer}>
+          <DialogTitle className={classes.title}>
+            {param.name[currentLanguage]}
+            {param.paramType}
+          </DialogTitle>
+          <DialogActions className={classes.buttons}>
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<CancelIcon />}
+              onClick={onClose}
+            >
+              Cancel
+            </Button>
+            <Button
+              variant="contained"
+              size="large"
+              startIcon={<SaveIcon />}
+              onClick={handleEnter}
+            >
+              Save
+            </Button>
+          </DialogActions>
+        </Grid>
+        <Grid item xs={7}>
+          {param.paramType === ParamType.ENUM && (
+            <GridList cols={1} className={classes.gridList}>
+              <FormControl style={{ height: '100%' }}>
+                <AhfParamEditFieldComponent
+                  type={param.paramType}
+                  value={input}
+                  values={param.paramEnumText}
+                  error={error}
+                  onFocus={handleValueFocus}
+                  onChange={handleParamChange}
+                />
+              </FormControl>
+            </GridList>
+          )}
+          {param.paramType !== ParamType.ENUM && (
+            <>
+              <FormControl fullWidth>
+                <AhfParamEditFieldComponent
+                  type={param.paramType}
+                  value={input}
+                  values={param.paramEnumText}
+                  error={error}
+                  onFocus={handleValueFocus}
+                  onChange={handleParamChange}
+                />
+              </FormControl>
+              {isKeyboardType(param.paramType) && (
+                <AhfVirtualKeyboardComponent
+                  keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
+                  layout={
+                    isNumericType(param.paramType)
+                      ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
+                      : LAYOUTS.ENGLISH
+                  }
+                  onChange={handleParamChange}
+                  onEnter={handleEnter}
+                  input={input}
+                />
+              )}
+            </>
+          )}
+        </Grid>
+        {/* <DialogTitle>
+        {param.name[currentLanguage]}
+        {param.paramType}
+      </DialogTitle>
       <Grid container direction="column" className={classes.mainGrid}>
         <Grid item>
           <FormControl fullWidth>
@@ -117,7 +188,8 @@ export const AhfParamEditContainer: React.FC<Props> = ({
         >
           Save
         </Button>
-      </DialogActions>
+      </DialogActions> */}
+      </Grid>
     </Dialog>
   );
 };
