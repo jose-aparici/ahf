@@ -65,27 +65,24 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     ) {
       setOpenSpinner(false);
       setNexMarker(param.read.marker);
+      setToasterSeverity('success');
+      setShowToaster(true);
     }
   }, [openSpinner, nextMarker, param.read]);
 
   useEffect(() => {
-    if (!openSpinner && !showToaster && timeoutIdRef.current) {
-      setToasterSeverity('success');
-      setShowToaster(true);
-      window.clearTimeout(timeoutIdRef.current);
-    } else {
-      if (openSpinner) {
-        timeoutIdRef.current = window.setTimeout(() => {
-          setToasterSeverity('warning');
-          setShowToaster(true);
-          setOpenSpinner(false);
-        }, 5000);
-      }
+    if (openSpinner) {
+      timeoutIdRef.current = window.setTimeout(() => {
+        setToasterSeverity('warning');
+        setOpenSpinner(false);
+        setShowToaster(true);
+      }, 5000);
+
+      return () => {
+        window.clearTimeout(timeoutIdRef.current);
+      };
     }
-    return () => {
-      window.clearTimeout(timeoutIdRef.current);
-    };
-  }, [openSpinner, showToaster]);
+  }, [openSpinner]);
 
   const handleClickInput = () =>
     param.value &&
