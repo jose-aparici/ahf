@@ -45,11 +45,13 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   const classes = useParamEditContainerStyles();
   const keyboardRef = useRef<Keyboard>(null);
 
-  const [input, setInput] = useState(() =>
-    param.paramType === ParamType.ENUM
-      ? param.paramEnumText.findIndex((item) => item === param.value).toString()
-      : (param.value as string),
-  );
+  const [input, setInput] = useState(() => {
+    if (param.paramType === ParamType.ENUM) {
+      return param.paramEnumText
+        .findIndex((item) => item === param.value)
+        .toString();
+    }
+  });
   const [error, setError] = useState<ParamError | undefined>(undefined);
 
   const handleParamChange = (value: string) => {
@@ -140,58 +142,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             </>
           )}
         </Grid>
-        {/* <DialogTitle>
-        {param.name[currentLanguage]}
-        {param.paramType}
-      </DialogTitle>
-      <Grid container direction="column" className={classes.mainGrid}>
-        <Grid item>
-          <FormControl fullWidth>
-            <AhfParamEditFieldComponent
-              type={param.paramType}
-              value={input}
-              values={param.paramEnumText}
-              error={error}
-              onFocus={handleValueFocus}
-              onChange={handleParamChange}
-            />
-          </FormControl>
-        </Grid>
-        <Grid item className={classes.keyboardContainer}>
-          {isKeyboardType(param.paramType) && (
-            <AhfVirtualKeyboardComponent
-              keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
-              layout={
-                isNumericType(param.paramType)
-                  ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
-                  : LAYOUTS.ENGLISH
-              }
-              onChange={handleParamChange}
-              onEnter={handleEnter}
-              input={input}
-            />
-          )}
-        </Grid>
-      </Grid>
-
-      <DialogActions>
-        <Button
-          variant="contained"
-          size="large"
-          startIcon={<CancelIcon />}
-          onClick={onClose}
-        >
-          Cancel
-        </Button>
-        <Button
-          variant="contained"
-          size="large"
-          startIcon={<SaveIcon />}
-          onClick={handleEnter}
-        >
-          Save
-        </Button>
-      </DialogActions> */}
       </Grid>
     </Dialog>
   );
