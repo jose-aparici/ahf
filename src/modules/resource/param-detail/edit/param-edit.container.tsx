@@ -86,7 +86,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
         <Grid item container xs={5} className={classes.leftContainer}>
           <DialogTitle className={classes.title}>
             {param.name[currentLanguage]}
-            {param.paramType}
           </DialogTitle>
           <DialogActions className={classes.buttons}>
             <Button
