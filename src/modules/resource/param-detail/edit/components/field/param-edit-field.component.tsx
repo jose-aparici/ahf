@@ -43,7 +43,7 @@ const AhfParamEditFieldComponent: React.FC<Props> = ({
               openTo="date"
               ampm={false}
               value={value}
-              onChange={(date) => date && onChange(date?.getTime().toString())}
+              onChange={(date) => date && onChange(date.toUTCString())}
             />
           </MuiPickersUtilsProvider>
         );

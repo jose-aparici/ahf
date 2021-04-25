@@ -6,12 +6,17 @@ import { ParamError } from './param.types';
 export const stringToParamValue = (
   value: string,
   type: ParamType,
-): ParamValue =>
-  type !== ParamType.IP && type !== ParamType.MAC && type !== ParamType.STRING
-    ? isNaN(Number(value))
-      ? ''
-      : Number(value)
-    : value;
+): ParamValue => {
+  if (
+    type !== ParamType.IP &&
+    type !== ParamType.MAC &&
+    type !== ParamType.STRING
+  ) {
+    return type === ParamType.DATE ? new Date(value).getTime() : Number(value);
+  }
+
+  return value;
+};
 
 export const isNumericType = (type: ParamType): boolean => {
   return (
