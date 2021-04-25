@@ -51,6 +51,8 @@ export const AhfParamEditContainer: React.FC<Props> = ({
         .findIndex((item) => item === param.value)
         .toString();
     }
+
+    return param.value as string;
   });
   const [error, setError] = useState<ParamError | undefined>(undefined);
 

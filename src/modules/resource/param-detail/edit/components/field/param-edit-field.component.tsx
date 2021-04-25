@@ -12,7 +12,7 @@ import { DateTimePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 import { ParamError, ParamType } from 'domain/param/param.types';
 
-import { useParamEditFieldComponentStyles } from './param-edit.component.styles';
+import { useParamEditFieldComponentStyles } from './param-edit-field.component.styles';
 
 interface Props {
   value: string;
