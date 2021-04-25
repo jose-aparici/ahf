@@ -33,7 +33,6 @@ import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
   param: Param;
-
   onClose: () => void;
   onSave: (value: string) => void;
 }
@@ -46,7 +45,11 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   const classes = useParamEditContainerStyles();
   const keyboardRef = useRef<Keyboard>(null);
 
-  const [input, setInput] = useState(param.value as string);
+  const [input, setInput] = useState(() =>
+    param.paramType === ParamType.ENUM
+      ? param.paramEnumText.findIndex((item) => item === param.value).toString()
+      : (param.value as string),
+  );
   const [error, setError] = useState<ParamError | undefined>(undefined);
 
   const handleParamChange = (value: string) => {

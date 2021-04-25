@@ -41,8 +41,9 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
             <DateTimePicker
               variant="static"
               openTo="date"
+              ampm={false}
               value={value}
-              onChange={(date) => date && onChange(date?.toString())}
+              onChange={(date) => date && onChange(date?.getTime().toString())}
             />
           </MuiPickersUtilsProvider>
         );
@@ -57,7 +58,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
               return (
                 <FormControlLabel
                   key={index}
-                  value={value}
+                  value={index.toString()}
                   control={<Radio classes={{ root: classes.radio }} />}
                   label={value}
                 />

@@ -3,6 +3,16 @@ import { ParamType, ParamValue } from 'domain/param/param.types';
 import { PARAMS_VALIDATION } from './param.constants';
 import { ParamError } from './param.types';
 
+export const stringToParamValue = (
+  value: string,
+  type: ParamType,
+): ParamValue =>
+  type !== ParamType.IP && type !== ParamType.MAC && type !== ParamType.STRING
+    ? isNaN(Number(value))
+      ? ''
+      : Number(value)
+    : value;
+
 export const isNumericType = (type: ParamType): boolean => {
   return (
     type === ParamType.FLOATING_POINT ||

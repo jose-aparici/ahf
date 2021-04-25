@@ -21,6 +21,7 @@ import Alert, { Color } from '@material-ui/lab/Alert';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AccessType, Param } from 'domain/param/param.types';
+import { stringToParamValue } from 'domain/param/param.utils';
 import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
 import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
@@ -99,7 +100,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       const paramToUpdate = JSON.parse(JSON.stringify(param));
       if (paramToUpdate.read) {
         paramToUpdate.read.marker = nextMarker;
-        paramToUpdate.value = value;
+        paramToUpdate.value = stringToParamValue(value, param.paramType);
         setNexMarker(nextMarker);
         writeParam(paramToUpdate);
       }
