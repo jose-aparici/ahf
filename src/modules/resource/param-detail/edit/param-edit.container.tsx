@@ -1,5 +1,5 @@
 import i18n from 'i18n';
-import React, { MutableRefObject, useRef, useState } from 'react';
+import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
 import {
@@ -28,7 +28,7 @@ import {
 } from 'domain/virtual-keyboard/virtual-keyboard.constants';
 import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
-import { AhfParamEditFieldComponent } from './components/field/param-edit-field.component';
+import { AhfParamEditFieldComponentMemoized } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
@@ -56,17 +56,23 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   });
   const [error, setError] = useState<ParamError | undefined>(undefined);
 
-  const handleParamChange = (value: string) => {
-    setInput(value);
-    setError(validateValue(param.paramType, value));
-  };
+  const handleParamChange = useCallback(
+    (value: string) => {
+      setInput(value);
+      setError(validateValue(param.paramType, value));
+    },
+    [param.paramType],
+  );
 
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const handleValueFocus = (value: string) => {
-    setError(validateValue(param.paramType, value));
-  };
+  const handleValueFocus = useCallback(
+    (value: string) => {
+      setError(validateValue(param.paramType, value));
+    },
+    [param.paramType],
+  );
 
   const handleEnter = () => !error && onSave(input);
 
@@ -105,7 +111,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
           {param.paramType === ParamType.ENUM && (
             <GridList cols={1} className={classes.gridList}>
               <FormControl style={{ height: '100%' }}>
-                <AhfParamEditFieldComponent
+                <AhfParamEditFieldComponentMemoized
                   type={param.paramType}
                   value={input}
                   values={param.paramEnumText}
@@ -119,7 +125,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
           {param.paramType !== ParamType.ENUM && (
             <>
               <FormControl fullWidth>
-                <AhfParamEditFieldComponent
+                <AhfParamEditFieldComponentMemoized
                   type={param.paramType}
                   value={input}
                   values={param.paramEnumText}
