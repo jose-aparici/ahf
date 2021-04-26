@@ -1,5 +1,7 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
+import { AHF_COLORS } from '../../../styles/ahf.colors';
+
 export const useParamCardComponentStyles = makeStyles((theme: Theme) => ({
   cardContainer: {
     marginBottom: '8px',
@@ -13,17 +15,22 @@ export const useParamCardComponentStyles = makeStyles((theme: Theme) => ({
   },
   infoContainer: {
     display: 'flex',
+    alignItems: 'center',
   },
   avatar: {
     backgroundColor: theme.palette.background.default,
     marginRight: '4px',
     color: theme.palette.primary.main,
     fontWeight: 'bold',
-    width: '32px',
-    height: '28px',
+    fontSize: '14px',
+    width: '25px',
+    height: '20px',
+    borderRadius: '3px',
   },
   editIcon: {
     marginLeft: 'auto',
+    fontSize: '16px',
+    color: AHF_COLORS.grey1,
   },
   unitContainer: {
     display: 'flex',

@@ -41,5 +41,10 @@ export const ahfTheme = createMuiTheme({
       lineHeight: '1.5',
       letterSpacing: '0.09px',
     },
+    h6: {
+      fontSize: '12px',
+      lineHeight: '24px',
+      letterSpacing: '0.09px',
+    },
   },
 });

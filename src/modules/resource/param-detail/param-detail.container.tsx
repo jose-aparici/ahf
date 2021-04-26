@@ -1,6 +1,12 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -27,7 +33,7 @@ import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previo
 import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
 
 import { AhfResourceContext } from '../store/context';
-import { AhfParamEditContainer } from './edit/param-edit.container';
+import { AhfParamEditContainerMemoized } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 import { useParamNavigation } from './param-navigation.hook';
 
@@ -90,22 +96,25 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     param.accessType === AccessType.READ_WRITE &&
     setOpenEditModal(true);
 
-  const handleEditClose = () => setOpenEditModal(false);
+  const handleEditClose = useCallback(() => setOpenEditModal(false), []);
 
-  const handleSave = (value: string) => {
-    setOpenEditModal(false);
-    setOpenSpinner(true);
-    const nextMarker = param.read ? param.read.marker + 1 : undefined;
-    if (nextMarker) {
-      const paramToUpdate = JSON.parse(JSON.stringify(param));
-      if (paramToUpdate.read) {
-        paramToUpdate.read.marker = nextMarker;
-        paramToUpdate.value = stringToParamValue(value, param.paramType);
-        setNexMarker(nextMarker);
-        writeParam(paramToUpdate);
+  const handleSave = useCallback(
+    (value: string) => {
+      setOpenEditModal(false);
+      setOpenSpinner(true);
+      const nextMarker = param.read ? param.read.marker + 1 : undefined;
+      if (nextMarker) {
+        const paramToUpdate = JSON.parse(JSON.stringify(param));
+        if (paramToUpdate.read) {
+          paramToUpdate.read.marker = nextMarker;
+          paramToUpdate.value = stringToParamValue(value, param.paramType);
+          setNexMarker(nextMarker);
+          writeParam(paramToUpdate);
+        }
       }
-    }
-  };
+    },
+    [param, writeParam],
+  );
 
   const handleToasterClose = () => setShowToaster(false);
 
@@ -116,13 +125,14 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         <Grid item xs={12}>
           <Card variant="elevation" className={classes.cardContainer}>
             <CardHeader
+              className={classes.cardHeader}
               avatar={
                 <Avatar className={classes.avatar} variant="square">
                   {param.paramId}
                 </Avatar>
               }
               title={
-                <Typography variant="h5">
+                <Typography variant="h3" className={classes.title}>
                   {param.name[currentLanguage]}
                 </Typography>
               }
@@ -138,16 +148,21 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
               <Grid item container>
                 <FormControl fullWidth>
                   <TextField
-                    label="Value"
+                    label={t('RESOURCE.PARAM_DETAIL.FIELDS.VALUE.LABEL')}
                     value={
                       param.value ? `${param.value} ${param.unit}` : ' -- '
                     }
                     onClick={handleClickInput}
                     placeholder=""
+                    InputProps={{
+                      classes: {
+                        input: classes.value,
+                      },
+                    }}
                     InputLabelProps={{
                       shrink: true,
                       classes: {
-                        root: classes.valueLabel,
+                        root: classes.label,
                       },
                     }}
                   />
@@ -157,14 +172,19 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                 <FormControl disabled fullWidth>
                   <TextField
                     className={classes.description}
-                    label="Description"
-                    defaultValue={param.description[currentLanguage]}
+                    label={t('RESOURCE.PARAM_DETAIL.FIELDS.DESCRIPTION.LABEL')}
+                    value={param.description[currentLanguage]}
                     placeholder=""
                     multiline
+                    InputProps={{
+                      classes: {
+                        input: classes.value,
+                      },
+                    }}
                     InputLabelProps={{
                       shrink: true,
                       classes: {
-                        root: classes.valueLabel,
+                        root: classes.label,
                       },
                     }}
                   />
@@ -175,7 +195,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         </Grid>
       </Grid>
       {openEditModal && (
-        <AhfParamEditContainer
+        <AhfParamEditContainerMemoized
           param={param}
           onClose={handleEditClose}
           onSave={handleSave}

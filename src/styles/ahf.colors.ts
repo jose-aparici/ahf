@@ -8,6 +8,7 @@ export const AHF_COLORS = {
       primary: '#000000',
       secondary: '#ffffff',
     },
-    background: '#f5f5f5',
+    background: '#f0f0f0',
   },
+  grey1: '#a3a3a3',
 };

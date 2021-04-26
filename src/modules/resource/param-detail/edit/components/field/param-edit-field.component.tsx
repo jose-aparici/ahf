@@ -21,7 +21,7 @@ interface Props {
   onFocus: (value: string) => void;
   onChange: (value: string) => void;
 }
-const AhfParamEditFieldComponent: React.FC<Props> = ({
+export const AhfParamEditFieldComponent: React.FC<Props> = ({
   type,
   value,
   values,
@@ -101,7 +101,3 @@ const AhfParamEditFieldComponent: React.FC<Props> = ({
 
   return <>{renderEditComponent()}</>;
 };
-
-export const AhfParamEditFieldComponentMemoized = React.memo(
-  AhfParamEditFieldComponent,
-);
