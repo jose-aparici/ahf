@@ -18,12 +18,8 @@ export const useParamDetailContainerStyles = makeStyles((theme: Theme) => ({
   description: {
     marginTop: '16px',
   },
-  value: {
-    textAlign: 'center',
-    fontSize: '40px',
-    fontWeight: 'bold',
-    [theme.breakpoints.down('md')]: {
-      fontSize: '16px',
-    },
+
+  valueLabel: {
+    color: 'black',
   },
 }));

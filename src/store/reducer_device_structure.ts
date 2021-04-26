@@ -2,12 +2,49 @@ import { flatten } from 'flattree';
 
 import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
 import { AhfFolderData } from 'domain/ahf-folder/ahf-folder.types';
-import { AhfParam } from 'domain/ahf-param/ahf-param.types';
+import { AhfParam, AhfParamType } from 'domain/ahf-param/ahf-param.types';
 import { Folder } from 'domain/folder/folder.types';
-import { Param } from 'domain/param/param.types';
+import { Param, ParamType } from 'domain/param/param.types';
 
 import { AppRoutes } from '../pages/App.routes';
 import { State } from './initialState';
+
+const transformAhfParamTypeToParamType = (
+  ahfParamType: AhfParamType,
+  ahfParamId: number,
+  enumCount: number,
+): ParamType => {
+  if (enumCount > 0) {
+    return ParamType.ENUM;
+  }
+
+  if (ahfParamId === 240 || ahfParamId === 242 || ahfParamId === 243) {
+    return ParamType.IP;
+  }
+
+  if (ahfParamId === 8) {
+    return ParamType.MAC;
+  }
+
+  switch (ahfParamType) {
+    case 'SignedInteger_8':
+    case 'SignedInteger_16':
+    case 'SignedInteger_32':
+      return ParamType.SIGNED_INTEGER;
+    case 'UnsignedInteger_8':
+    case 'UnsignedInteger_16':
+    case 'UnsignedInteger_32':
+      return ParamType.UNSIGNED_INTEGER;
+    case 'SinglePrecisionFloatingPoint':
+      return ParamType.FLOATING_POINT;
+    case 'VisibleString':
+      return ParamType.STRING;
+    case 'Date':
+      return ParamType.DATE;
+    default:
+      return ParamType.STRING;
+  }
+};
 
 const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
   ahfParams.map(
@@ -19,7 +56,11 @@ const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
         paramEnumNumb: ahfParam.ParamEnumNumb,
         paramEnumText: ahfParam.ParamEnumText,
         paramId: ahfParam.ParamID,
-        paramType: ahfParam.ParamType,
+        paramType: transformAhfParamTypeToParamType(
+          ahfParam.ParamType,
+          ahfParam.ParamID,
+          ahfParam.ParamEnumNumb,
+        ),
         unit: ahfParam.Unit,
         value: ahfParam.Value,
       } as unknown) as Param),

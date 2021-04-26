@@ -50,6 +50,7 @@ export const useSocketHook = (): SocketHook => {
 
   const writeParam = useCallback((param: Param) => {
     param.read &&
+      param.value !== undefined &&
       AhfSocket.getInstance().next({
         Cmd: AhfCommand.PARAM_DETAIL,
         Data: {
@@ -58,7 +59,7 @@ export const useSocketHook = (): SocketHook => {
           Marker: param.read.marker,
           ParamID: param.paramId,
           ParamPos: param.read.paramPos,
-          Value: param.value as string,
+          Value: param.value,
         },
       });
   }, []);

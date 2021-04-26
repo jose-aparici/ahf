@@ -4,6 +4,7 @@ import { State } from 'store/initialState';
 import { deviceStructureReducer } from 'store/reducer_device_structure';
 
 import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
+import { ParamType } from 'domain/param/param.types';
 
 describe('reducer device structure', () => {
   it('should set device structure', () => {
@@ -44,7 +45,7 @@ describe('reducer device structure', () => {
                         paramEnumNumb: 1,
                         paramEnumText: ['1'],
                         paramId: 2,
-                        paramType: 'paramType1',
+                        paramType: ParamType.ENUM,
                         unit: 'unit1',
                         value: 'value1',
                       },
@@ -62,7 +63,7 @@ describe('reducer device structure', () => {
                 paramEnumNumb: 1,
                 paramEnumText: ['1'],
                 paramId: 1,
-                paramType: 'paramType1',
+                paramType: ParamType.ENUM,
                 unit: 'unit1',
                 value: 'value1',
               },
