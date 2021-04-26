@@ -1,5 +1,6 @@
 import i18n from 'i18n';
 import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
 
 import {
@@ -10,6 +11,7 @@ import {
   FormControl,
   Grid,
   GridList,
+  Typography,
 } from '@material-ui/core';
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
@@ -43,6 +45,8 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   onSave,
 }: Props) => {
   const classes = useParamEditContainerStyles();
+  const { t } = useTranslation();
+
   const keyboardRef = useRef<Keyboard>(null);
 
   const [input, setInput] = useState(() => {
@@ -87,7 +91,13 @@ export const AhfParamEditContainer: React.FC<Props> = ({
           <div className={classes.leftContainer}>
             <DialogTitle className={classes.title}>
               {param.name[currentLanguage]}
+              {error && (
+                <Typography variant="h4" className={classes.error}>
+                  {t(error.text)}
+                </Typography>
+              )}
             </DialogTitle>
+
             <DialogActions className={classes.buttons}>
               <Button
                 variant="contained"

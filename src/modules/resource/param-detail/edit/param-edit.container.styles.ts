@@ -23,6 +23,9 @@ export const useParamEditContainerStyles = makeStyles(() => ({
   title: {
     padding: 0,
   },
+  error: {
+    color: '#f44336',
+  },
   buttons: {
     padding: 0,
     alignItems: 'flex-end',
