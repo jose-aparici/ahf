@@ -7,4 +7,8 @@ export const useParamEditFieldComponentStyles = makeStyles(() => ({
   radio: {
     color: 'black',
   },
+  textField: {
+    fontSize: '42px',
+    padding: '4px 4px 0px',
+  },
 }));

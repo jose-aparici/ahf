@@ -3,11 +3,12 @@ import { makeStyles } from '@material-ui/core';
 export const useParamEditContainerStyles = makeStyles(() => ({
   dialogContainer: {
     margin: '8px',
-    maxWidth: '630px',
+    maxWidth: '695px',
   },
   mainGrid: {
     padding: '4px',
     minHeight: '120px',
+    flexWrap: 'nowrap',
   },
   leftGrid: {
     padding: '4px',

@@ -70,16 +70,19 @@ const AhfParamEditFieldComponent: React.FC<Props> = ({
       case ParamType.UNSIGNED_INTEGER:
       case ParamType.SIGNED_INTEGER:
       case ParamType.STRING:
+      case ParamType.MAC:
       case ParamType.IP:
         return (
           <TextField
             autoFocus
+            className={classes.textField}
             value={value}
             variant="filled"
             type="string"
             onFocus={() => onFocus(value)}
             error={error ? true : false}
             helperText={error && t(error.text)}
+            InputProps={{ classes: { input: classes.textField } }}
           />
         );
 
@@ -87,12 +90,14 @@ const AhfParamEditFieldComponent: React.FC<Props> = ({
         return (
           <TextField
             autoFocus
+            className={classes.textField}
             value={value}
             variant="filled"
             type="string"
             onFocus={() => onFocus(value)}
             error={error ? true : false}
             helperText={error && t(error.text)}
+            InputProps={{ classes: { input: classes.textField } }}
           />
         );
     }
