@@ -10,6 +10,6 @@ export const useFooterContainerStyles = makeStyles((theme: Theme) => ({
     padding: '0 24px',
   },
   text: {
-    color: theme.palette.text.secondary,
+    color: theme.palette.background.default,
   },
 }));
