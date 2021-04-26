@@ -1,5 +1,5 @@
 import i18n from 'i18n';
-import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
 import {
@@ -17,16 +17,7 @@ import SaveIcon from '@material-ui/icons/Save';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamError, ParamType } from 'domain/param/param.types';
-import {
-  isKeyboardType,
-  isNumericType,
-  validateValue,
-} from 'domain/param/param.utils';
-import {
-  LAYOUT_TYPE,
-  LAYOUTS,
-} from 'domain/virtual-keyboard/virtual-keyboard.constants';
-import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
+import { validateValue } from 'domain/param/param.utils';
 
 import { AhfParamEditFieldComponentMemoized } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
@@ -83,33 +74,38 @@ export const AhfParamEditContainer: React.FC<Props> = ({
       classes={{ paper: classes.dialogContainer }}
     >
       <Grid container className={classes.mainGrid}>
-        <Grid item container xs={5} className={classes.leftContainer}>
-          <DialogTitle className={classes.title}>
-            {param.name[currentLanguage]}
-          </DialogTitle>
-          <DialogActions className={classes.buttons}>
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<CancelIcon />}
-              onClick={onClose}
-            >
-              Cancel
-            </Button>
-            <Button
-              variant="contained"
-              size="large"
-              startIcon={<SaveIcon />}
-              onClick={handleEnter}
-            >
-              Save
-            </Button>
-          </DialogActions>
+        <Grid item xs className={classes.leftGrid}>
+          <div className={classes.leftContainer}>
+            <DialogTitle className={classes.title}>
+              {param.name[currentLanguage]}
+            </DialogTitle>
+            <DialogActions className={classes.buttons}>
+              <Button
+                variant="contained"
+                size="large"
+                startIcon={<CancelIcon />}
+                onClick={onClose}
+              >
+                Cancel
+              </Button>
+              <Button
+                variant="contained"
+                size="large"
+                startIcon={<SaveIcon />}
+                onClick={handleEnter}
+              >
+                Save
+              </Button>
+            </DialogActions>
+          </div>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs justify="space-around">
           {param.paramType === ParamType.ENUM && (
             <GridList cols={1} className={classes.gridList}>
-              <FormControl style={{ height: '100%' }}>
+              <FormControl
+                style={{ height: '100%' }}
+                className={classes.formControl}
+              >
                 <AhfParamEditFieldComponentMemoized
                   type={param.paramType}
                   value={input}
@@ -120,33 +116,6 @@ export const AhfParamEditContainer: React.FC<Props> = ({
                 />
               </FormControl>
             </GridList>
-          )}
-          {param.paramType !== ParamType.ENUM && (
-            <>
-              <FormControl fullWidth>
-                <AhfParamEditFieldComponentMemoized
-                  type={param.paramType}
-                  value={input}
-                  values={param.paramEnumText}
-                  error={error}
-                  onFocus={handleValueFocus}
-                  onChange={handleParamChange}
-                />
-              </FormControl>
-              {isKeyboardType(param.paramType) && (
-                <AhfVirtualKeyboardComponent
-                  keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
-                  layout={
-                    isNumericType(param.paramType)
-                      ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
-                      : LAYOUTS.ENGLISH
-                  }
-                  onChange={handleParamChange}
-                  onEnter={handleEnter}
-                  input={input}
-                />
-              )}
-            </>
           )}
         </Grid>
       </Grid>
