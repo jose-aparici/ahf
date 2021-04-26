@@ -6,5 +6,8 @@ export const useParamEditFieldComponentStyles = makeStyles(() => ({
   },
   radio: {
     color: 'black',
+    '&$checked': {
+      color: 'black',
+    },
   },
 }));

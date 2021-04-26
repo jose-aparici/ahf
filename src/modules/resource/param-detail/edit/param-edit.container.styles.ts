@@ -10,7 +10,7 @@ export const useParamEditContainerStyles = makeStyles(() => ({
     minHeight: '120px',
   },
   leftGrid: {
-    padding: '8px',
+    padding: '4px',
   },
   leftContainer: {
     height: '100%',
@@ -25,6 +25,9 @@ export const useParamEditContainerStyles = makeStyles(() => ({
   buttons: {
     padding: 0,
     alignItems: 'flex-end',
+  },
+  rightGrid: {
+    paddingBottom: '2px',
   },
   gridList: {
     maxHeight: '400px',

@@ -52,7 +52,7 @@ const AhfParamEditFieldComponent: React.FC<Props> = ({
           <RadioGroup
             value={value}
             onChange={(_, value) => onChange(value)}
-            classes={{ root: classes.radioGroup }}
+            className={classes.radioGroup}
           >
             {values.map((value, index) => {
               return (

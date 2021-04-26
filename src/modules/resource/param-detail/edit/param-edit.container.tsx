@@ -1,5 +1,5 @@
 import i18n from 'i18n';
-import React, { useCallback, useRef, useState } from 'react';
+import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
 import Keyboard from 'react-simple-keyboard';
 
 import {
@@ -17,7 +17,16 @@ import SaveIcon from '@material-ui/icons/Save';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamError, ParamType } from 'domain/param/param.types';
-import { validateValue } from 'domain/param/param.utils';
+import {
+  isKeyboardType,
+  isNumericType,
+  validateValue,
+} from 'domain/param/param.utils';
+import {
+  LAYOUT_TYPE,
+  LAYOUTS,
+} from 'domain/virtual-keyboard/virtual-keyboard.constants';
+import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
 import { AhfParamEditFieldComponentMemoized } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
@@ -99,7 +108,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             </DialogActions>
           </div>
         </Grid>
-        <Grid item xs justify="space-around">
+        <Grid item xs className={classes.rightGrid}>
           {param.paramType === ParamType.ENUM && (
             <GridList cols={1} className={classes.gridList}>
               <FormControl
@@ -116,6 +125,33 @@ export const AhfParamEditContainer: React.FC<Props> = ({
                 />
               </FormControl>
             </GridList>
+          )}
+          {param.paramType !== ParamType.ENUM && (
+            <>
+              <FormControl fullWidth>
+                <AhfParamEditFieldComponentMemoized
+                  type={param.paramType}
+                  value={input}
+                  values={param.paramEnumText}
+                  error={error}
+                  onFocus={handleValueFocus}
+                  onChange={handleParamChange}
+                />
+              </FormControl>
+              {isKeyboardType(param.paramType) && (
+                <AhfVirtualKeyboardComponent
+                  keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
+                  layout={
+                    isNumericType(param.paramType)
+                      ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
+                      : LAYOUTS.ENGLISH
+                  }
+                  onChange={handleParamChange}
+                  onEnter={handleEnter}
+                  input={input}
+                />
+              )}
+            </>
           )}
         </Grid>
       </Grid>
