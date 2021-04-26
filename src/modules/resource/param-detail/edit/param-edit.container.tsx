@@ -98,7 +98,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 startIcon={<CancelIcon />}
                 onClick={onClose}
               >
-                Cancel
+                {t('RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.CANCEL')}
               </Button>
               <Button
                 variant="contained"
@@ -106,7 +106,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 startIcon={<SaveIcon />}
                 onClick={handleEnter}
               >
-                Save
+                {t('RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.SAVE')}
               </Button>
             </DialogActions>
           </div>

@@ -3,8 +3,12 @@
   "RESOURCE": {
     "PARAM_DETAIL": {
       "EDIT": {
+        "BUTTONS": {
+          "CANCEL": "Cancel",
+          "SAVE": "Save"
+        },
         "ERRORS": {
-          "EMPTY": "Value mus be provided",
+          "EMPTY": "Value must be provided",
           "FORMAT": "Format is not valid"
         }
       },
