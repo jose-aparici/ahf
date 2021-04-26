@@ -4,6 +4,7 @@ import React from 'react';
 
 import {
   Card,
+  CardActions,
   CardContent,
   CircularProgress,
   Typography,
@@ -32,26 +33,27 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
     >
       <CardContent className={classes.contentContainer}>
         <div className={classes.titleContainer}>
-          <Typography variant="h2">
-            {deviceInfo.type} - {deviceInfo.id.toString().padStart(3, '0')}
-          </Typography>
+          <Typography variant="h2">{deviceInfo.type}</Typography>
           {deviceInfo.status === 0 ? (
-            <CircularProgress size={24} color="primary" />
+            <CircularProgress size={35} thickness={2} color="primary" />
           ) : (
             <CheckCircleIcon fontSize="large" htmlColor={'#42be65'} />
           )}
         </div>
-        <div className={classes.infoContainer}>
-          <Typography variant="h3">{deviceInfo.fw}</Typography>
-          <div className={classes.deviceIconContainer}>
-            {deviceInfo.type === DeviceType.ACTIVE_HARMONIC_FILER ? (
-              <AhfHarmonicFilterSvg />
-            ) : (
-              <SyncModuleSvg />
-            )}
-          </div>
-        </div>
+        <Typography variant="h2" display="inline">
+          {`${deviceInfo.id.toString().padStart(3, '0')} `}
+        </Typography>
+        <Typography variant="h3" display="inline">
+          {deviceInfo.fw}
+        </Typography>
       </CardContent>
+      <CardActions classes={{ root: classes.iconContainer }}>
+        {deviceInfo.type === DeviceType.ACTIVE_HARMONIC_FILER ? (
+          <AhfHarmonicFilterSvg />
+        ) : (
+          <SyncModuleSvg />
+        )}
+      </CardActions>
     </Card>
   );
 };

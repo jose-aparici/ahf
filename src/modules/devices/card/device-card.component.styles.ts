@@ -6,6 +6,7 @@ export const useAhfDeviceCardComponentStyles = makeStyles(() => ({
     flexDirection: 'column',
   },
   contentContainer: {
+    height: '100%',
     cursor: 'pointer',
     padding: '12px 16px 8px 16px',
     '&:last-child': {
@@ -16,15 +17,7 @@ export const useAhfDeviceCardComponentStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
-  infoContainer: {
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-  },
-  deviceIconContainer: {
-    display: 'flex',
-    alignItems: 'center',
+  iconContainer: {
     justifyContent: 'flex-end',
   },
 }));
