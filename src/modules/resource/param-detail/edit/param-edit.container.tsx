@@ -83,7 +83,10 @@ const AhfParamEditContainer: React.FC<Props> = ({
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
             <DialogTitle className={classes.title}>
-              {param.name[currentLanguage]}
+              <Typography variant="h3">
+                {param.name[currentLanguage]}
+              </Typography>
+
               {error && (
                 <Typography variant="body1" className={classes.error}>
                   {t(error.text)}
