@@ -85,7 +85,10 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     }
   }, [openSpinner]);
 
-  const handleClickInput = () => param.value && setOpenEditModal(true);
+  const handleClickInput = () =>
+    param.value &&
+    param.accessType === AccessType.READ_WRITE &&
+    setOpenEditModal(true);
 
   const handleEditClose = () => setOpenEditModal(false);
 
