@@ -7,6 +7,9 @@ export const useParamDetailContainerStyles = makeStyles((theme: Theme) => ({
   cardContainer: {
     minHeight: '100%',
   },
+  cardHeader: {
+    paddingBottom: '0',
+  },
   avatar: {
     backgroundColor: theme.palette.background.default,
     color: theme.palette.primary.main,

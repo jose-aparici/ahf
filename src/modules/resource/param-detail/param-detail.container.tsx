@@ -125,6 +125,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         <Grid item xs={12}>
           <Card variant="elevation" className={classes.cardContainer}>
             <CardHeader
+              className={classes.cardHeader}
               avatar={
                 <Avatar className={classes.avatar} variant="square">
                   {param.paramId}
