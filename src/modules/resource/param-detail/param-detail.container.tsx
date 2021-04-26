@@ -1,6 +1,12 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+} from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -27,7 +33,7 @@ import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previo
 import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
 
 import { AhfResourceContext } from '../store/context';
-import { AhfParamEditContainer } from './edit/param-edit.container';
+import { AhfParamEditContainerMemoized } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 import { useParamNavigation } from './param-navigation.hook';
 
@@ -90,22 +96,25 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     param.accessType === AccessType.READ_WRITE &&
     setOpenEditModal(true);
 
-  const handleEditClose = () => setOpenEditModal(false);
+  const handleEditClose = useCallback(() => setOpenEditModal(false), []);
 
-  const handleSave = (value: string) => {
-    setOpenEditModal(false);
-    setOpenSpinner(true);
-    const nextMarker = param.read ? param.read.marker + 1 : undefined;
-    if (nextMarker) {
-      const paramToUpdate = JSON.parse(JSON.stringify(param));
-      if (paramToUpdate.read) {
-        paramToUpdate.read.marker = nextMarker;
-        paramToUpdate.value = stringToParamValue(value, param.paramType);
-        setNexMarker(nextMarker);
-        writeParam(paramToUpdate);
+  const handleSave = useCallback(
+    (value: string) => {
+      setOpenEditModal(false);
+      setOpenSpinner(true);
+      const nextMarker = param.read ? param.read.marker + 1 : undefined;
+      if (nextMarker) {
+        const paramToUpdate = JSON.parse(JSON.stringify(param));
+        if (paramToUpdate.read) {
+          paramToUpdate.read.marker = nextMarker;
+          paramToUpdate.value = stringToParamValue(value, param.paramType);
+          setNexMarker(nextMarker);
+          writeParam(paramToUpdate);
+        }
       }
-    }
-  };
+    },
+    [param, writeParam],
+  );
 
   const handleToasterClose = () => setShowToaster(false);
 
@@ -175,7 +184,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         </Grid>
       </Grid>
       {openEditModal && (
-        <AhfParamEditContainer
+        <AhfParamEditContainerMemoized
           param={param}
           onClose={handleEditClose}
           onSave={handleSave}

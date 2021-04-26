@@ -1,5 +1,5 @@
 import i18n from 'i18n';
-import React, { MutableRefObject, useCallback, useRef, useState } from 'react';
+import React, { MutableRefObject, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
 
@@ -30,7 +30,7 @@ import {
 } from 'domain/virtual-keyboard/virtual-keyboard.constants';
 import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
-import { AhfParamEditFieldComponentMemoized } from './components/field/param-edit-field.component';
+import { AhfParamEditFieldComponent } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
@@ -39,7 +39,7 @@ interface Props {
   onSave: (value: string) => void;
 }
 
-export const AhfParamEditContainer: React.FC<Props> = ({
+const AhfParamEditContainer: React.FC<Props> = ({
   param,
   onClose,
   onSave,
@@ -60,23 +60,16 @@ export const AhfParamEditContainer: React.FC<Props> = ({
   });
   const [error, setError] = useState<ParamError | undefined>(undefined);
 
-  const handleParamChange = useCallback(
-    (value: string) => {
-      setInput(value);
-      setError(validateValue(param.paramType, value));
-    },
-    [param.paramType],
-  );
-
+  const handleParamChange = (value: string) => {
+    setInput(value);
+    setError(validateValue(param.paramType, value));
+  };
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const handleValueFocus = useCallback(
-    (value: string) => {
-      setError(validateValue(param.paramType, value));
-    },
-    [param.paramType],
-  );
+  const handleValueFocus = (value: string) => {
+    setError(validateValue(param.paramType, value));
+  };
 
   const handleEnter = () => !error && onSave(input);
 
@@ -92,7 +85,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
             <DialogTitle className={classes.title}>
               {param.name[currentLanguage]}
               {error && (
-                <Typography variant="h4" className={classes.error}>
+                <Typography variant="body1" className={classes.error}>
                   {t(error.text)}
                 </Typography>
               )}
@@ -125,7 +118,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
                 style={{ height: '100%' }}
                 className={classes.formControl}
               >
-                <AhfParamEditFieldComponentMemoized
+                <AhfParamEditFieldComponent
                   type={param.paramType}
                   value={input}
                   values={param.paramEnumText}
@@ -139,7 +132,7 @@ export const AhfParamEditContainer: React.FC<Props> = ({
           {param.paramType !== ParamType.ENUM && (
             <>
               <FormControl fullWidth>
-                <AhfParamEditFieldComponentMemoized
+                <AhfParamEditFieldComponent
                   type={param.paramType}
                   value={input}
                   values={param.paramEnumText}
@@ -168,3 +161,5 @@ export const AhfParamEditContainer: React.FC<Props> = ({
     </Dialog>
   );
 };
+
+export const AhfParamEditContainerMemoized = React.memo(AhfParamEditContainer);
