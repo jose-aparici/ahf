@@ -30,7 +30,7 @@ export const AhfParamCardComponent: React.FC<Props> = ({
           <Avatar className={classes.avatar} variant="square">
             {param.paramId}
           </Avatar>
-          <Typography>{param.name[currentLanguage]}</Typography>
+          <Typography variant="h6">{param.name[currentLanguage]}</Typography>
           {param.accessType === AccessType.READ_WRITE && (
             <EditIcon className={classes.editIcon} />
           )}
