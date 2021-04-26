@@ -83,7 +83,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
             <DialogTitle className={classes.title}>
-              <Typography variant="h3">
+              <Typography variant="h2">
                 {param.name[currentLanguage]}
               </Typography>
 
@@ -96,7 +96,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
 
             <DialogActions className={classes.buttons}>
               <Button
-                variant="contained"
+                variant="outlined"
                 size="large"
                 startIcon={<CancelIcon />}
                 onClick={onClose}
@@ -104,7 +104,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 {t('RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.CANCEL')}
               </Button>
               <Button
-                variant="contained"
+                variant="outlined"
                 size="large"
                 startIcon={<SaveIcon />}
                 onClick={handleEnter}
