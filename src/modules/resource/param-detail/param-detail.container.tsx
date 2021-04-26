@@ -147,7 +147,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
               <Grid item container>
                 <FormControl fullWidth>
                   <TextField
-                    label="Value"
+                    label={t('RESOURCE.PARAM_DETAIL.FIELDS.VALUE.LABEL')}
                     value={
                       param.value ? `${param.value} ${param.unit}` : ' -- '
                     }
@@ -166,7 +166,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                 <FormControl disabled fullWidth>
                   <TextField
                     className={classes.description}
-                    label="Description"
+                    label={t('RESOURCE.PARAM_DETAIL.FIELDS.DESCRIPTION.LABEL')}
                     value={param.description[currentLanguage]}
                     placeholder=""
                     multiline

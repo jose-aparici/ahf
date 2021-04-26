@@ -12,6 +12,14 @@
           "FORMAT": "Format is not valid"
         }
       },
+      "FIELDS": {
+        "VALUE": {
+          "LABEL": "Value"
+        },
+        "DESCRIPTION": {
+          "LABEL": "Description"
+        }
+      },
       "SAVE": {
         "SUCCESS": "Saved",
         "WARNING": "Device did not respond, value could be not be saved"
