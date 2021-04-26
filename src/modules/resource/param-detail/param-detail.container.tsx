@@ -131,7 +131,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                 </Avatar>
               }
               title={
-                <Typography variant="h5">
+                <Typography variant="h3" className={classes.title}>
                   {param.name[currentLanguage]}
                 </Typography>
               }
@@ -153,10 +153,15 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                     }
                     onClick={handleClickInput}
                     placeholder=""
+                    InputProps={{
+                      classes: {
+                        input: classes.value,
+                      },
+                    }}
                     InputLabelProps={{
                       shrink: true,
                       classes: {
-                        root: classes.valueLabel,
+                        root: classes.label,
                       },
                     }}
                   />
@@ -170,10 +175,15 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                     value={param.description[currentLanguage]}
                     placeholder=""
                     multiline
+                    InputProps={{
+                      classes: {
+                        input: classes.value,
+                      },
+                    }}
                     InputLabelProps={{
                       shrink: true,
                       classes: {
-                        root: classes.valueLabel,
+                        root: classes.label,
                       },
                     }}
                   />

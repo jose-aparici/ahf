@@ -9,17 +9,23 @@ export const useParamDetailContainerStyles = makeStyles((theme: Theme) => ({
   },
   avatar: {
     backgroundColor: theme.palette.background.default,
-    marginRight: '12px',
     color: theme.palette.primary.main,
     fontWeight: 'bold',
-    width: '50px',
-    height: '50px',
+    width: '40px',
+    height: '32px',
+    borderRadius: '3px',
+  },
+  title: {
+    fontWeight: 'bold',
+    color: theme.palette.primary.main,
   },
   description: {
     marginTop: '16px',
   },
-
-  valueLabel: {
+  label: {
     color: 'black',
+  },
+  value: {
+    fontSize: '18px',
   },
 }));
