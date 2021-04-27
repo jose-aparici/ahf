@@ -27,7 +27,7 @@ export const useParamEditContainerStyles = makeStyles(() => ({
     color: '#f44336',
   },
   buttons: {
-    padding: 0,
+    padding: '16px 0 0 0',
     alignItems: 'flex-end',
   },
   rightGrid: {
