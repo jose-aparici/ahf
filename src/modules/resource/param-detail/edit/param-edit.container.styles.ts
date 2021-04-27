@@ -42,7 +42,7 @@ export const useParamEditContainerStyles = makeStyles(() => ({
     justifyContent: 'space-between',
   },
   keyboardContainer: {
-    marginTop: 'auto',
+    width: '600px',
   },
   inputField: {
     fontSize: '30px',

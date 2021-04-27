@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import DateFnsUtils from '@date-io/date-fns';
 import {
@@ -30,6 +31,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
   onChange,
 }: Props) => {
   const classes = useParamEditFieldComponentStyles();
+  const { t } = useTranslation();
 
   const renderEditComponent = () => {
     switch (type) {
@@ -79,6 +81,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
             type="string"
             onFocus={() => onFocus(value)}
             error={error ? true : false}
+            helperText={error && t(error.text)}
             InputProps={{ classes: { input: classes.textField } }}
           />
         );
