@@ -33,16 +33,16 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
     >
       <CardContent className={classes.contentContainer}>
         <div className={classes.titleContainer}>
-          <Typography variant="h2">{deviceInfo.type}</Typography>
+          <Typography variant="h2">{`${
+            deviceInfo.type
+          } - ${deviceInfo.id.toString().padStart(3, '0')}`}</Typography>
           {deviceInfo.status === 0 ? (
             <CircularProgress size={35} thickness={2} color="primary" />
           ) : (
             <CheckCircleIcon fontSize="large" htmlColor={'#42be65'} />
           )}
         </div>
-        <Typography variant="h2" display="inline">
-          {`${deviceInfo.id.toString().padStart(3, '0')} `}
-        </Typography>
+
         <Typography variant="h3" display="inline">
           {deviceInfo.fw}
         </Typography>
