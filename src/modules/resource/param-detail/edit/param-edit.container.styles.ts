@@ -27,7 +27,7 @@ export const useParamEditContainerStyles = makeStyles(() => ({
     color: '#f44336',
   },
   buttons: {
-    padding: 0,
+    padding: '16px 0 0 0',
     alignItems: 'flex-end',
   },
   rightGrid: {
@@ -42,7 +42,7 @@ export const useParamEditContainerStyles = makeStyles(() => ({
     justifyContent: 'space-between',
   },
   keyboardContainer: {
-    marginTop: 'auto',
+    width: '600px',
   },
   inputField: {
     fontSize: '30px',

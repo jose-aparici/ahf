@@ -82,17 +82,39 @@ const AhfParamEditContainer: React.FC<Props> = ({
       <Grid container className={classes.mainGrid}>
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
-            <DialogTitle className={classes.title}>
-              <Typography variant="h2">
-                {param.name[currentLanguage]}
-              </Typography>
-
-              {error && (
-                <Typography variant="body1" className={classes.error}>
-                  {t(error.text)}
+            {!isKeyboardType(param.paramType) && (
+              <DialogTitle className={classes.title}>
+                <Typography variant="h2">
+                  {param.name[currentLanguage]}
                 </Typography>
-              )}
-            </DialogTitle>
+              </DialogTitle>
+            )}
+
+            {isKeyboardType(param.paramType) && (
+              <div className={classes.keyboardContainer}>
+                <FormControl fullWidth>
+                  <AhfParamEditFieldComponent
+                    type={param.paramType}
+                    value={input}
+                    values={param.paramEnumText}
+                    error={error}
+                    onFocus={handleValueFocus}
+                    onChange={handleParamChange}
+                  />
+                </FormControl>
+                <AhfVirtualKeyboardComponent
+                  keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
+                  layout={
+                    isNumericType(param.paramType)
+                      ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
+                      : LAYOUTS.ENGLISH
+                  }
+                  onChange={handleParamChange}
+                  onEnter={handleEnter}
+                  input={input}
+                />
+              </div>
+            )}
 
             <DialogActions className={classes.buttons}>
               <Button
@@ -114,52 +136,40 @@ const AhfParamEditContainer: React.FC<Props> = ({
             </DialogActions>
           </div>
         </Grid>
-        <Grid item xs className={classes.rightGrid}>
-          {param.paramType === ParamType.ENUM && (
-            <GridList cols={1} className={classes.gridList}>
-              <FormControl
-                style={{ height: '100%' }}
-                className={classes.formControl}
-              >
-                <AhfParamEditFieldComponent
-                  type={param.paramType}
-                  value={input}
-                  values={param.paramEnumText}
-                  error={error}
-                  onFocus={handleValueFocus}
-                  onChange={handleParamChange}
-                />
-              </FormControl>
-            </GridList>
-          )}
-          {param.paramType !== ParamType.ENUM && (
-            <>
-              <FormControl fullWidth>
-                <AhfParamEditFieldComponent
-                  type={param.paramType}
-                  value={input}
-                  values={param.paramEnumText}
-                  error={error}
-                  onFocus={handleValueFocus}
-                  onChange={handleParamChange}
-                />
-              </FormControl>
-              {isKeyboardType(param.paramType) && (
-                <AhfVirtualKeyboardComponent
-                  keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
-                  layout={
-                    isNumericType(param.paramType)
-                      ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
-                      : LAYOUTS.ENGLISH
-                  }
-                  onChange={handleParamChange}
-                  onEnter={handleEnter}
-                  input={input}
-                />
-              )}
-            </>
-          )}
-        </Grid>
+
+        {param.paramType === ParamType.ENUM && (
+          <Grid item xs className={classes.rightGrid}>
+            {param.paramType === ParamType.ENUM && (
+              <GridList cols={1} className={classes.gridList}>
+                <FormControl
+                  style={{ height: '100%' }}
+                  className={classes.formControl}
+                >
+                  <AhfParamEditFieldComponent
+                    type={param.paramType}
+                    value={input}
+                    values={param.paramEnumText}
+                    error={error}
+                    onFocus={handleValueFocus}
+                    onChange={handleParamChange}
+                  />
+                </FormControl>
+              </GridList>
+            )}
+          </Grid>
+        )}
+        {param.paramType === ParamType.DATE && (
+          <FormControl fullWidth>
+            <AhfParamEditFieldComponent
+              type={param.paramType}
+              value={input}
+              values={param.paramEnumText}
+              error={error}
+              onFocus={handleValueFocus}
+              onChange={handleParamChange}
+            />
+          </FormControl>
+        )}
       </Grid>
     </Dialog>
   );

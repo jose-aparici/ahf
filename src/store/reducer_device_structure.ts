@@ -70,9 +70,9 @@ const transformFolderDataToNode = (
   folderData: AhfFolderData,
   previousPath: string,
   deviceId: string,
-): Folder[] =>
-  Object.entries(folderData).map((entry) => ({
-    id: `${previousPath}/${entry[0]}`,
+): Folder[] => {
+  return Object.entries(folderData).map((entry) => ({
+    id: entry[0] === '' ? `${previousPath}/ ` : `${previousPath}/${entry[0]}`,
     label: entry[0],
     deviceId: deviceId,
     isMainFolder: false,
@@ -87,6 +87,7 @@ const transformFolderDataToNode = (
         )
       : [],
   }));
+};
 
 const transformStructureToNode = (structure: AhfDeviceStructure) =>
   Object.entries(structure.FolderData).reduce(
