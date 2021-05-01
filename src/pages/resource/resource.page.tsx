@@ -12,6 +12,8 @@ import { AhfResourceContainer } from 'modules/resource/resource.container';
 import { AhfResourceProvider } from 'modules/resource/store/context';
 import { AhfPage } from 'pages/ahf.page';
 
+import { useResourcePageStyles } from './resource.page.styles';
+
 interface ParamTypes {
   deviceId: string;
 }
@@ -19,6 +21,7 @@ interface ParamTypes {
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
 export const AhfResourcePage: React.FC = () => {
+  const classes = useResourcePageStyles();
   const { url } = useRouteMatch();
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
@@ -62,7 +65,7 @@ export const AhfResourcePage: React.FC = () => {
     const { index, key } = params;
     if (currentResource && index === currentIndex) {
       return (
-        <div key={key} style={{ minHeight: '395px' }}>
+        <div key={key} className={classes.slide}>
           {transition !== Transition.EMPTY ? (
             <div>loading</div>
           ) : (
