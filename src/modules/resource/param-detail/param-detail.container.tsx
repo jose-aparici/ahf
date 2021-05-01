@@ -1,12 +1,6 @@
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -28,14 +22,10 @@ import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AccessType, Param } from 'domain/param/param.types';
 import { stringToParamValue } from 'domain/param/param.utils';
-import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
-import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
 
-import { AhfResourceContext } from '../store/context';
 import { AhfParamEditContainerMemoized } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
-import { useParamNavigation } from './param-navigation.hook';
 
 interface Props {
   param: Param;
@@ -45,13 +35,6 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const classes = useParamDetailContainerStyles();
   const { t } = useTranslation();
   const { writeParam } = useSocketHook();
-  const { resourceState } = useContext(AhfResourceContext);
-  const {
-    hasNext,
-    hasPrevious,
-    handleNext,
-    handlePrevious,
-  } = useParamNavigation(resourceState.folder, param);
 
   const timeoutIdRef = useRef<number>();
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -201,10 +184,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
           onSave={handleSave}
         />
       )}
-      {hasPrevious && (
-        <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
-      )}
-      {hasNext && <AhfNavigationNextComponent onNext={handleNext} />}
+
       <Snackbar
         open={showToaster}
         autoHideDuration={4000}

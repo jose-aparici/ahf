@@ -14,7 +14,6 @@ import { AhfFolderCardComponent } from '../folder-card/folder-card.component';
 import { AhfFolderMainComponent } from '../folder-main/folder-main.component';
 import { AhfParamCardComponent } from '../param-card/param-card.component';
 import { AhfResourceContext } from '../store/context';
-import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
 
 export const AhfFolderContainer: React.FC = () => {
@@ -25,18 +24,6 @@ export const AhfFolderContainer: React.FC = () => {
 
   const history = useHistory();
   const { i18n } = useTranslation();
-
-  const { getNext, getPrevious } = useFolderNavigation();
-
-  const handleNext = () => {
-    const nextFolder = getNext(resourceState.folder);
-    nextFolder?.id && handleFolderChange(nextFolder);
-  };
-
-  const handlePrevious = () => {
-    const previousFolder = getPrevious(resourceState.folder);
-    previousFolder?.id && handleFolderChange(previousFolder);
-  };
 
   const handleFolderChange = (folder: Folder) => {
     history.push(history.location.pathname.replace(/[^]*$/, folder.id));

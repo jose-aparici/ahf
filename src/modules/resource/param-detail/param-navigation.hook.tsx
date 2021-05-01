@@ -1,55 +1,42 @@
-import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router';
+import { useCallback } from 'react';
 
 import { Folder } from 'domain/folder/folder.types';
 import { Param } from 'domain/param/param.types';
 
 type FolderNavigationHook = {
-  hasNext: boolean;
-  hasPrevious: boolean;
-  handleNext: () => void;
-  handlePrevious: () => void;
+  hasNext: (folder: Folder, param: Param) => boolean;
+  hasPrevious: (param: Param) => boolean;
+  getNextParamId: (folder: Folder, param: Param) => number;
+  getPreviousParamId: (folder: Folder, param: Param) => number;
 };
 
-export const useParamNavigation = (
-  folder: Folder,
-  param: Param,
-): FolderNavigationHook => {
-  const [hasNext, setHasNext] = useState(false);
-  const [hasPrevious, setHasPrevious] = useState(false);
-  const history = useHistory();
+export const useParamNavigation = (): FolderNavigationHook => {
+  const hasNext = useCallback((folder: Folder, param: Param): boolean => {
+    return param.read !== undefined
+      ? folder.params.length > param.read.paramPos + 1
+      : false;
+  }, []);
 
-  useEffect(() => {
-    setHasNext(
-      param.read !== undefined
-        ? folder.params.length > param.read.paramPos + 1
-        : false,
-    );
-    setHasPrevious(
-      param.read !== undefined ? param.read.paramPos - 1 >= 0 : false,
-    );
-  }, [folder.params.length, param.read]);
+  const hasPrevious = useCallback((param: Param): boolean => {
+    return param.read !== undefined ? param.read.paramPos - 1 >= 0 : false;
+  }, []);
 
-  const handleFolderChange = (paramId: number) => {
-    history.push(
-      history.location.pathname.replace(/[^]*$/, paramId.toString()),
-    );
-  };
+  const getNextParamId = useCallback((folder: Folder, param: Param) => {
+    return param.read !== undefined
+      ? folder.params[param.read.paramPos + 1].paramId
+      : -1;
+  }, []);
 
-  const handleNext = () => {
-    param.read !== undefined &&
-      handleFolderChange(folder.params[param.read.paramPos + 1].paramId);
-  };
-
-  const handlePrevious = () => {
-    param.read !== undefined &&
-      handleFolderChange(folder.params[param.read.paramPos - 1].paramId);
-  };
+  const getPreviousParamId = useCallback((folder: Folder, param: Param) => {
+    return param.read !== undefined
+      ? folder.params[param.read.paramPos - 1].paramId
+      : -1;
+  }, []);
 
   return {
     hasNext,
     hasPrevious,
-    handleNext,
-    handlePrevious,
+    getNextParamId,
+    getPreviousParamId,
   };
 };
