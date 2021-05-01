@@ -9,8 +9,8 @@ import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
 import { AhfResourceContainer } from 'modules/resource/resource/resource.container';
 
+import { useResourceSwipeNavigation } from './resource-swipe-navigation.hook';
 import { useResourceSwipeContainerStyles } from './resource-swipe.container.styles';
-import { useResourceSwipeNavigation } from './resource-swipe.hook';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
