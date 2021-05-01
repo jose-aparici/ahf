@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useResourcePageStyles = makeStyles(() => ({
+export const useResourceSwipeContainerStyles = makeStyles(() => ({
   slide: {
     minHeight: '395px',
   },
