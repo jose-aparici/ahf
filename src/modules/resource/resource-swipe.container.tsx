@@ -32,7 +32,7 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
     hasPreviousResource,
     goNextResource,
     goPreviousResource,
-  } = useResourceSwipeNavigation(currentResource);
+  } = useResourceSwipeNavigation();
   useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
       const resource = findResourceByPath(
@@ -49,13 +49,13 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
 
   const handleChangeIndex = (index: number) => {
     if (currentResource) {
-      if (index >= currentIndex && hasNextResource()) {
+      if (index >= currentIndex && hasNextResource(currentResource)) {
         setTransition(Transition.NEXT);
         setCurrentIndex(index);
         return;
       }
 
-      if (index < currentIndex && hasPreviousResource()) {
+      if (index < currentIndex && hasPreviousResource(currentResource)) {
         setTransition(Transition.PREVIOUS);
         setCurrentIndex(index);
         return;
@@ -82,7 +82,9 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
 
   const handleTransitionEnd = () => {
     if (transition !== Transition.EMPTY && currentResource?.folder.id) {
-      transition === Transition.NEXT ? goNextResource() : goPreviousResource();
+      transition === Transition.NEXT
+        ? goNextResource(currentResource)
+        : goPreviousResource(currentResource);
     }
   };
 
@@ -95,8 +97,8 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
           onChangeIndex={handleChangeIndex}
           slideRenderer={slideRenderer}
           onTransitionEnd={handleTransitionEnd}
-          overscanSlideBefore={hasPreviousResource() ? 1 : 0}
-          overscanSlideAfter={hasNextResource() ? 1 : 0}
+          overscanSlideBefore={hasPreviousResource(currentResource) ? 1 : 0}
+          overscanSlideAfter={hasNextResource(currentResource) ? 1 : 0}
         />
       )}
     </>
