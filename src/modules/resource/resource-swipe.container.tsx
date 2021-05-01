@@ -26,14 +26,13 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
   const { state } = useContext(AhfContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transition, setTransition] = useState<Transition>(Transition.EMPTY);
-  const {
-    hasNext,
-    hasPrevious,
-    goNext,
-    goPrevious,
-  } = useResourceSwipeNavigation();
   const [currentResource, setCurrentResource] = useState<Resource>();
-
+  const {
+    hasNextResource,
+    hasPreviousResource,
+    goNextResource,
+    goPreviousResource,
+  } = useResourceSwipeNavigation(currentResource);
   useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
       const resource = findResourceByPath(
@@ -50,13 +49,13 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
 
   const handleChangeIndex = (index: number) => {
     if (currentResource) {
-      if (index >= currentIndex && hasNext(currentResource)) {
+      if (index >= currentIndex && hasNextResource()) {
         setTransition(Transition.NEXT);
         setCurrentIndex(index);
         return;
       }
 
-      if (index < currentIndex && hasPrevious(currentResource)) {
+      if (index < currentIndex && hasPreviousResource()) {
         setTransition(Transition.PREVIOUS);
         setCurrentIndex(index);
         return;
@@ -83,9 +82,7 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
 
   const handleTransitionEnd = () => {
     if (transition !== Transition.EMPTY && currentResource?.folder.id) {
-      transition === Transition.NEXT
-        ? goNext(currentResource)
-        : goPrevious(currentResource);
+      transition === Transition.NEXT ? goNextResource() : goPreviousResource();
     }
   };
 
@@ -98,8 +95,8 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
           onChangeIndex={handleChangeIndex}
           slideRenderer={slideRenderer}
           onTransitionEnd={handleTransitionEnd}
-          overscanSlideBefore={hasPrevious(currentResource) ? 1 : 0}
-          overscanSlideAfter={hasNext(currentResource) ? 1 : 0}
+          overscanSlideBefore={hasPreviousResource() ? 1 : 0}
+          overscanSlideAfter={hasNextResource() ? 1 : 0}
         />
       )}
     </>

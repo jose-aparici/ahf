@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { Resource } from 'domain/resource/resource.type';
@@ -5,54 +6,74 @@ import { Resource } from 'domain/resource/resource.type';
 import { useFolderNavigation } from './folder/folder-navigation.hook';
 
 type ResourceSwipeNavigationHook = {
-  hasPrevious: (resource: Resource) => boolean;
-  hasNext: (resource: Resource) => boolean;
-  goNext: (resource: Resource) => void;
-  goPrevious: (resource: Resource) => void;
+  hasPreviousResource: () => boolean;
+  hasNextResource: () => boolean;
+  goNextResource: () => void;
+  goPreviousResource: () => void;
 };
 
-export const useResourceSwipeNavigation = (): ResourceSwipeNavigationHook => {
+export const useResourceSwipeNavigation = (
+  resource: Resource | undefined,
+): ResourceSwipeNavigationHook => {
   const folderNavigation = useFolderNavigation();
+  //const paramNavigation = useParamNavigation();
+
   const history = useHistory();
 
-  const hasNext = (resource: Resource): boolean => {
-    if (resource.currentParamIndex) {
+  const hasNextResource = useCallback((): boolean => {
+    if (resource) {
+      if (resource.currentParamIndex) {
+        return false;
+      } else {
+        return folderNavigation.goNext(resource.folder) ? true : false;
+      }
+    } else {
       return false;
-    } else {
-      return folderNavigation.goNext(resource.folder) ? true : false;
     }
-  };
+  }, [folderNavigation, resource]);
 
-  const goNext = (resource: Resource) => {
-    if (resource.currentParamIndex) {
-    } else {
-      const nextFolder = folderNavigation.goNext(resource.folder);
-      nextFolder &&
-        history.push(history.location.pathname.replace(/[^]*$/, nextFolder.id));
+  const goNextResource = useCallback(() => {
+    if (resource) {
+      if (resource.currentParamIndex) {
+      } else {
+        const nextFolder = folderNavigation.goNext(resource.folder);
+        nextFolder &&
+          history.push(
+            history.location.pathname.replace(/[^]*$/, nextFolder.id),
+          );
+      }
     }
-  };
+  }, [folderNavigation, history, resource]);
 
-  const goPrevious = (resource: Resource) => {
-    if (resource.currentParamIndex) {
-    } else {
-      const nextFolder = folderNavigation.goPrevious(resource.folder);
-      nextFolder &&
-        history.push(history.location.pathname.replace(/[^]*$/, nextFolder.id));
+  const goPreviousResource = useCallback(() => {
+    if (resource) {
+      if (resource.currentParamIndex) {
+      } else {
+        const nextFolder = folderNavigation.goPrevious(resource.folder);
+        nextFolder &&
+          history.push(
+            history.location.pathname.replace(/[^]*$/, nextFolder.id),
+          );
+      }
     }
-  };
+  }, [folderNavigation, history, resource]);
 
-  const hasPrevious = (resource: Resource): boolean => {
-    if (resource.currentParamIndex) {
+  const hasPreviousResource = useCallback((): boolean => {
+    if (resource) {
+      if (resource.currentParamIndex) {
+        return false;
+      } else {
+        return folderNavigation.goPrevious(resource.folder) ? true : false;
+      }
+    } else {
       return false;
-    } else {
-      return folderNavigation.goPrevious(resource.folder) ? true : false;
     }
-  };
+  }, [folderNavigation, resource]);
 
   return {
-    hasNext,
-    goNext,
-    hasPrevious,
-    goPrevious,
+    hasNextResource,
+    goNextResource,
+    hasPreviousResource,
+    goPreviousResource,
   };
 };
