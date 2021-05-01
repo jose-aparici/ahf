@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { useHistory, useRouteMatch } from 'react-router-dom';
+import { useRouteMatch } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
 import { AhfContext } from 'store/context';
@@ -7,10 +7,10 @@ import { AhfContext } from 'store/context';
 import { Transition } from 'domain/resource-navigation/resource-navigation.types';
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
-import { useFolderNavigation } from 'modules/resource/folder/folder-navigation.hook';
 import { AhfResourceContainer } from 'modules/resource/resource/resource.container';
 
 import { useResourceSwipeContainerStyles } from './resource-swipe.container.styles';
+import { useResourceSwipeNavigation } from './resource-swipe.hook';
 
 const VirtualizeSwipeableViews = virtualize(SwipeableViews);
 
@@ -26,9 +26,13 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
   const { state } = useContext(AhfContext);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [transition, setTransition] = useState<Transition>(Transition.EMPTY);
-  const { goNext, goPrevious } = useFolderNavigation();
+  const {
+    hasNext,
+    hasPrevious,
+    goNext,
+    goPrevious,
+  } = useResourceSwipeNavigation();
   const [currentResource, setCurrentResource] = useState<Resource>();
-  const history = useHistory();
 
   useEffect(() => {
     if (state?.devices[+deviceId]?.structure) {
@@ -36,8 +40,6 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
         url,
         state.devices[+deviceId].structure,
       );
-
-      debugger;
 
       if (resource) {
         setCurrentResource(resource);
@@ -48,13 +50,13 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
 
   const handleChangeIndex = (index: number) => {
     if (currentResource) {
-      if (index >= currentIndex && goNext(currentResource.folder)) {
+      if (index >= currentIndex && hasNext(currentResource)) {
         setTransition(Transition.NEXT);
         setCurrentIndex(index);
         return;
       }
 
-      if (index < currentIndex && goPrevious(currentResource.folder)) {
+      if (index < currentIndex && hasPrevious(currentResource)) {
         setTransition(Transition.PREVIOUS);
         setCurrentIndex(index);
         return;
@@ -81,13 +83,9 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
 
   const handleTransitionEnd = () => {
     if (transition !== Transition.EMPTY && currentResource?.folder.id) {
-      const nextFolder =
-        transition === Transition.NEXT
-          ? goNext(currentResource.folder)
-          : goPrevious(currentResource.folder);
-
-      nextFolder &&
-        history.push(history.location.pathname.replace(/[^]*$/, nextFolder.id));
+      transition === Transition.NEXT
+        ? goNext(currentResource)
+        : goPrevious(currentResource);
     }
   };
 
@@ -100,8 +98,8 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
           onChangeIndex={handleChangeIndex}
           slideRenderer={slideRenderer}
           onTransitionEnd={handleTransitionEnd}
-          overscanSlideBefore={goPrevious(currentResource.folder) ? 1 : 0}
-          overscanSlideAfter={goNext(currentResource.folder) ? 1 : 0}
+          overscanSlideBefore={hasPrevious(currentResource) ? 1 : 0}
+          overscanSlideAfter={hasNext(currentResource) ? 1 : 0}
         />
       )}
     </>
