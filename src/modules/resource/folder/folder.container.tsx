@@ -9,8 +9,6 @@ import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
-import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
-import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
 import { AhfFolderCardComponent } from '../folder-card/folder-card.component';
 import { AhfFolderMainComponent } from '../folder-main/folder-main.component';
@@ -93,13 +91,6 @@ export const AhfFolderContainer: React.FC = () => {
             >
               {[...folderCards, ...paramsCards].map((card) => card)}
             </Masonry>
-          )}
-
-          {goPrevious(resourceState.folder) && (
-            <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
-          )}
-          {goNext(resourceState.folder) && (
-            <AhfNavigationNextComponent onNext={handleNext} />
           )}
         </>
       )}
