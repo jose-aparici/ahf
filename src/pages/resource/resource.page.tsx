@@ -29,7 +29,6 @@ export const AhfResourcePage: React.FC = () => {
   const history = useHistory();
 
   useEffect(() => {
-    console.log('entra en use effect');
     if (state?.devices[+deviceId]?.structure) {
       const resource = findResourceByPath(
         url,
@@ -44,7 +43,6 @@ export const AhfResourcePage: React.FC = () => {
   }, [deviceId, state, url]);
 
   const handleChangeIndex = (index: number) => {
-    console.log('entra en state');
     if (currentResource) {
       if (index >= currentIndex && goNext(currentResource.folder)) {
         setTransition(Transition.NEXT);
@@ -63,11 +61,9 @@ export const AhfResourcePage: React.FC = () => {
   const slideRenderer = (params: SlideRenderProps) => {
     const { index, key } = params;
     if (currentResource && index === currentIndex) {
-      console.log('entra');
-      debugger;
       return (
         <div key={key} style={{ minHeight: '395px' }}>
-          {transition !== '' ? (
+          {transition !== Transition.EMPTY ? (
             <div>loading</div>
           ) : (
             <AhfResourceContainer resource={currentResource} />
@@ -80,11 +76,9 @@ export const AhfResourcePage: React.FC = () => {
   };
 
   const handleTransitionEnd = () => {
-    console.log('transition end');
-    if (transition !== '' && currentResource?.folder.id) {
-      console.log('transition next');
+    if (transition !== Transition.EMPTY && currentResource?.folder.id) {
       const nextFolder =
-        transition === 'next'
+        transition === Transition.NEXT
           ? goNext(currentResource.folder)
           : goPrevious(currentResource.folder);
 
