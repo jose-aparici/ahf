@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { useHistory, useParams, useRouteMatch } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
-import { virtualize } from 'react-swipeable-views-utils';
+import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
 import { AhfContext } from 'store/context';
 
+import { Transition } from 'domain/resource-navigation/resource-navigation.types';
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
 import { useFolderNavigation } from 'modules/resource/folder/folder-navigation.hook';
@@ -22,7 +23,7 @@ export const AhfResourcePage: React.FC = () => {
   const { state } = useContext(AhfContext);
   const { deviceId } = useParams<ParamTypes>();
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [transition, setTransition] = useState('');
+  const [transition, setTransition] = useState<Transition>(Transition.EMPTY);
   const { goNext, goPrevious } = useFolderNavigation();
   const [currentResource, setCurrentResource] = useState<Resource>();
   const history = useHistory();
@@ -37,21 +38,30 @@ export const AhfResourcePage: React.FC = () => {
 
       if (resource) {
         setCurrentResource(resource);
-        setTransition('');
+        setTransition(Transition.EMPTY);
       }
     }
   }, [deviceId, state, url]);
 
   const handleChangeIndex = (index: number) => {
     console.log('entra en state');
-    index >= currentIndex ? setTransition('next') : setTransition('previous');
-    setCurrentIndex(index);
-    // setCurrentResource(undefined);
+    if (currentResource) {
+      if (index >= currentIndex && goNext(currentResource.folder)) {
+        setTransition(Transition.NEXT);
+        setCurrentIndex(index);
+        return;
+      }
+
+      if (index < currentIndex && goPrevious(currentResource.folder)) {
+        setTransition(Transition.PREVIOUS);
+        setCurrentIndex(index);
+        return;
+      }
+    }
   };
 
-  const slideRenderer = (params: any) => {
+  const slideRenderer = (params: SlideRenderProps) => {
     const { index, key } = params;
-    // return <div key={key}>divv {index}</div>;
     if (currentResource && index === currentIndex) {
       console.log('entra');
       debugger;
@@ -88,11 +98,13 @@ export const AhfResourcePage: React.FC = () => {
       <AhfResourceProvider>
         {currentResource && (
           <VirtualizeSwipeableViews
+            enableMouseEvents
             index={currentIndex}
             onChangeIndex={handleChangeIndex}
-            enableMouseEvents
             slideRenderer={slideRenderer}
             onTransitionEnd={handleTransitionEnd}
+            overscanSlideBefore={goPrevious(currentResource.folder) ? 1 : 0}
+            overscanSlideAfter={goNext(currentResource.folder) ? 1 : 0}
           />
         )}
       </AhfResourceProvider>
