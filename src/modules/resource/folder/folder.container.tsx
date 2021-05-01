@@ -26,15 +26,15 @@ export const AhfFolderContainer: React.FC = () => {
   const history = useHistory();
   const { i18n } = useTranslation();
 
-  const { goNext, goPrevious } = useFolderNavigation();
+  const { getNext, getPrevious } = useFolderNavigation();
 
   const handleNext = () => {
-    const nextFolder = goNext(resourceState.folder);
+    const nextFolder = getNext(resourceState.folder);
     nextFolder?.id && handleFolderChange(nextFolder);
   };
 
   const handlePrevious = () => {
-    const previousFolder = goPrevious(resourceState.folder);
+    const previousFolder = getPrevious(resourceState.folder);
     previousFolder?.id && handleFolderChange(previousFolder);
   };
 

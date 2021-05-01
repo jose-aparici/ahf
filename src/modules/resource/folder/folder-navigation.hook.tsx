@@ -12,8 +12,8 @@ import {
 import { Folder } from 'domain/folder/folder.types';
 
 type FolderNavigationHook = {
-  goNext: (folder: Folder) => Folder | undefined;
-  goPrevious: (folder: Folder) => Folder | undefined;
+  getNext: (folder: Folder) => Folder | undefined;
+  getPrevious: (folder: Folder) => Folder | undefined;
 };
 
 export const useFolderNavigation = (): FolderNavigationHook => {
@@ -29,7 +29,7 @@ export const useFolderNavigation = (): FolderNavigationHook => {
     }
   }, []);
 
-  const goNext = useCallback(
+  const getNext = useCallback(
     (folder: Folder): Folder | undefined => {
       if (hasChildren(folder)) {
         return getFirstChild(folder);
@@ -53,7 +53,7 @@ export const useFolderNavigation = (): FolderNavigationHook => {
     }
   }, []);
 
-  const goPrevious = useCallback(
+  const getPrevious = useCallback(
     (folder: Folder): Folder | undefined => {
       const previous = getPreviousSibling(folder);
       if (previous) {
@@ -66,7 +66,7 @@ export const useFolderNavigation = (): FolderNavigationHook => {
   );
 
   return {
-    goNext,
-    goPrevious,
+    getNext,
+    getPrevious,
   };
 };

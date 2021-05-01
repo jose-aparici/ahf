@@ -28,7 +28,7 @@ export const useResourceSwipeNavigation = (): ResourceSwipeNavigationHook => {
       if (currentResource.currentParamIndex) {
         return false;
       } else {
-        return folderNavigation.goNext(currentResource.folder) ? true : false;
+        return folderNavigation.getNext(currentResource.folder) ? true : false;
       }
     },
     [folderNavigation],
@@ -39,7 +39,7 @@ export const useResourceSwipeNavigation = (): ResourceSwipeNavigationHook => {
       if (currentResource.currentParamIndex) {
         return;
       } else {
-        const nextFolder = folderNavigation.goNext(currentResource.folder);
+        const nextFolder = folderNavigation.getNext(currentResource.folder);
         nextFolder &&
           history.push(
             history.location.pathname.replace(/[^]*$/, nextFolder.id),
@@ -53,7 +53,7 @@ export const useResourceSwipeNavigation = (): ResourceSwipeNavigationHook => {
     (currentResource: Resource) => {
       if (currentResource.currentParamIndex) {
       } else {
-        const nextFolder = folderNavigation.goPrevious(currentResource.folder);
+        const nextFolder = folderNavigation.getPrevious(currentResource.folder);
         nextFolder &&
           history.push(
             history.location.pathname.replace(/[^]*$/, nextFolder.id),
@@ -68,7 +68,7 @@ export const useResourceSwipeNavigation = (): ResourceSwipeNavigationHook => {
       if (currentResource.currentParamIndex) {
         return false;
       } else {
-        return folderNavigation.goPrevious(currentResource.folder)
+        return folderNavigation.getPrevious(currentResource.folder)
           ? true
           : false;
       }
