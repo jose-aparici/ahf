@@ -83,7 +83,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
             {!isKeyboardType(param.paramType) && (
-              <DialogTitle className={classes.title}>
+              <DialogTitle className={classes.title} disableTypography>
                 <Typography variant="h2">
                   {param.name[currentLanguage]}
                 </Typography>
