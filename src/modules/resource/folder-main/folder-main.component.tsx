@@ -21,9 +21,9 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
   const classes = useFolderMainComponentStyles();
   return (
     <div className={classes.root}>
-      <Grid container spacing={2}>
+      <Grid container>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
+          <Paper className={clsx(classes.paper, classes.paperLeft)}>
             <Grid item>
               <Typography variant="h2" className={clsx(classes.containerTitle)}>
                 Mains parameters
@@ -112,7 +112,7 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
           </Paper>
         </Grid>
         <Grid item xs={6}>
-          <Paper className={classes.paper}>
+          <Paper className={clsx(classes.paper, classes.paperRight)}>
             <Grid item>
               <Typography variant="h2" className={clsx(classes.containerTitle)}>
                 Filter parameters

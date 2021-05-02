@@ -12,6 +12,12 @@ export const useFolderMainComponentStyles = makeStyles(() => ({
     flexDirection: 'column',
     justifyContent: 'space-between',
   },
+  paperLeft: {
+    marginRight: '5px',
+  },
+  paperRight: {
+    marginLeft: '5px',
+  },
   containerTitle: {
     fontWeight: 'bold',
   },
