@@ -18,7 +18,6 @@ export const AhfBreadcrumbsComponent: React.FC<Props> = ({
   return (
     <Breadcrumbs
       aria-label="breadcrumb"
-      className={classes.root}
       separator={<NavigateNextIcon fontSize="small" />}
     >
       {breadcrumbs.map((breadcrumb, index) => {
@@ -31,7 +30,7 @@ export const AhfBreadcrumbsComponent: React.FC<Props> = ({
             component={NavLink}
             activeClassName={classes.active}
           >
-            <Typography>{breadcrumb.label}</Typography>
+            <Typography className={classes.item}>{breadcrumb.label}</Typography>
           </Link>
         );
       })}
