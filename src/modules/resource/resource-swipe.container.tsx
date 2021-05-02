@@ -4,6 +4,8 @@ import SwipeableViews from 'react-swipeable-views';
 import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
 import { AhfContext } from 'store/context';
 
+import { LinearProgress } from '@material-ui/core';
+
 import { Transition } from 'domain/resource-navigation/resource-navigation.types';
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
@@ -69,7 +71,7 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
       return (
         <div key={key} className={classes.slide}>
           {transition !== Transition.EMPTY ? (
-            <div>loading</div>
+            <LinearProgress />
           ) : (
             <AhfResourceContainer resource={currentResource} />
           )}
