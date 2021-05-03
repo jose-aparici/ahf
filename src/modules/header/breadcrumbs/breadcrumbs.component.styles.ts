@@ -6,7 +6,7 @@ export const useBreadcrumbsComponentStyles = makeStyles((theme: Theme) => ({
     fontWeight: 'normal',
     fontSize: '14px',
     lineHeight: '24px',
-    letterSpacing: '0.11 px',
+    letterSpacing: '0.11px',
   },
   active: {
     fontWeight: 'bold',
