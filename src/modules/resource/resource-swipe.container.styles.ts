@@ -5,4 +5,10 @@ export const useResourceSwipeContainerStyles = makeStyles(() => ({
     minHeight: '395px',
     width: '100%',
   },
+  transition: {
+    minHeight: 'inherit',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 }));
