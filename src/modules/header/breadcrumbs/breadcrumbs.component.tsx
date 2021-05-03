@@ -19,6 +19,7 @@ export const AhfBreadcrumbsComponent: React.FC<Props> = ({
     <Breadcrumbs
       aria-label="breadcrumb"
       separator={<NavigateNextIcon fontSize="small" />}
+      classes={{ separator: classes.separator }}
     >
       {breadcrumbs.map((breadcrumb, index) => {
         return (

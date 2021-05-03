@@ -8,7 +8,11 @@ export const useBreadcrumbsComponentStyles = makeStyles((theme: Theme) => ({
     lineHeight: '24px',
     letterSpacing: '0.11px',
   },
+  separator: {
+    margin: '4px',
+  },
   active: {
     fontWeight: 'bold',
+    textDecoration: 'none',
   },
 }));
