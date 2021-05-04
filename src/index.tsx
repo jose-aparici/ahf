@@ -2,6 +2,8 @@ import './index.css';
 import './i18n';
 import './fonts/index.css';
 
+import { AhfBackdropProvider } from 'contexts/backdrop/context';
+import { AhfToasterProvider } from 'contexts/toaster/context';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { AhfProvider } from 'store/context';
@@ -16,7 +18,11 @@ ReactDOM.render(
   <Suspense fallback="loading">
     <ThemeProvider theme={ahfTheme}>
       <AhfProvider>
-        <App />
+        <AhfToasterProvider>
+          <AhfBackdropProvider>
+            <App />
+          </AhfBackdropProvider>
+        </AhfToasterProvider>
       </AhfProvider>
     </ThemeProvider>
   </Suspense>,
