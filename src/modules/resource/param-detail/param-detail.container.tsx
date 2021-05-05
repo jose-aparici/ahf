@@ -1,3 +1,5 @@
+import { AhfBackdropContext } from 'contexts/backdrop/context';
+import { AhfToasterContext } from 'contexts/toaster/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
 import React, {
@@ -17,25 +19,18 @@ import {
   FormControl,
   Grid,
   IconButton,
-  Snackbar,
   TextField,
   Typography,
 } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
-import Alert, { Color } from '@material-ui/lab/Alert';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AccessType, Param } from 'domain/param/param.types';
 import { stringToParamValue } from 'domain/param/param.utils';
-import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
-import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
-import { AhfSpinnerComponent } from 'modules/shared/spinner/spinner.component';
 
-import { AhfResourceContext } from '../store/context';
 import { AhfParamEditContainerMemoized } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
-import { useParamNavigation } from './param-navigation.hook';
 
 interface Props {
   param: Param;
@@ -45,19 +40,16 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const classes = useParamDetailContainerStyles();
   const { t } = useTranslation();
   const { writeParam } = useSocketHook();
-  const { resourceState } = useContext(AhfResourceContext);
-  const {
-    hasNext,
-    hasPrevious,
-    handleNext,
-    handlePrevious,
-  } = useParamNavigation(resourceState.folder, param);
+  const { isBackdropOpened, openBackdrop, closeBackdrop } = useContext(
+    AhfBackdropContext,
+  );
+
+  const { setShowToaster, setSeverity, setMessage } = useContext(
+    AhfToasterContext,
+  );
 
   const timeoutIdRef = useRef<number>();
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [openSpinner, setOpenSpinner] = useState(false);
-  const [showToaster, setShowToaster] = useState(false);
-  const [toasterSeverity, setToasterSeverity] = useState<Color>();
   const [nextMarker, setNexMarker] = useState(param.read?.marker);
 
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
@@ -65,23 +57,34 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
 
   useEffect(() => {
     if (
-      openSpinner &&
+      isBackdropOpened &&
       nextMarker &&
       param.read &&
       param.read?.marker >= nextMarker
     ) {
-      setOpenSpinner(false);
+      closeBackdrop();
       setNexMarker(param.read.marker);
-      setToasterSeverity('success');
+      setSeverity('success');
+      setMessage(t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS'));
       setShowToaster(true);
     }
-  }, [openSpinner, nextMarker, param.read]);
+  }, [
+    nextMarker,
+    param.read,
+    closeBackdrop,
+    isBackdropOpened,
+    setSeverity,
+    setShowToaster,
+    setMessage,
+    t,
+  ]);
 
   useEffect(() => {
-    if (openSpinner) {
+    if (isBackdropOpened) {
       timeoutIdRef.current = window.setTimeout(() => {
-        setToasterSeverity('warning');
-        setOpenSpinner(false);
+        setSeverity('warning');
+        setMessage(t('RESOURCE.PARAM_DETAIL.SAVE.WARNING'));
+        closeBackdrop();
         setShowToaster(true);
       }, 5000);
 
@@ -89,7 +92,14 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         window.clearTimeout(timeoutIdRef.current);
       };
     }
-  }, [openSpinner]);
+  }, [
+    closeBackdrop,
+    isBackdropOpened,
+    setSeverity,
+    setShowToaster,
+    setMessage,
+    t,
+  ]);
 
   const handleClickInput = () =>
     param.value &&
@@ -101,7 +111,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const handleSave = useCallback(
     (value: string) => {
       setOpenEditModal(false);
-      setOpenSpinner(true);
+      openBackdrop();
       const nextMarker = param.read ? param.read.marker + 1 : undefined;
       if (nextMarker) {
         const paramToUpdate = JSON.parse(JSON.stringify(param));
@@ -113,14 +123,11 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         }
       }
     },
-    [param, writeParam],
+    [param, writeParam, openBackdrop],
   );
-
-  const handleToasterClose = () => setShowToaster(false);
 
   return (
     <>
-      <AhfSpinnerComponent open={openSpinner} />
       <Grid container className={classes.gridContainer}>
         <Grid item xs={12}>
           <Card variant="elevation" className={classes.cardContainer}>
@@ -201,11 +208,8 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
           onSave={handleSave}
         />
       )}
-      {hasPrevious && (
-        <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
-      )}
-      {hasNext && <AhfNavigationNextComponent onNext={handleNext} />}
-      <Snackbar
+
+      {/*   <Snackbar
         open={showToaster}
         autoHideDuration={4000}
         anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
@@ -216,7 +220,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
             ? t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS')
             : t('RESOURCE.PARAM_DETAIL.SAVE.WARNING')}
         </Alert>
-      </Snackbar>
+      </Snackbar> */}
     </>
   );
 };

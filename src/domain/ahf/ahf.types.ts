@@ -1,4 +1,4 @@
-import { Action, Payload } from 'store/actions';
+import { Action, Payload } from 'contexts/store/actions';
 
 import {
   AhfDeviceInfo,

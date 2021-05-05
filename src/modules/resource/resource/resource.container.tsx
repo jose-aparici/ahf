@@ -4,10 +4,10 @@ import { useParams } from 'react-router-dom';
 
 import { Resource } from 'domain/resource/resource.type';
 
-import { AhfFolderContainer } from './folder/folder.container';
-import { AhfParamDetailContainer } from './param-detail/param-detail.container';
-import { AhfResourceContext } from './store/context';
-import { RESOURCE_CHANGE } from './store/types';
+import { AhfFolderContainer } from '../folder/folder.container';
+import { AhfParamDetailContainer } from '../param-detail/param-detail.container';
+import { AhfResourceContext } from '../store/context';
+import { RESOURCE_CHANGE } from '../store/types';
 
 interface ParamTypes {
   deviceId: string;

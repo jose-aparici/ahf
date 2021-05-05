@@ -1,7 +1,7 @@
+import { AhfContext } from 'contexts/store/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { AhfContext } from 'store/context';
 
 import { DeviceInfo } from 'domain/device/device.types';
 

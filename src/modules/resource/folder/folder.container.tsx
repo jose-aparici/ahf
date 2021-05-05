@@ -1,22 +1,19 @@
+import { AhfContext } from 'contexts/store/context';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
 import { useHistory, useLocation } from 'react-router-dom';
-import { AhfContext } from 'store/context';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
-import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
-import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
 import { AhfFolderCardComponent } from '../folder-card/folder-card.component';
 import { AhfFolderMainComponent } from '../folder-main/folder-main.component';
 import { AhfParamCardComponent } from '../param-card/param-card.component';
 import { AhfResourceContext } from '../store/context';
-import { useFolderNavigation } from './folder-navigation.hook';
 import { useFolderContainerStyles } from './folder.container.styles';
 
 export const AhfFolderContainer: React.FC = () => {
@@ -27,18 +24,6 @@ export const AhfFolderContainer: React.FC = () => {
 
   const history = useHistory();
   const { i18n } = useTranslation();
-
-  const { goNext, goPrevious } = useFolderNavigation();
-
-  const handleNext = () => {
-    const nextFolder = goNext(resourceState.folder);
-    nextFolder?.id && handleFolderChange(nextFolder);
-  };
-
-  const handlePrevious = () => {
-    const previousFolder = goPrevious(resourceState.folder);
-    previousFolder?.id && handleFolderChange(previousFolder);
-  };
 
   const handleFolderChange = (folder: Folder) => {
     history.push(history.location.pathname.replace(/[^]*$/, folder.id));
@@ -93,13 +78,6 @@ export const AhfFolderContainer: React.FC = () => {
             >
               {[...folderCards, ...paramsCards].map((card) => card)}
             </Masonry>
-          )}
-
-          {goPrevious(resourceState.folder) && (
-            <AhfNavigationPreviousComponent onPrevious={handlePrevious} />
-          )}
-          {goNext(resourceState.folder) && (
-            <AhfNavigationNextComponent onNext={handleNext} />
           )}
         </>
       )}

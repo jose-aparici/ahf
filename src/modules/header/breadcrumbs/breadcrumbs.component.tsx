@@ -1,7 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-import { Breadcrumbs, Link, Typography } from '@material-ui/core';
+import { Breadcrumbs, Link } from '@material-ui/core';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 
 import { Breadcrumb } from 'domain/breadcrumbs/breadcrumbs.types';
@@ -18,8 +18,8 @@ export const AhfBreadcrumbsComponent: React.FC<Props> = ({
   return (
     <Breadcrumbs
       aria-label="breadcrumb"
-      className={classes.root}
       separator={<NavigateNextIcon fontSize="small" />}
+      classes={{ separator: classes.separator }}
     >
       {breadcrumbs.map((breadcrumb, index) => {
         return (
@@ -30,8 +30,9 @@ export const AhfBreadcrumbsComponent: React.FC<Props> = ({
             exact
             component={NavLink}
             activeClassName={classes.active}
+            className={classes.item}
           >
-            <Typography>{breadcrumb.label}</Typography>
+            {breadcrumb.label}
           </Link>
         );
       })}

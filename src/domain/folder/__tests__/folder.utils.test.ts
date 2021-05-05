@@ -1,10 +1,10 @@
 import { buildDeviceAhf } from '__mocks__/buildDevice';
-import { deviceStructureReducer } from 'store/reducer_device_structure';
+import { deviceStructureReducer } from 'contexts/store/reducer_device_structure';
 
 import { AhfDevice } from 'domain/ahf-device/ahf-device.types';
 
-import { initialState, State } from '../../../store/initialState';
-import { deviceInfoReducer } from '../../../store/reducer_device_info';
+import { initialState, State } from '../../../contexts/store/initialState';
+import { deviceInfoReducer } from '../../../contexts/store/reducer_device_info';
 import { getIdsWithChildren } from '../folder.utils';
 
 describe('folder utils', () => {

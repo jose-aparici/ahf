@@ -1,6 +1,6 @@
+import { AhfContext } from 'contexts/store/context';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import { AhfContext } from 'store/context';
 
 import { AppBar, Toolbar } from '@material-ui/core';
 

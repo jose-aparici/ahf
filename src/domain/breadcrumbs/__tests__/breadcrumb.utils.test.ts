@@ -6,7 +6,6 @@ describe('breadcrumb utils', () => {
       const path = '/devices/1/folder1.1/folder1.2';
       const result = pathToBreadCrumbs(path);
       expect(result).toEqual([
-        { label: '1', path: '/devices/1' },
         { label: 'folder1.1', path: '/devices/1/folder1.1' },
         { label: 'folder1.2', path: '/devices/1/folder1.1/folder1.2' },
       ]);

@@ -1,4 +1,4 @@
-import { PARAM_READ } from 'store/types';
+import { PARAM_READ } from 'contexts/store/types';
 
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 import { AhfAction } from 'domain/ahf/ahf.types';

@@ -9,7 +9,7 @@ import { Layout } from 'domain/virtual-keyboard/virtual-keyboard.types';
 interface Props {
   onChange: (input: string) => void;
   onEnter: () => void;
-  keyboardRef: MutableRefObject<Keyboard>;
+  keyboardRef: MutableRefObject<any>;
   layout?: Layout;
   input: string;
 }
@@ -39,7 +39,7 @@ export const AhfVirtualKeyboardComponent: React.FC<Props> = ({
 
   return (
     <Keyboard
-      keyboardRef={(r) => (keyboardRef.current = r)}
+      keyboardRef={(r: any) => (keyboardRef.current = r)}
       layoutName={layoutName}
       onChange={onChange}
       onKeyPress={onKeyPress}

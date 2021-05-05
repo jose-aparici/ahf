@@ -47,7 +47,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
   const classes = useParamEditContainerStyles();
   const { t } = useTranslation();
 
-  const keyboardRef = useRef<Keyboard>(null);
+  const keyboardRef = useRef<typeof Keyboard>(null);
 
   const [input, setInput] = useState(() => {
     if (param.paramType === ParamType.ENUM) {
@@ -56,7 +56,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
         .toString();
     }
 
-    return param.value as string;
+    return param.value ? param.value.toString() : '';
   });
   const [error, setError] = useState<ParamError | undefined>(undefined);
 
@@ -83,7 +83,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
             {!isKeyboardType(param.paramType) && (
-              <DialogTitle className={classes.title}>
+              <DialogTitle className={classes.title} disableTypography>
                 <Typography variant="h2">
                   {param.name[currentLanguage]}
                 </Typography>
@@ -103,7 +103,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                   />
                 </FormControl>
                 <AhfVirtualKeyboardComponent
-                  keyboardRef={keyboardRef as MutableRefObject<Keyboard>}
+                  keyboardRef={keyboardRef as MutableRefObject<any>}
                   layout={
                     isNumericType(param.paramType)
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
