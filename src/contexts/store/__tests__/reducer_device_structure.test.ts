@@ -1,7 +1,7 @@
 import { buildDeviceAhf } from '__mocks__/buildDevice';
-import { buildState } from 'store/__mocks__/buildState';
-import { State } from 'store/initialState';
-import { deviceStructureReducer } from 'store/reducer_device_structure';
+import { buildState } from 'contexts/store/__mocks__/buildState';
+import { State } from 'contexts/store/initialState';
+import { deviceStructureReducer } from 'contexts/store/reducer_device_structure';
 
 import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
 import { ParamType } from 'domain/param/param.types';

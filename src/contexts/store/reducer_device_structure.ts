@@ -6,7 +6,7 @@ import { AhfParam, AhfParamType } from 'domain/ahf-param/ahf-param.types';
 import { Folder } from 'domain/folder/folder.types';
 import { Param, ParamType } from 'domain/param/param.types';
 
-import { AppRoutes } from '../pages/App.routes';
+import { AppRoutes } from '../../pages/App.routes';
 import { State } from './initialState';
 
 const transformAhfParamTypeToParamType = (

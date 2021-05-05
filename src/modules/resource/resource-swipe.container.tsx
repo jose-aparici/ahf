@@ -1,8 +1,8 @@
+import { AhfContext } from 'contexts/store/context';
 import React, { useContext, useEffect, useState } from 'react';
 import { useRouteMatch } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
-import { AhfContext } from 'store/context';
 
 import { CircularProgress } from '@material-ui/core';
 

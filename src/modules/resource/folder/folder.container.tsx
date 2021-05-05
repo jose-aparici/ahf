@@ -1,8 +1,8 @@
+import { AhfContext } from 'contexts/store/context';
 import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 import Masonry from 'react-masonry-css';
 import { useHistory, useLocation } from 'react-router-dom';
-import { AhfContext } from 'store/context';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';

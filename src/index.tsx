@@ -3,10 +3,10 @@ import './i18n';
 import './fonts/index.css';
 
 import { AhfBackdropProvider } from 'contexts/backdrop/context';
+import { AhfProvider } from 'contexts/store/context';
 import { AhfToasterProvider } from 'contexts/toaster/context';
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
-import { AhfProvider } from 'store/context';
 
 import { ThemeProvider } from '@material-ui/core';
 

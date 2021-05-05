@@ -1,7 +1,7 @@
-import { buildState } from 'store/__mocks__/buildState';
-import { Action } from 'store/actions';
-import { reducer } from 'store/reducer';
-import { DEVICE_INFO, DEVICE_STRUCTURE } from 'store/types';
+import { buildState } from 'contexts/store/__mocks__/buildState';
+import { Action } from 'contexts/store/actions';
+import { reducer } from 'contexts/store/reducer';
+import { DEVICE_INFO, DEVICE_STRUCTURE } from 'contexts/store/types';
 
 import {
   AhfDeviceInfo,

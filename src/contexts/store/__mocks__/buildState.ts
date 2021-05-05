@@ -1,4 +1,4 @@
-import { State } from 'store/initialState';
+import { State } from 'contexts/store/initialState';
 
 import { DeviceInfo } from 'domain/device/device.types';
 import { Folder } from 'domain/folder/folder.types';

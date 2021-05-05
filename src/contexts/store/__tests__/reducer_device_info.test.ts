@@ -1,6 +1,6 @@
 import { buildDeviceAhf } from '__mocks__/buildDevice';
-import { buildState } from 'store/__mocks__/buildState';
-import { deviceInfoReducer } from 'store/reducer_device_info';
+import { buildState } from 'contexts/store/__mocks__/buildState';
+import { deviceInfoReducer } from 'contexts/store/reducer_device_info';
 
 describe('reducer device info', () => {
   it('should set device info', () => {
