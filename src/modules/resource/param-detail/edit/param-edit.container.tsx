@@ -22,7 +22,7 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamError, ParamType } from 'domain/param/param.types';
 import {
   isKeyboardType,
-  isNumericType,
+  isNumericKeyboardType,
   validateValue,
 } from 'domain/param/param.utils';
 import {
@@ -107,7 +107,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 <AhfVirtualKeyboardComponent
                   keyboardRef={keyboardRef as MutableRefObject<any>}
                   layout={
-                    isNumericType(param.paramType)
+                    isNumericKeyboardType(param.paramType)
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
                       : LAYOUTS.ENGLISH
                   }
