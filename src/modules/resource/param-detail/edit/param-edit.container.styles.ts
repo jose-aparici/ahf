@@ -1,6 +1,6 @@
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Theme } from '@material-ui/core';
 
-export const useParamEditContainerStyles = makeStyles(() => ({
+export const useParamEditContainerStyles = makeStyles((theme: Theme) => ({
   dialogContainer: {
     margin: '8px',
     maxWidth: '695px',
@@ -18,10 +18,17 @@ export const useParamEditContainerStyles = makeStyles(() => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
   },
   title: {
-    padding: 0,
+    padding: '0 5px 0 5px',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  avatar: {
+    marginRight: '4px',
+    backgroundColor: theme.palette.background.default,
+    color: theme.palette.primary.main,
   },
   error: {
     color: '#f44336',
@@ -29,6 +36,7 @@ export const useParamEditContainerStyles = makeStyles(() => ({
   buttons: {
     padding: '16px 0 0 0',
     alignItems: 'flex-end',
+    justifyContent: 'center',
   },
   rightGrid: {
     paddingBottom: '2px',
