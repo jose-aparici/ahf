@@ -26,7 +26,7 @@ export const AhfNavigationIconsComponent: React.FC = () => {
       <IconButton
         className={classes.iconButton}
         component={Link}
-        to={AppRoutes.DevicesPage}
+        to={AppRoutes.SettingsPage}
         color="inherit"
         aria-label="menu"
       >

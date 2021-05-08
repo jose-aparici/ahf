@@ -9,6 +9,7 @@ import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
 import { AhfResourcePage } from 'pages/resource/resource.page';
+import { AhfSettingsPage } from 'pages/settings/settings.page';
 
 const App: React.FC = () => {
   const { init, listen, scan, stopUpdate } = useSocketHook();
@@ -32,6 +33,11 @@ const App: React.FC = () => {
             path={AppRoutes.DevicesPage}
             exact
             component={AhfDevicesPage}
+          />
+          <Route
+            path={AppRoutes.SettingsPage}
+            exact
+            component={AhfSettingsPage}
           />
           <Route path={AppRoutes.EventsPage} exact component={AhfEventsPage} />
           <Route path={AppRoutes.ResourcePage} component={AhfResourcePage} />
