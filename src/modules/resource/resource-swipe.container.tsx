@@ -4,11 +4,11 @@ import { useRouteMatch } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
 
-import { CircularProgress } from '@material-ui/core';
-
 import { Transition } from 'domain/resource-navigation/resource-navigation.types';
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
+import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
+import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
 
 import { useResourceSwipeNavigation } from './resource-swipe-navigation.hook';
 import { useResourceSwipeContainerStyles } from './resource-swipe.container.styles';
@@ -71,9 +71,7 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
       return (
         <div key={key} className={classes.slide}>
           {transition !== Transition.EMPTY ? (
-            <div className={classes.transition}>
-              <CircularProgress />
-            </div>
+            <></>
           ) : (
             <AhfResourceContainer resource={currentResource} />
           )}
@@ -95,15 +93,31 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
   return (
     <>
       {currentResource && (
-        <VirtualizeSwipeableViews
-          enableMouseEvents
-          index={currentIndex}
-          onChangeIndex={handleChangeIndex}
-          slideRenderer={slideRenderer}
-          onTransitionEnd={handleTransitionEnd}
-          overscanSlideBefore={hasPreviousResource(currentResource) ? 1 : 0}
-          overscanSlideAfter={hasNextResource(currentResource) ? 1 : 0}
-        />
+        <>
+          <VirtualizeSwipeableViews
+            enableMouseEvents
+            index={currentIndex}
+            onChangeIndex={handleChangeIndex}
+            slideRenderer={slideRenderer}
+            onTransitionEnd={handleTransitionEnd}
+            overscanSlideBefore={hasPreviousResource(currentResource) ? 1 : 0}
+            overscanSlideAfter={hasNextResource(currentResource) ? 1 : 0}
+          />
+          {transition === Transition.EMPTY && (
+            <>
+              {hasPreviousResource(currentResource) && (
+                <AhfNavigationPreviousComponent
+                  onPrevious={() => goPreviousResource(currentResource)}
+                />
+              )}
+              {hasNextResource(currentResource) && (
+                <AhfNavigationNextComponent
+                  onNext={() => goNextResource(currentResource)}
+                />
+              )}
+            </>
+          )}
+        </>
       )}
     </>
   );

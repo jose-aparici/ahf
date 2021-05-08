@@ -4,6 +4,7 @@ import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
 
 import {
+  Avatar,
   Button,
   Dialog,
   DialogActions,
@@ -21,7 +22,7 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamError, ParamType } from 'domain/param/param.types';
 import {
   isKeyboardType,
-  isNumericType,
+  isNumericKeyboardType,
   validateValue,
 } from 'domain/param/param.utils';
 import {
@@ -82,13 +83,14 @@ const AhfParamEditContainer: React.FC<Props> = ({
       <Grid container className={classes.mainGrid}>
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
-            {!isKeyboardType(param.paramType) && (
-              <DialogTitle className={classes.title} disableTypography>
-                <Typography variant="h2">
-                  {param.name[currentLanguage]}
-                </Typography>
-              </DialogTitle>
-            )}
+            <DialogTitle className={classes.title} disableTypography>
+              <Avatar variant="square" className={classes.avatar}>
+                {param.paramId}
+              </Avatar>
+              <Typography variant="h2" display="inline">
+                {param.name[currentLanguage]}
+              </Typography>
+            </DialogTitle>
 
             {isKeyboardType(param.paramType) && (
               <div className={classes.keyboardContainer}>
@@ -105,7 +107,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 <AhfVirtualKeyboardComponent
                   keyboardRef={keyboardRef as MutableRefObject<any>}
                   layout={
-                    isNumericType(param.paramType)
+                    isNumericKeyboardType(param.paramType)
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
                       : LAYOUTS.ENGLISH
                   }

@@ -18,11 +18,12 @@ export const stringToParamValue = (
   return value;
 };
 
-export const isNumericType = (type: ParamType): boolean => {
+export const isNumericKeyboardType = (type: ParamType): boolean => {
   return (
     type === ParamType.FLOATING_POINT ||
     type === ParamType.SIGNED_INTEGER ||
-    type === ParamType.UNSIGNED_INTEGER
+    type === ParamType.UNSIGNED_INTEGER ||
+    type === ParamType.IP
   );
 };
 
