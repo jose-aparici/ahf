@@ -1,10 +1,9 @@
 import { AhfContext } from 'contexts/store/context';
 import React, { useContext, useEffect, useState } from 'react';
+import ContentLoader from 'react-content-loader';
 import { useRouteMatch } from 'react-router-dom';
 import SwipeableViews from 'react-swipeable-views';
 import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
-
-import { CircularProgress } from '@material-ui/core';
 
 import { Transition } from 'domain/resource-navigation/resource-navigation.types';
 import { Resource } from 'domain/resource/resource.type';
@@ -73,9 +72,7 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
       return (
         <div key={key} className={classes.slide}>
           {transition !== Transition.EMPTY ? (
-            <div className={classes.transition}>
-              <CircularProgress />
-            </div>
+            <></>
           ) : (
             <AhfResourceContainer resource={currentResource} />
           )}
@@ -107,15 +104,19 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
             overscanSlideBefore={hasPreviousResource(currentResource) ? 1 : 0}
             overscanSlideAfter={hasNextResource(currentResource) ? 1 : 0}
           />
-          {hasPreviousResource(currentResource) && (
-            <AhfNavigationPreviousComponent
-              onPrevious={() => goPreviousResource(currentResource)}
-            />
-          )}
-          {hasNextResource(currentResource) && (
-            <AhfNavigationNextComponent
-              onNext={() => goNextResource(currentResource)}
-            />
+          {transition === Transition.EMPTY && (
+            <>
+              {hasPreviousResource(currentResource) && (
+                <AhfNavigationPreviousComponent
+                  onPrevious={() => goPreviousResource(currentResource)}
+                />
+              )}
+              {hasNextResource(currentResource) && (
+                <AhfNavigationNextComponent
+                  onNext={() => goNextResource(currentResource)}
+                />
+              )}
+            </>
           )}
         </>
       )}
