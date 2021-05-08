@@ -18,7 +18,6 @@ export const useParamEditContainerStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    // alignItems: 'center',
   },
   title: {
     padding: '0 5px 0 5px',
