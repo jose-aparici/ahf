@@ -28,6 +28,10 @@ describe('param utils', () => {
       ${ParamType.IP}               | ${'1,'}                 | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
       ${ParamType.IP}               | ${'1.1.1.1.1.'}         | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
       ${ParamType.IP}               | ${'1.1.1.1a'}           | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
+      ${ParamType.IP}               | ${'192.168'}            | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
+      ${ParamType.IP}               | ${'192.168.'}           | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
+      ${ParamType.IP}               | ${'192.168.1'}          | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
+      ${ParamType.IP}               | ${'192.168.1.'}         | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
       ${ParamType.IP}               | ${'255.255.255.256'}    | ${{ text: 'RESOURCE.PARAM_DETAIL.EDIT.ERRORS.FORMAT' }}
       ${ParamType.IP}               | ${'255.255.255.255'}    | ${undefined}
       ${ParamType.IP}               | ${'1.1.1.1'}            | ${undefined}
