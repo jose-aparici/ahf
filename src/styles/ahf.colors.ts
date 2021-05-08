@@ -11,4 +11,5 @@ export const AHF_COLORS = {
     background: '#f0f0f0',
   },
   grey1: '#a3a3a3',
+  grey2: '#e0e0e0',
 };
