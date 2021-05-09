@@ -208,19 +208,6 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
           onSave={handleSave}
         />
       )}
-
-      {/*   <Snackbar
-        open={showToaster}
-        autoHideDuration={4000}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        onClose={handleToasterClose}
-      >
-        <Alert elevation={6} variant="filled" severity={toasterSeverity}>
-          {toasterSeverity === 'success'
-            ? t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS')
-            : t('RESOURCE.PARAM_DETAIL.SAVE.WARNING')}
-        </Alert>
-      </Snackbar> */}
     </>
   );
 };
