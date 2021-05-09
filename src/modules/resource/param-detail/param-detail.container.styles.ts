@@ -1,12 +1,6 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
 export const useParamDetailContainerStyles = makeStyles((theme: Theme) => ({
-  gridContainer: {
-    minHeight: '81vh',
-  },
-  cardContainer: {
-    minHeight: '100%',
-  },
   cardHeader: {
     paddingBottom: '0',
   },

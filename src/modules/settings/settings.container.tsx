@@ -5,12 +5,12 @@ import { Tab, Tabs } from '@material-ui/core';
 
 import { SETTING_TABS } from 'domain/settings/settings.contants';
 
-import { AhfSettingsEthernetComponent } from './ethernet/settings-ethernet.conmponent';
-import { AhfSettingsLanguageComponent } from './language/settings-language.conmponent';
-import { AhfSettingsModbusAhfComponent } from './modbus_ahf/settings-modbus-ahf.conmponent';
-import { AhfSettingsModbusHmiComponent } from './modbus_hmi/settings-modbus-hmi.conmponent';
+import { AhfSettingsEthernetContainer } from './ethernet/settings-ethernet.container';
+import { AhfSettingsLanguageContainer } from './language/settings-language.container';
+import { AhfSettingsModbusAhfContainer } from './modbus_ahf/settings-modbus-ahf.container';
+import { AhfSettingsModbusHmiContainer } from './modbus_hmi/settings-modbus-hmi.container';
 import { useSettingsContainerStyles } from './settings.container.styles';
-import { AhfSettingsSystemComponent } from './system/settings-system.conmponent';
+import { AhfSettingsSystemContainer } from './system/settings-system.container';
 
 export const AhfSettingsContainer: React.FC = () => {
   const { t } = useTranslation();
@@ -40,19 +40,19 @@ export const AhfSettingsContainer: React.FC = () => {
         ))}
       </Tabs>
       {currentTab === SETTING_TABS.SYSTEM.index && (
-        <AhfSettingsSystemComponent />
+        <AhfSettingsSystemContainer />
       )}
       {currentTab === SETTING_TABS.MODBUS_HMI.index && (
-        <AhfSettingsModbusHmiComponent />
+        <AhfSettingsModbusHmiContainer />
       )}
       {currentTab === SETTING_TABS.MODBUS_AHF.index && (
-        <AhfSettingsModbusAhfComponent />
+        <AhfSettingsModbusAhfContainer />
       )}
       {currentTab === SETTING_TABS.ETHERNET.index && (
-        <AhfSettingsEthernetComponent />
+        <AhfSettingsEthernetContainer />
       )}
       {currentTab === SETTING_TABS.LANGUAGE.index && (
-        <AhfSettingsLanguageComponent />
+        <AhfSettingsLanguageContainer />
       )}
     </>
   );

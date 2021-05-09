@@ -105,7 +105,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                   />
                 </FormControl>
                 <AhfVirtualKeyboardComponent
-                  keyboardRef={keyboardRef as MutableRefObject<any>}
+                  keyboardRef={keyboardRef as MutableRefObject<unknown>}
                   layout={
                     isNumericKeyboardType(param.paramType)
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
