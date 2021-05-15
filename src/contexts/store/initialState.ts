@@ -11,6 +11,7 @@ const deviceAhf: AhfDevice = buildDeviceAhf();
 
 export interface State {
   devices: Record<number, Device>;
+  initialDevice: number;
 }
 
 export const mockedState: State = deviceStructureReducer(
@@ -20,4 +21,5 @@ export const mockedState: State = deviceStructureReducer(
 
 export const initialState: State = {
   devices: {},
+  initialDevice: -1,
 };
