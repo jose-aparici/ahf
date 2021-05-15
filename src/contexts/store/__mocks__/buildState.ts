@@ -10,6 +10,7 @@ const DEFAULT_STATE: State = {
       structure: {} as Folder,
     },
   },
+  initialDevice: 1,
 };
 
 export const buildState = (overrides = {}): State => ({

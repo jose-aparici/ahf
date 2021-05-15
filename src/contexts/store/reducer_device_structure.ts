@@ -119,10 +119,25 @@ const transformStructureToNode = (structure: AhfDeviceStructure) =>
     } as Folder,
   );
 
+const hasInitalDevice = (state: State): boolean => {
+  if (state.initialDevice >= 0) {
+    return true;
+  }
+  const exists = Object.entries(state.devices).find(
+    (device) => device[1].structure !== undefined,
+  );
+
+  return exists === undefined ? false : true;
+};
+
 export const deviceStructureReducer = (
   state: State,
   deviceStructure: AhfDeviceStructure,
 ): State => {
+  if (!hasInitalDevice(state)) {
+    state.initialDevice = deviceStructure.DeviceID;
+  }
+
   if (
     state.devices[deviceStructure.DeviceID] &&
     state.devices[deviceStructure.DeviceID].info

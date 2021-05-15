@@ -20,6 +20,7 @@ describe('reducer device info', () => {
           },
         },
       },
+      initialDevice: 1,
     });
   });
 });
