@@ -1,4 +1,5 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import {
   CardContent,
@@ -13,14 +14,16 @@ import { useSettingsModbusHmiContainerStyles } from './settings-modbus-hmi.conta
 
 export const AhfSettingsModbusHmiContainer: React.FC = () => {
   const classes = useSettingsModbusHmiContainerStyles();
+  const { t } = useTranslation();
+
   return (
     <AhfCardFullPageComponent minHeight="70vh">
       <CardHeader />
       <CardContent>
         <FormControl fullWidth>
           <TextField
-            label="label"
-            value="value"
+            label={t('SETTINGS.MODBUS_HMI.VALUES.SLAVE_ID.LABEL')}
+            value={'value'}
             onClick={() => 0}
             placeholder=""
             InputLabelProps={{

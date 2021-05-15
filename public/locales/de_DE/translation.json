@@ -33,6 +33,15 @@
       "MODBUS_AHF": { "LABEL": "Modbus AHF" },
       "ETHERNET": { "LABEL": "Ethernet" },
       "LANGUAGE": { "LABEL": "Language" }
+    },
+    "MODBUS_HMI": {
+      "VALUES": {
+        "SLAVE_ID": { "LABEL": "Slave ID" },
+        "BAUD_RATE": { "LABEL": "Baudrate" },
+        "DATA_BITS": { "LABEL": "Data Bits" },
+        "STOP_BITS": { "LABEL": "Stop Bits" },
+        "PARITY": { "LABEL": "Parity" }
+      }
     }
   }
 }
