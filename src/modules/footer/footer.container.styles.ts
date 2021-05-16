@@ -8,6 +8,7 @@ export const useFooterContainerStyles = makeStyles((theme: Theme) => ({
     position: 'sticky',
     height: '36px',
     padding: '0 24px',
+    zIndex: theme.zIndex.drawer + 1000,
   },
   text: {
     color: theme.palette.background.default,
