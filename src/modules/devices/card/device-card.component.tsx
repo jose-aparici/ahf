@@ -43,7 +43,11 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
           )}
         </div>
 
-        <Typography variant="h3" display="inline">
+        <Typography
+          variant="h3"
+          display="inline"
+          className={classes.titleVersion}
+        >
           {deviceInfo.fw}
         </Typography>
       </CardContent>

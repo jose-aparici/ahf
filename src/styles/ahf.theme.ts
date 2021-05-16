@@ -27,7 +27,7 @@ export const ahfTheme = createMuiTheme({
     h3: {
       fontSize: '18px',
       lineHeight: '20px',
-      fontWeight: 'normal',
+      fontWeight: 'bold',
       letterSpacing: '0.32px',
     },
     h4: {
