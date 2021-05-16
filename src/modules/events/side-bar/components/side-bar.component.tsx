@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Button, Typography } from '@material-ui/core';
 import FileCopyIcon from '@material-ui/icons/FileCopy';
@@ -11,18 +12,24 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 export const AhfSideBarComponent: React.FC = () => {
   const classes = useSideBarComponentStyles();
+  const { t } = useTranslation();
 
   return (
     <div className={classes.iconsRoot}>
       <div className={clsx(classes.iconsSection, classes.iconsSectionUpdate)}>
-        <Typography className={classes.iconsSectionTitle}>Update</Typography>
+        <Typography className={classes.iconsSectionTitle}>
+          {t('EVENTS.SIDEBAR.UPDATE.TITLE')}
+        </Typography>
+        <Typography className={classes.iconsSectionTitle}>
+          {t('EVENTS.SIDEBAR.UPDATE.LAST_UPDATE_TITLE')}
+        </Typography>
         <Button
           className={clsx(classes.eventsButton, classes.latestEventsButton)}
           variant="outlined"
           size="large"
           startIcon={<RestoreIcon />}
         >
-          <Typography>Latest records</Typography>
+          <Typography>{t('EVENTS.SIDEBAR.UPDATE.BUTTONS.LATEST')}</Typography>
         </Button>
         <Button
           className={clsx(classes.eventsButton, classes.allEventsButton)}
@@ -30,12 +37,12 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<FileCopyIcon />}
         >
-          <Typography>All records</Typography>
+          <Typography>{t('EVENTS.SIDEBAR.UPDATE.BUTTONS.ALL')}</Typography>
         </Button>
       </div>
       <div className={classes.iconsSection}>
         <Typography className={classes.iconsSectionTitle}>
-          Event log actions
+          {t('EVENTS.SIDEBAR.ACTIONS.TITLE')}
         </Typography>
         <Button
           className={clsx(classes.eventsButton, classes.openSavedEventsButton)}
@@ -43,7 +50,9 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<FolderOpenIcon />}
         >
-          <Typography>Open saved eventlogs</Typography>
+          <Typography>
+            {t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.OPEN_SAVED')}
+          </Typography>
         </Button>
         <Button
           className={clsx(classes.eventsButton, classes.saveEventsButton)}
@@ -51,7 +60,7 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<SaveIcon />}
         >
-          <Typography>Save eventlog</Typography>
+          <Typography>{t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.SAVE')}</Typography>
         </Button>
       </div>
     </div>

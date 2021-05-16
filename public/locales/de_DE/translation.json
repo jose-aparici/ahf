@@ -1,4 +1,23 @@
 {
+  "EVENTS": {
+    "SIDEBAR": {
+      "ACTIONS": {
+        "BUTTONS": {
+          "OPEN_SAVED": "Open saved eventlogs",
+          "SAVE": "Save eventlog"
+        },
+        "TITLE": "Event log actions"
+      },
+      "UPDATE": {
+        "BUTTONS": {
+          "ALL": "All records",
+          "LATEST": "Latest records"
+        },
+        "LAST_UPDATE_TITLE": "Last update",
+        "TITLE": "Update"
+      }
+    }
+  },
   "HEADER": "german",
   "RESOURCE": {
     "PARAM_DETAIL": {
@@ -13,11 +32,11 @@
         }
       },
       "FIELDS": {
-        "VALUE": {
-          "LABEL": "Value"
-        },
         "DESCRIPTION": {
           "LABEL": "Description"
+        },
+        "VALUE": {
+          "LABEL": "Value"
         }
       },
       "SAVE": {
