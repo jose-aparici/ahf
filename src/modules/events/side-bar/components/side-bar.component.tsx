@@ -17,10 +17,10 @@ export const AhfSideBarComponent: React.FC = () => {
   return (
     <div className={classes.iconsRoot}>
       <div className={clsx(classes.iconsSection, classes.iconsSectionUpdate)}>
-        <Typography className={classes.iconsSectionTitle}>
+        <Typography className={classes.iconsSectionTitle} variant="h3">
           {t('EVENTS.SIDEBAR.UPDATE.TITLE')}
         </Typography>
-        <Typography className={classes.iconsSectionTitle}>
+        <Typography className={classes.iconsSectionTitle} variant="h6">
           {t('EVENTS.SIDEBAR.UPDATE.LAST_UPDATE_TITLE')}
         </Typography>
         <Button
@@ -29,7 +29,9 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<RestoreIcon />}
         >
-          <Typography>{t('EVENTS.SIDEBAR.UPDATE.BUTTONS.LATEST')}</Typography>
+          <Typography variant="h5">
+            {t('EVENTS.SIDEBAR.UPDATE.BUTTONS.LATEST')}
+          </Typography>
         </Button>
         <Button
           className={clsx(classes.eventsButton, classes.allEventsButton)}
@@ -37,11 +39,13 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<FileCopyIcon />}
         >
-          <Typography>{t('EVENTS.SIDEBAR.UPDATE.BUTTONS.ALL')}</Typography>
+          <Typography variant="h5">
+            {t('EVENTS.SIDEBAR.UPDATE.BUTTONS.ALL')}
+          </Typography>
         </Button>
       </div>
       <div className={classes.iconsSection}>
-        <Typography className={classes.iconsSectionTitle}>
+        <Typography className={classes.iconsSectionTitle} variant="h3">
           {t('EVENTS.SIDEBAR.ACTIONS.TITLE')}
         </Typography>
         <Button
@@ -50,7 +54,7 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<FolderOpenIcon />}
         >
-          <Typography>
+          <Typography variant="h5">
             {t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.OPEN_SAVED')}
           </Typography>
         </Button>
@@ -60,7 +64,9 @@ export const AhfSideBarComponent: React.FC = () => {
           size="large"
           startIcon={<SaveIcon />}
         >
-          <Typography>{t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.SAVE')}</Typography>
+          <Typography variant="h5">
+            {t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.SAVE')}
+          </Typography>
         </Button>
       </div>
     </div>
