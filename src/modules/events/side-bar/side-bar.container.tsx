@@ -17,6 +17,7 @@ export const AhfSideBarContainer: React.FC = () => {
       open={isOpen}
       onClose={() => handleToggleSideBar(isOpen)}
       onOpen={() => handleToggleSideBar(isOpen)}
+      SwipeAreaProps={{ className: classes.swipeArea }}
     >
       <Toolbar className={classes.toolBarTop} />
       <AhfSideBarComponent />
