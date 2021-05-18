@@ -11,9 +11,11 @@ export interface DeviceInfo {
   id: number;
   status: number;
   type: DeviceType;
+  typeName: string;
 }
 
 export enum DeviceType {
-  AHF_SYNC_MODULE = 'AHF Sync Module',
-  ACTIVE_HARMONIC_FILER = 'Active Harmonic Filter',
+  AHF_SYNC_MODULE = 1,
+  ACTIVE_HARMONIC_FILER = 2,
+  HMI_DEVICE = 3,
 }
