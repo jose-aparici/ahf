@@ -48,15 +48,12 @@ const AhfParamEditContainer: React.FC<Props> = ({
   const classes = useParamEditContainerStyles();
   const { t } = useTranslation();
 
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
+
   const keyboardRef = useRef<typeof Keyboard>(null);
 
   const [input, setInput] = useState(() => {
-    if (param.paramType === ParamType.ENUM) {
-      return param.paramEnumText
-        .findIndex((item) => item === param.value)
-        .toString();
-    }
-
     return param.value ? param.value.toString() : '';
   });
   const [error, setError] = useState<ParamError | undefined>(undefined);
@@ -65,8 +62,6 @@ const AhfParamEditContainer: React.FC<Props> = ({
     setInput(value);
     setError(validateValue(param.paramType, value));
   };
-  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
-    .position;
 
   const handleValueFocus = (value: string) => {
     setError(validateValue(param.paramType, value));
@@ -98,7 +93,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                   <AhfParamEditFieldComponent
                     type={param.paramType}
                     value={input}
-                    values={param.paramEnumText}
+                    values={param.paramEnumText[currentLanguage]}
                     error={error}
                     onFocus={handleValueFocus}
                     onChange={handleParamChange}
@@ -150,7 +145,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                   <AhfParamEditFieldComponent
                     type={param.paramType}
                     value={input}
-                    values={param.paramEnumText}
+                    values={param.paramEnumText[currentLanguage]}
                     error={error}
                     onFocus={handleValueFocus}
                     onChange={handleParamChange}
@@ -165,7 +160,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
             <AhfParamEditFieldComponent
               type={param.paramType}
               value={input}
-              values={param.paramEnumText}
+              values={param.paramEnumText[currentLanguage]}
               error={error}
               onFocus={handleValueFocus}
               onChange={handleParamChange}

@@ -4,6 +4,7 @@ import { Avatar, Card, CardContent, Typography } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/Edit';
 
 import { AccessType, Param } from 'domain/param/param.types';
+import { getParamValue } from 'domain/param/param.utils';
 
 import { useParamCardComponentStyles } from './param-card.component.styles';
 
@@ -37,7 +38,9 @@ export const AhfParamCardComponent: React.FC<Props> = ({
         </div>
         <div className={classes.unitContainer}>
           <Typography className={classes.value}>
-            {param.value === undefined ? '---' : `${param.value} ${param.unit}`}
+            {param.value === undefined
+              ? '---'
+              : `${getParamValue(param, currentLanguage)} ${param.unit}`}
           </Typography>
         </div>
       </CardContent>

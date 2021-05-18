@@ -1,4 +1,4 @@
-import { ParamType, ParamValue } from 'domain/param/param.types';
+import { Param, ParamType, ParamValue } from 'domain/param/param.types';
 
 import { PARAMS_VALIDATION } from './param.constants';
 import { ParamError } from './param.types';
@@ -57,4 +57,14 @@ const validateUndefined = (value: ParamValue) => value !== undefined;
 const validateFormat = (type: ParamType, value: ParamValue): boolean => {
   const regex = PARAMS_VALIDATION[type].regex;
   return regex ? new RegExp(regex).test(value as string) : true;
+};
+
+export const getParamValue = (
+  param: Param,
+  currentLanguage: number,
+): ParamValue => {
+  if (param.paramEnumNumb > 0 && param.value !== undefined) {
+    return param.paramEnumText[currentLanguage][param.value as number];
+  }
+  return param.value;
 };

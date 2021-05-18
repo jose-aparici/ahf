@@ -20,7 +20,7 @@ export interface Param {
   description: Array<string>;
   name: Array<string>;
   paramEnumNumb: number;
-  paramEnumText: Array<string>;
+  paramEnumText: Record<number, Array<string>>;
   paramId: number;
   paramType: ParamType;
   unit: string;

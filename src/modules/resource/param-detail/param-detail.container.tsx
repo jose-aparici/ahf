@@ -27,7 +27,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AccessType, Param } from 'domain/param/param.types';
-import { stringToParamValue } from 'domain/param/param.utils';
+import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 
 import { AhfParamEditContainerMemoized } from './edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
@@ -157,7 +157,11 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
                   <TextField
                     label={t('RESOURCE.PARAM_DETAIL.FIELDS.VALUE.LABEL')}
                     value={
-                      param.value ? `${param.value} ${param.unit}` : ' -- '
+                      param.value !== undefined
+                        ? `${getParamValue(param, currentLanguage)} ${
+                            param.unit
+                          }`
+                        : ' -- '
                     }
                     onClick={handleClickInput}
                     placeholder=""
@@ -208,19 +212,6 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
           onSave={handleSave}
         />
       )}
-
-      {/*   <Snackbar
-        open={showToaster}
-        autoHideDuration={4000}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        onClose={handleToasterClose}
-      >
-        <Alert elevation={6} variant="filled" severity={toasterSeverity}>
-          {toasterSeverity === 'success'
-            ? t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS')
-            : t('RESOURCE.PARAM_DETAIL.SAVE.WARNING')}
-        </Alert>
-      </Snackbar> */}
     </>
   );
 };

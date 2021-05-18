@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import i18n from 'i18n';
 import { ReactComponent as AhfHarmonicFilterSvg } from 'images/harmonic_filter.svg';
 import { ReactComponent as SyncModuleSvg } from 'images/sync_module.svg';
 import React from 'react';
@@ -6,7 +7,10 @@ import React from 'react';
 import { Grid, Paper, Typography } from '@material-ui/core';
 
 import { DeviceType } from 'domain/device/device.types';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
+import { getParamValue } from 'domain/param/param.utils';
 
 import { useFolderMainComponentStyles } from './folder-main.component.styles';
 
@@ -19,6 +23,9 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
   deviceType,
 }: Props) => {
   const classes = useFolderMainComponentStyles();
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
+
   return (
     <div className={classes.root}>
       <Grid container>
@@ -41,8 +48,10 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
                   variant="h5"
                   className={clsx(classes.parameterValue)}
                 >
-                  {params[0].value
-                    ? `${params[0].value} ${params[0].unit}`
+                  {params[0].value !== undefined
+                    ? `${getParamValue(params[0], currentLanguage)} ${
+                        params[0].unit
+                      }`
                     : '-'}
                 </Typography>
               </Grid>
@@ -51,8 +60,10 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
                   variant="h5"
                   className={clsx(classes.parameterValue)}
                 >
-                  {params[1].value
-                    ? `${params[1].value} ${params[1].unit}`
+                  {params[1].value !== undefined
+                    ? `${getParamValue(params[1], currentLanguage)} ${
+                        params[1].unit
+                      }`
                     : '-'}
                 </Typography>
               </Grid>
@@ -89,8 +100,12 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
                             variant="h5"
                             className={clsx(classes.parameterValue)}
                           >
-                            {params[item].value && params[item].unit
-                              ? `${params[item].value} ${params[item].unit}`
+                            {params[item].value !== undefined &&
+                            params[item].unit
+                              ? `${getParamValue(
+                                  params[item],
+                                  currentLanguage,
+                                )} ${params[item].unit}`
                               : ''}
                           </Typography>
                         </Grid>
@@ -149,8 +164,11 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
                           variant="h5"
                           className={clsx(classes.parameterValue)}
                         >
-                          {params[paramIndex].value
-                            ? `${params[paramIndex].value} ${params[paramIndex].unit}`
+                          {params[paramIndex].value !== undefined
+                            ? `${getParamValue(
+                                params[paramIndex],
+                                currentLanguage,
+                              )} ${params[paramIndex].unit}`
                             : '-'}
                         </Typography>
                       </Grid>
@@ -174,8 +192,11 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
                     variant="h5"
                     className={clsx(classes.parameterValue)}
                   >
-                    {params[paramIndex].value
-                      ? `${params[paramIndex].value} ${params[paramIndex].unit}`
+                    {params[paramIndex].value !== undefined
+                      ? `${getParamValue(
+                          params[paramIndex],
+                          currentLanguage,
+                        )} ${params[paramIndex].unit}`
                       : '-'}
                   </Typography>
                 </Grid>
