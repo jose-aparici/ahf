@@ -1,5 +1,4 @@
 import { flatten } from 'flattree';
-import i18n from 'i18n';
 
 import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
 import { AhfFolderData } from 'domain/ahf-folder/ahf-folder.types';
@@ -49,10 +48,6 @@ const transformAhfParamTypeToParamType = (
 
 const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
   ahfParams.map((ahfParam) => {
-    if (ahfParam.ParamID === 200 && ahfParam.Value) {
-      // debugger;
-      //i18n.changeLanguage(AHF_LANGUAGES[ahfParam.Value as number].locale);
-    }
     return ({
       accessType: ahfParam.AccessType,
       description: ahfParam.Description,
