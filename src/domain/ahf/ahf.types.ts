@@ -17,6 +17,8 @@ export enum AhfCommand {
   PARAM_DETAIL = 'WriteParam',
   READ_EVENTS = 'ReadEventLog',
   WRITE_EVENTS = 'WriteEventLog',
+  EVENT_LOG_FILES = 'EventLogFiles',
+  READ_EVENT_LOG_FROM_FILE = 'ReadEventLogFromFile',
 }
 export interface AhfMessage {
   Cmd: AhfCommand;
@@ -27,7 +29,8 @@ export interface AhfMessage {
     | AhfFolderSelect
     | AhfParamRead
     | AhfEvent
-    | { Len: string };
+    | { Len: string }
+    | { FileName: string };
 }
 
 //TODO check Action and payload types naming

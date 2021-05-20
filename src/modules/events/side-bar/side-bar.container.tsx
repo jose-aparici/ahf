@@ -9,11 +9,19 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 export const AhfSideBarContainer: React.FC = () => {
   const classes = useSideBarContainerStyles();
   const [isOpen, setIsOpen] = useState(true);
-  const { readEvents } = useSocketHook();
+  const {
+    readEvents,
+    readEventLogFiles,
+    readEventLogFromFile,
+  } = useSocketHook();
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   const handleRetrieveAll = () => readEvents();
+
+  const handleOpenSaveEventLogs = () => readEventLogFiles();
+
+  const handleSelectEventLogFile = () => readEventLogFromFile();
 
   return (
     <SwipeableDrawer
@@ -24,7 +32,12 @@ export const AhfSideBarContainer: React.FC = () => {
       SwipeAreaProps={{ className: classes.swipeArea }}
     >
       <Toolbar className={classes.toolBarTop} />
-      <AhfSideBarComponent onRetrieveAll={handleRetrieveAll} />
+      <AhfSideBarComponent
+        onRetrieveAll={handleRetrieveAll}
+        onOpenSaveEventLogs={handleOpenSaveEventLogs}
+      />
+      <button onClick={handleSelectEventLogFile}>Save</button>
+
       <Toolbar className={classes.toolBarBottom} />
     </SwipeableDrawer>
   );

@@ -13,6 +13,8 @@ interface SocketHook {
   stopUpdate: () => void;
   writeParam: (param: Param) => void;
   readEvents: () => void;
+  readEventLogFiles: () => void;
+  readEventLogFromFile: () => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -72,5 +74,29 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
-  return { init, listen, scan, update, stopUpdate, writeParam, readEvents };
+  const readEventLogFiles = useCallback(() => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.EVENT_LOG_FILES,
+      Data: { Len: '512' },
+    });
+  }, []);
+
+  const readEventLogFromFile = useCallback(() => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.READ_EVENT_LOG_FROM_FILE,
+      Data: { FileName: 'Eventlog_S06_T16_final_07.11.2019.txt' },
+    });
+  }, []);
+
+  return {
+    init,
+    listen,
+    scan,
+    update,
+    stopUpdate,
+    writeParam,
+    readEvents,
+    readEventLogFiles,
+    readEventLogFromFile,
+  };
 };

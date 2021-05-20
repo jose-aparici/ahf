@@ -12,10 +12,12 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 interface Props {
   onRetrieveAll: () => void;
+  onOpenSaveEventLogs: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   onRetrieveAll,
+  onOpenSaveEventLogs,
 }: Props) => {
   const classes = useSideBarComponentStyles();
   const { t } = useTranslation();
@@ -60,6 +62,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           variant="outlined"
           size="large"
           startIcon={<FolderOpenIcon />}
+          onClick={onOpenSaveEventLogs}
         >
           <Typography variant="h5">
             {t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.OPEN_SAVED')}
