@@ -1,7 +1,19 @@
-export type EventType = 'warning' | 'error';
+export enum LogType {
+  ERROR = 'Error',
+  WARNING = 'Warning',
+  STATUS = 'Status',
+  INFO = 'Info',
+}
 
-export type EventRow = {
-  type: EventType;
-  timestamp: string;
+export type Log = {
+  date: string;
+  time: string;
   message: string;
+  operatingHours: string;
+  type: LogType;
+};
+
+export type Event = {
+  fileName: string;
+  logs: Log[];
 };

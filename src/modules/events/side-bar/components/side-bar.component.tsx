@@ -10,7 +10,13 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
-export const AhfSideBarComponent: React.FC = () => {
+interface Props {
+  onRetrieveAll: () => void;
+}
+
+export const AhfSideBarComponent: React.FC<Props> = ({
+  onRetrieveAll,
+}: Props) => {
   const classes = useSideBarComponentStyles();
   const { t } = useTranslation();
 
@@ -38,6 +44,7 @@ export const AhfSideBarComponent: React.FC = () => {
           variant="outlined"
           size="large"
           startIcon={<FileCopyIcon />}
+          onClick={onRetrieveAll}
         >
           <Typography variant="h5">
             {t('EVENTS.SIDEBAR.UPDATE.BUTTONS.ALL')}

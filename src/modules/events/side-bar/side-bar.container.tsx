@@ -1,3 +1,4 @@
+import { useSocketHook } from 'hooks/socket-hook';
 import React, { useState } from 'react';
 
 import { SwipeableDrawer, Toolbar } from '@material-ui/core';
@@ -8,8 +9,11 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 export const AhfSideBarContainer: React.FC = () => {
   const classes = useSideBarContainerStyles();
   const [isOpen, setIsOpen] = useState(true);
+  const { readEvents } = useSocketHook();
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
+
+  const handleRetrieveAll = () => readEvents();
 
   return (
     <SwipeableDrawer
@@ -20,7 +24,7 @@ export const AhfSideBarContainer: React.FC = () => {
       SwipeAreaProps={{ className: classes.swipeArea }}
     >
       <Toolbar className={classes.toolBarTop} />
-      <AhfSideBarComponent />
+      <AhfSideBarComponent onRetrieveAll={handleRetrieveAll} />
       <Toolbar className={classes.toolBarBottom} />
     </SwipeableDrawer>
   );

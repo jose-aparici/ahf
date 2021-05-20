@@ -9,10 +9,10 @@ import {
   TableRow,
 } from '@material-ui/core';
 
-import { EventRow } from 'domain/events/events.type';
+import { Log } from 'domain/events/events.type';
 
 interface Props {
-  rows: EventRow[];
+  rows: Log[];
 }
 export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
   return (
@@ -24,7 +24,6 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
               <TableCell component="th" scope="row">
                 {row.type}
               </TableCell>
-              <TableCell align="right">{row.timestamp}</TableCell>
               <TableCell align="right">{row.message}</TableCell>
             </TableRow>
           ))}
