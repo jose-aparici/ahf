@@ -9,6 +9,7 @@ interface SocketHook {
   init: () => void;
   listen: (dispatch: Dispatch<AhfAction>) => Subscription;
   scan: () => void;
+  readIniFile: (deviceId: string) => void;
   update: (deviceId: string, folderId: string) => void;
   stopUpdate: () => void;
   writeParam: (param: Param) => void;
@@ -35,6 +36,13 @@ export const useSocketHook = (): SocketHook => {
 
   const scan = useCallback((): void => {
     AhfSocket.getInstance().next({ Cmd: AhfCommand.SCAN });
+  }, []);
+
+  const readIniFile = useCallback((deviceId: string): void => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.READ_INI_FILE,
+      Data: { Device: deviceId },
+    });
   }, []);
 
   const update = useCallback((deviceId: string, folderId: string) => {
@@ -92,6 +100,7 @@ export const useSocketHook = (): SocketHook => {
     init,
     listen,
     scan,
+    readIniFile,
     update,
     stopUpdate,
     writeParam,

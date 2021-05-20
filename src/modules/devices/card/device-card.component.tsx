@@ -40,13 +40,13 @@ export const AhfDeviceCardComponent: React.FC<Props> = ({
           } - ${deviceInfo.id.toString().padStart(3, '0')}`}</Typography>
 
           {deviceInfo.status === 0 && (
-            <CircularProgress size={35} thickness={2} color="primary" />
+            <DescriptionIcon fontSize="large" htmlColor="orange" />
           )}
           {deviceInfo.status === 1 && (
-            <PowerOffIcon fontSize="large" htmlColor="red" />
+            <CircularProgress size={35} thickness={2} color="primary" />
           )}
           {deviceInfo.status === 2 && (
-            <DescriptionIcon fontSize="large" htmlColor="orange" />
+            <PowerOffIcon fontSize="large" htmlColor="grey" />
           )}
           {deviceInfo.status === 3 && (
             <CheckCircleIcon fontSize="large" htmlColor={'#42be65'} />

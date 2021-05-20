@@ -11,6 +11,7 @@ import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 export enum AhfCommand {
   VERSION = 'WSVer',
   SCAN = 'Scan',
+  READ_INI_FILE = 'ReadIniFile',
   DEVICE_INFO = 'DevInfo',
   DEVICE_STRUCTURE = 'FolderStruct',
   FOLDER_SELECT = 'FolderSelect',

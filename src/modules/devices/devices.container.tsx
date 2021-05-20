@@ -11,13 +11,23 @@ import { useDevicesContainerStyles } from './devices-container.styles';
 export const AhfDevicesContainer: React.FC = () => {
   const classes = useDevicesContainerStyles();
   const { state } = useContext(AhfContext);
-  const { stopUpdate } = useSocketHook();
+  const { stopUpdate, readIniFile } = useSocketHook();
   const history = useHistory();
 
   const handleClickDevice = (id: number) => {
-    state.devices[id].structure &&
-      state.devices[id].structure.isMainFolder &&
-      history.push(state.devices[id].structure.id);
+    debugger;
+    if (
+      state.devices[id].structure &&
+      state.devices[id].structure.isMainFolder
+    ) {
+      if (state.devices[id].info.status > 1) {
+        history.push(state.devices[id].structure.id);
+      }
+
+      if (state.devices[id].info.status === 0) {
+        readIniFile(id.toString());
+      }
+    }
   };
 
   useEffect(() => {
