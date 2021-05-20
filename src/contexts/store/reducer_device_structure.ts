@@ -141,7 +141,6 @@ export const deviceStructureReducer = (
     state.devices[deviceStructure.DeviceID] &&
     state.devices[deviceStructure.DeviceID].info
   ) {
-    state.devices[deviceStructure.DeviceID].info.status = 1;
     state.devices[deviceStructure.DeviceID].structure = flatten(
       transformStructureToNode(deviceStructure),
     )[0];

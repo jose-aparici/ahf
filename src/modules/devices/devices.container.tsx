@@ -11,20 +11,18 @@ import { useDevicesContainerStyles } from './devices-container.styles';
 export const AhfDevicesContainer: React.FC = () => {
   const classes = useDevicesContainerStyles();
   const { state } = useContext(AhfContext);
-  const { stopUpdate, scan } = useSocketHook();
+  const { stopUpdate } = useSocketHook();
   const history = useHistory();
 
   const handleClickDevice = (id: number) => {
-    state.devices[id].info.status > 0 &&
-      state.devices[id].structure &&
+    state.devices[id].structure &&
       state.devices[id].structure.isMainFolder &&
       history.push(state.devices[id].structure.id);
   };
 
   useEffect(() => {
     stopUpdate();
-    scan();
-  }, [stopUpdate, scan]);
+  }, [stopUpdate]);
 
   return (
     <div className={classes.root}>

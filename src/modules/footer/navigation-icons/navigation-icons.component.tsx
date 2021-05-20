@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Grid, IconButton } from '@material-ui/core';
+import { CircularProgress, Grid, IconButton } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
@@ -10,7 +10,13 @@ import { AppRoutes } from 'pages/App.routes';
 
 import { useNavigationIconsStyles } from './navigation-icons.component.styles';
 
-export const AhfNavigationIconsComponent: React.FC = () => {
+interface Props {
+  status: number;
+}
+
+export const AhfNavigationIconsComponent: React.FC<Props> = ({
+  status,
+}: Props) => {
   const classes = useNavigationIconsStyles();
   return (
     <>
@@ -44,7 +50,12 @@ export const AhfNavigationIconsComponent: React.FC = () => {
           color="inherit"
           aria-label="menu"
         >
-          <CheckCircleIcon htmlColor="green" />
+          {status === 0 && (
+            <CircularProgress size={20} thickness={2} color="secondary" />
+          )}
+          {status === 1 && <CheckCircleIcon htmlColor="red" />}
+          {status === 2 && <CheckCircleIcon htmlColor="blue" />}
+          {status === 3 && <CheckCircleIcon htmlColor="grey" />}
         </IconButton>
       </Grid>
     </>

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
 
 import { Grid, Typography } from '@material-ui/core';
 
@@ -9,9 +10,15 @@ import { AppRoutes } from 'pages/App.routes';
 import { useFooterContainerStyles } from './footer.container.styles';
 import { AhfNavigationIconsComponent } from './navigation-icons/navigation-icons.component';
 
+interface ParamTypes {
+  deviceId: string;
+}
+
 export const AhfFooterContainer: React.FC = () => {
   const classes = useFooterContainerStyles();
   const location = useLocation();
+  const { deviceId } = useParams<ParamTypes>();
+  const { state } = useContext(AhfContext);
 
   const [currentDate, setCurrentDate] = useState(() =>
     getCurrentDateFormatted(),
@@ -37,7 +44,7 @@ export const AhfFooterContainer: React.FC = () => {
               </Typography>
             </Grid>
             <Grid container item xs={8} justify="flex-end">
-              <AhfNavigationIconsComponent />
+              {deviceId && <AhfNavigationIconsComponent status={0} />}
             </Grid>
           </Grid>
         </>

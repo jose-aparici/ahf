@@ -1,4 +1,5 @@
 import { AhfContext } from 'contexts/store/context';
+import { useSocketHook } from 'hooks/socket-hook';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
@@ -22,6 +23,7 @@ export const AhfHeaderContainer: FC = () => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
   const [breadcrumbs, setBreadcrumbs] = useState<Breadcrumb[]>();
   const [deviceId, setDeviceId] = useState<string>();
+  const { scan } = useSocketHook();
 
   const { state } = useContext(AhfContext);
   const location = useLocation();
@@ -32,6 +34,11 @@ export const AhfHeaderContainer: FC = () => {
   }, [location.pathname]);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
+
+  const handleScan = () => {
+    scan();
+    state.devices = {};
+  };
 
   return (
     <>
@@ -50,7 +57,10 @@ export const AhfHeaderContainer: FC = () => {
           )}
 
           <div className={classes.iconsSection}>
-            <AhfNavigationIconsComponent />
+            <AhfNavigationIconsComponent
+              onScan={handleScan}
+              isDevicesPage={location.pathname === AppRoutes.DevicesPage}
+            />
           </div>
         </Toolbar>
       </AppBar>
