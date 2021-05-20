@@ -48,9 +48,10 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
           </MuiPickersUtilsProvider>
         );
       case ParamType.ENUM:
+        debugger;
         return (
           <RadioGroup
-            value={value}
+            value={value.toString()}
             onChange={(_, value) => onChange(value)}
             className={classes.radioGroup}
           >

@@ -9,7 +9,7 @@ export interface AhfParam {
   Description: Array<string>;
   Name: Array<string>;
   ParamEnumNumb: number;
-  ParamEnumText: Array<string>;
+  ParamEnumText: Record<number, Array<string>>;
   ParamID: number;
   ParamType: AhfParamType;
   Unit: string;

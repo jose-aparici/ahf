@@ -10,11 +10,18 @@ export interface AhfDeviceInfo {
   FW: string;
   ID: number;
   Status: number;
-  Type: string;
+  Type: AhfDeviceType;
+  TypeName: string;
 }
 
 export interface AhfDeviceStructure {
   DeviceID: number;
   FolderNames: Array<string>;
   FolderData: Record<string, AhfFolder>;
+}
+
+export enum AhfDeviceType {
+  AHF_SYNC_MODULE = 1,
+  ACTIVE_HARMONIC_FILER = 2,
+  HMI_DEVICE = 3,
 }
