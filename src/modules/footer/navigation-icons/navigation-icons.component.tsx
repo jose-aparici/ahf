@@ -4,7 +4,9 @@ import { Link } from 'react-router-dom';
 import { CircularProgress, Grid, IconButton } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import DescriptionIcon from '@material-ui/icons/Description';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import PowerOffIcon from '@material-ui/icons/PowerOff';
 
 import { AppRoutes } from 'pages/App.routes';
 
@@ -50,12 +52,12 @@ export const AhfNavigationIconsComponent: React.FC<Props> = ({
           color="inherit"
           aria-label="menu"
         >
-          {status === 0 && (
-            <CircularProgress size={20} thickness={2} color="secondary" />
+          {status === 0 && <DescriptionIcon htmlColor="orange" />}
+          {status === 1 && (
+            <CircularProgress size={20} thickness={2} color="primary" />
           )}
-          {status === 1 && <CheckCircleIcon htmlColor="red" />}
-          {status === 2 && <CheckCircleIcon htmlColor="blue" />}
-          {status === 3 && <CheckCircleIcon htmlColor="grey" />}
+          {status === 2 && <PowerOffIcon htmlColor="grey" />}
+          {status === 3 && <CheckCircleIcon htmlColor={'#42be65'} />}
         </IconButton>
       </Grid>
     </>

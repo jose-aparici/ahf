@@ -1,23 +1,21 @@
 import { AhfContext } from 'contexts/store/context';
 import React, { useContext, useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 import { Grid, Typography } from '@material-ui/core';
 
 import { getCurrentDateFormatted } from 'domain/date/date.utils';
+import { extractDeviceFromPath } from 'domain/path/path.utils';
 import { AppRoutes } from 'pages/App.routes';
 
 import { useFooterContainerStyles } from './footer.container.styles';
 import { AhfNavigationIconsComponent } from './navigation-icons/navigation-icons.component';
 
-interface ParamTypes {
-  deviceId: string;
-}
-
 export const AhfFooterContainer: React.FC = () => {
   const classes = useFooterContainerStyles();
   const location = useLocation();
-  const { deviceId } = useParams<ParamTypes>();
+  const [deviceId, setDeviceId] = useState<string>();
+
   const { state } = useContext(AhfContext);
 
   const [currentDate, setCurrentDate] = useState(() =>
@@ -33,6 +31,10 @@ export const AhfFooterContainer: React.FC = () => {
     return () => window.clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    setDeviceId(extractDeviceFromPath(location.pathname));
+  }, [location.pathname]);
+
   return (
     <>
       {location.pathname !== AppRoutes.DevicesPage && (
@@ -44,7 +46,13 @@ export const AhfFooterContainer: React.FC = () => {
               </Typography>
             </Grid>
             <Grid container item xs={8} justify="flex-end">
-              {deviceId && <AhfNavigationIconsComponent status={0} />}
+              {deviceId &&
+                state.devices[+deviceId] &&
+                state.devices[+deviceId].info && (
+                  <AhfNavigationIconsComponent
+                    status={state.devices[+deviceId].info.status}
+                  />
+                )}
             </Grid>
           </Grid>
         </>
