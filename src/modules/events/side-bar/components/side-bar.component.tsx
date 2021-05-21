@@ -12,11 +12,13 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 interface Props {
   onRetrieveAll: () => void;
+  onRetrieveLatest: () => void;
   onOpenSaveEventLogs: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   onRetrieveAll,
+  onRetrieveLatest,
   onOpenSaveEventLogs,
 }: Props) => {
   const classes = useSideBarComponentStyles();
@@ -35,6 +37,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           className={clsx(classes.eventsButton, classes.latestEventsButton)}
           variant="outlined"
           size="large"
+          onClick={onRetrieveLatest}
           startIcon={<RestoreIcon />}
         >
           <Typography variant="h5">
@@ -45,8 +48,8 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           className={clsx(classes.eventsButton, classes.allEventsButton)}
           variant="outlined"
           size="large"
-          startIcon={<FileCopyIcon />}
           onClick={onRetrieveAll}
+          startIcon={<FileCopyIcon />}
         >
           <Typography variant="h5">
             {t('EVENTS.SIDEBAR.UPDATE.BUTTONS.ALL')}

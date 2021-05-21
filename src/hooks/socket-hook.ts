@@ -13,7 +13,7 @@ interface SocketHook {
   update: (deviceId: string, folderId: string) => void;
   stopUpdate: () => void;
   writeParam: (param: Param) => void;
-  readEvents: () => void;
+  readEvents: (len: string) => void;
   readEventLogFiles: () => void;
   readEventLogFromFile: () => void;
 }
@@ -75,10 +75,10 @@ export const useSocketHook = (): SocketHook => {
       });
   }, []);
 
-  const readEvents = useCallback(() => {
+  const readEvents = useCallback((len: string) => {
     AhfSocket.getInstance().next({
       Cmd: AhfCommand.READ_EVENTS,
-      Data: { Len: '512' },
+      Data: { Len: len },
     });
   }, []);
 
