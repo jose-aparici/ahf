@@ -15,7 +15,6 @@ export const AhfDevicesContainer: React.FC = () => {
   const history = useHistory();
 
   const handleClickDevice = (id: number) => {
-    debugger;
     if (
       state.devices[id].structure &&
       state.devices[id].structure.isMainFolder
