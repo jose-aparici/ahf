@@ -50,7 +50,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
 
   return (
     <TreeView className={classes.root} defaultExpanded={foldersExpandedIds}>
-      {device.info.status === 1 &&
+      {device.info.status > 0 &&
         device.structure &&
         renderTree(device.structure)}
     </TreeView>
