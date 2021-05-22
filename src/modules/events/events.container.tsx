@@ -1,3 +1,4 @@
+import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfContext } from 'contexts/store/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect, useReducer } from 'react';
@@ -19,6 +20,8 @@ export interface State {
 
 export const AhfEventsContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
+  const { closeBackdrop } = useContext(AhfBackdropContext);
+
   const [, dispatch] = useReducer(readEventLogFilesReducer, {
     logFiles: [],
   });
@@ -31,6 +34,10 @@ export const AhfEventsContainer: React.FC = () => {
       subscription.unsubscribe();
     };
   }, [listen]);
+
+  useEffect(() => {
+    state.eventLogs.logs && closeBackdrop();
+  }, [state.eventLogs.logs, closeBackdrop]);
 
   return (
     <>

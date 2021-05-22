@@ -17,13 +17,13 @@ import { ahfTheme } from './styles/ahf.theme';
 ReactDOM.render(
   <Suspense fallback="loading">
     <ThemeProvider theme={ahfTheme}>
-      <AhfProvider>
-        <AhfToasterProvider>
-          <AhfBackdropProvider>
+      <AhfToasterProvider>
+        <AhfBackdropProvider>
+          <AhfProvider>
             <App />
-          </AhfBackdropProvider>
-        </AhfToasterProvider>
-      </AhfProvider>
+          </AhfProvider>
+        </AhfBackdropProvider>
+      </AhfToasterProvider>
     </ThemeProvider>
   </Suspense>,
   document.getElementById('root'),
