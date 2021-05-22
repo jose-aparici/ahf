@@ -18,3 +18,5 @@ export interface AhfEvent {
   };
   FileName: string;
 }
+
+export type AhfEventLogFiles = string[];

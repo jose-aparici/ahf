@@ -1,10 +1,10 @@
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
+import { Log, LogType } from 'domain/event/events.type';
 
-import { State } from './events.container';
+import { State } from './initialState';
 
 export const writeEventsReducer = (state: State, eventLog: AhfEvent): State => {
-  return state;
-  /* const logs: Log[] = eventLog.EventLog.Entries.map((EventLog) => {
+  const logs: Log[] = eventLog.EventLog.Entries.map((EventLog) => {
     return {
       date: EventLog.Date,
       time: EventLog.Time,
@@ -14,12 +14,12 @@ export const writeEventsReducer = (state: State, eventLog: AhfEvent): State => {
     };
   });
 
-  state.event = {
+  state.eventLogs = {
     fileName: eventLog.FileName,
     logs,
   };
 
   return {
     ...state,
-  }; */
+  };
 };

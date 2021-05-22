@@ -18,8 +18,12 @@ const App: React.FC = () => {
   useEffect(() => {
     init();
     stopUpdate();
-    listen(dispatch);
+    const subscription = listen(dispatch);
     scan();
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [init, listen, scan, stopUpdate, dispatch]);
   return (
     <>

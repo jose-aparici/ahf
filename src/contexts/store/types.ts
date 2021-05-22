@@ -14,3 +14,6 @@ export type READ_EVENTS = typeof READ_EVENTS;
 
 export const WRITE_EVENTS = AhfCommand.WRITE_EVENTS;
 export type WRITE_EVENTS = typeof WRITE_EVENTS;
+
+export const EVENT_LOG_FILES = AhfCommand.EVENT_LOG_FILES;
+export type EVENT_LOG_FILES = typeof EVENT_LOG_FILES;

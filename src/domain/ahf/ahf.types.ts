@@ -4,7 +4,7 @@ import {
   AhfDeviceInfo,
   AhfDeviceStructure,
 } from 'domain/ahf-device/ahf-device.types';
-import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
+import { AhfEvent, AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
 import { AhfFolderSelect } from 'domain/ahf-folder/ahf-folder.types';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 
@@ -30,6 +30,7 @@ export interface AhfMessage {
     | AhfFolderSelect
     | AhfParamRead
     | AhfEvent
+    | AhfEventLogFiles
     | { Len: string }
     | { FileName: string };
 }

@@ -2,6 +2,7 @@ import { buildDeviceAhf } from '__mocks__/buildDevice';
 
 import { AhfDevice } from 'domain/ahf-device/ahf-device.types';
 import { Device } from 'domain/device/device.types';
+import { EventLogs } from 'domain/event/events.type';
 
 import { buildState } from './__mocks__/buildState';
 import { deviceInfoReducer } from './reducer_device_info';
@@ -11,6 +12,7 @@ const deviceAhf: AhfDevice = buildDeviceAhf();
 
 export interface State {
   devices: Record<number, Device>;
+  eventLogs: EventLogs;
   initialDevice: number;
 }
 
@@ -21,5 +23,9 @@ export const mockedState: State = deviceStructureReducer(
 
 export const initialState: State = {
   devices: {},
+  eventLogs: {
+    fileName: '',
+    logs: [],
+  },
   initialDevice: -1,
 };

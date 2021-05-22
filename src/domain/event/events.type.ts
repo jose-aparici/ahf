@@ -13,7 +13,9 @@ export type Log = {
   type: LogType;
 };
 
-export type Event = {
+export type EventLogs = {
   fileName: string;
   logs: Log[];
 };
+
+export type EventLogFiles = string[];

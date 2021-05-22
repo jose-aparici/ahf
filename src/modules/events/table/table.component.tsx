@@ -13,7 +13,7 @@ import InfoIcon from '@material-ui/icons/Info';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
 import WarningIcon from '@material-ui/icons/Warning';
 
-import { Log, LogType } from 'domain/events/events.type';
+import { Log, LogType } from 'domain/event/events.type';
 
 interface Props {
   rows: Log[];

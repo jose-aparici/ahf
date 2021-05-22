@@ -11,6 +11,10 @@ const DEFAULT_STATE: State = {
     },
   },
   initialDevice: 1,
+  eventLogs: {
+    fileName: '',
+    logs: [],
+  },
 };
 
 export const buildState = (overrides = {}): State => ({
