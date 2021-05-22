@@ -2,10 +2,10 @@ import { AhfContext } from 'contexts/store/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect, useReducer } from 'react';
 
-import { AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
 import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { EventLogFiles } from 'domain/event/events.type';
 
+import { readEventLogFilesReducer } from './reducer_event_logs_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
 import { AhfTableComponent } from './table/table.component';
 
@@ -19,23 +19,9 @@ export interface State {
 
 export const AhfEventsContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
-  const [, dispatch] = useReducer(
-    (state: State, action: Action): State => {
-      const { type, payload } = action;
-      switch (type) {
-        case AhfCommand.EVENT_LOG_FILES:
-          return {
-            ...state,
-            logFiles: payload as AhfEventLogFiles,
-          };
-        default:
-          return state;
-      }
-    },
-    {
-      logFiles: [],
-    },
-  );
+  const [, dispatch] = useReducer(readEventLogFilesReducer, {
+    logFiles: [],
+  });
 
   const { listen } = useSocketHook();
 
