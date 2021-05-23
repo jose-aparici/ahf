@@ -29,7 +29,7 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AccessType, Param } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 
-import { AhfParamEditContainerMemoized } from './edit/param-edit.container';
+import { AhfParamEditContainerMemoized } from '../../shared/param-edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 
 interface Props {
@@ -207,7 +207,11 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       </Grid>
       {openEditModal && (
         <AhfParamEditContainerMemoized
-          param={param}
+          avatarTitle={param.paramId.toString()}
+          nameTitle={param.name[currentLanguage]}
+          type={param.paramType}
+          value={param.value}
+          values={param.paramEnumText[currentLanguage]}
           onClose={handleEditClose}
           onSave={handleSave}
         />

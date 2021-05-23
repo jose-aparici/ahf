@@ -1,4 +1,3 @@
-import i18n from 'i18n';
 import React, { MutableRefObject, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import Keyboard from 'react-simple-keyboard';
@@ -17,9 +16,7 @@ import {
 import CancelIcon from '@material-ui/icons/Cancel';
 import SaveIcon from '@material-ui/icons/Save';
 
-import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
-import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Param, ParamError, ParamType } from 'domain/param/param.types';
+import { ParamError, ParamType, ParamValue } from 'domain/param/param.types';
 import {
   isKeyboardType,
   isNumericKeyboardType,
@@ -35,36 +32,41 @@ import { AhfParamEditFieldComponent } from './components/field/param-edit-field.
 import { useParamEditContainerStyles } from './param-edit.container.styles';
 
 interface Props {
-  param: Param;
+  avatarTitle?: string;
+  nameTitle?: string;
+  value: ParamValue;
+  values?: string[];
+  type: ParamType;
   onClose: () => void;
   onSave: (value: string) => void;
 }
 
 const AhfParamEditContainer: React.FC<Props> = ({
-  param,
+  avatarTitle,
+  nameTitle,
+  value,
+  values = [],
+  type,
   onClose,
   onSave,
 }: Props) => {
   const classes = useParamEditContainerStyles();
   const { t } = useTranslation();
 
-  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
-    .position;
-
   const keyboardRef = useRef<typeof Keyboard>(null);
 
   const [input, setInput] = useState(() => {
-    return param.value ? param.value.toString() : '';
+    return value ? value.toString() : '';
   });
   const [error, setError] = useState<ParamError | undefined>(undefined);
 
   const handleParamChange = (value: string) => {
     setInput(value);
-    setError(validateValue(param.paramType, value));
+    setError(validateValue(type, value));
   };
 
   const handleValueFocus = (value: string) => {
-    setError(validateValue(param.paramType, value));
+    setError(validateValue(type, value));
   };
 
   const handleEnter = () => !error && onSave(input);
@@ -79,21 +81,25 @@ const AhfParamEditContainer: React.FC<Props> = ({
         <Grid item xs className={classes.leftGrid}>
           <div className={classes.leftContainer}>
             <DialogTitle className={classes.title} disableTypography>
-              <Avatar variant="square" className={classes.avatar}>
-                {param.paramId}
-              </Avatar>
-              <Typography variant="h2" display="inline">
-                {param.name[currentLanguage]}
-              </Typography>
+              {avatarTitle && (
+                <Avatar variant="square" className={classes.avatar}>
+                  {avatarTitle}
+                </Avatar>
+              )}
+              {nameTitle && (
+                <Typography variant="h2" display="inline">
+                  {nameTitle}
+                </Typography>
+              )}
             </DialogTitle>
 
-            {isKeyboardType(param.paramType) && (
+            {isKeyboardType(type) && (
               <div className={classes.keyboardContainer}>
                 <FormControl fullWidth>
                   <AhfParamEditFieldComponent
-                    type={param.paramType}
+                    type={type}
                     value={input}
-                    values={param.paramEnumText[currentLanguage]}
+                    values={values}
                     error={error}
                     onFocus={handleValueFocus}
                     onChange={handleParamChange}
@@ -102,7 +108,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 <AhfVirtualKeyboardComponent
                   keyboardRef={keyboardRef as MutableRefObject<any>}
                   layout={
-                    isNumericKeyboardType(param.paramType)
+                    isNumericKeyboardType(type)
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]
                       : LAYOUTS.ENGLISH
                   }
@@ -134,18 +140,18 @@ const AhfParamEditContainer: React.FC<Props> = ({
           </div>
         </Grid>
 
-        {param.paramType === ParamType.ENUM && (
+        {type === ParamType.ENUM && (
           <Grid item xs className={classes.rightGrid}>
-            {param.paramType === ParamType.ENUM && (
+            {type === ParamType.ENUM && (
               <GridList cols={1} className={classes.gridList}>
                 <FormControl
                   style={{ height: '100%' }}
                   className={classes.formControl}
                 >
                   <AhfParamEditFieldComponent
-                    type={param.paramType}
+                    type={type}
                     value={input}
-                    values={param.paramEnumText[currentLanguage]}
+                    values={values}
                     error={error}
                     onFocus={handleValueFocus}
                     onChange={handleParamChange}
@@ -155,12 +161,12 @@ const AhfParamEditContainer: React.FC<Props> = ({
             )}
           </Grid>
         )}
-        {param.paramType === ParamType.DATE && (
+        {type === ParamType.DATE && (
           <FormControl fullWidth>
             <AhfParamEditFieldComponent
-              type={param.paramType}
+              type={type}
               value={input}
-              values={param.paramEnumText[currentLanguage]}
+              values={values}
               error={error}
               onFocus={handleValueFocus}
               onChange={handleParamChange}
