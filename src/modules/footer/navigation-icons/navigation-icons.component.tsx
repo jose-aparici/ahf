@@ -13,10 +13,12 @@ import { AppRoutes } from 'pages/App.routes';
 import { useNavigationIconsStyles } from './navigation-icons.component.styles';
 
 interface Props {
+  devicePath: string;
   status: number;
 }
 
 export const AhfNavigationIconsComponent: React.FC<Props> = ({
+  devicePath,
   status,
 }: Props) => {
   const classes = useNavigationIconsStyles();
@@ -26,7 +28,7 @@ export const AhfNavigationIconsComponent: React.FC<Props> = ({
         <IconButton
           component={Link}
           className={classes.icon}
-          to={AppRoutes.EventsPage}
+          to={`${devicePath}/events`}
           color="inherit"
           aria-label="menu"
         >

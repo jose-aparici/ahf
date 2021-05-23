@@ -29,9 +29,11 @@ export const AhfHeaderContainer: FC = () => {
   const location = useLocation();
 
   useEffect(() => {
-    setBreadcrumbs(pathToBreadCrumbs(location.pathname));
+    setBreadcrumbs(
+      pathToBreadCrumbs(location.pathname, state.eventLogs.fileName),
+    );
     setDeviceId(extractDeviceFromPath(location.pathname));
-  }, [location.pathname]);
+  }, [location.pathname, deviceId, state.devices, state.eventLogs.fileName]);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
 

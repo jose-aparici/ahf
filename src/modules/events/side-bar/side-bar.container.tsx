@@ -9,9 +9,15 @@ import { ALL_EVENTS_SIZE, LATEST_EVENTS_SIZE } from 'domain/event/events.type';
 import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';
 
-export const AhfSideBarContainer: React.FC = () => {
+interface Props {
+  openSideBar: boolean;
+}
+
+export const AhfSideBarContainer: React.FC<Props> = ({
+  openSideBar,
+}: Props) => {
   const classes = useSideBarContainerStyles();
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(openSideBar);
   const { openBackdrop } = useContext(AhfBackdropContext);
   const { readEvents, readEventLogFiles } = useSocketHook();
 

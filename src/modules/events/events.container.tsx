@@ -42,7 +42,7 @@ export const AhfEventsContainer: React.FC = () => {
   return (
     <>
       <AhfTableComponent rows={state.eventLogs.logs} />
-      <AhfSideBarContainer />
+      <AhfSideBarContainer openSideBar={state.eventLogs.logs.length === 0} />
     </>
   );
 };

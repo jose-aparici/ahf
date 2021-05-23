@@ -1,11 +1,32 @@
 import { Breadcrumb } from './breadcrumbs.types';
 
-export const pathToBreadCrumbs = (path: string): Breadcrumb[] => {
+export const pathToBreadCrumbs = (
+  path: string,
+  fileName = '',
+): Breadcrumb[] => {
   const pathSplitted = path.split('/');
-  return pathSplitted
+  const breadCrumbs = pathSplitted
     .filter((_, index) => index > 2)
-    .map((item, index) => ({
-      label: item,
-      path: pathSplitted.slice(0, index + 4).join('/'),
-    }));
+    .map((item, index) => {
+      if (index === 1 && item === 'events') {
+        console.log(item);
+        return {
+          label: 'Event Logs',
+          path: pathSplitted.slice(0, index + 4).join('/'),
+        };
+      }
+      return {
+        label: item,
+        path: pathSplitted.slice(0, index + 4).join('/'),
+      };
+    });
+
+  if (path.indexOf('events') >= 0 && fileName.length > 0) {
+    breadCrumbs.push({
+      label: fileName,
+      path: breadCrumbs[breadCrumbs.length - 1].path,
+    });
+  }
+
+  return breadCrumbs;
 };

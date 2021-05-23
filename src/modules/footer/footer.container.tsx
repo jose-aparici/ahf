@@ -48,8 +48,10 @@ export const AhfFooterContainer: React.FC = () => {
             <Grid container item xs={8} justify="flex-end">
               {deviceId &&
                 state.devices[+deviceId] &&
-                state.devices[+deviceId].info && (
+                state.devices[+deviceId].info &&
+                state.devices[+deviceId].structure && (
                   <AhfNavigationIconsComponent
+                    devicePath={state.devices[+deviceId].structure.id}
                     status={state.devices[+deviceId].info.status}
                   />
                 )}
