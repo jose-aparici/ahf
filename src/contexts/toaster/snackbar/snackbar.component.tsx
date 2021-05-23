@@ -3,6 +3,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Snackbar } from '@material-ui/core';
 import Alert, { Color } from '@material-ui/lab/Alert';
 
+import { useSnackBarComponentStyles } from './snackbar.component.styles';
+
 export type Severity = 'success' | 'info' | 'warning' | 'error';
 
 interface Props {
@@ -18,11 +20,13 @@ export const AhfSnackBarComponent: React.FC<Props> = ({
   severity,
   message,
 }: Props) => {
+  const classes = useSnackBarComponentStyles();
   return (
     <Snackbar
       open={show}
       autoHideDuration={3000}
       anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      className={classes.root}
       onClose={() => onShow(false)}
     >
       <Alert elevation={6} variant="filled" severity={severity as Color}>
