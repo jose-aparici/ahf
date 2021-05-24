@@ -130,7 +130,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
       {openFileNameEditModal && (
         <AhfParamEditContainerMemoized
           nameTitle={'Titulo'}
-          type={ParamType.STRING}
+          type={ParamType.FILE_NAME}
           value={appState.eventLogs.fileName}
           values={[]}
           onClose={handleCloseFileNameEditModal}

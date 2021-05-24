@@ -70,6 +70,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
       case ParamType.UNSIGNED_INTEGER:
       case ParamType.SIGNED_INTEGER:
       case ParamType.STRING:
+      case ParamType.FILE_NAME:
       case ParamType.MAC:
       case ParamType.IP:
         return (
