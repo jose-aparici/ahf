@@ -15,7 +15,7 @@ interface SocketHook {
   writeParam: (param: Param) => void;
   readEvents: (len: string) => void;
   readEventLogFiles: () => void;
-  readEventLogFromFile: () => void;
+  readEventLogFromFile: (fileName: string) => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -89,10 +89,10 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
-  const readEventLogFromFile = useCallback(() => {
+  const readEventLogFromFile = useCallback((fileName: string) => {
     AhfSocket.getInstance().next({
       Cmd: AhfCommand.READ_EVENT_LOG_FROM_FILE,
-      Data: { FileName: 'Eventlog_S06_T16_final_07.11.2019.txt' },
+      Data: { FileName: fileName },
     });
   }, []);
 

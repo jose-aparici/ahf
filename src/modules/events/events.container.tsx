@@ -19,10 +19,10 @@ export interface State {
 }
 
 export const AhfEventsContainer: React.FC = () => {
-  const { state } = useContext(AhfContext);
+  const { state: appState } = useContext(AhfContext);
   const { closeBackdrop } = useContext(AhfBackdropContext);
 
-  const [, dispatch] = useReducer(readEventLogFilesReducer, {
+  const [state, dispatch] = useReducer(readEventLogFilesReducer, {
     logFiles: [],
   });
 
@@ -36,13 +36,19 @@ export const AhfEventsContainer: React.FC = () => {
   }, [listen]);
 
   useEffect(() => {
-    state.eventLogs.logs && closeBackdrop();
-  }, [state.eventLogs.logs, closeBackdrop]);
+    appState.eventLogs.logs && closeBackdrop();
+  }, [appState.eventLogs.logs, closeBackdrop]);
+
+  const handleClearLogFiles = () => (state.logFiles = []);
 
   return (
     <>
-      <AhfTableComponent rows={state.eventLogs.logs} />
-      <AhfSideBarContainer openSideBar={state.eventLogs.logs.length === 0} />
+      <AhfTableComponent rows={appState.eventLogs.logs} />
+      <AhfSideBarContainer
+        openSideBar={appState.eventLogs.logs.length === 0}
+        logFiles={state.logFiles}
+        onClearLogFiles={handleClearLogFiles}
+      />
     </>
   );
 };
