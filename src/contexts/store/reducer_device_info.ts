@@ -16,6 +16,10 @@ export const deviceInfoReducer = (
       type: (deviceInfo.Type as unknown) as DeviceType,
       typeName: deviceInfo.TypeName,
     },
+    structure:
+      state.devices[deviceInfo.ID] && state.devices[deviceInfo.ID].structure
+        ? state.devices[deviceInfo.ID].structure
+        : {},
   } as Device;
 
   return {
