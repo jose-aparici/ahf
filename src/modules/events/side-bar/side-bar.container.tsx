@@ -5,6 +5,7 @@ import React, { useContext, useState } from 'react';
 
 import { SwipeableDrawer, Toolbar } from '@material-ui/core';
 
+import { AppCommand } from 'domain/app/app.types';
 import { transformFromLogToAhfLog } from 'domain/event/event.utils';
 import {
   ALL_EVENTS_SIZE,
@@ -28,7 +29,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   onClearLogFiles,
 }: Props) => {
   const classes = useSideBarContainerStyles();
-  const { state: appState } = useContext(AhfContext);
+  const { state: appState, dispatch } = useContext(AhfContext);
 
   const [isOpen, setIsOpen] = useState(appState.eventLogs.logs.length === 0);
   const { openBackdrop } = useContext(AhfBackdropContext);
@@ -41,10 +42,6 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const [openFileListEditModal, setOpenFileListEditModal] = useState(false);
   const [openFileNameEditModal, setOpenFileNameEditModal] = useState(false);
-
-  /*  useEffect(() => {
-    setOpenFileListEditModal(logFiles.length > 0);
-  }, [logFiles.length]); */
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
@@ -79,6 +76,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
       transformFromLogToAhfLog(log),
     );
     writeEvents(ahfLogs, value);
+    dispatch({ type: AppCommand.CHANGE_EVENT_LOG_FILE_NAME, payload: value });
   };
 
   const handleCloseFileListEditModal = () => {
@@ -118,7 +116,6 @@ export const AhfSideBarContainer: React.FC<Props> = ({
       </SwipeableDrawer>
       {openFileListEditModal && (
         <AhfParamEditContainerMemoized
-          nameTitle={'Titulo'}
           type={ParamType.ENUM}
           value={'0'}
           values={logFiles}
@@ -129,7 +126,6 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
       {openFileNameEditModal && (
         <AhfParamEditContainerMemoized
-          nameTitle={'Titulo'}
           type={ParamType.FILE_NAME}
           value={appState.eventLogs.fileName}
           values={[]}

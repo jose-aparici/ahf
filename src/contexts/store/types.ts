@@ -1,5 +1,7 @@
 import { AhfCommand } from 'domain/ahf/ahf.types';
 
+import { AppCommand } from '../../domain/app/app.types';
+
 export const DEVICE_INFO = AhfCommand.DEVICE_INFO;
 export type DEVICE_INFO = typeof DEVICE_INFO;
 
@@ -17,3 +19,6 @@ export type WRITE_EVENTS = typeof WRITE_EVENTS;
 
 export const EVENT_LOG_FILES = AhfCommand.EVENT_LOG_FILES;
 export type EVENT_LOG_FILES = typeof EVENT_LOG_FILES;
+
+export const CHANGE_EVENT_LOG_FILE_NAME = AppCommand.CHANGE_EVENT_LOG_FILE_NAME;
+export type CHANGE_EVENT_LOG_FILE_NAME = typeof CHANGE_EVENT_LOG_FILE_NAME;
