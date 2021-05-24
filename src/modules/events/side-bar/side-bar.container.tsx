@@ -1,13 +1,16 @@
 import { AhfBackdropContext } from 'contexts/backdrop/context';
+import { AhfContext } from 'contexts/store/context';
 import { useSocketHook } from 'hooks/socket-hook';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { SwipeableDrawer, Toolbar } from '@material-ui/core';
 
+import { transformFromLogToAhfLog } from 'domain/event/event.utils';
 import {
   ALL_EVENTS_SIZE,
   EventLogFiles,
   LATEST_EVENTS_SIZE,
+  Log,
 } from 'domain/event/events.type';
 import { ParamType } from 'domain/param/param.types';
 import { AhfParamEditContainerMemoized } from 'modules/shared/param-edit/param-edit.container';
@@ -16,30 +19,32 @@ import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';
 
 interface Props {
-  openSideBar: boolean;
   logFiles: EventLogFiles;
   onClearLogFiles: () => void;
 }
 
 export const AhfSideBarContainer: React.FC<Props> = ({
-  openSideBar,
   logFiles,
   onClearLogFiles,
 }: Props) => {
   const classes = useSideBarContainerStyles();
-  const [isOpen, setIsOpen] = useState(openSideBar);
+  const { state: appState } = useContext(AhfContext);
+
+  const [isOpen, setIsOpen] = useState(appState.eventLogs.logs.length === 0);
   const { openBackdrop } = useContext(AhfBackdropContext);
   const {
     readEvents,
     readEventLogFiles,
     readEventLogFromFile,
+    writeEvents,
   } = useSocketHook();
 
-  const [openEditModal, setOpenEditModal] = useState(logFiles.length > 0);
+  const [openFileListEditModal, setOpenFileListEditModal] = useState(false);
+  const [openFileNameEditModal, setOpenFileNameEditModal] = useState(false);
 
-  useEffect(() => {
-    setOpenEditModal(logFiles.length > 0);
-  }, [logFiles.length]);
+  /*  useEffect(() => {
+    setOpenFileListEditModal(logFiles.length > 0);
+  }, [logFiles.length]); */
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
@@ -55,19 +60,42 @@ export const AhfSideBarContainer: React.FC<Props> = ({
     readEvents(LATEST_EVENTS_SIZE);
   };
 
-  const handleOpenSaveEventLogs = () => readEventLogFiles();
+  const handleOpenSaveEventLogs = () => {
+    setOpenFileListEditModal(true);
+    readEventLogFiles();
+  };
 
   const handleSelectEventLogFile = (value: string) => {
     onClearLogFiles();
-    setOpenEditModal(false);
+    setOpenFileListEditModal(false);
     setIsOpen(false);
     readEventLogFromFile(logFiles[+value]);
   };
 
-  const handleCloseEditModal = () => {
-    setOpenEditModal(false);
+  const handleSelectEventLogFileName = (value: string) => {
+    setOpenFileNameEditModal(false);
+    setIsOpen(false);
+    const ahfLogs = appState.eventLogs.logs.map((log: Log) =>
+      transformFromLogToAhfLog(log),
+    );
+    writeEvents(ahfLogs, value);
+  };
+
+  const handleCloseFileListEditModal = () => {
+    setOpenFileListEditModal(false);
     setIsOpen(false);
     onClearLogFiles();
+  };
+
+  const handleCloseFileNameEditModal = () => {
+    setOpenFileNameEditModal(false);
+    setIsOpen(false);
+  };
+
+  const handleSaveEventLogs = () => {
+    if (appState.eventLogs.fileName.length > 0) {
+      setOpenFileNameEditModal(true);
+    }
   };
 
   return (
@@ -84,17 +112,29 @@ export const AhfSideBarContainer: React.FC<Props> = ({
           onRetrieveAll={handleRetrieveAll}
           onRetrieveLatest={handleRetrieveLatest}
           onOpenSaveEventLogs={handleOpenSaveEventLogs}
+          onSaveEventLogs={handleSaveEventLogs}
         />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
-      {openEditModal && (
+      {openFileListEditModal && (
         <AhfParamEditContainerMemoized
           nameTitle={'Titulo'}
           type={ParamType.ENUM}
           value={'0'}
           values={logFiles}
-          onClose={handleCloseEditModal}
+          onClose={handleCloseFileListEditModal}
           onSave={handleSelectEventLogFile}
+        />
+      )}
+
+      {openFileNameEditModal && (
+        <AhfParamEditContainerMemoized
+          nameTitle={'Titulo'}
+          type={ParamType.STRING}
+          value={appState.eventLogs.fileName}
+          values={[]}
+          onClose={handleCloseFileNameEditModal}
+          onSave={handleSelectEventLogFileName}
         />
       )}
     </>

@@ -14,12 +14,14 @@ interface Props {
   onRetrieveAll: () => void;
   onRetrieveLatest: () => void;
   onOpenSaveEventLogs: () => void;
+  onSaveEventLogs: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   onRetrieveAll,
   onRetrieveLatest,
   onOpenSaveEventLogs,
+  onSaveEventLogs,
 }: Props) => {
   const classes = useSideBarComponentStyles();
   const { t } = useTranslation();
@@ -76,6 +78,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           variant="outlined"
           size="large"
           startIcon={<SaveIcon />}
+          onClick={onSaveEventLogs}
         >
           <Typography variant="h5">
             {t('EVENTS.SIDEBAR.ACTIONS.BUTTONS.SAVE')}

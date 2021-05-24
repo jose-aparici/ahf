@@ -1,6 +1,7 @@
 import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
+import { AhfLog } from 'domain/ahf-event/ahf-event.types';
 import { AhfAction, AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { Param } from 'domain/param/param.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
@@ -16,6 +17,7 @@ interface SocketHook {
   readEvents: (len: string) => void;
   readEventLogFiles: () => void;
   readEventLogFromFile: (fileName: string) => void;
+  writeEvents: (logs: AhfLog[], fileName: string) => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -96,6 +98,18 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
+  const writeEvents = useCallback((logs: AhfLog[], fileName: string) => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.WRITE_EVENTS,
+      Data: {
+        EventLog: {
+          Entries: logs,
+        },
+        FileName: fileName,
+      },
+    });
+  }, []);
+
   return {
     init,
     listen,
@@ -107,5 +121,6 @@ export const useSocketHook = (): SocketHook => {
     readEvents,
     readEventLogFiles,
     readEventLogFromFile,
+    writeEvents,
   };
 };

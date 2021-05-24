@@ -45,7 +45,6 @@ export const AhfEventsContainer: React.FC = () => {
     <>
       <AhfTableComponent rows={appState.eventLogs.logs} />
       <AhfSideBarContainer
-        openSideBar={appState.eventLogs.logs.length === 0}
         logFiles={state.logFiles}
         onClearLogFiles={handleClearLogFiles}
       />
