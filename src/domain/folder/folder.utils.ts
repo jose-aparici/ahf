@@ -13,7 +13,7 @@ export const getIdsWithChildren = (
   folder: Folder,
   folderIds: string[],
 ): string[] => {
-  if (folder.children.length > 0) {
+  if (folder.children && folder.children.length > 0) {
     folderIds.push(folder.id);
     folder.children.forEach((child) => {
       getIdsWithChildren(child, folderIds);
