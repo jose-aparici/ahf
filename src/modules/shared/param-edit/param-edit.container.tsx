@@ -34,6 +34,8 @@ import { useParamEditContainerStyles } from './param-edit.container.styles';
 interface Props {
   avatarTitle?: string;
   nameTitle?: string;
+  button1Text?: string;
+  button2Text?: string;
   value: ParamValue;
   values?: string[];
   type: ParamType;
@@ -44,6 +46,8 @@ interface Props {
 const AhfParamEditContainer: React.FC<Props> = ({
   avatarTitle,
   nameTitle,
+  button1Text = 'RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.CANCEL',
+  button2Text = 'RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.SAVE',
   value,
   values = [],
   type,
@@ -126,7 +130,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 startIcon={<CancelIcon />}
                 onClick={onClose}
               >
-                {t('RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.CANCEL')}
+                {t(button1Text)}
               </Button>
               <Button
                 variant="outlined"
@@ -134,7 +138,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                 startIcon={<SaveIcon />}
                 onClick={handleEnter}
               >
-                {t('RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.SAVE')}
+                {t(button2Text)}
               </Button>
             </DialogActions>
           </div>

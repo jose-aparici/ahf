@@ -24,6 +24,7 @@
       "EDIT": {
         "BUTTONS": {
           "CANCEL": "Cancel",
+          "OPEN": "Open",
           "SAVE": "Save"
         },
         "ERRORS": {

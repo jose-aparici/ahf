@@ -120,6 +120,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
           type={ParamType.ENUM}
           value={'0'}
           values={logFiles}
+          button2Text="RESOURCE.PARAM_DETAIL.EDIT.BUTTONS.OPEN"
           onClose={handleCloseFileListEditModal}
           onSave={handleSelectEventLogFile}
         />
