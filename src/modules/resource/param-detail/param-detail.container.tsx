@@ -101,10 +101,11 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     t,
   ]);
 
-  const handleClickInput = () =>
-    param.value &&
-    param.accessType === AccessType.READ_WRITE &&
-    setOpenEditModal(true);
+  const handleClickInput = () => {
+    param.value !== undefined &&
+      param.accessType === AccessType.READ_WRITE &&
+      setOpenEditModal(true);
+  };
 
   const handleEditClose = useCallback(() => setOpenEditModal(false), []);
 
@@ -210,7 +211,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
           avatarTitle={param.paramId.toString()}
           nameTitle={param.name[currentLanguage]}
           type={param.paramType}
-          value={param.value}
+          value={param.value?.toString()}
           values={param.paramEnumText[currentLanguage]}
           onClose={handleEditClose}
           onSave={handleSave}
