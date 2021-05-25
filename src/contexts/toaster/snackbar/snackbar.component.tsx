@@ -1,6 +1,6 @@
 import React, { Dispatch, SetStateAction } from 'react';
 
-import { Snackbar } from '@material-ui/core';
+import { Snackbar, Typography } from '@material-ui/core';
 import Alert, { Color } from '@material-ui/lab/Alert';
 
 import { useSnackBarComponentStyles } from './snackbar.component.styles';
@@ -36,7 +36,7 @@ export const AhfSnackBarComponent: React.FC<Props> = ({
         style={{ height: '20px', padding: '4px' }}
         classes={{ message: classes.alertMessage, icon: classes.alertIcon }}
       >
-        {message}
+        <Typography className={classes.text}>{message}</Typography>
       </Alert>
     </Snackbar>
   );

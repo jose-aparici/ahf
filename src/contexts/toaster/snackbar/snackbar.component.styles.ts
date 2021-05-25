@@ -16,4 +16,8 @@ export const useSnackBarComponentStyles = makeStyles((theme: Theme) => ({
     padding: '0',
     marginRight: '6px',
   },
+  text: {
+    fontSize: '12px',
+    color: theme.palette.background.default,
+  },
 }));
