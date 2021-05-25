@@ -20,6 +20,7 @@ export enum AhfCommand {
   WRITE_EVENTS = 'WriteEventLog',
   EVENT_LOG_FILES = 'EventLogFiles',
   READ_EVENT_LOG_FROM_FILE = 'ReadEventLogFromFile',
+  DISPLAY_MESSAGE = 'DisplayMessage',
 }
 export interface AhfMessage {
   Cmd: AhfCommand;

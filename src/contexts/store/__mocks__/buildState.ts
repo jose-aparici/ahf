@@ -15,6 +15,7 @@ const DEFAULT_STATE: State = {
     fileName: '',
     logs: [],
   },
+  notification: undefined,
 };
 
 export const buildState = (overrides = {}): State => ({

@@ -5,6 +5,7 @@ import {
 import { AhfEvent, AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 import { AhfCommand } from 'domain/ahf/ahf.types';
+import { AhfNotification } from 'domain/ahfNotification/ahf-notification.types';
 import { AppCommand, AppPayload } from 'domain/app/app.types';
 
 export type Action = {
@@ -17,4 +18,5 @@ export type Payload =
   | AhfDeviceStructure
   | AhfParamRead
   | AhfEvent
-  | AhfEventLogFiles;
+  | AhfEventLogFiles
+  | AhfNotification;

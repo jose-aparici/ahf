@@ -22,10 +22,10 @@ export const AhfDevicesContainer: React.FC = () => {
       if (state.devices[id].info.status > 1) {
         history.push(state.devices[id].structure.id);
       }
+    }
 
-      if (state.devices[id].info.status === 0) {
-        readIniFile(id.toString());
-      }
+    if (state.devices[id].info.status === 0) {
+      readIniFile(id.toString());
     }
   };
 

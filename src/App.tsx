@@ -1,4 +1,5 @@
 import { AhfContext } from 'contexts/store/context';
+import { AhfToasterContext } from 'contexts/toaster/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
@@ -13,8 +14,10 @@ import { AhfResourcePage } from 'pages/resource/resource.page';
 
 const App: React.FC = () => {
   const { init, listen, scan, stopUpdate } = useSocketHook();
-  const { dispatch } = useContext(AhfContext);
-
+  const { state, dispatch } = useContext(AhfContext);
+  const { setShowToaster, setSeverity, setMessage } = useContext(
+    AhfToasterContext,
+  );
   useEffect(() => {
     init();
     stopUpdate();
@@ -25,6 +28,15 @@ const App: React.FC = () => {
       subscription.unsubscribe();
     };
   }, [init, listen, scan, stopUpdate, dispatch]);
+
+  useEffect(() => {
+    if (state.notification !== undefined) {
+      setSeverity(state.notification.severity);
+      setMessage(state.notification.text);
+      setShowToaster(true);
+    }
+  }, [setMessage, setShowToaster, setSeverity, state.notification]);
+
   return (
     <>
       <BrowserRouter>

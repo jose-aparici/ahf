@@ -3,7 +3,9 @@ import {
   AhfDeviceStructure,
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
+import { AhfNotification } from 'domain/ahfNotification/ahf-notification.types';
 import { EventLogFileName } from 'domain/event/events.type';
+import { Notification, Severity } from 'domain/notification/notification.types';
 
 import { Action } from './actions';
 import { State } from './initialState';
@@ -14,6 +16,7 @@ import {
   CHANGE_EVENT_LOG_FILE_NAME,
   DEVICE_INFO,
   DEVICE_STRUCTURE,
+  DISPLAY_MESSAGE,
   WRITE_EVENTS,
 } from './types';
 
@@ -32,6 +35,16 @@ export const reducer = (state: State, action: Action): State => {
 
     case CHANGE_EVENT_LOG_FILE_NAME: {
       state.eventLogs.fileName = payload as EventLogFileName;
+      return { ...state };
+    }
+
+    case DISPLAY_MESSAGE: {
+      const notification = payload as AhfNotification;
+      state.notification = {
+        text: notification.Text,
+        severity: notification.Severity as Severity,
+      } as Notification;
+
       return { ...state };
     }
 
