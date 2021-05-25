@@ -24,12 +24,18 @@ export const AhfSnackBarComponent: React.FC<Props> = ({
   return (
     <Snackbar
       open={show}
-      autoHideDuration={3000}
-      anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+      autoHideDuration={10000}
+      anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
       className={classes.root}
       onClose={() => onShow(false)}
     >
-      <Alert elevation={6} variant="filled" severity={severity as Color}>
+      <Alert
+        elevation={6}
+        variant="filled"
+        severity={severity as Color}
+        style={{ height: '20px', padding: '4px' }}
+        classes={{ message: classes.alertMessage, icon: classes.alertIcon }}
+      >
         {message}
       </Alert>
     </Snackbar>

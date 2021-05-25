@@ -10,7 +10,7 @@ const DEFAULT_STATE: State = {
       structure: {} as Folder,
     },
   },
-  initialDevice: 1,
+  initialDevice: -1,
   eventLogs: {
     fileName: '',
     logs: [],

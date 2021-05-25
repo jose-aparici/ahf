@@ -6,7 +6,6 @@ import { Grid, Typography } from '@material-ui/core';
 
 import { getCurrentDateFormatted } from 'domain/date/date.utils';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
-import { AppRoutes } from 'pages/App.routes';
 
 import { useFooterContainerStyles } from './footer.container.styles';
 import { AhfNavigationIconsComponent } from './navigation-icons/navigation-icons.component';
@@ -36,29 +35,23 @@ export const AhfFooterContainer: React.FC = () => {
   }, [location.pathname]);
 
   return (
-    <>
-      {location.pathname !== AppRoutes.DevicesPage && (
-        <>
-          <Grid container className={classes.root} alignItems="center">
-            <Grid item container xs={4} justify="flex-start">
-              <Typography className={classes.text} variant="h6">
-                {currentDate}
-              </Typography>
-            </Grid>
-            <Grid container item xs={8} justify="flex-end">
-              {deviceId &&
-                state.devices[+deviceId] &&
-                state.devices[+deviceId].info &&
-                state.devices[+deviceId].structure && (
-                  <AhfNavigationIconsComponent
-                    devicePath={state.devices[+deviceId].structure.id}
-                    status={state.devices[+deviceId].info.status}
-                  />
-                )}
-            </Grid>
-          </Grid>
-        </>
-      )}
-    </>
+    <Grid container className={classes.root} alignItems="center">
+      <Grid item container xs={4} justify="flex-start">
+        <Typography className={classes.text} variant="h6">
+          {currentDate}
+        </Typography>
+      </Grid>
+      <Grid container item xs={8} justify="flex-end">
+        {deviceId &&
+          state.devices[+deviceId] &&
+          state.devices[+deviceId].info &&
+          state.devices[+deviceId].structure && (
+            <AhfNavigationIconsComponent
+              devicePath={state.devices[+deviceId].structure.id}
+              status={state.devices[+deviceId].info.status}
+            />
+          )}
+      </Grid>
+    </Grid>
   );
 };

@@ -123,7 +123,7 @@ const hasInitalDevice = (state: State): boolean => {
     return true;
   }
   const exists = Object.entries(state.devices).find(
-    (device) => device[1].structure !== undefined,
+    (device) => device[1].structure.id !== undefined,
   );
 
   return exists === undefined ? false : true;
@@ -133,7 +133,9 @@ export const deviceStructureReducer = (
   state: State,
   deviceStructure: AhfDeviceStructure,
 ): State => {
+  debugger;
   if (!hasInitalDevice(state)) {
+    debugger;
     state.initialDevice = deviceStructure.DeviceID;
   }
 
