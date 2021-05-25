@@ -58,8 +58,9 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   };
 
   const handleOpenSaveEventLogs = () => {
-    setOpenFileListEditModal(true);
+    onClearLogFiles();
     readEventLogFiles();
+    setOpenFileListEditModal(true);
   };
 
   const handleSelectEventLogFile = (value: string) => {
@@ -114,7 +115,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
         />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
-      {openFileListEditModal && (
+      {openFileListEditModal && logFiles.length > 0 && (
         <AhfParamEditContainerMemoized
           type={ParamType.ENUM}
           value={'0'}
