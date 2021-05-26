@@ -133,9 +133,7 @@ export const deviceStructureReducer = (
   state: State,
   deviceStructure: AhfDeviceStructure,
 ): State => {
-  debugger;
   if (!hasInitalDevice(state)) {
-    debugger;
     state.initialDevice = deviceStructure.DeviceID;
   }
 
