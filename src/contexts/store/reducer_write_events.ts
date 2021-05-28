@@ -10,7 +10,7 @@ export const writeEventsReducer = (state: State, eventLog: AhfEvent): State => {
       time: EventLog.Time,
       message: EventLog.Message,
       operatingHours: EventLog['Operating Hours'],
-      type: (EventLog.Type as unknown) as LogType,
+      type: EventLog.Type.toString().toLowerCase() as LogType,
     };
   });
 
