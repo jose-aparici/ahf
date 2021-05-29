@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import React from 'react';
 
 import { Grid, Typography } from '@material-ui/core';
@@ -25,6 +26,7 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
             key={index}
             severity={(row.type as unknown) as Color}
             classes={{
+              root: classes.alertRoot,
               message: classes.row,
               standardError: classes.standardError,
               standardInfo: classes.standardInfo,
@@ -48,8 +50,8 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
               <Grid item xs={7}>
                 <Typography className={classes.text}>{row.message}</Typography>
               </Grid>
-              <Grid item xs={3}>
-                <Typography className={classes.text}>
+              <Grid item xs={3} alignContent="flex-end">
+                <Typography className={clsx(classes.text, classes.textRight)}>
                   {row.operatingHours}
                 </Typography>
               </Grid>

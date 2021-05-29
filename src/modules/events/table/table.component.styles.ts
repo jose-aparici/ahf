@@ -4,6 +4,9 @@ export const useTableComponentStyles = makeStyles(() => ({
   row: {
     width: '100%',
   },
+  alertRoot: {
+    padding: '0 10px 0 6px',
+  },
   standardSuccess: {
     color: '#1e4620',
   },
@@ -20,6 +23,9 @@ export const useTableComponentStyles = makeStyles(() => ({
     fontSize: '12px',
   },
   text: {
-    fontSize: '12px',
+    fontSize: '14px',
+  },
+  textRight: {
+    textAlign: 'end',
   },
 }));
