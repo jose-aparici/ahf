@@ -8,6 +8,7 @@ export const useFolderTreeViewComponentStyles = makeStyles(() => ({
   },
   treeItemContent: {
     display: 'block',
+    height: '30px',
   },
   navLink: {
     textDecoration: 'none',
