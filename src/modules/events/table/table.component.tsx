@@ -40,7 +40,7 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
               warning: <WarningIcon fontSize="inherit" />,
             }}
           >
-            <Grid container spacing={3}>
+            <Grid container spacing={1}>
               <Grid item xs={1}>
                 <Typography className={classes.text}>{row.date}</Typography>
               </Grid>

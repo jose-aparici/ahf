@@ -3,7 +3,8 @@ import { AhfContext } from 'contexts/store/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useState } from 'react';
 
-import { SwipeableDrawer, Toolbar } from '@material-ui/core';
+import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { AppCommand } from 'domain/app/app.types';
 import { transformFromLogToAhfLog } from 'domain/event/event.utils';
@@ -31,7 +32,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const classes = useSideBarContainerStyles();
   const { state: appState, dispatch } = useContext(AhfContext);
 
-  const [isOpen, setIsOpen] = useState(appState.eventLogs.logs.length === 0);
+  const [isOpen, setIsOpen] = useState(false);
   const { openBackdrop } = useContext(AhfBackdropContext);
   const {
     readEvents,
@@ -104,9 +105,24 @@ export const AhfSideBarContainer: React.FC<Props> = ({
         open={isOpen}
         onClose={() => handleToggleSideBar(isOpen)}
         onOpen={() => handleToggleSideBar(isOpen)}
-        SwipeAreaProps={{ className: classes.swipeArea }}
+        disableSwipeToOpen={false}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        PaperProps={{ className: classes.swipePaper }}
+        swipeAreaWidth={15}
       >
         <Toolbar className={classes.toolBarTop} />
+        <Box
+          className={classes.pullerContainer}
+          position="absolute"
+          visibility="visible"
+          top={'50%'}
+          right={0}
+          left={0}
+        >
+          {!isOpen && <ChevronLeftIcon />}
+        </Box>
         <AhfSideBarComponent
           onRetrieveAll={handleRetrieveAll}
           onRetrieveLatest={handleRetrieveLatest}
