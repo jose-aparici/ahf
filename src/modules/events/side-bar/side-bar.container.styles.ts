@@ -2,7 +2,7 @@ import { makeStyles } from '@material-ui/core';
 
 export const useSideBarContainerStyles = makeStyles(() => ({
   swipePaper: {
-    width: `calc(50% - 15px)`,
+    width: `255px`,
     overflow: 'visible',
   },
   pullerContainer: {
