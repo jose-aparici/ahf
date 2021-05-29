@@ -3,9 +3,9 @@ import {
   AhfDeviceStructure,
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent, AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
+import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 import { AhfCommand } from 'domain/ahf/ahf.types';
-import { AhfNotification } from 'domain/ahfNotification/ahf-notification.types';
 import { AppCommand, AppPayload } from 'domain/app/app.types';
 
 export type Action = {

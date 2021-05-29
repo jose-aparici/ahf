@@ -3,7 +3,7 @@ import {
   AhfDeviceStructure,
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
-import { AhfNotification } from 'domain/ahfNotification/ahf-notification.types';
+import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
 
