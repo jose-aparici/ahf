@@ -15,9 +15,7 @@ import { AhfResourcePage } from 'pages/resource/resource.page';
 const App: React.FC = () => {
   const { init, listen, scan, stopUpdate } = useSocketHook();
   const { state, dispatch } = useContext(AhfContext);
-  const { setShowToaster, setSeverity, setMessage } = useContext(
-    AhfToasterContext,
-  );
+  const { showNotification } = useContext(AhfToasterContext);
   useEffect(() => {
     init();
     stopUpdate();
@@ -31,11 +29,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (state.notification !== undefined) {
-      setSeverity(state.notification.severity);
-      setMessage(state.notification.text);
-      setShowToaster(true);
+      showNotification({
+        text: state.notification.text,
+        severity: state.notification.severity,
+      });
     }
-  }, [setMessage, setShowToaster, setSeverity, state.notification]);
+  }, [showNotification, state.notification]);
 
   return (
     <>

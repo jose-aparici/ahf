@@ -1,4 +1,9 @@
-export type Severity = 'success' | 'info' | 'warning' | 'error';
+export enum Severity {
+  SUCCESS = 'success',
+  INFO = 'info',
+  WARNING = 'warning',
+  ERROR = 'error',
+}
 
 export interface Notification {
   text: string;

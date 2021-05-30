@@ -3,6 +3,8 @@ import React, { Dispatch, SetStateAction } from 'react';
 import { Snackbar, Typography } from '@material-ui/core';
 import Alert, { Color } from '@material-ui/lab/Alert';
 
+import { Notification } from 'domain/notification/notification.types';
+
 import { useSnackBarComponentStyles } from './snackbar.component.styles';
 
 export type Severity = 'success' | 'info' | 'warning' | 'error';
@@ -10,17 +12,16 @@ export type Severity = 'success' | 'info' | 'warning' | 'error';
 interface Props {
   show: boolean;
   onShow: Dispatch<SetStateAction<boolean>>;
-  severity: string;
-  message: string;
+  notification: Notification;
 }
 
 export const AhfSnackBarComponent: React.FC<Props> = ({
   show,
   onShow,
-  severity,
-  message,
+  notification,
 }: Props) => {
   const classes = useSnackBarComponentStyles();
+  const { text, severity } = notification;
   return (
     <Snackbar
       open={show}
@@ -36,7 +37,7 @@ export const AhfSnackBarComponent: React.FC<Props> = ({
         style={{ height: '20px', padding: '4px' }}
         classes={{ message: classes.alertMessage, icon: classes.alertIcon }}
       >
-        <Typography className={classes.text}>{message}</Typography>
+        <Typography className={classes.text}>{text}</Typography>
       </Alert>
     </Snackbar>
   );

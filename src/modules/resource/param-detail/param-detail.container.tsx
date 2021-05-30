@@ -27,6 +27,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { Severity } from 'domain/notification/notification.types';
 import { AccessType, Param } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 
@@ -45,9 +46,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     AhfBackdropContext,
   );
 
-  const { setShowToaster, setSeverity, setMessage } = useContext(
-    AhfToasterContext,
-  );
+  const { showNotification } = useContext(AhfToasterContext);
 
   const timeoutIdRef = useRef<number>();
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -71,18 +70,17 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       }
       closeBackdrop();
       setNexMarker(param.read.marker);
-      setSeverity('success');
-      setMessage(t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS'));
-      setShowToaster(true);
+      showNotification({
+        text: t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS'),
+        severity: Severity.SUCCESS,
+      });
     }
   }, [
     nextMarker,
     param.read,
     closeBackdrop,
     isBackdropOpened,
-    setSeverity,
-    setShowToaster,
-    setMessage,
+    showNotification,
     param.value,
     param.paramId,
     t,
@@ -91,24 +89,18 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   useEffect(() => {
     if (isBackdropOpened) {
       timeoutIdRef.current = window.setTimeout(() => {
-        setSeverity('warning');
-        setMessage(t('RESOURCE.PARAM_DETAIL.SAVE.WARNING'));
         closeBackdrop();
-        setShowToaster(true);
+        showNotification({
+          text: t('RESOURCE.PARAM_DETAIL.SAVE.WARNING'),
+          severity: Severity.WARNING,
+        });
       }, 5000);
 
       return () => {
         window.clearTimeout(timeoutIdRef.current);
       };
     }
-  }, [
-    closeBackdrop,
-    isBackdropOpened,
-    setSeverity,
-    setShowToaster,
-    setMessage,
-    t,
-  ]);
+  }, [closeBackdrop, isBackdropOpened, showNotification, t]);
 
   const handleClickInput = () => {
     param.value !== undefined &&
