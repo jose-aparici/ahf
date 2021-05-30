@@ -50,11 +50,8 @@ const transformAhfParamTypeToParamType = (
 
 const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] => {
   return ahfParams.map((ahfParam) => {
-    if (ahfParam.ParamID === 200) {
-      debugger;
-      console.log('language');
-      ahfParam.Value &&
-        i18n.changeLanguage(AHF_LANGUAGES[ahfParam.Value as number].locale);
+    if (ahfParam.ParamID === 200 && ahfParam.Value) {
+      i18n.changeLanguage(AHF_LANGUAGES[ahfParam.Value as number].locale);
     }
     return ({
       accessType: ahfParam.AccessType,
