@@ -2,6 +2,7 @@ import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfToasterContext } from 'contexts/toaster/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
+import i18next from 'i18next';
 import React, {
   useCallback,
   useContext,
@@ -62,6 +63,12 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       param.read &&
       param.read?.marker >= nextMarker
     ) {
+      if (
+        param.paramId === 200 &&
+        i18next.language !== AHF_LANGUAGES[param.value as number].locale
+      ) {
+        i18next.changeLanguage(AHF_LANGUAGES[param.value as number].locale);
+      }
       closeBackdrop();
       setNexMarker(param.read.marker);
       setSeverity('success');
@@ -76,6 +83,8 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     setSeverity,
     setShowToaster,
     setMessage,
+    param.value,
+    param.paramId,
     t,
   ]);
 
