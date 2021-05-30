@@ -8,7 +8,7 @@ import StarBorderIcon from '@material-ui/icons/StarBorder';
 import WarningIcon from '@material-ui/icons/Warning';
 import Alert, { Color } from '@material-ui/lab/Alert';
 
-import { Log } from 'domain/event/events.type';
+import { Log, LogType } from 'domain/event/events.type';
 
 import { useTableComponentStyles } from './table.component.styles';
 
@@ -24,7 +24,11 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
         return (
           <Alert
             key={index}
-            severity={(row.type as unknown) as Color}
+            severity={
+              row.type === LogType.STATUS
+                ? 'success'
+                : ((row.type as unknown) as Color)
+            }
             classes={{
               root: classes.alertRoot,
               message: classes.row,
@@ -50,7 +54,7 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
               <Grid item xs={7}>
                 <Typography className={classes.text}>{row.message}</Typography>
               </Grid>
-              <Grid item xs={3} alignContent="flex-end">
+              <Grid item xs={3} container alignContent="flex-end">
                 <Typography className={clsx(classes.text, classes.textRight)}>
                   {row.operatingHours}
                 </Typography>
