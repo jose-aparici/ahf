@@ -20,6 +20,28 @@
   },
   "HEADER": "german",
   "RESOURCE": {
+    "MAIN": {
+      "TITLES": {
+        "ACTUAL": "Actual",
+        "CURRENTS": "Currents",
+        "CURRENT_TRANSFORMER": "Current transformer",
+        "DPF": "DPF",
+        "FILTER_PARAMETERS": "Filter parameters",
+        "HARMONIC_COMPENSATION": "Harmonic compensation",
+        "LOAD_BALANCING": "Load balancing",
+        "LOWER_LIMIT": "Lower limit",
+        "MAINS_PARAMETERS": "Mains parameters",
+        "MAIN_FREQUENCY": "Main frequency",
+        "OUTPUT": "Output",
+        "REACTIVE_POWER_COMPENSATION": "Reactive power compensation",
+        "REACTIVE_POWER_CONTROL": "Reactive power control",
+        "ROTATING_FIELD": "Rotating field",
+        "STATE": "State",
+        "THDI": "THDi",
+        "UPPER_LIMIT": "Upper limit",
+        "VOLTAGE": "Voltage"
+      }
+    },
     "PARAM_DETAIL": {
       "EDIT": {
         "BUTTONS": {

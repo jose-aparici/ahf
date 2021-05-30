@@ -65,6 +65,7 @@ export const AhfFolderContainer: React.FC = () => {
           {resourceState.folder.isMainFolder ? (
             <AhfFolderMainComponent
               params={resourceState.folder.params}
+              currentLanguage={currentLanguage}
               deviceType={
                 state.devices[+extractDeviceFromPath(location.pathname)].info
                   .type
