@@ -121,7 +121,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
           right={0}
           left={0}
         >
-          {!isOpen && <ChevronLeftIcon />}
+          {!isOpen && <ChevronLeftIcon onClick={() => setIsOpen(true)} />}
         </Box>
         <AhfSideBarComponent
           onRetrieveAll={handleRetrieveAll}
