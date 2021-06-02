@@ -15,7 +15,7 @@ import { useTableComponentStyles } from './table.component.styles';
 interface Props {
   rows: Log[];
 }
-export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
+const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
   const classes = useTableComponentStyles();
 
   return (
@@ -66,3 +66,5 @@ export const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
     </>
   );
 };
+
+export const AhfTableComponentMemoized = React.memo(AhfTableComponent);

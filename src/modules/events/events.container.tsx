@@ -8,7 +8,7 @@ import { EventLogFiles } from 'domain/event/events.type';
 
 import { readEventLogFilesReducer } from './reducer_event_logs_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
-import { AhfTableComponent } from './table/table.component';
+import { AhfTableComponentMemoized } from './table/table.component';
 
 export type Action = {
   type: AhfCommand;
@@ -43,7 +43,7 @@ export const AhfEventsContainer: React.FC = () => {
 
   return (
     <>
-      <AhfTableComponent rows={appState.eventLogs.logs} />
+      <AhfTableComponentMemoized rows={appState.eventLogs.logs} />
       <AhfSideBarContainer
         logFiles={state.logFiles}
         onClearLogFiles={handleClearLogFiles}
