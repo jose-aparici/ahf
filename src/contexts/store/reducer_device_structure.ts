@@ -73,7 +73,7 @@ const transformFolderDataToNode = (
 ): Folder[] => {
   return Object.entries(folderData).map((entry) => ({
     id: entry[0] === '' ? `${previousPath}/ ` : `${previousPath}/${entry[0]}`,
-    label: entry[0],
+    label: entry[1].Names,
     deviceId: deviceId,
     isMainFolder: false,
     params: entry[1].Params
@@ -95,7 +95,7 @@ const transformStructureToNode = (structure: AhfDeviceStructure) =>
       id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
         current[0]
       }`,
-      label: current[0],
+      label: [current[0]],
       deviceId: structure.DeviceID.toString(),
       isMainFolder: true,
       params: current[1].Params
@@ -111,7 +111,7 @@ const transformStructureToNode = (structure: AhfDeviceStructure) =>
     }),
     {
       id: '',
-      label: '',
+      label: [],
       params: [],
       children: [],
       deviceId: '',

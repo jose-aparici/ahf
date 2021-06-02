@@ -7,7 +7,7 @@ export interface State {
 export const initialState: State = {
   folder: {
     id: '',
-    label: '',
+    label: [],
     deviceId: '',
     isMainFolder: false,
     children: [],

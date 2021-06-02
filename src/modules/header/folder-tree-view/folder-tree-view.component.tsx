@@ -13,12 +13,14 @@ interface Props {
   device: Device;
   foldersExpandedIds: string[];
   onToggleSideBar: () => void;
+  currentLanguage: number;
 }
 
 export const AhfFolderTreeViewComponent: React.FC<Props> = ({
   device,
   foldersExpandedIds,
   onToggleSideBar,
+  currentLanguage,
 }: Props) => {
   const classes = useFolderTreeViewComponentStyles();
 
@@ -37,7 +39,7 @@ export const AhfFolderTreeViewComponent: React.FC<Props> = ({
             activeClassName={classes.navLinkActive}
             to={`${encodeURI(folder.id)}`}
           >
-            {folder.label}
+            {folder.label[currentLanguage]}
           </NavLink>
         }
       >
