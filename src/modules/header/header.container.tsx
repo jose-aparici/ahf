@@ -34,10 +34,17 @@ export const AhfHeaderContainer: FC = () => {
     .position;
 
   useEffect(() => {
-    setBreadcrumbs(
-      pathToBreadCrumbs(location.pathname, state.eventLogs.fileName),
-    );
-    setDeviceId(extractDeviceFromPath(location.pathname));
+    const deviceId = extractDeviceFromPath(location.pathname);
+    if (deviceId !== undefined) {
+      setBreadcrumbs(
+        pathToBreadCrumbs(
+          location.pathname,
+          state.devices[+deviceId].paths,
+          state.eventLogs.fileName,
+        ),
+      );
+      setDeviceId(deviceId);
+    }
   }, [location.pathname, deviceId, state.devices, state.eventLogs.fileName]);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
@@ -58,7 +65,10 @@ export const AhfHeaderContainer: FC = () => {
               />
 
               {breadcrumbs && (
-                <AhfBreadcrumbsComponent breadcrumbs={breadcrumbs} />
+                <AhfBreadcrumbsComponent
+                  currentLanguage={currentLanguage}
+                  breadcrumbs={breadcrumbs}
+                />
               )}
             </>
           )}

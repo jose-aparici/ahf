@@ -20,6 +20,10 @@ export const deviceInfoReducer = (
       state.devices[deviceInfo.ID] && state.devices[deviceInfo.ID].structure
         ? state.devices[deviceInfo.ID].structure
         : {},
+    paths:
+      state.devices[deviceInfo.ID] && state.devices[deviceInfo.ID].paths
+        ? state.devices[deviceInfo.ID].paths
+        : {},
   } as Device;
 
   return {
