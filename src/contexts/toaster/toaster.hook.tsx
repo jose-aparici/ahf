@@ -1,44 +1,27 @@
-import {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useEffect,
-  useState,
-} from 'react';
+import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 
 import { Notification } from 'domain/notification/notification.types';
 
 interface ToasterHook {
-  showNotification: (notification: Notification) => void;
-  showToaster: boolean;
-  setShowToaster: Dispatch<SetStateAction<boolean>>;
-  currentNotification: Notification | undefined;
+  displayNotification: (notification: Notification) => void;
+  notification: Notification | undefined;
+  showNotification: boolean;
+  setShowNotification: Dispatch<SetStateAction<boolean>>;
 }
 
 export const useToaster = (): ToasterHook => {
-  const [notifications, setNotifications] = useState<Notification[]>([]);
-  const [showToaster, setShowToaster] = useState(false);
-  const [currentNotification, setCurrentNotification] = useState<
-    Notification
-  >();
+  const [showNotification, setShowNotification] = useState(false);
+  const [notification, setNotification] = useState<Notification>();
 
-  useEffect(() => {
-    if (notifications.length && !currentNotification) {
-      setCurrentNotification({ ...notifications[0] });
-      setNotifications((prev) => prev.slice(1));
-      setShowToaster(true);
-    }
-  }, [currentNotification, notifications]);
-
-  const showNotification = useCallback((notification: Notification) => {
-    setCurrentNotification(undefined);
-    setNotifications((prev) => [...prev, notification]);
+  const displayNotification = useCallback((notification: Notification) => {
+    setNotification(notification);
+    setShowNotification(true);
   }, []);
 
   return {
+    displayNotification,
+    notification,
     showNotification,
-    showToaster,
-    setShowToaster,
-    currentNotification,
+    setShowNotification,
   };
 };
