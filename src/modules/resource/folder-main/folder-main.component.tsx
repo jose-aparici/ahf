@@ -1,14 +1,12 @@
 import clsx from 'clsx';
-import i18n from 'i18n';
 import { ReactComponent as AhfHarmonicFilterSvg } from 'images/harmonic_filter.svg';
 import { ReactComponent as SyncModuleSvg } from 'images/sync_module.svg';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Grid, Paper, Typography } from '@material-ui/core';
 
 import { DeviceType } from 'domain/device/device.types';
-import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
-import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param } from 'domain/param/param.types';
 import { getParamValue } from 'domain/param/param.utils';
 
@@ -17,14 +15,15 @@ import { useFolderMainComponentStyles } from './folder-main.component.styles';
 interface Props {
   params: Param[];
   deviceType: DeviceType;
+  currentLanguage: number;
 }
 export const AhfFolderMainComponent: React.FC<Props> = ({
   params,
   deviceType,
+  currentLanguage,
 }: Props) => {
   const classes = useFolderMainComponentStyles();
-  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
-    .position;
+  const { t } = useTranslation();
 
   return (
     <div className={classes.root}>
@@ -33,15 +32,19 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
           <Paper className={clsx(classes.paper, classes.paperLeft)}>
             <Grid item>
               <Typography variant="h2" className={clsx(classes.containerTitle)}>
-                Mains parameters
+                {t('RESOURCE.MAIN.TITLES.MAINS_PARAMETERS')}
               </Typography>
             </Grid>
             <Grid container>
               <Grid item xs={6}>
-                <Typography variant="h4">Main frequency</Typography>
+                <Typography variant="h4">
+                  {t('RESOURCE.MAIN.TITLES.MAINS_PARAMETERS')}
+                </Typography>
               </Grid>
               <Grid item xs={6}>
-                <Typography variant="h4">Rotating field</Typography>
+                <Typography variant="h4">
+                  {t('RESOURCE.MAIN.TITLES.ROTATING_FIELD')}
+                </Typography>
               </Grid>
               <Grid item xs={6}>
                 <Typography
@@ -70,9 +73,18 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
             </Grid>
             <Grid container>
               {[
-                { title: 'Voltage', params: [2, 3, 4] },
-                { title: 'Currents', params: [5, 6, 7] },
-                { title: 'THDi', params: [8, 9, 10] },
+                {
+                  title: t('RESOURCE.MAIN.TITLES.VOLTAGE'),
+                  params: [2, 3, 4],
+                },
+                {
+                  title: t('RESOURCE.MAIN.TITLES.CURRENTS'),
+                  params: [5, 6, 7],
+                },
+                {
+                  title: t('RESOURCE.MAIN.TITLES.THDI'),
+                  params: [8, 9, 10],
+                },
               ].map((row) => (
                 <React.Fragment key={row.title}>
                   <Grid item xs={12}>
@@ -130,22 +142,34 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
           <Paper className={clsx(classes.paper, classes.paperRight)}>
             <Grid item>
               <Typography variant="h2" className={clsx(classes.containerTitle)}>
-                Filter parameters
+                {t('RESOURCE.MAIN.TITLES.FILTER_PARAMETERS')}
               </Typography>
             </Grid>
             <Grid container>
               {[
-                { labels: ['State', 'Output'], paramsIndex: [11, 12] },
-                { labels: ['Current transformer', ''], paramsIndex: [13, 14] },
                 {
                   labels: [
-                    'Harmonic compensation',
-                    'Reactive power compensation',
+                    t('RESOURCE.MAIN.TITLES.STATE'),
+                    t('RESOURCE.MAIN.TITLES.OUTPUT'),
+                  ],
+                  paramsIndex: [11, 12],
+                },
+                {
+                  labels: [t('RESOURCE.MAIN.TITLES.CURRENT_TRANSFORMER'), ''],
+                  paramsIndex: [13, 14],
+                },
+                {
+                  labels: [
+                    t('RESOURCE.MAIN.TITLES.HARMONIC_COMPENSATION'),
+                    t('RESOURCE.MAIN.TITLES.REACTIVE_POWER_COMPENSATION'),
                   ],
                   paramsIndex: [15, 16],
                 },
                 {
-                  labels: ['Reactive power control', 'Load balancing'],
+                  labels: [
+                    t('RESOURCE.MAIN.TITLES.REACTIVE_POWER_CONTROL'),
+                    t('RESOURCE.MAIN.TITLES.LOAD_BALANCING'),
+                  ],
                   paramsIndex: [17, 18],
                 },
               ].map((row, index) => (
@@ -178,10 +202,16 @@ export const AhfFolderMainComponent: React.FC<Props> = ({
               ))}
             </Grid>
             <Grid item>
-              <Typography variant="h4">DPF</Typography>
+              <Typography variant="h4">
+                {t('RESOURCE.MAIN.TITLES.DPF')}
+              </Typography>
             </Grid>
             <Grid container>
-              {['Lower limit', 'Actual', 'Upper limit'].map((label) => (
+              {[
+                t('RESOURCE.MAIN.TITLES.LOWER_LIMIT'),
+                t('RESOURCE.MAIN.TITLES.ACTUAL'),
+                t('RESOURCE.MAIN.TITLES.UPPER_LIMIT'),
+              ].map((label) => (
                 <Grid item xs={4} key={label}>
                   <Typography variant="h4">{label}</Typography>
                 </Grid>

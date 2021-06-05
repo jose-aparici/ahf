@@ -10,6 +10,7 @@ export enum ParamType {
   UNSIGNED_INTEGER = 'UnsignedInteger',
   FLOATING_POINT = 'FloatingPoint',
   STRING = 'String',
+  FILE_NAME = 'FileName',
   DATE = 'Date',
   ENUM = 'Enum',
   IP = 'Ip',

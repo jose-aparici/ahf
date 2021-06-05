@@ -12,12 +12,8 @@ interface Props {
 export const AhfSpinnerComponent: React.FC<Props> = ({ open }: Props) => {
   const classes = useSpinnerComponentStyles();
   return (
-    <>
-      {open && (
-        <Backdrop className={classes.root} open={open}>
-          <CircularProgress color="inherit" />
-        </Backdrop>
-      )}
-    </>
+    <Backdrop className={classes.root} open={open}>
+      <CircularProgress color="inherit" />
+    </Backdrop>
   );
 };

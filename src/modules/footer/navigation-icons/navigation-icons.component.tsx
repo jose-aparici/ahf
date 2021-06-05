@@ -1,16 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import { Grid, IconButton } from '@material-ui/core';
+import { CircularProgress, Grid, IconButton } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import DescriptionIcon from '@material-ui/icons/Description';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import PowerOffIcon from '@material-ui/icons/PowerOff';
 
-import { AppRoutes } from 'pages/App.routes';
+import { AppRoutes, EVENTS } from 'pages/App.routes';
 
 import { useNavigationIconsStyles } from './navigation-icons.component.styles';
 
-export const AhfNavigationIconsComponent: React.FC = () => {
+interface Props {
+  devicePath: string;
+  status: number;
+}
+
+export const AhfNavigationIconsComponent: React.FC<Props> = ({
+  devicePath,
+  status,
+}: Props) => {
   const classes = useNavigationIconsStyles();
   return (
     <>
@@ -18,7 +28,7 @@ export const AhfNavigationIconsComponent: React.FC = () => {
         <IconButton
           component={Link}
           className={classes.icon}
-          to={AppRoutes.EventsPage}
+          to={`${devicePath}/${EVENTS}`}
           color="inherit"
           aria-label="menu"
         >
@@ -44,7 +54,12 @@ export const AhfNavigationIconsComponent: React.FC = () => {
           color="inherit"
           aria-label="menu"
         >
-          <CheckCircleIcon htmlColor="green" />
+          {status === 0 && <DescriptionIcon htmlColor="orange" />}
+          {status === 1 && (
+            <CircularProgress size={20} thickness={2} color="primary" />
+          )}
+          {status === 2 && <PowerOffIcon htmlColor="grey" />}
+          {status === 3 && <CheckCircleIcon htmlColor={'#42be65'} />}
         </IconButton>
       </Grid>
     </>

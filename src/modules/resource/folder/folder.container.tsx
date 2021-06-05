@@ -40,6 +40,7 @@ export const AhfFolderContainer: React.FC = () => {
   const folderCards = resourceState.folder.children.map((folder) => {
     return (
       <AhfFolderCardComponent
+        currentLanguage={currentLanguage}
         key={folder.id}
         folder={folder}
         onClickFolder={handleClickFolder}
@@ -65,6 +66,7 @@ export const AhfFolderContainer: React.FC = () => {
           {resourceState.folder.isMainFolder ? (
             <AhfFolderMainComponent
               params={resourceState.folder.params}
+              currentLanguage={currentLanguage}
               deviceType={
                 state.devices[+extractDeviceFromPath(location.pathname)].info
                   .type

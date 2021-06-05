@@ -3,6 +3,7 @@ import { Folder } from 'domain/folder/folder.types';
 export interface Device {
   info: DeviceInfo;
   structure: Folder;
+  paths: DevicePaths;
 }
 
 export interface DeviceInfo {
@@ -19,3 +20,5 @@ export enum DeviceType {
   ACTIVE_HARMONIC_FILER = 2,
   HMI_DEVICE = 3,
 }
+
+export type DevicePaths = Record<string, string[]>;

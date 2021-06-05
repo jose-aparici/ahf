@@ -17,10 +17,15 @@ describe('reducer device info', () => {
             id: payload.ID,
             status: payload.Status,
             type: payload.Type,
+            typeName: payload.TypeName,
           },
         },
       },
       initialDevice: 1,
+      eventLogs: {
+        fileName: '',
+        logs: [],
+      },
     });
   });
 });

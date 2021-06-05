@@ -1,29 +1,15 @@
-import React, {
-  createContext,
-  Dispatch,
-  ReactElement,
-  ReactNode,
-  SetStateAction,
-} from 'react';
+import React, { createContext, ReactElement, ReactNode } from 'react';
+
+import { Notification } from 'domain/notification/notification.types';
 
 import { AhfSnackBarComponent } from './snackbar/snackbar.component';
 import { useToaster } from './toaster.hook';
 
 interface Props {
-  showToaster: boolean;
-  setShowToaster: Dispatch<SetStateAction<boolean>>;
-  severity: string;
-  setSeverity: Dispatch<SetStateAction<string>>;
-  message: string;
-  setMessage: Dispatch<SetStateAction<string>>;
+  showNotification: (notification: Notification) => void;
 }
 export const AhfToasterContext = createContext<Props>({
-  showToaster: false,
-  setShowToaster: () => true,
-  severity: '',
-  setSeverity: () => true,
-  message: '',
-  setMessage: () => true,
+  showNotification: () => 0,
 });
 
 interface ProviderProps {
@@ -34,31 +20,25 @@ export const AhfToasterProvider = ({
   children,
 }: ProviderProps): ReactElement => {
   const {
+    showNotification,
     showToaster,
     setShowToaster,
-    severity,
-    setSeverity,
-    message,
-    setMessage,
+    currentNotification,
   } = useToaster();
 
   return (
     <AhfToasterContext.Provider
       value={{
-        showToaster,
-        setShowToaster,
-        severity,
-        setSeverity,
-        message,
-        setMessage,
+        showNotification,
       }}
     >
-      <AhfSnackBarComponent
-        show={showToaster}
-        onShow={setShowToaster}
-        severity={severity}
-        message={message}
-      />
+      {currentNotification && (
+        <AhfSnackBarComponent
+          show={showToaster}
+          onShow={setShowToaster}
+          notification={currentNotification}
+        />
+      )}
       {children}
     </AhfToasterContext.Provider>
   );

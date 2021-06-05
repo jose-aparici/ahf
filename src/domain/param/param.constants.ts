@@ -5,6 +5,9 @@ export const PARAMS_VALIDATION: Record<ParamType, ParamValidation> = {
   SignedInteger: { regex: '^[+-]?\\d+$' },
   UnsignedInteger: { regex: '^\\d+$' },
   String: {},
+  FileName: {
+    regex: '^(.)+(.txt)$',
+  },
   Date: {},
   Enum: {},
   Ip: {
