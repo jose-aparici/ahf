@@ -19,12 +19,7 @@ interface ProviderProps {
 export const AhfToasterProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const {
-    displayNotification,
-    notification,
-    showNotification,
-    setShowNotification,
-  } = useToaster();
+  const { displayNotification, notification, show, setShow } = useToaster();
 
   return (
     <AhfToasterContext.Provider
@@ -33,8 +28,8 @@ export const AhfToasterProvider = ({
       }}
     >
       <AhfSnackBarComponent
-        show={showNotification}
-        onShow={setShowNotification}
+        show={show}
+        onShow={setShow}
         notification={notification}
       />
 
