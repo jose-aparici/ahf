@@ -7,7 +7,7 @@ import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { AppCommand } from 'domain/app/app.types';
 import { EventLogFiles } from 'domain/event/events.type';
 
-import { readEventLogFilesReducer } from './reducer_event_logs_files';
+import { eventLogFilesReducer } from './reducer_event_logs_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
 import { AhfTableComponentMemoized } from './table/table.component';
 
@@ -23,7 +23,7 @@ export const AhfEventsContainer: React.FC = () => {
   const { state: appState, dispatch: appDispatch } = useContext(AhfContext);
   const { closeBackdrop } = useContext(AhfBackdropContext);
 
-  const [state, dispatch] = useReducer(readEventLogFilesReducer, {
+  const [state, dispatch] = useReducer(eventLogFilesReducer, {
     logFiles: [],
   });
 
