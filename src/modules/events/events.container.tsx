@@ -40,11 +40,11 @@ export const AhfEventsContainer: React.FC = () => {
     appState.eventLogs.logs.length > 0 && closeBackdrop();
   }, [appState.eventLogs.logs, closeBackdrop]);
 
-  // const handleClearLogFiles = () => (state.logFiles = []);
+  const handleClearLogFiles = () => (state.logFiles = []);
 
-  const handleClearLogFiles = () => {
+  /* const handleClearLogFiles = () => {
     //dispatch({type: })
-  };
+  }; */
 
   const handleClearEventLogs = () => {
     appDispatch({ type: AppCommand.CHANGE_EVENT_LOG_FILE_NAME, payload: [] });

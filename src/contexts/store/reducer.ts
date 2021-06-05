@@ -4,10 +4,10 @@ import {
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
 import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
+import { Action } from 'domain/app/app.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
 
-import { Action } from './actions';
 import { State } from './initialState';
 import { deviceInfoReducer } from './reducer_device_info';
 import { deviceStructureReducer } from './reducer_device_structure';

@@ -6,7 +6,8 @@ import React, {
   useReducer,
 } from 'react';
 
-import { Action } from './actions';
+import { Action } from 'domain/app/app.types';
+
 import { initialState, State } from './initialState';
 import { reducer } from './reducer';
 

@@ -1,3 +1,4 @@
+import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { EventLogFileName } from 'domain/event/events.type';
 
 export enum AppCommand {
@@ -6,3 +7,8 @@ export enum AppCommand {
 }
 
 export type AppPayload = EventLogFileName;
+
+export type Action = {
+  type: AhfCommand | AppCommand;
+  payload: AhfPayload | AppPayload;
+};
