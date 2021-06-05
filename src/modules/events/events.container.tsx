@@ -5,7 +5,10 @@ import React, { useContext, useEffect, useReducer } from 'react';
 
 import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { AppCommand } from 'domain/app/app.types';
-import { EventLogFiles } from 'domain/event/events.type';
+import {
+  EventLogFiles,
+  EventLogsFileNamesCommand,
+} from 'domain/event/events.type';
 
 import { eventLogFilesReducer } from './reducer_event_logs_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
@@ -40,11 +43,9 @@ export const AhfEventsContainer: React.FC = () => {
     appState.eventLogs.logs.length > 0 && closeBackdrop();
   }, [appState.eventLogs.logs, closeBackdrop]);
 
-  const handleClearLogFiles = () => (state.logFiles = []);
-
-  /* const handleClearLogFiles = () => {
-    //dispatch({type: })
-  }; */
+  const handleClearLogFiles = () => {
+    dispatch({ type: EventLogsFileNamesCommand.CLEAR, payload: [] });
+  };
 
   const handleClearEventLogs = () => {
     appDispatch({ type: AppCommand.CHANGE_EVENT_LOG_FILE_NAME, payload: [] });
