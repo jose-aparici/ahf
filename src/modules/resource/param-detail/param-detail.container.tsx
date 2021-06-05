@@ -46,7 +46,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     AhfBackdropContext,
   );
 
-  const { showNotification } = useContext(AhfToasterContext);
+  const { displayNotification } = useContext(AhfToasterContext);
 
   const timeoutIdRef = useRef<number>();
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -70,7 +70,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
       }
       closeBackdrop();
       setNexMarker(param.read.marker);
-      showNotification({
+      displayNotification({
         text: t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS'),
         severity: Severity.SUCCESS,
       });
@@ -80,7 +80,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     param.read,
     closeBackdrop,
     isBackdropOpened,
-    showNotification,
+    displayNotification,
     param.value,
     param.paramId,
     t,
@@ -90,7 +90,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
     if (isBackdropOpened) {
       timeoutIdRef.current = window.setTimeout(() => {
         closeBackdrop();
-        showNotification({
+        displayNotification({
           text: t('RESOURCE.PARAM_DETAIL.SAVE.WARNING'),
           severity: Severity.WARNING,
         });
@@ -100,7 +100,7 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         window.clearTimeout(timeoutIdRef.current);
       };
     }
-  }, [closeBackdrop, isBackdropOpened, showNotification, t]);
+  }, [closeBackdrop, isBackdropOpened, displayNotification, t]);
 
   const handleClickInput = () => {
     param.value !== undefined &&

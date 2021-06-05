@@ -6,10 +6,10 @@ import { AhfSnackBarComponent } from './snackbar/snackbar.component';
 import { useToaster } from './toaster.hook';
 
 interface Props {
-  showNotification: (notification: Notification) => void;
+  displayNotification: (notification: Notification) => void;
 }
 export const AhfToasterContext = createContext<Props>({
-  showNotification: () => 0,
+  displayNotification: () => 0,
 });
 
 interface ProviderProps {
@@ -19,26 +19,20 @@ interface ProviderProps {
 export const AhfToasterProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const {
-    showNotification,
-    showToaster,
-    setShowToaster,
-    currentNotification,
-  } = useToaster();
+  const { displayNotification, notification, show, setShow } = useToaster();
 
   return (
     <AhfToasterContext.Provider
       value={{
-        showNotification,
+        displayNotification,
       }}
     >
-      {currentNotification && (
-        <AhfSnackBarComponent
-          show={showToaster}
-          onShow={setShowToaster}
-          notification={currentNotification}
-        />
-      )}
+      <AhfSnackBarComponent
+        show={show}
+        onShow={setShow}
+        notification={notification}
+      />
+
       {children}
     </AhfToasterContext.Provider>
   );
