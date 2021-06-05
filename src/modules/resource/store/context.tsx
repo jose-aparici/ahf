@@ -6,14 +6,27 @@ import React, {
   useReducer,
 } from 'react';
 
-import { Action } from './actions';
-import { initialState, State } from './initialState';
-import { reducer } from './reducer';
+import { Action } from 'domain/app/app.types';
+
+import { reducer, State } from './reducer';
 
 interface Props {
   resourceState: State;
   dispatch: Dispatch<Action>;
 }
+
+export const initialState: State = {
+  folder: {
+    id: '',
+    label: [],
+    deviceId: '',
+    isMainFolder: false,
+    children: [],
+    params: [],
+  },
+  currentParamIndex: undefined,
+};
+
 export const AhfResourceContext = createContext<Props>({
   resourceState: initialState,
   dispatch: () => true,

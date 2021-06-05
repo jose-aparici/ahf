@@ -1,6 +1,6 @@
 import { Resource } from 'domain/resource/resource.type';
 
-import { State } from './initialState';
+import { State } from './reducer';
 
 export const resourceChangeReducer = (
   state: State,
