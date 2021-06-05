@@ -1,8 +1,8 @@
 import i18next from 'i18next';
 
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 
-import { AHF_LANGUAGES } from '../../../domain/languages/languages.constants';
 import { State } from './reducer';
 
 export const paramReadReducer = (
