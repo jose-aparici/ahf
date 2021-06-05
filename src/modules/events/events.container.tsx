@@ -36,10 +36,14 @@ export const AhfEventsContainer: React.FC = () => {
   }, [listen]);
 
   useEffect(() => {
-    appState.eventLogs.logs && closeBackdrop();
+    appState.eventLogs.logs.length > 0 && closeBackdrop();
   }, [appState.eventLogs.logs, closeBackdrop]);
 
   const handleClearLogFiles = () => (state.logFiles = []);
+
+  const handleClearEventLogs = () => {
+    appState.eventLogs.logs = [];
+  };
 
   return (
     <>
@@ -47,6 +51,7 @@ export const AhfEventsContainer: React.FC = () => {
       <AhfSideBarContainer
         logFiles={state.logFiles}
         onClearLogFiles={handleClearLogFiles}
+        onClearEventLogs={handleClearEventLogs}
       />
     </>
   );

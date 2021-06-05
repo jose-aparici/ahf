@@ -23,11 +23,13 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 interface Props {
   logFiles: EventLogFiles;
   onClearLogFiles: () => void;
+  onClearEventLogs: () => void;
 }
 
 export const AhfSideBarContainer: React.FC<Props> = ({
   logFiles,
   onClearLogFiles,
+  onClearEventLogs,
 }: Props) => {
   const classes = useSideBarContainerStyles();
   const { state: appState, dispatch } = useContext(AhfContext);
@@ -47,12 +49,14 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   const handleRetrieveAll = () => {
+    onClearEventLogs();
     setIsOpen(false);
     openBackdrop();
     readEvents(ALL_EVENTS_SIZE);
   };
 
   const handleRetrieveLatest = () => {
+    onClearEventLogs();
     setIsOpen(false);
     openBackdrop();
     readEvents(LATEST_EVENTS_SIZE);
@@ -66,6 +70,8 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const handleSelectEventLogFile = (value: string) => {
     onClearLogFiles();
+    onClearEventLogs();
+    openBackdrop();
     setOpenFileListEditModal(false);
     setIsOpen(false);
     readEventLogFromFile(logFiles[+value]);
