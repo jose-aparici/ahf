@@ -5,6 +5,7 @@
   "dependencies": {
     "@date-io/date-fns": "^1.3.13",
     "@material-ui/pickers": "^3.3.10",
+    "@types/react-window": "^1.8.3",
     "date-fns": "^2.21.1",
     "flattree": "^0.11.1",
     "i18next": "^19.8.4",
@@ -18,6 +19,7 @@
     "react-simple-keyboard": "^3.0.70",
     "react-swipeable-views": "^0.13.9",
     "react-swipeable-views-utils": "^0.14.0-alpha.0",
+    "react-window": "^1.8.6",
     "rxjs": "^6.6.2"
   },
   "scripts": {
