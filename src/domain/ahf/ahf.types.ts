@@ -1,11 +1,10 @@
-import { Action, Payload } from 'contexts/store/actions';
-
 import {
   AhfDeviceInfo,
   AhfDeviceStructure,
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent, AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
 import { AhfFolderSelect } from 'domain/ahf-folder/ahf-folder.types';
+import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 
 export enum AhfCommand {
@@ -22,6 +21,15 @@ export enum AhfCommand {
   READ_EVENT_LOG_FROM_FILE = 'ReadEventLogFromFile',
   DISPLAY_MESSAGE = 'DisplayMessage',
 }
+
+export type AhfPayload =
+  | AhfDeviceInfo
+  | AhfDeviceStructure
+  | AhfParamRead
+  | AhfEvent
+  | AhfEventLogFiles
+  | AhfNotification;
+
 export interface AhfMessage {
   Cmd: AhfCommand;
   Len?: string;
@@ -35,8 +43,3 @@ export interface AhfMessage {
     | { Len: string }
     | { FileName: string };
 }
-
-//TODO check Action and payload types naming
-export type AhfAction = Action;
-
-export type AhfPayload = Payload;

@@ -2,13 +2,14 @@ import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
 import { AhfLog } from 'domain/ahf-event/ahf-event.types';
-import { AhfAction, AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
+import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
+import { Action } from 'domain/app/app.types';
 import { Param } from 'domain/param/param.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
 interface SocketHook {
   init: () => void;
-  listen: (dispatch: Dispatch<AhfAction>) => Subscription;
+  listen: (dispatch: Dispatch<Action>) => Subscription;
   scan: () => void;
   readIniFile: (deviceId: string) => void;
   update: (deviceId: string, folderId: string) => void;
@@ -25,7 +26,7 @@ export const useSocketHook = (): SocketHook => {
     AhfSocket.getInstance();
   }, []);
 
-  const listen = useCallback((dispatch: Dispatch<AhfAction>): Subscription => {
+  const listen = useCallback((dispatch: Dispatch<Action>): Subscription => {
     return AhfSocket.getInstance()
       .asObservable()
       .subscribe((data) => {

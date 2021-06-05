@@ -7,13 +7,12 @@ import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { AppCommand } from 'domain/app/app.types';
-import { transformFromLogToAhfLog } from 'domain/event/event.utils';
 import {
   ALL_EVENTS_SIZE,
-  EventLogFiles,
   LATEST_EVENTS_SIZE,
-  Log,
-} from 'domain/event/events.type';
+} from 'domain/event/event.constants';
+import { transformFromLogToAhfLog } from 'domain/event/event.utils';
+import { EventLogFiles, Log } from 'domain/event/events.type';
 import { ParamType } from 'domain/param/param.types';
 import { AhfParamEditContainerMemoized } from 'modules/shared/param-edit/param-edit.container';
 

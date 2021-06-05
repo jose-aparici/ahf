@@ -1,6 +1,6 @@
 import { AccessType, ParamType } from 'domain/param/param.types';
 
-import { State } from '../initialState';
+import { State } from '../reducer';
 
 const DEFAULT_STATE: State = {
   folder: {

@@ -1,19 +1,24 @@
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
-import { Resource } from 'domain/resource/resource.type';
+import { AhfCommand } from 'domain/ahf/ahf.types';
+import { Action } from 'domain/app/app.types';
+import { Folder } from 'domain/folder/folder.types';
+import { Resource, ResourceCommand } from 'domain/resource/resource.type';
 
-import { Action } from './actions';
-import { State } from './initialState';
 import { paramReadReducer } from './reducer_param_read';
 import { resourceChangeReducer } from './reducer_resource_change';
-import { PARAM_READ, RESOURCE_CHANGE } from './types';
+
+export interface State {
+  folder: Folder;
+  currentParamIndex: number | undefined;
+}
 
 export const reducer = (state: State, action: Action): State => {
   const { type, payload } = action;
 
   switch (type) {
-    case RESOURCE_CHANGE:
+    case ResourceCommand.RESOURCE_CHANGE:
       return resourceChangeReducer(state, payload as Resource);
-    case PARAM_READ:
+    case AhfCommand.PARAM_DETAIL:
       return paramReadReducer(state, payload as AhfParamRead);
 
     default:
