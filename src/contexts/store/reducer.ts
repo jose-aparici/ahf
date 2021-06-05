@@ -14,6 +14,7 @@ import { deviceStructureReducer } from './reducer_device_structure';
 import { writeEventsReducer } from './reducer_write_events';
 import {
   CHANGE_EVENT_LOG_FILE_NAME,
+  CLEAR_EVENT_LOGS,
   DEVICE_INFO,
   DEVICE_STRUCTURE,
   DISPLAY_MESSAGE,
@@ -35,6 +36,11 @@ export const reducer = (state: State, action: Action): State => {
 
     case CHANGE_EVENT_LOG_FILE_NAME: {
       state.eventLogs.fileName = payload as EventLogFileName;
+      return { ...state };
+    }
+
+    case CLEAR_EVENT_LOGS: {
+      state.eventLogs.logs = [];
       return { ...state };
     }
 

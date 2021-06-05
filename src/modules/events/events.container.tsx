@@ -4,6 +4,7 @@ import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect, useReducer } from 'react';
 
 import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
+import { AppCommand } from 'domain/app/app.types';
 import { EventLogFiles } from 'domain/event/events.type';
 
 import { readEventLogFilesReducer } from './reducer_event_logs_files';
@@ -19,7 +20,7 @@ export interface State {
 }
 
 export const AhfEventsContainer: React.FC = () => {
-  const { state: appState } = useContext(AhfContext);
+  const { state: appState, dispatch: appDispatch } = useContext(AhfContext);
   const { closeBackdrop } = useContext(AhfBackdropContext);
 
   const [state, dispatch] = useReducer(readEventLogFilesReducer, {
@@ -39,10 +40,14 @@ export const AhfEventsContainer: React.FC = () => {
     appState.eventLogs.logs.length > 0 && closeBackdrop();
   }, [appState.eventLogs.logs, closeBackdrop]);
 
-  const handleClearLogFiles = () => (state.logFiles = []);
+  // const handleClearLogFiles = () => (state.logFiles = []);
+
+  const handleClearLogFiles = () => {
+    //dispatch({type: })
+  };
 
   const handleClearEventLogs = () => {
-    appState.eventLogs.logs = [];
+    appDispatch({ type: AppCommand.CHANGE_EVENT_LOG_FILE_NAME, payload: [] });
   };
 
   return (

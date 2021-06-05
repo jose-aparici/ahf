@@ -69,8 +69,8 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   };
 
   const handleSelectEventLogFile = (value: string) => {
-    onClearLogFiles();
     onClearEventLogs();
+    onClearLogFiles();
     openBackdrop();
     setOpenFileListEditModal(false);
     setIsOpen(false);
