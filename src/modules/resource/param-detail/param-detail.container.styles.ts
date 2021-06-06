@@ -13,7 +13,6 @@ export const useParamDetailContainerStyles = makeStyles((theme: Theme) => ({
     borderRadius: '3px',
   },
   title: {
-    fontWeight: 'bold',
     color: theme.palette.primary.main,
   },
   description: {

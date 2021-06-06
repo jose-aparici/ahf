@@ -10,6 +10,7 @@ export enum ParamType {
   UNSIGNED_INTEGER = 'UnsignedInteger',
   FLOATING_POINT = 'FloatingPoint',
   STRING = 'String',
+  FILE_NAME = 'FileName',
   DATE = 'Date',
   ENUM = 'Enum',
   IP = 'Ip',
@@ -20,7 +21,7 @@ export interface Param {
   description: Array<string>;
   name: Array<string>;
   paramEnumNumb: number;
-  paramEnumText: Array<string>;
+  paramEnumText: Record<number, Array<string>>;
   paramId: number;
   paramType: ParamType;
   unit: string;

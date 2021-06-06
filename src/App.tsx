@@ -1,34 +1,43 @@
 import { AhfContext } from 'contexts/store/context';
+import { AhfToasterContext } from 'contexts/toaster/context';
 import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
-import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { AhfFooterContainer } from 'modules/footer/footer.container';
 import { AhfHeaderContainer } from 'modules/header/header.container';
 import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
+import { AhfMainPage } from 'pages/main/main.page';
 import { AhfResourcePage } from 'pages/resource/resource.page';
 import { AhfSettingsPage } from 'pages/settings/settings.page';
 
 const App: React.FC = () => {
   const { init, listen, scan, stopUpdate } = useSocketHook();
-  const { dispatch } = useContext(AhfContext);
-
+  const { state, dispatch } = useContext(AhfContext);
+  const { displayNotification } = useContext(AhfToasterContext);
   useEffect(() => {
     init();
     stopUpdate();
-    listen(dispatch);
+    const subscription = listen(dispatch);
     scan();
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, [init, listen, scan, stopUpdate, dispatch]);
+
+  useEffect(() => {
+    state.notification && displayNotification(state.notification);
+  }, [displayNotification, state.notification]);
+
   return (
     <>
       <BrowserRouter>
         <AhfHeaderContainer />
         <Switch>
-          <Route path={AppRoutes.MainPage} exact>
-            <Redirect to={AppRoutes.DevicesPage} />
-          </Route>
+          <Route path={AppRoutes.MainPage} exact component={AhfMainPage} />
           <Route
             path={AppRoutes.DevicesPage}
             exact

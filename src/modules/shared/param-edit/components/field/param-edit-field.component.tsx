@@ -50,7 +50,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
       case ParamType.ENUM:
         return (
           <RadioGroup
-            value={value}
+            value={value.toString()}
             onChange={(_, value) => onChange(value)}
             className={classes.radioGroup}
           >
@@ -70,6 +70,7 @@ export const AhfParamEditFieldComponent: React.FC<Props> = ({
       case ParamType.UNSIGNED_INTEGER:
       case ParamType.SIGNED_INTEGER:
       case ParamType.STRING:
+      case ParamType.FILE_NAME:
       case ParamType.MAC:
       case ParamType.IP:
         return (

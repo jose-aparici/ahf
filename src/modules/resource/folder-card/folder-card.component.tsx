@@ -8,11 +8,13 @@ import { Folder } from 'domain/folder/folder.types';
 import { useFolderCardComponentStyles } from './folder-card.component.styles';
 
 interface Props {
+  currentLanguage: number;
   folder: Folder;
   onClickFolder: (folder: Folder) => void;
 }
 
 export const AhfFolderCardComponent: React.FC<Props> = ({
+  currentLanguage,
   folder,
   onClickFolder,
 }: Props) => {
@@ -25,7 +27,9 @@ export const AhfFolderCardComponent: React.FC<Props> = ({
     >
       <CardContent className={classes.contentContainer}>
         <FolderOpenIcon />
-        <Typography className={classes.name}>{folder.label}</Typography>
+        <Typography className={classes.name}>
+          {folder.label[currentLanguage]}
+        </Typography>
       </CardContent>
     </Card>
   );

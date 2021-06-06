@@ -17,6 +17,9 @@ export const useAhfDeviceCardComponentStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'space-between',
   },
+  titleVersion: {
+    fontWeight: 'normal',
+  },
   iconContainer: {
     justifyContent: 'flex-end',
   },

@@ -5,6 +5,7 @@ export const useHeaderContainerStyles = makeStyles((theme: Theme) => ({
     boxShadow: `0 0 0 2px ${theme.palette.secondary.main}`,
     position: 'sticky',
     height: '38px',
+    zIndex: theme.zIndex.drawer + 1000,
   },
   toolBar: {
     display: 'flex',

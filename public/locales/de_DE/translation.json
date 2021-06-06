@@ -1,10 +1,52 @@
 {
+  "EVENTS": {
+    "SIDEBAR": {
+      "ACTIONS": {
+        "BUTTONS": {
+          "OPEN_SAVED": "Open saved eventlogs",
+          "SAVE": "Save eventlog"
+        },
+        "TITLE": "Event log actions"
+      },
+      "UPDATE": {
+        "BUTTONS": {
+          "ALL": "All records",
+          "LATEST": "Latest records"
+        },
+        "LAST_UPDATE_TITLE": "Last update",
+        "TITLE": "Update"
+      }
+    }
+  },
   "HEADER": "german",
   "RESOURCE": {
+    "MAIN": {
+      "TITLES": {
+        "ACTUAL": "Actual",
+        "CURRENTS": "Currents",
+        "CURRENT_TRANSFORMER": "Current transformer",
+        "DPF": "DPF",
+        "FILTER_PARAMETERS": "Filter parameters",
+        "HARMONIC_COMPENSATION": "Harmonic compensation",
+        "LOAD_BALANCING": "Load balancing",
+        "LOWER_LIMIT": "Lower limit",
+        "MAINS_PARAMETERS": "Mains parameters",
+        "MAIN_FREQUENCY": "Main frequency",
+        "OUTPUT": "Output",
+        "REACTIVE_POWER_COMPENSATION": "Reactive power compensation",
+        "REACTIVE_POWER_CONTROL": "Reactive power control",
+        "ROTATING_FIELD": "Rotating field",
+        "STATE": "State",
+        "THDI": "THDi",
+        "UPPER_LIMIT": "Upper limit",
+        "VOLTAGE": "Voltage"
+      }
+    },
     "PARAM_DETAIL": {
       "EDIT": {
         "BUTTONS": {
           "CANCEL": "Cancel",
+          "OPEN": "Open",
           "SAVE": "Save"
         },
         "ERRORS": {
@@ -13,11 +55,11 @@
         }
       },
       "FIELDS": {
-        "VALUE": {
-          "LABEL": "Value"
-        },
         "DESCRIPTION": {
           "LABEL": "Description"
+        },
+        "VALUE": {
+          "LABEL": "Value"
         }
       },
       "SAVE": {

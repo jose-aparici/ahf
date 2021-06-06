@@ -6,6 +6,7 @@ export const useSideBarComponentStyles = makeStyles(() => ({
     flexDirection: 'column',
     margin: '16px',
     height: '100%',
+    overflow: 'auto',
   },
   iconsSection: {
     display: 'flex',

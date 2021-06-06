@@ -1,22 +1,64 @@
-import React from 'react';
+import { AhfBackdropContext } from 'contexts/backdrop/context';
+import { AhfContext } from 'contexts/store/context';
+import { useSocketHook } from 'hooks/socket-hook';
+import React, { useContext, useEffect, useReducer } from 'react';
 
-import { EventRow } from 'domain/events/events.type';
+import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
+import { AppCommand } from 'domain/app/app.types';
+import {
+  EventLogFiles,
+  EventLogsFileNamesCommand,
+} from 'domain/event/events.type';
 
+import { eventLogFilesReducer } from './reducer_event_logs_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
-import { AhfTableComponent } from './table/table.component';
+import { AhfTableComponentMemoized } from './table/table.component';
+
+export type Action = {
+  type: AhfCommand;
+  payload: AhfPayload;
+};
+export interface State {
+  logFiles: EventLogFiles;
+}
 
 export const AhfEventsContainer: React.FC = () => {
-  const rows: EventRow[] = [
-    { type: 'warning', timestamp: 'timestamp1', message: 'mesasge1' },
-    { type: 'warning', timestamp: 'timestamp2', message: 'mesasge2' },
-    { type: 'warning', timestamp: 'timestamp3', message: 'mesasge3' },
-    { type: 'warning', timestamp: 'timestamp4', message: 'mesasge4' },
-    { type: 'warning', timestamp: 'timestamp5', message: 'mesasge5' },
-  ];
+  const { state: appState, dispatch: appDispatch } = useContext(AhfContext);
+  const { closeBackdrop } = useContext(AhfBackdropContext);
+
+  const [state, dispatch] = useReducer(eventLogFilesReducer, {
+    logFiles: [],
+  });
+
+  const { listen } = useSocketHook();
+
+  useEffect(() => {
+    const subscription = listen(dispatch);
+    return () => {
+      subscription.unsubscribe();
+    };
+  }, [listen]);
+
+  useEffect(() => {
+    appState.eventLogs.logs.length > 0 && closeBackdrop();
+  }, [appState.eventLogs.logs, closeBackdrop]);
+
+  const handleClearLogFiles = () => {
+    dispatch({ type: EventLogsFileNamesCommand.CLEAR, payload: [] });
+  };
+
+  const handleClearEventLogs = () => {
+    appDispatch({ type: AppCommand.CHANGE_EVENT_LOG_FILE_NAME, payload: [] });
+  };
+
   return (
     <>
-      <AhfTableComponent rows={rows} />
-      <AhfSideBarContainer />
+      <AhfTableComponentMemoized rows={appState.eventLogs.logs} />
+      <AhfSideBarContainer
+        logFiles={state.logFiles}
+        onClearLogFiles={handleClearLogFiles}
+        onClearEventLogs={handleClearEventLogs}
+      />
     </>
   );
 };

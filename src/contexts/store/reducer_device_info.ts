@@ -1,5 +1,5 @@
 import { AhfDeviceInfo } from 'domain/ahf-device/ahf-device.types';
-import { Device } from 'domain/device/device.types';
+import { Device, DeviceType } from 'domain/device/device.types';
 
 import { State } from './initialState';
 
@@ -13,8 +13,17 @@ export const deviceInfoReducer = (
       fw: deviceInfo.FW,
       id: deviceInfo.ID,
       status: deviceInfo.Status,
-      type: deviceInfo.Type,
+      type: (deviceInfo.Type as unknown) as DeviceType,
+      typeName: deviceInfo.TypeName,
     },
+    structure:
+      state.devices[deviceInfo.ID] && state.devices[deviceInfo.ID].structure
+        ? state.devices[deviceInfo.ID].structure
+        : {},
+    paths:
+      state.devices[deviceInfo.ID] && state.devices[deviceInfo.ID].paths
+        ? state.devices[deviceInfo.ID].paths
+        : {},
   } as Device;
 
   return {

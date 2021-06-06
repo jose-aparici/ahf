@@ -4,8 +4,10 @@ import { AhfDeviceStructure } from 'domain/ahf-device/ahf-device.types';
 import { AhfFolderData } from 'domain/ahf-folder/ahf-folder.types';
 import { AhfParam, AhfParamType } from 'domain/ahf-param/ahf-param.types';
 import { Folder } from 'domain/folder/folder.types';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { Param, ParamType } from 'domain/param/param.types';
 
+import { DevicePaths } from '../../domain/device/device.types';
 import { AppRoutes } from '../../pages/App.routes';
 import { State } from './initialState';
 
@@ -46,90 +48,131 @@ const transformAhfParamTypeToParamType = (
   }
 };
 
-const transformAhfParamsToParam = (ahfParams: AhfParam[]): Param[] =>
-  ahfParams.map(
-    (ahfParam) =>
-      (({
-        accessType: ahfParam.AccessType,
-        description: ahfParam.Description,
-        name: ahfParam.Name,
-        paramEnumNumb: ahfParam.ParamEnumNumb,
-        paramEnumText: ahfParam.ParamEnumText,
-        paramId: ahfParam.ParamID,
-        paramType: transformAhfParamTypeToParamType(
-          ahfParam.ParamType,
-          ahfParam.ParamID,
-          ahfParam.ParamEnumNumb,
-        ),
-        unit: ahfParam.Unit,
-        value: ahfParam.Value,
-      } as unknown) as Param),
-  );
+const transformAhfParamsToParam = (
+  ahfParams: AhfParam[],
+  paths: DevicePaths,
+  pathId: string,
+): Param[] => {
+  return ahfParams.map((ahfParam) => {
+    paths[`${pathId}/${ahfParam.ParamID}`] = ahfParam.Name;
+    return ({
+      accessType: ahfParam.AccessType,
+      description: ahfParam.Description,
+      name: ahfParam.Name,
+      paramEnumNumb: ahfParam.ParamEnumNumb,
+      paramEnumText: ahfParam.ParamEnumText,
+      paramId: ahfParam.ParamID,
+      paramType: transformAhfParamTypeToParamType(
+        ahfParam.ParamType,
+        ahfParam.ParamID,
+        ahfParam.ParamEnumNumb,
+      ),
+      unit: ahfParam.Unit,
+      value: ahfParam.Value,
+    } as unknown) as Param;
+  });
+};
 
 const transformFolderDataToNode = (
   folderData: AhfFolderData,
   previousPath: string,
   deviceId: string,
+  paths: DevicePaths,
 ): Folder[] => {
-  return Object.entries(folderData).map((entry) => ({
-    id: entry[0] === '' ? `${previousPath}/ ` : `${previousPath}/${entry[0]}`,
-    label: entry[0],
-    deviceId: deviceId,
-    isMainFolder: false,
-    params: entry[1].Params
-      ? transformAhfParamsToParam(entry[1].Params.ParData)
-      : [],
-    children: entry[1].Folders
-      ? transformFolderDataToNode(
-          entry[1].Folders,
-          `${previousPath}/${entry[0]}`,
-          deviceId,
-        )
-      : [],
-  }));
+  return Object.entries(folderData).map((entry) => {
+    const id =
+      entry[0] === '' ? `${previousPath}/ ` : `${previousPath}/${entry[0]}`;
+    const label = entry[1].Names;
+    paths[id] = label;
+    return {
+      id: id,
+      label: label,
+      deviceId: deviceId,
+      isMainFolder: false,
+      params: entry[1].Params
+        ? transformAhfParamsToParam(entry[1].Params.ParData, paths, id)
+        : [],
+      children: entry[1].Folders
+        ? transformFolderDataToNode(
+            entry[1].Folders,
+            `${previousPath}/${entry[0]}`,
+            deviceId,
+            paths,
+          )
+        : [],
+    };
+  });
 };
 
-const transformStructureToNode = (structure: AhfDeviceStructure) =>
-  Object.entries(structure.FolderData).reduce(
-    (_, current) => ({
-      id: `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
+const transformStructureToNode = (
+  structure: AhfDeviceStructure,
+  paths: DevicePaths,
+) => {
+  return Object.entries(structure.FolderData).reduce(
+    (_, current) => {
+      const id = `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
         current[0]
-      }`,
-      label: current[0],
-      deviceId: structure.DeviceID.toString(),
-      isMainFolder: true,
-      params: current[1].Params
-        ? transformAhfParamsToParam(current[1].Params.ParData)
-        : [],
-      children: transformFolderDataToNode(
-        current[1].Folders,
-        `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
-          current[0]
-        }`,
-        structure.DeviceID.toString(),
-      ),
-    }),
+      }`;
+      const label = new Array(AHF_LANGUAGES.length).fill(current[0]);
+      paths[id] = label;
+      return {
+        id: id,
+        label: label,
+        deviceId: structure.DeviceID.toString(),
+        isMainFolder: true,
+        params: current[1].Params
+          ? transformAhfParamsToParam(current[1].Params.ParData, paths, id)
+          : [],
+        children: transformFolderDataToNode(
+          current[1].Folders,
+          `${AppRoutes.DevicesPage}/${structure.DeviceID.toString()}/${
+            current[0]
+          }`,
+          structure.DeviceID.toString(),
+          paths,
+        ),
+      };
+    },
     {
       id: '',
-      label: '',
+      label: [],
       params: [],
       children: [],
       deviceId: '',
       isMainFolder: true,
     } as Folder,
   );
+};
+
+const hasInitalDevice = (state: State): boolean => {
+  if (state.initialDevice >= 0) {
+    return true;
+  }
+  const exists = Object.entries(state.devices).find(
+    (device) => device[1].structure.id !== undefined,
+  );
+
+  return exists === undefined ? false : true;
+};
 
 export const deviceStructureReducer = (
   state: State,
   deviceStructure: AhfDeviceStructure,
 ): State => {
+  if (!hasInitalDevice(state)) {
+    state.initialDevice = deviceStructure.DeviceID;
+  }
+
   if (
     state.devices[deviceStructure.DeviceID] &&
     state.devices[deviceStructure.DeviceID].info
   ) {
-    state.devices[deviceStructure.DeviceID].info.status = 1;
+    state.devices[deviceStructure.DeviceID].paths = {};
     state.devices[deviceStructure.DeviceID].structure = flatten(
-      transformStructureToNode(deviceStructure),
+      transformStructureToNode(
+        deviceStructure,
+        state.devices[deviceStructure.DeviceID].paths,
+      ),
     )[0];
   }
 

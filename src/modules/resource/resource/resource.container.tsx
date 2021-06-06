@@ -2,12 +2,11 @@ import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { Resource } from 'domain/resource/resource.type';
+import { Resource, ResourceCommand } from 'domain/resource/resource.type';
 
 import { AhfFolderContainer } from '../folder/folder.container';
 import { AhfParamDetailContainer } from '../param-detail/param-detail.container';
 import { AhfResourceContext } from '../store/context';
-import { RESOURCE_CHANGE } from '../store/types';
 
 interface ParamTypes {
   deviceId: string;
@@ -23,7 +22,7 @@ export const AhfResourceContainer: React.FC<Props> = ({ resource }: Props) => {
   const { dispatch } = useContext(AhfResourceContext);
 
   useEffect(() => {
-    dispatch({ type: RESOURCE_CHANGE, payload: resource });
+    dispatch({ type: ResourceCommand.RESOURCE_CHANGE, payload: resource });
     update(
       deviceId,
       resource.folder.id.replace(/\/devices\/([A-Za-z0-9]+)\//, ''),

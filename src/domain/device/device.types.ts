@@ -3,6 +3,7 @@ import { Folder } from 'domain/folder/folder.types';
 export interface Device {
   info: DeviceInfo;
   structure: Folder;
+  paths: DevicePaths;
 }
 
 export interface DeviceInfo {
@@ -11,9 +12,13 @@ export interface DeviceInfo {
   id: number;
   status: number;
   type: DeviceType;
+  typeName: string;
 }
 
 export enum DeviceType {
-  AHF_SYNC_MODULE = 'AHF Sync Module',
-  ACTIVE_HARMONIC_FILER = 'Active Harmonic Filter',
+  AHF_SYNC_MODULE = 1,
+  ACTIVE_HARMONIC_FILER = 2,
+  HMI_DEVICE = 3,
 }
+
+export type DevicePaths = Record<string, string[]>;

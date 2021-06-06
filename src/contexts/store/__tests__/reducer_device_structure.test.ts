@@ -16,9 +16,7 @@ describe('reducer device structure', () => {
     expect(result).toMatchObject({
       devices: {
         1: {
-          info: {
-            status: 1,
-          },
+          info: {},
           structure: {
             id: '/devices/1/folder1',
             label: 'folder1',
@@ -43,7 +41,7 @@ describe('reducer device structure', () => {
                         description: ['description1Eng', 'description1Ger'],
                         name: ['name1Eng', 'name1Ger'],
                         paramEnumNumb: 1,
-                        paramEnumText: ['1'],
+                        paramEnumText: { 1: ['1'] },
                         paramId: 2,
                         paramType: ParamType.ENUM,
                         unit: 'unit1',
@@ -61,7 +59,7 @@ describe('reducer device structure', () => {
                 description: ['description1Eng', 'description1Ger'],
                 name: ['name1Eng', 'name1Ger'],
                 paramEnumNumb: 1,
-                paramEnumText: ['1'],
+                paramEnumText: { 1: ['1'] },
                 paramId: 1,
                 paramType: ParamType.ENUM,
                 unit: 'unit1',
