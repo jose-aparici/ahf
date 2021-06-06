@@ -47,6 +47,10 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state };
     }
 
+    case AhfCommand.SETTINGS_STRUCTURE: {
+      return deviceStructureReducer(state, payload as AhfDeviceStructure);
+    }
+
     default:
       return state;
   }

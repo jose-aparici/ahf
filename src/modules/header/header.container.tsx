@@ -12,7 +12,7 @@ import { getIdsWithChildren } from 'domain/folder/folder.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
-import { AppRoutes } from 'pages/App.routes';
+import { AppRoutes, SETTINGS } from 'pages/App.routes';
 
 import { AhfBreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AhfFolderTreeViewComponent } from './folder-tree-view/folder-tree-view.component';
@@ -36,14 +36,18 @@ export const AhfHeaderContainer: FC = () => {
   useEffect(() => {
     const deviceId = extractDeviceFromPath(location.pathname);
     if (deviceId !== undefined) {
-      setBreadcrumbs(
-        pathToBreadCrumbs(
-          location.pathname,
-          state.devices[+deviceId].paths,
-          state.eventLogs.fileName,
-        ),
-      );
-      setDeviceId(deviceId);
+      if (deviceId === SETTINGS) {
+        setBreadcrumbs([{ label: ['settings'], path: AppRoutes.SettingsPage }]);
+      } else {
+        setBreadcrumbs(
+          pathToBreadCrumbs(
+            location.pathname,
+            state.devices[+deviceId].paths,
+            state.eventLogs.fileName,
+          ),
+        );
+        setDeviceId(deviceId);
+      }
     }
   }, [location.pathname, deviceId, state.devices, state.eventLogs.fileName]);
 
