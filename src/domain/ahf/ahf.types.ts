@@ -20,6 +20,7 @@ export enum AhfCommand {
   EVENT_LOG_FILES = 'EventLogFiles',
   READ_EVENT_LOG_FROM_FILE = 'ReadEventLogFromFile',
   DISPLAY_MESSAGE = 'DisplayMessage',
+  SETTINGS_STRUCTURE = 'SettingsStructure',
 }
 
 export type AhfPayload =
