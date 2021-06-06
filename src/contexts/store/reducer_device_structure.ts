@@ -104,7 +104,7 @@ const transformFolderDataToNode = (
   });
 };
 
-const transformStructureToNode = (
+const transformStructureToFolder = (
   structure: AhfDeviceStructure,
   paths: DevicePaths,
 ) => {
@@ -169,7 +169,7 @@ export const deviceStructureReducer = (
   ) {
     state.devices[deviceStructure.DeviceID].paths = {};
     state.devices[deviceStructure.DeviceID].structure = flatten(
-      transformStructureToNode(
+      transformStructureToFolder(
         deviceStructure,
         state.devices[deviceStructure.DeviceID].paths,
       ),
