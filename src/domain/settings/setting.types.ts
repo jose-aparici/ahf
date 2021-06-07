@@ -5,6 +5,4 @@ export type Tab = {
   label: string;
 };
 
-export interface Settings {
-  structure: Folder;
-}
+export type Settings = Folder;

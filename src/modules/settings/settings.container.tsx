@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
-import { useTranslation } from 'react-i18next';
+import { AhfContext } from 'contexts/store/context';
+import i18n from 'i18n';
+import React, { useContext, useState } from 'react';
+import SwipeableViews from 'react-swipeable-views';
 
 import { Tab, Tabs } from '@material-ui/core';
 
-import { SETTING_TABS } from 'domain/settings/settings.contants';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
 
-import { AhfSettingsEthernetContainer } from './ethernet/settings-ethernet.container';
-import { AhfSettingsLanguageContainer } from './language/settings-language.container';
-import { AhfSettingsModbusAhfContainer } from './modbus_ahf/settings-modbus-ahf.container';
-import { AhfSettingsModbusHmiContainer } from './modbus_hmi/settings-modbus-hmi.container';
 import { useSettingsContainerStyles } from './settings.container.styles';
-import { AhfSettingsSystemContainer } from './system/settings-system.container';
+import { AhfTabContainer } from './tab/tab.container';
 
 export const AhfSettingsContainer: React.FC = () => {
-  const { t } = useTranslation();
   const classes = useSettingsContainerStyles();
   const [currentTab, setCurrentTab] = useState(0);
+  const { state } = useContext(AhfContext);
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
 
   const handleChange = (
     _event: React.ChangeEvent<unknown>,
     tabIndex: number,
   ) => {
     setCurrentTab(tabIndex);
+  };
+
+  const handleChangeIndex = (index: number) => {
+    setCurrentTab(index);
   };
   return (
     <>
@@ -31,29 +36,21 @@ export const AhfSettingsContainer: React.FC = () => {
         variant="fullWidth"
         classes={{ root: classes.root }}
       >
-        {Object.entries(SETTING_TABS).map((tab) => (
-          <Tab
-            key={tab[1].index}
-            classes={{ root: classes.tabRoot, wrapper: classes.tab }}
-            label={t(tab[1].label)}
-          />
+        {state.settings?.children.map((tab) => (
+          <Tab key={tab.id} label={tab.label[currentLanguage]} />
         ))}
       </Tabs>
-      {currentTab === SETTING_TABS.SYSTEM.index && (
-        <AhfSettingsSystemContainer />
-      )}
-      {currentTab === SETTING_TABS.MODBUS_HMI.index && (
-        <AhfSettingsModbusHmiContainer />
-      )}
-      {currentTab === SETTING_TABS.MODBUS_AHF.index && (
-        <AhfSettingsModbusAhfContainer />
-      )}
-      {currentTab === SETTING_TABS.ETHERNET.index && (
-        <AhfSettingsEthernetContainer />
-      )}
-      {currentTab === SETTING_TABS.LANGUAGE.index && (
-        <AhfSettingsLanguageContainer />
-      )}
+      <SwipeableViews index={currentTab} onChangeIndex={handleChangeIndex}>
+        {state.settings?.children && state.settings?.children.length > 0 ? (
+          state.settings?.children.map((tab) => (
+            <React.Fragment key={tab.id}>
+              <AhfTabContainer tab={tab} currentLanguage={currentLanguage} />
+            </React.Fragment>
+          ))
+        ) : (
+          <></>
+        )}
+      </SwipeableViews>
     </>
   );
 };
