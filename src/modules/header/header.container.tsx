@@ -1,5 +1,4 @@
 import { AhfContext } from 'contexts/store/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -12,6 +11,7 @@ import { getIdsWithChildren } from 'domain/folder/folder.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 import { AppRoutes, SETTINGS } from 'pages/App.routes';
 
 import { AhfBreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';

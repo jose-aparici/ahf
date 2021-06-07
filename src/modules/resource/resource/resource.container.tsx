@@ -1,8 +1,8 @@
-import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { Resource, ResourceCommand } from 'domain/resource/resource.type';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { AhfFolderContainer } from '../folder/folder.container';
 import { AhfParamDetailContainer } from '../param-detail/param-detail.container';

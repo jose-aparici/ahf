@@ -1,6 +1,5 @@
 import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfToasterContext } from 'contexts/toaster/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
 import i18next from 'i18next';
 import React, {
@@ -31,6 +30,7 @@ import { AccessType, Param } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 

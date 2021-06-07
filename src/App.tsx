@@ -1,11 +1,11 @@
 import { AhfContext } from 'contexts/store/context';
 import { AhfToasterContext } from 'contexts/toaster/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { AhfFooterContainer } from 'modules/footer/footer.container';
 import { AhfHeaderContainer } from 'modules/header/header.container';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
