@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@material-ui/core';
 
-import { AhfCardFullPageComponent } from 'modules/shared/cards/full-page/card-full-page.component';
+import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { useSettingsLanguageContainerStyles } from './settings-language.container.styles';
 

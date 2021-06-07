@@ -29,9 +29,9 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Severity } from 'domain/notification/notification.types';
 import { AccessType, Param } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
-import { AhfCardFullPageComponent } from 'modules/shared/cards/full-page/card-full-page.component';
+import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
+import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
-import { AhfParamEditContainerMemoized } from '../../shared/param-edit/param-edit.container';
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
 
 interface Props {

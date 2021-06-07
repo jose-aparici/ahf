@@ -26,8 +26,8 @@ import {
   LAYOUT_TYPE,
   LAYOUTS,
 } from 'domain/virtual-keyboard/virtual-keyboard.constants';
-import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
+import { AhfVirtualKeyboardComponent } from '../virtual-keyboard/virtual-keyboard.component';
 import { AhfParamEditFieldComponent } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
 

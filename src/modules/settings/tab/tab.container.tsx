@@ -11,8 +11,8 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AccessType, Param } from 'domain/param/param.types';
-import { AhfCardFullPageComponent } from 'modules/shared/cards/full-page/card-full-page.component';
-import { AhfParamEditContainerMemoized } from 'modules/shared/param-edit/param-edit.container';
+import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
+import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
 import { useTabContainerStyles } from './tab.container.styles';
 

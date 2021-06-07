@@ -7,7 +7,7 @@ import {
   TextField,
 } from '@material-ui/core';
 
-import { AhfCardFullPageComponent } from 'modules/shared/cards/full-page/card-full-page.component';
+import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { useSettingsModbusAhfContainerStyles } from './settings-modbus-ahf.container.styles';
 

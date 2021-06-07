@@ -14,7 +14,7 @@ import {
 import { transformFromLogToAhfLog } from 'domain/event/event.utils';
 import { EventLogFiles, Log } from 'domain/event/events.type';
 import { ParamType } from 'domain/param/param.types';
-import { AhfParamEditContainerMemoized } from 'modules/shared/param-edit/param-edit.container';
+import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
 import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';
