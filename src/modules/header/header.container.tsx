@@ -36,8 +36,10 @@ export const AhfHeaderContainer: FC = () => {
   useEffect(() => {
     const deviceId = extractDeviceFromPath(location.pathname);
     if (deviceId !== undefined) {
-      if (deviceId === SETTINGS) {
-        setBreadcrumbs([{ label: ['settings'], path: AppRoutes.SettingsPage }]);
+      if (deviceId === SETTINGS && state.settings) {
+        setBreadcrumbs([
+          { label: state.settings?.label, path: AppRoutes.SettingsPage },
+        ]);
       } else {
         setBreadcrumbs(
           pathToBreadCrumbs(
@@ -49,7 +51,13 @@ export const AhfHeaderContainer: FC = () => {
         setDeviceId(deviceId);
       }
     }
-  }, [location.pathname, deviceId, state.devices, state.eventLogs.fileName]);
+  }, [
+    location.pathname,
+    deviceId,
+    state.devices,
+    state.eventLogs.fileName,
+    state.settings,
+  ]);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
 
