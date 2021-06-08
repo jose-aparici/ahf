@@ -1,12 +1,13 @@
 import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
 import { Tab, Tabs } from '@material-ui/core';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { INITIAL_MARKER } from 'domain/settings/settings.contants';
 
 import { useSettingsContainerStyles } from './settings.container.styles';
 import { AhfTabContainer } from './tab/tab.container';
@@ -14,6 +15,8 @@ import { AhfTabContainer } from './tab/tab.container';
 export const AhfSettingsContainer: React.FC = () => {
   const classes = useSettingsContainerStyles();
   const [currentTab, setCurrentTab] = useState(0);
+  const initialMarker = useRef<number>(INITIAL_MARKER);
+
   const { state } = useContext(AhfContext);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
@@ -44,7 +47,11 @@ export const AhfSettingsContainer: React.FC = () => {
         {state.settings?.children && state.settings?.children.length > 0 ? (
           state.settings?.children.map((tab) => (
             <React.Fragment key={tab.id}>
-              <AhfTabContainer tab={tab} currentLanguage={currentLanguage} />
+              <AhfTabContainer
+                tab={tab}
+                currentLanguage={currentLanguage}
+                initialMarker={initialMarker}
+              />
             </React.Fragment>
           ))
         ) : (

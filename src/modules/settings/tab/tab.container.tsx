@@ -1,4 +1,9 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, {
+  MutableRefObject,
+  useCallback,
+  useEffect,
+  useState,
+} from 'react';
 
 import {
   CardContent,
@@ -12,10 +17,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import { Folder } from 'domain/folder/folder.types';
 import { AccessType, Param } from 'domain/param/param.types';
 import { stringToParamValue } from 'domain/param/param.utils';
-import {
-  INITIAL_MARKER,
-  SETTINGS_DEVICE_ID,
-} from 'domain/settings/settings.contants';
+import { SETTINGS_DEVICE_ID } from 'domain/settings/settings.contants';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 import { useSaveParam } from 'modules/shared/hooks/save-param.hook';
@@ -26,16 +28,17 @@ import { useTabContainerStyles } from './tab.container.styles';
 interface Props {
   tab: Folder;
   currentLanguage: number;
+  initialMarker: MutableRefObject<number>;
 }
 
 export const AhfTabContainer: React.FC<Props> = ({
   tab,
   currentLanguage,
+  initialMarker,
 }: Props) => {
   const classes = useTabContainerStyles();
   const [selectedParam, setSelectedParam] = useState<Param | undefined>();
   const { setNextMarker, setParamToSave, openBackdrop } = useSaveParam();
-  const currentMarker = useRef<number>(INITIAL_MARKER);
 
   const { writeParam } = useSocketHook();
 
@@ -61,7 +64,7 @@ export const AhfTabContainer: React.FC<Props> = ({
         paramToUpdate.read = {
           deviceId: SETTINGS_DEVICE_ID,
           folderName: '',
-          marker: currentMarker.current,
+          marker: initialMarker.current,
           paramPos: 0,
         };
         setSelectedParam(undefined);
@@ -73,13 +76,13 @@ export const AhfTabContainer: React.FC<Props> = ({
             value,
             paramToUpdate.paramType,
           );
-          setNextMarker(currentMarker.current);
+          setNextMarker(initialMarker.current);
           writeParam(paramToUpdate);
-          currentMarker.current = currentMarker.current + 1;
+          initialMarker.current = initialMarker.current + 1;
         }
       }
     },
-    [selectedParam, writeParam, openBackdrop, currentMarker, setNextMarker],
+    [selectedParam, writeParam, openBackdrop, initialMarker, setNextMarker],
   );
 
   const handleEditClose = () => setSelectedParam(undefined);
