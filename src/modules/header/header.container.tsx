@@ -70,19 +70,20 @@ export const AhfHeaderContainer: FC = () => {
     <>
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
-          {location.pathname !== AppRoutes.DevicesPage && (
-            <>
-              <AhfSideBarButtonComponent
-                onToggleSideBar={handleToggleSideBar}
-              />
-
-              {breadcrumbs && (
-                <AhfBreadcrumbsComponent
-                  currentLanguage={currentLanguage}
-                  breadcrumbs={breadcrumbs}
+          {location.pathname !== AppRoutes.DevicesPage &&
+            location.pathname !== AppRoutes.SettingsPage && (
+              <>
+                <AhfSideBarButtonComponent
+                  onToggleSideBar={handleToggleSideBar}
                 />
-              )}
-            </>
+              </>
+            )}
+
+          {location.pathname !== AppRoutes.DevicesPage && breadcrumbs && (
+            <AhfBreadcrumbsComponent
+              currentLanguage={currentLanguage}
+              breadcrumbs={breadcrumbs}
+            />
           )}
 
           <div className={classes.iconsSection}>
