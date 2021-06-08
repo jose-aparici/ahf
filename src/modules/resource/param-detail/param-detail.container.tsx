@@ -1,14 +1,5 @@
-import { AhfBackdropContext } from 'contexts/backdrop/context';
-import { AhfToasterContext } from 'contexts/toaster/context';
 import i18n from 'i18n';
-import i18next from 'i18next';
-import React, {
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -25,11 +16,11 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Severity } from 'domain/notification/notification.types';
 import { AccessType, Param } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
+import { useSaveParam } from 'modules/shared/hooks/save-param.hook';
 import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { useParamDetailContainerStyles } from './param-detail.container.styles';
@@ -41,66 +32,17 @@ interface Props {
 export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
   const classes = useParamDetailContainerStyles();
   const { t } = useTranslation();
+  const { setNextMarker, setParamToSave, openBackdrop } = useSaveParam();
   const { writeParam } = useSocketHook();
-  const { isBackdropOpened, openBackdrop, closeBackdrop } = useContext(
-    AhfBackdropContext,
-  );
 
-  const { displayNotification } = useContext(AhfToasterContext);
-
-  const timeoutIdRef = useRef<number>();
   const [openEditModal, setOpenEditModal] = useState(false);
-  const [nextMarker, setNexMarker] = useState(param.read?.marker);
 
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
   useEffect(() => {
-    if (
-      isBackdropOpened &&
-      nextMarker &&
-      param.read &&
-      param.read?.marker >= nextMarker
-    ) {
-      if (
-        param.paramId === 200 &&
-        i18next.language !== AHF_LANGUAGES[param.value as number].locale
-      ) {
-        i18next.changeLanguage(AHF_LANGUAGES[param.value as number].locale);
-      }
-      closeBackdrop();
-      setNexMarker(param.read.marker);
-      displayNotification({
-        text: t('RESOURCE.PARAM_DETAIL.SAVE.SUCCESS'),
-        severity: Severity.SUCCESS,
-      });
-    }
-  }, [
-    nextMarker,
-    param.read,
-    closeBackdrop,
-    isBackdropOpened,
-    displayNotification,
-    param.value,
-    param.paramId,
-    t,
-  ]);
-
-  useEffect(() => {
-    if (isBackdropOpened) {
-      timeoutIdRef.current = window.setTimeout(() => {
-        closeBackdrop();
-        displayNotification({
-          text: t('RESOURCE.PARAM_DETAIL.SAVE.WARNING'),
-          severity: Severity.WARNING,
-        });
-      }, 5000);
-
-      return () => {
-        window.clearTimeout(timeoutIdRef.current);
-      };
-    }
-  }, [closeBackdrop, isBackdropOpened, displayNotification, t]);
+    setParamToSave(param.read);
+  }, [setParamToSave, param.read]);
 
   const handleClickInput = () => {
     param.value !== undefined &&
@@ -120,12 +62,12 @@ export const AhfParamDetailContainer: React.FC<Props> = ({ param }: Props) => {
         if (paramToUpdate.read) {
           paramToUpdate.read.marker = nextMarker;
           paramToUpdate.value = stringToParamValue(value, param.paramType);
-          setNexMarker(nextMarker);
+          setNextMarker(nextMarker);
           writeParam(paramToUpdate);
         }
       }
     },
-    [param, writeParam, openBackdrop],
+    [param, writeParam, openBackdrop, setNextMarker],
   );
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import {
   CardContent,
@@ -11,8 +11,15 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AccessType, Param } from 'domain/param/param.types';
+import { stringToParamValue } from 'domain/param/param.utils';
+import {
+  INITIAL_MARKER,
+  SETTINGS_DEVICE_ID,
+} from 'domain/settings/settings.contants';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
+import { useSaveParam } from 'modules/shared/hooks/save-param.hook';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { useTabContainerStyles } from './tab.container.styles';
 
@@ -27,6 +34,16 @@ export const AhfTabContainer: React.FC<Props> = ({
 }: Props) => {
   const classes = useTabContainerStyles();
   const [selectedParam, setSelectedParam] = useState<Param | undefined>();
+  const { setNextMarker, setParamToSave, openBackdrop } = useSaveParam();
+  const currentMarker = useRef<number>(INITIAL_MARKER);
+
+  const { writeParam } = useSocketHook();
+
+  useEffect(() => {
+    if (selectedParam && selectedParam.read) {
+      setParamToSave(selectedParam.read);
+    }
+  }, [setParamToSave, selectedParam]);
 
   const handleClickInput = (param: Param) => {
     if (
@@ -36,6 +53,34 @@ export const AhfTabContainer: React.FC<Props> = ({
       setSelectedParam(param);
     }
   };
+
+  const handleSave = useCallback(
+    (value: string) => {
+      if (selectedParam) {
+        const paramToUpdate = selectedParam;
+        paramToUpdate.read = {
+          deviceId: SETTINGS_DEVICE_ID,
+          folderName: '',
+          marker: currentMarker.current,
+          paramPos: 0,
+        };
+        setSelectedParam(undefined);
+        openBackdrop();
+        debugger;
+
+        if (paramToUpdate.read) {
+          paramToUpdate.value = stringToParamValue(
+            value,
+            paramToUpdate.paramType,
+          );
+          setNextMarker(currentMarker.current);
+          writeParam(paramToUpdate);
+          currentMarker.current = currentMarker.current + 1;
+        }
+      }
+    },
+    [selectedParam, writeParam, openBackdrop, currentMarker, setNextMarker],
+  );
 
   const handleEditClose = () => setSelectedParam(undefined);
 
@@ -83,7 +128,7 @@ export const AhfTabContainer: React.FC<Props> = ({
           value={selectedParam.value?.toString()}
           values={selectedParam.paramEnumText[currentLanguage]}
           onClose={handleEditClose}
-          onSave={() => 0}
+          onSave={handleSave}
         />
       )}
     </>
