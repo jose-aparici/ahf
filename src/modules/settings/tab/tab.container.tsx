@@ -16,7 +16,7 @@ import EditIcon from '@material-ui/icons/Edit';
 
 import { Folder } from 'domain/folder/folder.types';
 import { AccessType, Param } from 'domain/param/param.types';
-import { stringToParamValue } from 'domain/param/param.utils';
+import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 import { SETTINGS_DEVICE_ID } from 'domain/settings/settings.contants';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
@@ -106,7 +106,13 @@ export const AhfTabContainer: React.FC<Props> = ({
                           )}
                         </div>
                       }
-                      value={param.value}
+                      value={
+                        param.value !== undefined
+                          ? `${getParamValue(param, currentLanguage)} ${
+                              param.unit
+                            }`
+                          : ' -- '
+                      }
                       onClick={() => handleClickInput(param)}
                       placeholder=""
                       InputLabelProps={{
