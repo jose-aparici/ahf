@@ -1,6 +1,6 @@
 import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React, { useContext, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import SwipeableViews from 'react-swipeable-views';
 
 import { Tab, Tabs } from '@material-ui/core';
@@ -8,6 +8,7 @@ import { Tab, Tabs } from '@material-ui/core';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { INITIAL_MARKER } from 'domain/settings/settings.contants';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { useSettingsContainerStyles } from './settings.container.styles';
 import { AhfTabContainer } from './tab/tab.container';
@@ -16,10 +17,15 @@ export const AhfSettingsContainer: React.FC = () => {
   const classes = useSettingsContainerStyles();
   const [currentTab, setCurrentTab] = useState(0);
   const initialMarker = useRef<number>(INITIAL_MARKER);
+  const { stopUpdate } = useSocketHook();
 
   const { state } = useContext(AhfContext);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
+
+  useEffect(() => {
+    stopUpdate();
+  }, [stopUpdate]);
 
   const handleChange = (
     _event: React.ChangeEvent<unknown>,
