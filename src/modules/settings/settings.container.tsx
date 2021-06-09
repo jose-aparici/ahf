@@ -44,7 +44,6 @@ export const AhfSettingsContainer: React.FC = () => {
       }
       switch (type) {
         case AhfCommand.PARAM_DETAIL:
-          debugger;
           return {
             setting: {
               deviceId: paramRead.DeviceID,
