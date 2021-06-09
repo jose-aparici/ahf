@@ -15,7 +15,7 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 
 import { Folder } from 'domain/folder/folder.types';
-import { AccessType, Param } from 'domain/param/param.types';
+import { AccessType, Param, ParamRead } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 import { SETTINGS_DEVICE_ID } from 'domain/settings/settings.contants';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
@@ -29,12 +29,14 @@ interface Props {
   tab: Folder;
   currentLanguage: number;
   initialMarker: MutableRefObject<number>;
+  settingToEdit?: ParamRead;
 }
 
 export const AhfTabContainer: React.FC<Props> = ({
   tab,
   currentLanguage,
   initialMarker,
+  settingToEdit,
 }: Props) => {
   const classes = useTabContainerStyles();
   const [selectedParam, setSelectedParam] = useState<Param | undefined>();
@@ -43,10 +45,10 @@ export const AhfTabContainer: React.FC<Props> = ({
   const { writeParam } = useSocketHook();
 
   useEffect(() => {
-    if (selectedParam && selectedParam.read) {
-      setParamToSave(selectedParam.read);
+    if (settingToEdit) {
+      setParamToSave(settingToEdit);
     }
-  }, [setParamToSave, selectedParam]);
+  }, [setParamToSave, settingToEdit]);
 
   const handleClickInput = (param: Param) => {
     if (
@@ -69,7 +71,6 @@ export const AhfTabContainer: React.FC<Props> = ({
         };
         setSelectedParam(undefined);
         openBackdrop();
-        debugger;
 
         if (paramToUpdate.read) {
           paramToUpdate.value = stringToParamValue(
