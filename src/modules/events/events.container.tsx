@@ -1,23 +1,18 @@
 import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfContext } from 'contexts/store/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect, useReducer } from 'react';
 
-import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { AppCommand } from 'domain/app/app.types';
 import {
   EventLogFiles,
   EventLogsFileNamesCommand,
 } from 'domain/event/events.type';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { eventLogFilesReducer } from './reducer_event_logs_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
 import { AhfTableComponentMemoized } from './table/table.component';
 
-export type Action = {
-  type: AhfCommand;
-  payload: AhfPayload;
-};
 export interface State {
   logFiles: EventLogFiles;
 }

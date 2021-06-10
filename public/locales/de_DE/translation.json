@@ -67,5 +67,23 @@
         "WARNING": "Device did not respond, value could be not be saved"
       }
     }
+  },
+  "SETTINGS": {
+    "TABS": {
+      "SYSTEM": { "LABEL": "System" },
+      "MODBUS_HMI": { "LABEL": "Modbus HMI" },
+      "MODBUS_AHF": { "LABEL": "Modbus AHF" },
+      "ETHERNET": { "LABEL": "Ethernet" },
+      "LANGUAGE": { "LABEL": "Language" }
+    },
+    "MODBUS_HMI": {
+      "VALUES": {
+        "SLAVE_ID": { "LABEL": "Slave ID" },
+        "BAUD_RATE": { "LABEL": "Baudrate" },
+        "DATA_BITS": { "LABEL": "Data Bits" },
+        "STOP_BITS": { "LABEL": "Stop Bits" },
+        "PARITY": { "LABEL": "Parity" }
+      }
+    }
   }
 }

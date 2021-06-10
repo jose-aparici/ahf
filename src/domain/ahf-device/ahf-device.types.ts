@@ -24,4 +24,5 @@ export enum AhfDeviceType {
   AHF_SYNC_MODULE = 1,
   ACTIVE_HARMONIC_FILER = 2,
   HMI_DEVICE = 3,
+  SETTINGS = 4,
 }

@@ -1,9 +1,9 @@
 import { AhfContext } from 'contexts/store/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import { DeviceInfo } from 'domain/device/device.types';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { AhfDeviceCardComponent } from './card/device-card.component';
 import { useDevicesContainerStyles } from './devices-container.styles';

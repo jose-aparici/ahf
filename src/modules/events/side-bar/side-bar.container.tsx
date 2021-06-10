@@ -1,6 +1,5 @@
 import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfContext } from 'contexts/store/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import React, { useContext, useState } from 'react';
 
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
@@ -14,7 +13,8 @@ import {
 import { transformFromLogToAhfLog } from 'domain/event/event.utils';
 import { EventLogFiles, Log } from 'domain/event/events.type';
 import { ParamType } from 'domain/param/param.types';
-import { AhfParamEditContainerMemoized } from 'modules/shared/param-edit/param-edit.container';
+import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';

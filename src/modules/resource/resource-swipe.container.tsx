@@ -7,8 +7,8 @@ import { SlideRenderProps, virtualize } from 'react-swipeable-views-utils';
 import { Transition } from 'domain/resource-navigation/resource-navigation.types';
 import { Resource } from 'domain/resource/resource.type';
 import { findResourceByPath } from 'domain/resource/resource.utils';
-import { AhfNavigationNextComponent } from 'modules/shared/navigation-next/navigation-next.component';
-import { AhfNavigationPreviousComponent } from 'modules/shared/navigation-previous/navigation-previous.component';
+import { AhfNavigationNextComponent } from 'modules/shared/components/navigation-next/navigation-next.component';
+import { AhfNavigationPreviousComponent } from 'modules/shared/components/navigation-previous/navigation-previous.component';
 
 import { useResourceSwipeNavigation } from './resource-swipe-navigation.hook';
 import { useResourceSwipeContainerStyles } from './resource-swipe.container.styles';
@@ -35,19 +35,18 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
     goNextResource,
     goPreviousResource,
   } = useResourceSwipeNavigation();
-  useEffect(() => {
-    if (state?.devices[+deviceId]?.structure) {
-      const resource = findResourceByPath(
-        url,
-        state.devices[+deviceId].structure,
-      );
 
-      if (resource) {
-        setCurrentResource(resource);
-        setTransition(Transition.EMPTY);
-      }
+  useEffect(() => {
+    const resource = findResourceByPath(
+      url,
+      state.devices[+deviceId].structure,
+    );
+
+    if (resource) {
+      setCurrentResource(resource);
+      setTransition(Transition.EMPTY);
     }
-  }, [deviceId, state, url]);
+  }, [deviceId, state.devices, url]);
 
   const handleChangeIndex = (index: number) => {
     if (currentResource) {

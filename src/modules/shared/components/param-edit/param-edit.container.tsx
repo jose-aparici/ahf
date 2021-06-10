@@ -26,8 +26,8 @@ import {
   LAYOUT_TYPE,
   LAYOUTS,
 } from 'domain/virtual-keyboard/virtual-keyboard.constants';
-import { AhfVirtualKeyboardComponent } from 'modules/shared/virtual-keyboard/virtual-keyboard.component';
 
+import { AhfVirtualKeyboardComponent } from '../virtual-keyboard/virtual-keyboard.component';
 import { AhfParamEditFieldComponent } from './components/field/param-edit-field.component';
 import { useParamEditContainerStyles } from './param-edit.container.styles';
 
@@ -110,7 +110,7 @@ const AhfParamEditContainer: React.FC<Props> = ({
                   />
                 </FormControl>
                 <AhfVirtualKeyboardComponent
-                  keyboardRef={keyboardRef as MutableRefObject<any>}
+                  keyboardRef={keyboardRef as MutableRefObject<unknown>}
                   layout={
                     isNumericKeyboardType(type)
                       ? LAYOUTS[LAYOUT_TYPE.NUMERIC]

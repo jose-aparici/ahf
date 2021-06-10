@@ -1,5 +1,4 @@
 import { AhfContext } from 'contexts/store/context';
-import { useSocketHook } from 'hooks/socket-hook';
 import i18n from 'i18n';
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -12,7 +11,8 @@ import { getIdsWithChildren } from 'domain/folder/folder.utils';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
-import { AppRoutes } from 'pages/App.routes';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
+import { AppRoutes, SETTINGS } from 'pages/App.routes';
 
 import { AhfBreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { AhfFolderTreeViewComponent } from './folder-tree-view/folder-tree-view.component';
@@ -36,16 +36,28 @@ export const AhfHeaderContainer: FC = () => {
   useEffect(() => {
     const deviceId = extractDeviceFromPath(location.pathname);
     if (deviceId !== undefined) {
-      setBreadcrumbs(
-        pathToBreadCrumbs(
-          location.pathname,
-          state.devices[+deviceId].paths,
-          state.eventLogs.fileName,
-        ),
-      );
-      setDeviceId(deviceId);
+      if (deviceId === SETTINGS && state.settings) {
+        setBreadcrumbs([
+          { label: state.settings?.label, path: AppRoutes.SettingsPage },
+        ]);
+      } else {
+        setBreadcrumbs(
+          pathToBreadCrumbs(
+            location.pathname,
+            state.devices[+deviceId].paths,
+            state.eventLogs.fileName,
+          ),
+        );
+        setDeviceId(deviceId);
+      }
     }
-  }, [location.pathname, deviceId, state.devices, state.eventLogs.fileName]);
+  }, [
+    location.pathname,
+    deviceId,
+    state.devices,
+    state.eventLogs.fileName,
+    state.settings,
+  ]);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
 
@@ -58,19 +70,20 @@ export const AhfHeaderContainer: FC = () => {
     <>
       <AppBar className={classes.appBar}>
         <Toolbar className={classes.toolBar}>
-          {location.pathname !== AppRoutes.DevicesPage && (
-            <>
-              <AhfSideBarButtonComponent
-                onToggleSideBar={handleToggleSideBar}
-              />
-
-              {breadcrumbs && (
-                <AhfBreadcrumbsComponent
-                  currentLanguage={currentLanguage}
-                  breadcrumbs={breadcrumbs}
+          {location.pathname !== AppRoutes.DevicesPage &&
+            location.pathname !== AppRoutes.SettingsPage && (
+              <>
+                <AhfSideBarButtonComponent
+                  onToggleSideBar={handleToggleSideBar}
                 />
-              )}
-            </>
+              </>
+            )}
+
+          {location.pathname !== AppRoutes.DevicesPage && breadcrumbs && (
+            <AhfBreadcrumbsComponent
+              currentLanguage={currentLanguage}
+              breadcrumbs={breadcrumbs}
+            />
           )}
 
           <div className={classes.iconsSection}>
