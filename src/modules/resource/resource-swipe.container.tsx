@@ -35,19 +35,18 @@ export const AhfResourceSwipeContainer: React.FC<Props> = ({
     goNextResource,
     goPreviousResource,
   } = useResourceSwipeNavigation();
-  useEffect(() => {
-    if (state?.devices[+deviceId]?.structure) {
-      const resource = findResourceByPath(
-        url,
-        state.devices[+deviceId].structure,
-      );
 
-      if (resource) {
-        setCurrentResource(resource);
-        setTransition(Transition.EMPTY);
-      }
+  useEffect(() => {
+    const resource = findResourceByPath(
+      url,
+      state.devices[+deviceId].structure,
+    );
+
+    if (resource) {
+      setCurrentResource(resource);
+      setTransition(Transition.EMPTY);
     }
-  }, [deviceId, state, url]);
+  }, [deviceId, state.devices, url]);
 
   const handleChangeIndex = (index: number) => {
     if (currentResource) {
