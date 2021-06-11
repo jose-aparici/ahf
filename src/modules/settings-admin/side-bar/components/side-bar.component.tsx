@@ -8,7 +8,15 @@ import SaveIcon from '@material-ui/icons/Save';
 
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
-export const AhfSideBarComponent: React.FC = () => {
+interface Props {
+  onOpenList: () => void;
+  onSave: () => void;
+}
+
+export const AhfSideBarComponent: React.FC<Props> = ({
+  onOpenList,
+  onSave,
+}: Props) => {
   const classes = useSideBarComponentStyles();
   const { t } = useTranslation();
 
@@ -23,7 +31,7 @@ export const AhfSideBarComponent: React.FC = () => {
           variant="outlined"
           size="large"
           startIcon={<FolderOpenIcon />}
-          onClick={() => 0}
+          onClick={onOpenList}
         >
           <Typography variant="h5">
             {t('SETTINGS_ADMIN.SIDEBAR.ACTIONS.BUTTONS.OPEN')}
@@ -34,7 +42,7 @@ export const AhfSideBarComponent: React.FC = () => {
           variant="outlined"
           size="large"
           startIcon={<SaveIcon />}
-          onClick={() => 0}
+          onClick={onSave}
         >
           <Typography variant="h5">
             {t('SETTINGS_ADMIN.SIDEBAR.ACTIONS.BUTTONS.SAVE')}

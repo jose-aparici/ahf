@@ -13,6 +13,14 @@ export const AhfSideBarContainer: React.FC = () => {
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
+  const handleOpenList = () => {
+    console.log('open list');
+  };
+
+  const handleSave = () => {
+    console.log('save');
+  };
+
   return (
     <>
       <SwipeableDrawer
@@ -38,7 +46,7 @@ export const AhfSideBarContainer: React.FC = () => {
         >
           {!isOpen && <ChevronLeftIcon onClick={() => setIsOpen(true)} />}
         </Box>
-        <AhfSideBarComponent />
+        <AhfSideBarComponent onOpenList={handleOpenList} onSave={handleSave} />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
     </>
