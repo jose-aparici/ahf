@@ -18,7 +18,13 @@
       }
     }
   },
-  "HEADER": "german",
+  "OSCILLOSCOPE": {
+    "SIDEBAR": {
+      "PARAMETERS": {
+        "TITLE": "Parameters"
+      }
+    }
+  },
   "RESOURCE": {
     "MAIN": {
       "TITLES": {
