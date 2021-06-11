@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
+
 import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';
 
@@ -10,11 +12,13 @@ export const AhfSideBarContainer: React.FC = () => {
   const classes = useSideBarContainerStyles();
 
   const [isOpen, setIsOpen] = useState(false);
+  const { readParameterSetList } = useSocketHook();
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   const handleOpenList = () => {
     console.log('open list');
+    readParameterSetList();
   };
 
   const handleSave = () => {

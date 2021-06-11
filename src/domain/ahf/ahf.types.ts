@@ -21,6 +21,8 @@ export enum AhfCommand {
   READ_EVENT_LOG_FROM_FILE = 'ReadEventLogFromFile',
   DISPLAY_MESSAGE = 'DisplayMessage',
   SETTINGS_STRUCTURE = 'SettingsStructure',
+  READ_PARAMETER_SET_LIST = 'ReadParameterSetList',
+  WRITE_PARAMETER_SET_LIST = 'WriteParameterSetList',
 }
 
 export type AhfPayload =
@@ -42,5 +44,6 @@ export interface AhfMessage {
     | AhfEvent
     | AhfEventLogFiles
     | { Len: string }
-    | { FileName: string };
+    | { FileName: string }
+    | string;
 }

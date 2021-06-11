@@ -19,6 +19,7 @@ interface SocketHook {
   readEventLogFiles: () => void;
   readEventLogFromFile: (fileName: string) => void;
   writeEvents: (logs: AhfLog[], fileName: string) => void;
+  readParameterSetList: () => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -111,6 +112,13 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
+  const readParameterSetList = useCallback(() => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.READ_PARAMETER_SET_LIST,
+      Data: '',
+    });
+  }, []);
+
   return {
     init,
     listen,
@@ -123,5 +131,6 @@ export const useSocketHook = (): SocketHook => {
     readEventLogFiles,
     readEventLogFromFile,
     writeEvents,
+    readParameterSetList,
   };
 };
