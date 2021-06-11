@@ -67,5 +67,16 @@
         "WARNING": "Device did not respond, value could be not be saved"
       }
     }
+  },
+  "SETTINGS_ADMIN": {
+    "SIDEBAR": {
+      "ACTIONS": {
+        "BUTTONS": {
+          "OPEN": "Open",
+          "SAVE": "Save"
+        },
+        "TITLE": "Settingsactions"
+      }
+    }
   }
 }

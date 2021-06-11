@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { AhfSettingsAdminContainer } from 'modules/settings-admin/settings-admin.container';
 import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 import { AhfPage } from 'pages/ahf.page';
 
@@ -12,7 +13,7 @@ export const AhfSettingsAdminPage: React.FC = () => {
 
   return (
     <AhfPage>
-      <div>this is settings admin</div>
+      <AhfSettingsAdminContainer />
     </AhfPage>
   );
 };
