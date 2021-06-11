@@ -2,6 +2,7 @@ import { Breadcrumb } from 'domain/breadcrumbs/breadcrumbs.types';
 import { DevicePaths } from 'domain/device/device.types';
 import { EVENTS } from 'pages/App.routes';
 
+import { OSCILLOSCOPE } from '../../pages/App.routes';
 import { AHF_LANGUAGES } from '../languages/languages.constants';
 
 export const pathToBreadCrumbs = (
@@ -19,6 +20,14 @@ export const pathToBreadCrumbs = (
           path: pathSplitted.slice(0, index + 4).join('/'),
         };
       }
+
+      if (index === 1 && item === OSCILLOSCOPE) {
+        return {
+          label: new Array(AHF_LANGUAGES.length).fill('Oscilloscope'),
+          path: pathSplitted.slice(0, index + 4).join('/'),
+        };
+      }
+
       return {
         label: devicePaths[pathSplitted.slice(0, index + 4).join('/')],
         path: pathSplitted.slice(0, index + 4).join('/'),

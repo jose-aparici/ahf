@@ -8,7 +8,7 @@ import DescriptionIcon from '@material-ui/icons/Description';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import PowerOffIcon from '@material-ui/icons/PowerOff';
 
-import { AppRoutes, EVENTS } from 'pages/App.routes';
+import { AppRoutes, EVENTS, OSCILLOSCOPE } from 'pages/App.routes';
 
 import { useNavigationIconsStyles } from './navigation-icons.component.styles';
 
@@ -39,7 +39,7 @@ export const AhfNavigationIconsComponent: React.FC<Props> = ({
         <IconButton
           component={Link}
           className={classes.icon}
-          to={AppRoutes.DevicesPage}
+          to={`${devicePath}/${OSCILLOSCOPE}`}
           color="inherit"
           aria-label="menu"
         >
