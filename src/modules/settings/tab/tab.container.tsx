@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import React, {
   MutableRefObject,
   useCallback,
@@ -15,6 +16,7 @@ import {
 import EditIcon from '@material-ui/icons/Edit';
 
 import { Folder } from 'domain/folder/folder.types';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { AccessType, Param, ParamRead } from 'domain/param/param.types';
 import { getParamValue, stringToParamValue } from 'domain/param/param.utils';
 import { SETTINGS_DEVICE_ID } from 'domain/settings/settings.contants';
@@ -80,6 +82,15 @@ export const AhfTabContainer: React.FC<Props> = ({
           setNextMarker(initialMarker.current);
           writeParam(paramToUpdate);
           initialMarker.current = initialMarker.current + 1;
+          if (
+            paramToUpdate.paramId === 200 &&
+            i18next.language !==
+              AHF_LANGUAGES[paramToUpdate.value as number].locale
+          ) {
+            i18next.changeLanguage(
+              AHF_LANGUAGES[paramToUpdate.value as number].locale,
+            );
+          }
         }
       }
     },
