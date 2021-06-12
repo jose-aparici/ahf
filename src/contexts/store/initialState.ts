@@ -1,7 +1,7 @@
-import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { Device } from 'domain/device/device.types';
 import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
+import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { Settings } from 'domain/settings/setting.types';
 
 export interface State {
@@ -11,14 +11,9 @@ export interface State {
   notification: Notification | undefined;
   settings: Settings | undefined;
   settingsAdmin: {
-    currentFile: AhfSettingsAdminFile | undefined;
+    currentFile: SettingsAdminFile | undefined;
   };
 }
-
-/* export const mockedState: State = deviceStructureReducer(
-  deviceInfoReducer(buildState(), deviceAhf.info),
-  deviceAhf.structure,
-); */
 
 export const initialState: State = {
   devices: {},

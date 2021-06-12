@@ -8,7 +8,8 @@ import { AHF_LANGUAGES } from '../languages/languages.constants';
 export const pathToBreadCrumbs = (
   path: string,
   devicePaths: DevicePaths,
-  fileName = '',
+  eventsFileName = '',
+  settingsAdminFileName = '',
 ): Breadcrumb[] => {
   const pathSplitted = path.split('/');
   const breadCrumbs: Breadcrumb[] = pathSplitted
@@ -35,9 +36,16 @@ export const pathToBreadCrumbs = (
       };
     });
 
-  if (path.indexOf(EVENTS) >= 0 && fileName.length > 0) {
+  if (path.indexOf(EVENTS) >= 0 && eventsFileName.length > 0) {
     breadCrumbs.push({
-      label: new Array(AHF_LANGUAGES.length).fill(fileName),
+      label: new Array(AHF_LANGUAGES.length).fill(eventsFileName),
+      path: breadCrumbs[breadCrumbs.length - 1].path,
+    });
+  }
+
+  if (path.indexOf(SETTINGS_ADMIN) >= 0 && settingsAdminFileName.length > 0) {
+    breadCrumbs.push({
+      label: new Array(AHF_LANGUAGES.length).fill(settingsAdminFileName),
       path: breadCrumbs[breadCrumbs.length - 1].path,
     });
   }

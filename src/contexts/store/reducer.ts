@@ -9,6 +9,7 @@ import { AhfCommand } from 'domain/ahf/ahf.types';
 import { Action, AppCommand } from 'domain/app/app.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
+import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
 
 import { State } from './initialState';
 import { deviceInfoReducer } from './reducer_device_info';
@@ -53,7 +54,9 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     case AhfCommand.WRITE_PARAMETER_SET_FILE: {
-      const currentFile = payload as AhfSettingsAdminFile;
+      const currentFile = transformAhfCurrentFileToCurrentFile(
+        payload as AhfSettingsAdminFile,
+      );
       return { ...state, settingsAdmin: { currentFile } };
     }
 

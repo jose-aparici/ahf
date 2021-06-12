@@ -9,10 +9,8 @@ export const settingsAdminFilesReducer = (
   action: Action,
 ): State => {
   const { type, payload } = action;
-  debugger;
   switch (type) {
     case AhfCommand.WRITE_PARAMETER_SET_LIST:
-      debugger;
       return {
         ...state,
         fileList: payload as AhfSettingsAdminFileList,
