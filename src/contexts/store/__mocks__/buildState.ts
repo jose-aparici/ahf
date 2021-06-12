@@ -18,6 +18,7 @@ const DEFAULT_STATE: State = {
   },
   notification: undefined,
   settings: undefined,
+  settingsAdmin: { currentFile: undefined },
 };
 
 export const buildState = (overrides = {}): State => ({

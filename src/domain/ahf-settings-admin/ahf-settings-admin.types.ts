@@ -4,9 +4,11 @@ export interface AhfSettingsAdminFile {
 }
 
 export type AhfSettingsAdminParameter = {
+  ParamFolder: string;
   ParamID: number;
   ParamName: string;
   Value: number;
+  EnumVal: string;
 };
 
 export type AhfSettingsAdminFileList = string[];
