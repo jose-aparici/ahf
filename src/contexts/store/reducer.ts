@@ -12,7 +12,6 @@ import { Notification, Severity } from 'domain/notification/notification.types';
 import { State } from './initialState';
 import { deviceInfoReducer } from './reducer_device_info';
 import { deviceStructureReducer } from './reducer_device_structure';
-import { readParamSetListReducer } from './reducer_read_param_set_list';
 import { writeEventsReducer } from './reducer_write_events';
 
 export const reducer = (state: State, action: Action): State => {
@@ -52,8 +51,8 @@ export const reducer = (state: State, action: Action): State => {
       return deviceStructureReducer(state, payload as AhfDeviceStructure);
     }
 
-    case AhfCommand.READ_PARAMETER_SET_LIST: {
-      return readParamSetListReducer(state, payload);
+    case AhfCommand.WRITE_PARAMETER_SET_FILE: {
+      return state;
     }
 
     default:

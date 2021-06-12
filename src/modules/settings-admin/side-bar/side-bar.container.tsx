@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
+import { Box, Button, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
 import { useSocketHook } from 'modules/shared/hooks/socket-hook';
@@ -12,12 +12,11 @@ export const AhfSideBarContainer: React.FC = () => {
   const classes = useSideBarContainerStyles();
 
   const [isOpen, setIsOpen] = useState(false);
-  const { readParameterSetList } = useSocketHook();
+  const { readParameterSetList, readParameterSetFile } = useSocketHook();
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   const handleOpenList = () => {
-    console.log('open list');
     readParameterSetList();
   };
 
@@ -50,6 +49,7 @@ export const AhfSideBarContainer: React.FC = () => {
         >
           {!isOpen && <ChevronLeftIcon onClick={() => setIsOpen(true)} />}
         </Box>
+        <Button onClick={readParameterSetFile}>Test</Button>
         <AhfSideBarComponent onOpenList={handleOpenList} onSave={handleSave} />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>

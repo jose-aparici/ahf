@@ -20,6 +20,7 @@ interface SocketHook {
   readEventLogFromFile: (fileName: string) => void;
   writeEvents: (logs: AhfLog[], fileName: string) => void;
   readParameterSetList: () => void;
+  readParameterSetFile: () => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -119,6 +120,13 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
+  const readParameterSetFile = useCallback(() => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.READ_PARAMETER_SET_FILE,
+      Data: { FileName: 'AHF Slave Airbus_V2.btp' },
+    });
+  }, []);
+
   return {
     init,
     listen,
@@ -132,5 +140,6 @@ export const useSocketHook = (): SocketHook => {
     readEventLogFromFile,
     writeEvents,
     readParameterSetList,
+    readParameterSetFile,
   };
 };

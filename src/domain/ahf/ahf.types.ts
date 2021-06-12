@@ -6,6 +6,10 @@ import { AhfEvent, AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
 import { AhfFolderSelect } from 'domain/ahf-folder/ahf-folder.types';
 import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
+import {
+  AhfSettingsAdminFile,
+  AhfSettingsAdminFileList,
+} from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 
 export enum AhfCommand {
   VERSION = 'WSVer',
@@ -23,6 +27,8 @@ export enum AhfCommand {
   SETTINGS_STRUCTURE = 'SettingsStructure',
   READ_PARAMETER_SET_LIST = 'ReadParameterSetList',
   WRITE_PARAMETER_SET_LIST = 'WriteParameterSetList',
+  READ_PARAMETER_SET_FILE = 'ReadParameterSetFile',
+  WRITE_PARAMETER_SET_FILE = 'WriteParameterSetFile',
 }
 
 export type AhfPayload =
@@ -31,7 +37,9 @@ export type AhfPayload =
   | AhfParamRead
   | AhfEvent
   | AhfEventLogFiles
-  | AhfNotification;
+  | AhfNotification
+  | AhfSettingsAdminFile
+  | AhfSettingsAdminFileList;
 
 export interface AhfMessage {
   Cmd: AhfCommand;
