@@ -55,9 +55,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
     readParameterSetFile(fileList[+value]);
   };
 
-  const handleCloseEditFileName = () => {
-    return '';
-  };
+  const handleCloseEditFileName = () => setOpenEditFileName(false);
 
   const handleSaveEditFileName = (name: string) => {
     console.log(name);
