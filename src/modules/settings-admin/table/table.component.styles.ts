@@ -5,6 +5,6 @@ export const useTableComponentStyles = makeStyles(() => ({
     maxHeight: '392px',
   },
   cell: {
-    padding: '0',
+    padding: '4px',
   },
 }));
