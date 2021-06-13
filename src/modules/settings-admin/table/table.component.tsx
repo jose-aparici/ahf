@@ -21,6 +21,24 @@ interface Props {
 
 const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
   const classes = useTableComponentStyles();
+  const tableRows = (rows: SettingsAdminParameter[]) => {
+    let currentColor = 'white';
+    return rows.map((row: SettingsAdminParameter, index) => {
+      if (index > 0 && row.folder !== rows[index - 1].folder) {
+        currentColor = currentColor === 'white' ? '#f5f5f5' : 'white';
+      }
+      return (
+        <TableRow key={row.id} style={{ backgroundColor: currentColor }}>
+          <TableCell className={classes.cell}>{row.id}</TableCell>
+          <TableCell className={classes.cell}>{row.folder}</TableCell>
+          <TableCell className={classes.cell}>{row.name}</TableCell>
+          <TableCell className={classes.cell}>{row.value}</TableCell>
+          <TableCell className={classes.cell}>{row.enumVal}</TableCell>
+        </TableRow>
+      );
+    });
+  };
+
   return (
     <Paper>
       <TableContainer className={classes.container}>
@@ -34,17 +52,7 @@ const AhfTableComponent: React.FC<Props> = ({ rows }: Props) => {
               ))}
             </TableRow>
           </TableHead>
-          <TableBody>
-            {rows.map((row: SettingsAdminParameter) => (
-              <TableRow key={row.id}>
-                <TableCell className={classes.cell}>{row.id}</TableCell>
-                <TableCell className={classes.cell}>{row.folder}</TableCell>
-                <TableCell className={classes.cell}>{row.name}</TableCell>
-                <TableCell className={classes.cell}>{row.value}</TableCell>
-                <TableCell className={classes.cell}>{row.enumVal}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
+          <TableBody>{tableRows(rows)}</TableBody>
         </Table>
       </TableContainer>
     </Paper>
