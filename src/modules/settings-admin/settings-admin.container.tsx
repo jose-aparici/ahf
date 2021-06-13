@@ -8,6 +8,7 @@ import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { settingsAdminFilesReducer } from './reducer_settings_admin_files';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
+import { AhfTableComponentMemoized } from './table/table.component';
 
 export interface State {
   fileList: AhfSettingsAdminFileList;
@@ -43,6 +44,11 @@ export const AhfSettingsAdminContainer: React.FC = () => {
 
   return (
     <>
+      {appState.settingsAdmin.currentFile?.parameterSet && (
+        <AhfTableComponentMemoized
+          rows={appState.settingsAdmin.currentFile?.parameterSet}
+        />
+      )}
       <AhfSideBarContainer
         fileList={state.fileList}
         onClearFileList={handleClearFileList}

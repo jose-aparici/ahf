@@ -12,3 +12,5 @@ export type SettingsAdminParameter = {
 };
 
 export type SettingsAdminFileList = string[];
+
+export type TableHeader = { id: number; label: string };
