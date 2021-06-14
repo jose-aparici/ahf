@@ -31,39 +31,44 @@ export const AhfSideBarContainer: React.FC<Props> = ({
     readParameterSetFile,
     writeParameterSetFile,
   } = useSocketHook();
-  const { state: appState, dispatch } = useContext(AhfContext);
+  const { state: appState } = useContext(AhfContext);
 
   const [isOpen, setIsOpen] = useState(false);
-  const [openEditFileName, setOpenEditFileName] = useState(false);
+  const [openSaveFileName, setOpenSaveFileName] = useState(false);
+  const [openFileList, setOpenFileList] = useState(false);
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   const handleOpenFileList = () => {
+    setOpenFileList(true);
     onClearFileList();
     readParameterSetList();
   };
 
-  const handleSaveFile = () => {
-    appState.settingsAdmin.currentFile?.fileName && setOpenEditFileName(true);
-  };
-
-  const handleCloseSelectFileName = () => {
-    onClearFileList();
+  const handleCloseFileList = () => {
+    setOpenFileList(false);
     setIsOpen(false);
   };
 
-  const handleSelectFileName = (value: string) => {
+  const handleSelectFileList = (value: string) => {
+    setOpenFileList(false);
     onClearFileList();
     openBackdrop();
     setIsOpen(false);
     readParameterSetFile(fileList[+value]);
   };
 
-  const handleCloseEditFileName = () => setOpenEditFileName(false);
+  const handleOpenSaveFileName = () => {
+    appState.settingsAdmin.currentFile?.fileName && setOpenSaveFileName(true);
+  };
 
-  const handleSaveEditFileName = (name: string) => {
-    console.log(name);
+  const handleCloseSaveFileName = () => setOpenSaveFileName(false);
+
+  const handleSaveFileName = (name: string) => {
     if (appState.settingsAdmin.currentFile !== undefined) {
+      openBackdrop();
+      setOpenSaveFileName(false);
+      setIsOpen(false);
       const parameterSetFile = transformCurrentFileToAhfCurrentFile(
         name,
         appState.settingsAdmin.currentFile,
@@ -100,28 +105,28 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
         <AhfSideBarComponent
           onOpenList={handleOpenFileList}
-          onSaveFile={handleSaveFile}
+          onOpenSaveFileName={handleOpenSaveFileName}
         />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
-      {fileList.length > 0 && (
+      {openFileList && (
         <AhfParamEditContainerMemoized
           type={ParamType.ENUM}
           value={'0'}
           values={fileList}
           button2Text="SETTINGS_ADMIN.SIDEBAR.ACTIONS.BUTTONS.OPEN"
-          onClose={handleCloseSelectFileName}
-          onSave={handleSelectFileName}
+          onClose={handleCloseFileList}
+          onSave={handleSelectFileList}
         />
       )}
 
-      {openEditFileName && appState.settingsAdmin.currentFile && (
+      {openSaveFileName && appState.settingsAdmin.currentFile && (
         <AhfParamEditContainerMemoized
           type={ParamType.FILE_NAME}
           value={appState.settingsAdmin.currentFile?.fileName}
           values={[]}
-          onClose={handleCloseEditFileName}
-          onSave={handleSaveEditFileName}
+          onClose={handleCloseSaveFileName}
+          onSave={handleSaveFileName}
         />
       )}
     </>

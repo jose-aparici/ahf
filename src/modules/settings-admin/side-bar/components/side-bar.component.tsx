@@ -10,12 +10,12 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 interface Props {
   onOpenList: () => void;
-  onSaveFile: () => void;
+  onOpenSaveFileName: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   onOpenList,
-  onSaveFile,
+  onOpenSaveFileName,
 }: Props) => {
   const classes = useSideBarComponentStyles();
   const { t } = useTranslation();
@@ -47,7 +47,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           variant="outlined"
           size="large"
           startIcon={<SaveIcon />}
-          onClick={onSaveFile}
+          onClick={onOpenSaveFileName}
         >
           <Typography variant="h5">
             {t('SETTINGS_ADMIN.SIDEBAR.ACTIONS.BUTTONS.SAVE')}

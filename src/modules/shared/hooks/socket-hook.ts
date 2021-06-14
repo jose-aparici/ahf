@@ -131,7 +131,6 @@ export const useSocketHook = (): SocketHook => {
 
   const writeParameterSetFile = useCallback(
     (settingsAdminFile: AhfSettingsAdminFile) => {
-      debugger;
       AhfSocket.getInstance().next({
         Cmd: AhfCommand.WRITE_PARAMETER_SET_FILE,
         Data: settingsAdminFile,

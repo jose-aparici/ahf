@@ -15,7 +15,7 @@ export interface State {
 }
 
 export const AhfSettingsAdminContainer: React.FC = () => {
-  const { state: appState, dispatch: appDispatch } = useContext(AhfContext);
+  const { state: appState } = useContext(AhfContext);
 
   const [state, dispatch] = useReducer(settingsAdminFilesReducer, {
     fileList: [],
@@ -31,6 +31,10 @@ export const AhfSettingsAdminContainer: React.FC = () => {
       subscription.unsubscribe();
     };
   }, [listen]);
+
+  useEffect(() => {
+    state.fileList && closeBackdrop();
+  }, [state.fileList, closeBackdrop]);
 
   useEffect(() => {
     appState.settingsAdmin.currentFile?.parameterSet &&
