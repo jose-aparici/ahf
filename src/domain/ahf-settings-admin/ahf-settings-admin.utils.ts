@@ -3,10 +3,11 @@ import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { AhfSettingsAdminFile } from './ahf-settings-admin.types';
 
 export const transformCurrentFileToAhfCurrentFile = (
+  fileName: string,
   currentFile: SettingsAdminFile,
 ): AhfSettingsAdminFile => {
   const ahfCurrentFile: AhfSettingsAdminFile = {
-    FileName: currentFile.fileName,
+    FileName: fileName,
     ParameterSet: currentFile.parameterSet.map((parameter) => ({
       EnumVal: parameter.enumVal,
       ParamFolder: parameter.folder,

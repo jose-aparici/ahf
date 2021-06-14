@@ -26,7 +26,11 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const { openBackdrop } = useContext(AhfBackdropContext);
 
-  const { readParameterSetList, readParameterSetFile } = useSocketHook();
+  const {
+    readParameterSetList,
+    readParameterSetFile,
+    writeParameterSetFile,
+  } = useSocketHook();
   const { state: appState, dispatch } = useContext(AhfContext);
 
   const [isOpen, setIsOpen] = useState(false);
@@ -60,10 +64,11 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const handleSaveEditFileName = (name: string) => {
     console.log(name);
     if (appState.settingsAdmin.currentFile !== undefined) {
-      const ahfCurrentFile = transformCurrentFileToAhfCurrentFile(
+      const parameterSetFile = transformCurrentFileToAhfCurrentFile(
+        name,
         appState.settingsAdmin.currentFile,
       );
-      return ahfCurrentFile;
+      writeParameterSetFile(parameterSetFile);
     }
   };
 

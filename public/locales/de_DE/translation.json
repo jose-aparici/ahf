@@ -75,7 +75,17 @@
           "OPEN": "Open",
           "SAVE": "Save"
         },
-        "TITLE": "Actions"
+        "TITLE": "File actions"
+      },
+      "DEVICE_ACTIONS": {
+        "BUTTONS": {
+          "OPEN": "Open",
+          "SAVE": "Save"
+        },
+        "TITLE": "Device actions"
+      },
+      "UPDATE": {
+        "TITLE": "Update"
       }
     }
   }

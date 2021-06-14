@@ -22,6 +22,11 @@ export const AhfSideBarComponent: React.FC<Props> = ({
 
   return (
     <div className={classes.iconsRoot}>
+      <div className={clsx(classes.iconsSection, classes.iconsSectionUpdate)}>
+        <Typography className={classes.iconsSectionTitle} variant="h3">
+          {t('SETTINGS_ADMIN.SIDEBAR.UPDATE.TITLE')}
+        </Typography>
+      </div>
       <div className={classes.iconsSection}>
         <Typography className={classes.iconsSectionTitle} variant="h3">
           {t('SETTINGS_ADMIN.SIDEBAR.ACTIONS.TITLE')}

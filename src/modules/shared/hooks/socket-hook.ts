@@ -2,6 +2,7 @@ import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
 import { AhfLog } from 'domain/ahf-event/ahf-event.types';
+import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { Action } from 'domain/app/app.types';
 import { Param } from 'domain/param/param.types';
@@ -21,6 +22,7 @@ interface SocketHook {
   writeEvents: (logs: AhfLog[], fileName: string) => void;
   readParameterSetList: () => void;
   readParameterSetFile: (fileName: string) => void;
+  writeParameterSetFile: (settingsAdminFile: AhfSettingsAdminFile) => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -127,6 +129,17 @@ export const useSocketHook = (): SocketHook => {
     });
   }, []);
 
+  const writeParameterSetFile = useCallback(
+    (settingsAdminFile: AhfSettingsAdminFile) => {
+      debugger;
+      AhfSocket.getInstance().next({
+        Cmd: AhfCommand.WRITE_PARAMETER_SET_FILE,
+        Data: settingsAdminFile,
+      });
+    },
+    [],
+  );
+
   return {
     init,
     listen,
@@ -141,5 +154,6 @@ export const useSocketHook = (): SocketHook => {
     writeEvents,
     readParameterSetList,
     readParameterSetFile,
+    writeParameterSetFile,
   };
 };
