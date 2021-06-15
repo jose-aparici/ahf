@@ -4,20 +4,22 @@ import { useTranslation } from 'react-i18next';
 
 import { Button, Typography } from '@material-ui/core';
 import FolderOpenIcon from '@material-ui/icons/FolderOpen';
+import GetAppIcon from '@material-ui/icons/GetApp';
+import PublishIcon from '@material-ui/icons/Publish';
 import SaveIcon from '@material-ui/icons/Save';
 
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 interface Props {
-  onOpenFromDevice: () => void;
-  onSaveFromDevice: () => void;
+  onReadFromDevice: () => void;
+  onWriteToDevice: () => void;
   onOpenList: () => void;
   onOpenSaveFileName: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
-  onOpenFromDevice,
-  onSaveFromDevice,
+  onReadFromDevice,
+  onWriteToDevice,
   onOpenList,
   onOpenSaveFileName,
 }: Props) => {
@@ -34,22 +36,22 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           className={clsx(classes.eventsButton, classes.openSavedEventsButton)}
           variant="outlined"
           size="large"
-          startIcon={<FolderOpenIcon />}
-          onClick={onOpenFromDevice}
+          startIcon={<PublishIcon />}
+          onClick={onReadFromDevice}
         >
           <Typography variant="h5">
-            {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.BUTTONS.OPEN')}
+            {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.BUTTONS.READ')}
           </Typography>
         </Button>
         <Button
           className={clsx(classes.eventsButton, classes.saveEventsButton)}
           variant="outlined"
           size="large"
-          startIcon={<SaveIcon />}
-          onClick={onSaveFromDevice}
+          startIcon={<GetAppIcon />}
+          onClick={onWriteToDevice}
         >
           <Typography variant="h5">
-            {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.BUTTONS.SAVE')}
+            {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.BUTTONS.WRITE')}
           </Typography>
         </Button>
       </div>

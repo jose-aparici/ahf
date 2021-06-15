@@ -39,11 +39,11 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
-  const handleOpenFromDevice = () => {
+  const handleReadFromDevice = () => {
     readParameterSetFile('FromDevice');
   };
 
-  const handleSaveFromDevice = () => {
+  const handleWriteToDevice = () => {
     console.log('entra');
   };
 
@@ -112,8 +112,8 @@ export const AhfSideBarContainer: React.FC<Props> = ({
         </Box>
 
         <AhfSideBarComponent
-          onOpenFromDevice={handleOpenFromDevice}
-          onSaveFromDevice={handleSaveFromDevice}
+          onReadFromDevice={handleReadFromDevice}
+          onWriteToDevice={handleWriteToDevice}
           onOpenList={handleOpenFileList}
           onOpenSaveFileName={handleOpenSaveFileName}
         />

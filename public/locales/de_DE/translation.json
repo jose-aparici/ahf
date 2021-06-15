@@ -79,8 +79,8 @@
       },
       "DEVICE_ACTIONS": {
         "BUTTONS": {
-          "OPEN": "Open",
-          "SAVE": "Save"
+          "READ": "Read from device",
+          "WRITE": "Write to device"
         },
         "TITLE": "Device actions"
       },
