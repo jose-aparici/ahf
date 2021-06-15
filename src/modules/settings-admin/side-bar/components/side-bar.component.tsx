@@ -9,11 +9,15 @@ import SaveIcon from '@material-ui/icons/Save';
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 interface Props {
+  onOpenFromDevice: () => void;
+  onSaveFromDevice: () => void;
   onOpenList: () => void;
   onOpenSaveFileName: () => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
+  onOpenFromDevice,
+  onSaveFromDevice,
   onOpenList,
   onOpenSaveFileName,
 }: Props) => {
@@ -24,17 +28,17 @@ export const AhfSideBarComponent: React.FC<Props> = ({
     <div className={classes.iconsRoot}>
       <div className={clsx(classes.iconsSection, classes.iconsSectionUpdate)}>
         <Typography className={classes.iconsSectionTitle} variant="h3">
-          {t('SETTINGS_ADMIN.SIDEBAR.UPDATE.TITLE')}
+          {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.TITLE')}
         </Typography>
         <Button
           className={clsx(classes.eventsButton, classes.openSavedEventsButton)}
           variant="outlined"
           size="large"
           startIcon={<FolderOpenIcon />}
-          onClick={onOpenList}
+          onClick={onOpenFromDevice}
         >
           <Typography variant="h5">
-            {t('SETTINGS_ADMIN.SIDEBAR.ACTIONS.BUTTONS.OPEN')}
+            {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.BUTTONS.OPEN')}
           </Typography>
         </Button>
         <Button
@@ -42,10 +46,10 @@ export const AhfSideBarComponent: React.FC<Props> = ({
           variant="outlined"
           size="large"
           startIcon={<SaveIcon />}
-          onClick={onOpenSaveFileName}
+          onClick={onSaveFromDevice}
         >
           <Typography variant="h5">
-            {t('SETTINGS_ADMIN.SIDEBAR.ACTIONS.BUTTONS.SAVE')}
+            {t('SETTINGS_ADMIN.SIDEBAR.DEVICE_ACTIONS.BUTTONS.SAVE')}
           </Typography>
         </Button>
       </div>
