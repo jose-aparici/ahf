@@ -122,7 +122,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
       {openSaveFileName && appState.settingsAdmin.currentFile && (
         <AhfParamEditContainerMemoized
-          type={ParamType.FILE_NAME}
+          type={ParamType.FILE_NAME_BTP}
           value={appState.settingsAdmin.currentFile?.fileName}
           values={[]}
           onClose={handleCloseSaveFileName}
