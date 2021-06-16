@@ -1,61 +1,56 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 
 import {
-  Button,
-  Divider,
+  Checkbox,
+  FormControlLabel,
   Grid,
-  IconButton,
   Typography,
 } from '@material-ui/core';
-import PauseIcon from '@material-ui/icons/Pause';
-import PlayArrowIcon from '@material-ui/icons/PlayArrow';
-import SettingsIcon from '@material-ui/icons/Settings';
+
+import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
+import { Channel } from 'domain/oscilloscope/oscilloscope.types';
 
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
-export const AhfSideBarComponent: React.FC = () => {
+interface Props {
+  channels: Channel[];
+}
+
+export const AhfSideBarComponent: React.FC<Props> = ({ channels }: Props) => {
   const classes = useSideBarComponentStyles();
-  const { t } = useTranslation();
-
   return (
-    <>
-      <Grid container>
-        <Grid item xs={3}>
-          <IconButton
-            component={Button}
-            color="inherit"
-            aria-label="menu"
-            size="small"
-          >
-            <SettingsIcon />
-          </IconButton>
-        </Grid>
-        <Grid container item xs={9} justify="flex-end">
-          <Grid>
-            <IconButton
-              component={Button}
-              color="inherit"
-              aria-label="menu"
-              size="small"
-            >
-              <PlayArrowIcon />
-            </IconButton>
+    <Grid container>
+      {channels.map((channel, index) => {
+        return (
+          <Grid container key={channel.id}>
+            <Grid item xs={12}>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    checked={true}
+                    onChange={() => 0}
+                    color="default"
+                    name="checkedB"
+                    classes={{
+                      root: classes.checkBox,
+                    }}
+                  />
+                }
+                label={<Typography>{channel.label[0]}</Typography>}
+                style={{ color: Colors[index] }}
+              />
+            </Grid>
+            <Grid container className={classes.gridValuesContainer}>
+              <Grid item xs={12}>
+                <Typography>C1 = xxx</Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <Typography>C2 = xxx</Typography>
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid>
-            <IconButton component={Button} color="inherit" aria-label="menu">
-              <PauseIcon />
-            </IconButton>
-          </Grid>
-        </Grid>
-      </Grid>
-      <Divider />
-
-      <Grid container>
-        <Typography className={classes.iconsSectionTitle} variant="h3">
-          {t('OSCILLOSCOPE.SIDEBAR.PARAMETERS.TITLE')}
-        </Typography>
-      </Grid>
-    </>
+        );
+      })}
+    </Grid>
   );
 };

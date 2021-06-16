@@ -9,7 +9,6 @@ import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
-import { AhfMainPage } from 'pages/main/main.page';
 import { AhfOscilloscopePage } from 'pages/oscilloscope/oscilloscope.page';
 import { AhfResourcePage } from 'pages/resource/resource.page';
 import { AhfSettingsPage } from 'pages/settings/settings.page';
@@ -38,7 +37,11 @@ const App: React.FC = () => {
       <BrowserRouter>
         <AhfHeaderContainer />
         <Switch>
-          <Route path={AppRoutes.MainPage} exact component={AhfMainPage} />
+          <Route
+            path={AppRoutes.MainPage}
+            exact
+            component={AhfOscilloscopePage}
+          />
           <Route
             path={AppRoutes.DevicesPage}
             exact

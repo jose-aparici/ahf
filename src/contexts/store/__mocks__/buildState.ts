@@ -18,6 +18,11 @@ const DEFAULT_STATE: State = {
   },
   notification: undefined,
   settings: undefined,
+  oscilloscope: {
+    settings: {
+      channels: [],
+    },
+  },
 };
 
 export const buildState = (overrides = {}): State => ({
