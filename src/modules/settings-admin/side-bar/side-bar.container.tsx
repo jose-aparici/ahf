@@ -40,14 +40,13 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
 
   const handleReadFromDevice = () => {
+    openBackdrop(false);
+    setIsOpen(false);
     readParameterSetFile('FromDevice');
   };
 
   const handleWriteToDevice = () => {
-    console.log('ToDevice');
-    openBackdrop(false);
-    setIsOpen(false);
-    //writeParameterSetFile(parameterSetFile);
+    handleSaveFileName('ToDevice');
   };
 
   const handleOpenFileList = () => {
@@ -77,7 +76,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const handleSaveFileName = (name: string) => {
     if (appState.settingsAdmin.currentFile !== undefined) {
-      openBackdrop();
+      openBackdrop(false);
       setOpenSaveFileName(false);
       setIsOpen(false);
       const parameterSetFile = transformCurrentFileToAhfCurrentFile(

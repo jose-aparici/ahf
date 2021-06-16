@@ -8,6 +8,6 @@ export const useSpinnerComponentStyles = makeStyles((theme: Theme) => ({
     zIndex: theme.zIndex.drawer + 10000,
   },
   nonBlocking: {
-    zIndex: 1,
+    zIndex: 5,
   },
 }));
