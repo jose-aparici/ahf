@@ -44,7 +44,10 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   };
 
   const handleWriteToDevice = () => {
-    console.log('entra');
+    console.log('ToDevice');
+    openBackdrop(false);
+    setIsOpen(false);
+    //writeParameterSetFile(parameterSetFile);
   };
 
   const handleOpenFileList = () => {

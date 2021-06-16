@@ -23,14 +23,16 @@ export const AhfSettingsAdminContainer: React.FC = () => {
 
   const { closeBackdrop } = useContext(AhfBackdropContext);
 
-  const { listen } = useSocketHook();
+  const { listen, stopUpdate } = useSocketHook();
 
   useEffect(() => {
     const subscription = listen(dispatch);
     return () => {
+      closeBackdrop();
+      stopUpdate();
       subscription.unsubscribe();
     };
-  }, [listen]);
+  }, [listen, closeBackdrop, stopUpdate]);
 
   useEffect(() => {
     state.fileList && closeBackdrop();
