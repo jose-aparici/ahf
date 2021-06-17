@@ -68,21 +68,24 @@
       }
     }
   },
-  "SETTINGS": {
-    "TABS": {
-      "SYSTEM": { "LABEL": "System" },
-      "MODBUS_HMI": { "LABEL": "Modbus HMI" },
-      "MODBUS_AHF": { "LABEL": "Modbus AHF" },
-      "ETHERNET": { "LABEL": "Ethernet" },
-      "LANGUAGE": { "LABEL": "Language" }
-    },
-    "MODBUS_HMI": {
-      "VALUES": {
-        "SLAVE_ID": { "LABEL": "Slave ID" },
-        "BAUD_RATE": { "LABEL": "Baudrate" },
-        "DATA_BITS": { "LABEL": "Data Bits" },
-        "STOP_BITS": { "LABEL": "Stop Bits" },
-        "PARITY": { "LABEL": "Parity" }
+  "SETTINGS_ADMIN": {
+    "SIDEBAR": {
+      "ACTIONS": {
+        "BUTTONS": {
+          "OPEN": "Open",
+          "SAVE": "Save"
+        },
+        "TITLE": "File actions"
+      },
+      "DEVICE_ACTIONS": {
+        "BUTTONS": {
+          "READ": "Read from device",
+          "WRITE": "Write to device"
+        },
+        "TITLE": "Device actions"
+      },
+      "UPDATE": {
+        "TITLE": "Update"
       }
     }
   }

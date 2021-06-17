@@ -1,6 +1,7 @@
 import { Device } from 'domain/device/device.types';
 import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
+import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { Settings } from 'domain/settings/setting.types';
 
 export interface State {
@@ -9,12 +10,10 @@ export interface State {
   initialDevice: number;
   notification: Notification | undefined;
   settings: Settings | undefined;
+  settingsAdmin: {
+    currentFile: SettingsAdminFile | undefined;
+  };
 }
-
-/* export const mockedState: State = deviceStructureReducer(
-  deviceInfoReducer(buildState(), deviceAhf.info),
-  deviceAhf.structure,
-); */
 
 export const initialState: State = {
   devices: {},
@@ -25,4 +24,5 @@ export const initialState: State = {
   initialDevice: -1,
   notification: undefined,
   settings: undefined,
+  settingsAdmin: { currentFile: undefined },
 };

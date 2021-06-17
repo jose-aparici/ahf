@@ -11,6 +11,7 @@ import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
 import { AhfMainPage } from 'pages/main/main.page';
 import { AhfResourcePage } from 'pages/resource/resource.page';
+import { AhfSettingsAdminPage } from 'pages/settings-admin/settings-admin.page';
 import { AhfSettingsPage } from 'pages/settings/settings.page';
 
 const App: React.FC = () => {
@@ -49,6 +50,11 @@ const App: React.FC = () => {
             component={AhfSettingsPage}
           />
           <Route path={AppRoutes.EventsPage} exact component={AhfEventsPage} />
+          <Route
+            path={AppRoutes.SettingsAdminPage}
+            exact
+            component={AhfSettingsAdminPage}
+          />
           <Route path={AppRoutes.ResourcePage} component={AhfResourcePage} />
         </Switch>
         <AhfFooterContainer />

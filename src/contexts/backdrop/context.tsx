@@ -5,7 +5,7 @@ import { useBackdrop } from './backdrop.hook';
 
 interface Props {
   isBackdropOpened: boolean;
-  openBackdrop: () => void;
+  openBackdrop: (blockingMode?: boolean) => void;
   closeBackdrop: () => void;
 }
 export const AhfBackdropContext = createContext<Props>({
@@ -21,13 +21,18 @@ interface ProviderProps {
 export const AhfBackdropProvider = ({
   children,
 }: ProviderProps): ReactElement => {
-  const { isBackdropOpened, openBackdrop, closeBackdrop } = useBackdrop();
+  const {
+    isBackdropOpened,
+    openBackdrop,
+    closeBackdrop,
+    isModal,
+  } = useBackdrop();
 
   return (
     <AhfBackdropContext.Provider
       value={{ isBackdropOpened, openBackdrop, closeBackdrop }}
     >
-      <AhfSpinnerComponent open={isBackdropOpened} />
+      <AhfSpinnerComponent open={isBackdropOpened} isModal={isModal} />
       {children}
     </AhfBackdropContext.Provider>
   );

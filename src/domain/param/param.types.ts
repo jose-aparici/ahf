@@ -11,6 +11,7 @@ export enum ParamType {
   FLOATING_POINT = 'FloatingPoint',
   STRING = 'String',
   FILE_NAME = 'FileName',
+  FILE_NAME_BTP = 'FileName_Btp',
   DATE = 'Date',
   ENUM = 'Enum',
   IP = 'Ip',

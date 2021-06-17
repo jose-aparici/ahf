@@ -5,10 +5,11 @@ import { CircularProgress, Grid, IconButton } from '@material-ui/core';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import DescriptionIcon from '@material-ui/icons/Description';
+import FileCopyIcon from '@material-ui/icons/FileCopy';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 import PowerOffIcon from '@material-ui/icons/PowerOff';
 
-import { AppRoutes, EVENTS } from 'pages/App.routes';
+import { AppRoutes, EVENTS, SETTINGS_ADMIN } from 'pages/App.routes';
 
 import { useNavigationIconsStyles } from './navigation-icons.component.styles';
 
@@ -24,6 +25,17 @@ export const AhfNavigationIconsComponent: React.FC<Props> = ({
   const classes = useNavigationIconsStyles();
   return (
     <>
+      <Grid item>
+        <IconButton
+          component={Link}
+          className={classes.icon}
+          to={`${devicePath}/${SETTINGS_ADMIN}`}
+          color="inherit"
+          aria-label="menu"
+        >
+          <FileCopyIcon />
+        </IconButton>
+      </Grid>
       <Grid item>
         <IconButton
           component={Link}

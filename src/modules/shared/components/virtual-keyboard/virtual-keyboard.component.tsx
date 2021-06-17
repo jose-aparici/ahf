@@ -39,7 +39,7 @@ export const AhfVirtualKeyboardComponent: React.FC<Props> = ({
 
   return (
     <Keyboard
-      keyboardRef={(r: any) => (keyboardRef.current = r)}
+      keyboardRef={(r: unknown) => (keyboardRef.current = r)}
       layoutName={layoutName}
       onChange={onChange}
       onKeyPress={onKeyPress}

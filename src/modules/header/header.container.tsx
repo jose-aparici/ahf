@@ -46,6 +46,7 @@ export const AhfHeaderContainer: FC = () => {
             location.pathname,
             state.devices[+deviceId].paths,
             state.eventLogs.fileName,
+            state.settingsAdmin.currentFile?.fileName,
           ),
         );
         setDeviceId(deviceId);
@@ -56,6 +57,7 @@ export const AhfHeaderContainer: FC = () => {
     deviceId,
     state.devices,
     state.eventLogs.fileName,
+    state.settingsAdmin.currentFile,
     state.settings,
   ]);
 

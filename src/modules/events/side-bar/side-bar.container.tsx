@@ -1,6 +1,7 @@
 import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfContext } from 'contexts/store/context';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -33,7 +34,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const classes = useSideBarContainerStyles();
   const { state: appState, dispatch } = useContext(AhfContext);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState<boolean>();
   const { openBackdrop } = useContext(AhfBackdropContext);
   const {
     readEvents,
@@ -44,8 +45,16 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const [openFileListEditModal, setOpenFileListEditModal] = useState(false);
   const [openFileNameEditModal, setOpenFileNameEditModal] = useState(false);
+  const location = useLocation();
 
-  const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
+  useEffect(() => {
+    setIsOpen((current) => {
+      return current === undefined ? false : !current;
+    });
+  }, [location]);
+
+  const handleToggleSideBar = (open: boolean | undefined): void =>
+    setIsOpen(!open);
 
   const handleRetrieveAll = () => {
     onClearEventLogs();
@@ -107,7 +116,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
     <>
       <SwipeableDrawer
         anchor={'right'}
-        open={isOpen}
+        open={isOpen === undefined ? false : isOpen}
         onClose={() => handleToggleSideBar(isOpen)}
         onOpen={() => handleToggleSideBar(isOpen)}
         disableSwipeToOpen={false}
