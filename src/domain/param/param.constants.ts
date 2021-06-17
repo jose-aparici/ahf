@@ -8,6 +8,9 @@ export const PARAMS_VALIDATION: Record<ParamType, ParamValidation> = {
   FileName: {
     regex: '^(.)+(.txt)$',
   },
+  FileName_Btp: {
+    regex: '^(.)+(.btp)$',
+  },
   Date: {},
   Enum: {},
   Ip: {

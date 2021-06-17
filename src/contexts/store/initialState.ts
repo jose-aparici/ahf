@@ -2,6 +2,7 @@ import { Device } from 'domain/device/device.types';
 import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
+import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { Settings } from 'domain/settings/setting.types';
 
 export interface State {
@@ -11,6 +12,9 @@ export interface State {
   notification: Notification | undefined;
   settings: Settings | undefined;
   oscilloscope: Oscilloscope;
+  settingsAdmin: {
+    currentFile: SettingsAdminFile | undefined;
+  };
 }
 
 export const initialState: State = {
@@ -34,4 +38,5 @@ export const initialState: State = {
       ],
     },
   },
+  settingsAdmin: { currentFile: undefined },
 };

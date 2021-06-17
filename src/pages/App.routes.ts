@@ -4,6 +4,7 @@ export const PARAM = 'param';
 export const EVENTS = 'events';
 export const OSCILLOSCOPE = 'oscilloscope';
 export const SETTINGS = 'settings';
+export const SETTINGS_ADMIN = 'settings-admin';
 
 export const AppRoutes = {
   MainPage: '/',
@@ -12,4 +13,5 @@ export const AppRoutes = {
   EventsPage: `/${DEVICES}/:deviceId/:folderName/${EVENTS}`,
   OscilloscopePage: `/${DEVICES}/:deviceId/:folderName/${OSCILLOSCOPE}`,
   SettingsPage: `/${DEVICES}/${SETTINGS}`,
+  SettingsAdminPage: `/${DEVICES}/:deviceId/:folderName/${SETTINGS_ADMIN}`,
 };

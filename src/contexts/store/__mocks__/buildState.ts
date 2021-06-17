@@ -23,6 +23,7 @@ const DEFAULT_STATE: State = {
       channels: [],
     },
   },
+  settingsAdmin: { currentFile: undefined },
 };
 
 export const buildState = (overrides = {}): State => ({

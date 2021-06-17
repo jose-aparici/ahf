@@ -1,7 +1,4 @@
-import i18next from 'i18next';
-
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
-import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 
 import { State } from './reducer';
 
@@ -14,12 +11,6 @@ export const paramReadReducer = (
   );
 
   if (findParamToUpdate) {
-    if (
-      paramRead.ParamID === 200 &&
-      i18next.language !== AHF_LANGUAGES[paramRead.Value as number].locale
-    ) {
-      i18next.changeLanguage(AHF_LANGUAGES[paramRead.Value as number].locale);
-    }
     findParamToUpdate.value = paramRead.Value;
     findParamToUpdate.read = {
       deviceId: paramRead.DeviceID,
