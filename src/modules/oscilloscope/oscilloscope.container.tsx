@@ -1,24 +1,26 @@
 import { AhfContext } from 'contexts/store/context';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext } from 'react';
+import { useLocation } from 'react-router-dom';
 
-import { Channel } from 'domain/oscilloscope/oscilloscope.types';
+import { extractDeviceFromPath } from 'domain/path/path.utils';
 
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
 import { AhfTopButtonsComponent } from './top-buttons/top-buttons.component';
 
 export const AhfOScilloscopeContainer: React.FC = () => {
   const { state } = useContext(AhfContext);
+  const location = useLocation();
 
-  const [channels, setChannels] = useState<Channel[]>([]);
-
-  useEffect(() => {
-    setChannels([...state.oscilloscope.settings.channels]);
-  }, [state.oscilloscope.settings.channels]);
+  const deviceId = extractDeviceFromPath(location.pathname);
 
   return (
     <>
-      <AhfTopButtonsComponent />
-      <AhfSideBarContainer channels={channels} />
+      {deviceId && state.devices[+deviceId].structure && (
+        <AhfTopButtonsComponent
+          devicePath={state.devices[+deviceId].structure.id}
+        />
+      )}
+      <AhfSideBarContainer channels={state.oscilloscope.settings.channels} />
     </>
   );
 };

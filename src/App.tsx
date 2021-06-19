@@ -10,6 +10,7 @@ import { AppRoutes } from 'pages/App.routes';
 import { AhfDevicesPage } from 'pages/devices/devices.page';
 import { AhfEventsPage } from 'pages/events/events.page';
 import { AhfMainPage } from 'pages/main/main.page';
+import { AhfOscilloscopeSettingsPage } from 'pages/oscilloscope-settings/oscilloscope-settings.page';
 import { AhfOscilloscopePage } from 'pages/oscilloscope/oscilloscope.page';
 import { AhfResourcePage } from 'pages/resource/resource.page';
 import { AhfSettingsAdminPage } from 'pages/settings-admin/settings-admin.page';
@@ -52,14 +53,19 @@ const App: React.FC = () => {
           />
           <Route path={AppRoutes.EventsPage} exact component={AhfEventsPage} />
           <Route
+            path={AppRoutes.SettingsAdminPage}
+            exact
+            component={AhfSettingsAdminPage}
+          />
+          <Route
             path={AppRoutes.OscilloscopePage}
             exact
             component={AhfOscilloscopePage}
           />
           <Route
-            path={AppRoutes.SettingsAdminPage}
+            path={AppRoutes.OscilloscopeSettingsPage}
             exact
-            component={AhfSettingsAdminPage}
+            component={AhfOscilloscopeSettingsPage}
           />
           <Route path={AppRoutes.ResourcePage} component={AhfResourcePage} />
         </Switch>

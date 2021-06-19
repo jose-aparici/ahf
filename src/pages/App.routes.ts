@@ -12,6 +12,7 @@ export const AppRoutes = {
   ResourcePage: `/${DEVICES}/:deviceId/:folderName*`,
   EventsPage: `/${DEVICES}/:deviceId/:folderName/${EVENTS}`,
   OscilloscopePage: `/${DEVICES}/:deviceId/:folderName/${OSCILLOSCOPE}`,
+  OscilloscopeSettingsPage: `/${DEVICES}/:deviceId/:folderName/${OSCILLOSCOPE}/${SETTINGS}`,
   SettingsPage: `/${DEVICES}/${SETTINGS}`,
   SettingsAdminPage: `/${DEVICES}/:deviceId/:folderName/${SETTINGS_ADMIN}`,
 };
