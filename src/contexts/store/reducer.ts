@@ -9,6 +9,7 @@ import { AhfCommand } from 'domain/ahf/ahf.types';
 import { Action, AppCommand } from 'domain/app/app.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
+import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
 
 import { State } from './initialState';
@@ -58,6 +59,10 @@ export const reducer = (state: State, action: Action): State => {
         payload as AhfSettingsAdminFile,
       );
       return { ...state, settingsAdmin: { currentFile } };
+    }
+
+    case AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS: {
+      return { ...state, oscilloscope: payload as Oscilloscope };
     }
 
     default:

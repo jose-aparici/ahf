@@ -21,6 +21,7 @@ const DEFAULT_STATE: State = {
   oscilloscope: {
     settings: {
       channels: [],
+      params: [],
     },
   },
   settingsAdmin: { currentFile: undefined },

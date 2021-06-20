@@ -6,3 +6,5 @@ export const Colors = [
   '#0334c3',
   '#da1e28',
 ];
+
+export const PARAMS_FOLDER = '1 Measurements';

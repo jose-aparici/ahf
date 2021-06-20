@@ -1,8 +1,11 @@
+import i18n from 'i18n';
 import React, { useState } from 'react';
 
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Channel } from 'domain/oscilloscope/oscilloscope.types';
 
 import { AhfSideBarComponent } from './components/side-bar.component';
@@ -14,6 +17,8 @@ interface Props {
 
 export const AhfSideBarContainer: React.FC<Props> = ({ channels }: Props) => {
   const classes = useSideBarContainerStyles();
+  const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+    .position;
 
   const [isOpen, setIsOpen] = useState(true);
 
@@ -44,7 +49,10 @@ export const AhfSideBarContainer: React.FC<Props> = ({ channels }: Props) => {
         >
           {!isOpen && <ChevronLeftIcon onClick={() => setIsOpen(true)} />}
         </Box>
-        <AhfSideBarComponent channels={channels} />
+        <AhfSideBarComponent
+          channels={channels}
+          currentLanguage={currentLanguage}
+        />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
     </>

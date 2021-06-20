@@ -14,15 +14,19 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 
 interface Props {
   channels: Channel[];
+  currentLanguage: number;
 }
 
-export const AhfSideBarComponent: React.FC<Props> = ({ channels }: Props) => {
+export const AhfSideBarComponent: React.FC<Props> = ({
+  channels,
+  currentLanguage,
+}: Props) => {
   const classes = useSideBarComponentStyles();
   return (
     <Grid container>
       {channels.map((channel, index) => {
         return (
-          <Grid container key={channel.id}>
+          <Grid container key={channel.paramId}>
             <Grid item xs={12}>
               <FormControlLabel
                 control={
@@ -36,7 +40,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({ channels }: Props) => {
                     }}
                   />
                 }
-                label={<Typography>{channel.label[0]}</Typography>}
+                label={<Typography>{channel.name[currentLanguage]}</Typography>}
                 style={{ color: Colors[index] }}
               />
             </Grid>

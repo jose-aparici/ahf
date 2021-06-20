@@ -28,14 +28,8 @@ export const initialState: State = {
   settings: undefined,
   oscilloscope: {
     settings: {
-      channels: [
-        { id: 1, label: ['channel1', 'channel1', 'channel1', 'channel1'] },
-        { id: 2, label: ['channel2', 'channel2', 'channel2', 'channel2'] },
-        { id: 3, label: ['channel3', 'channel3', 'channel3', 'channel3'] },
-        { id: 4, label: ['channel4', 'channel4', 'channel4', 'channel4'] },
-        { id: 5, label: ['channel5', 'channel5', 'channel5', 'channel5'] },
-        { id: 6, label: ['channel6', 'channel6', 'channel6', 'channel6'] },
-      ],
+      channels: [],
+      params: [],
     },
   },
   settingsAdmin: { currentFile: undefined },
