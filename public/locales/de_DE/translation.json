@@ -25,6 +25,15 @@
       }
     }
   },
+  "OSCILLOSCOPE_SETTINGS": {
+    "SECTIONS": {
+      "CHANNELS": {
+        "TITLE": "Channels",
+        "TRACE_TITLE": "Trace"
+      }
+    },
+    "TITLE": "Device oscilloscope configuration"
+  },
   "RESOURCE": {
     "MAIN": {
       "TITLES": {

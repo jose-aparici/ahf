@@ -18,12 +18,14 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const { params } = useOscilloscopeContainer();
 
   useEffect(() => {
-    dispatch({
-      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: { channels: params.slice(0, 6), params },
-      },
-    });
+    if (state.oscilloscope.settings.params.length <= 0) {
+      dispatch({
+        type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+        payload: {
+          settings: { channels: params.slice(0, 6), params },
+        },
+      });
+    }
   }, [params, state.oscilloscope.settings.params, dispatch]);
 
   return (

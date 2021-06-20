@@ -26,7 +26,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
     <Grid container>
       {channels.map((channel, index) => {
         return (
-          <Grid container key={channel.paramId}>
+          <Grid container key={index}>
             <Grid item xs={12}>
               <FormControlLabel
                 control={
