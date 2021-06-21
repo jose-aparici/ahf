@@ -69,7 +69,11 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
                 return (
                   <Grid key={index} item xs={4}>
                     <FormControl fullWidth>
-                      <InputLabel id={`trace-${index}`}>{`${t(
+                      <InputLabel
+                        shrink
+                        id={`trace-${index}`}
+                        classes={{ root: classes.label }}
+                      >{`${t(
                         'OSCILLOSCOPE_SETTINGS.SECTIONS.CHANNELS.TRACE_TITLE',
                       )} ${index + 1}`}</InputLabel>
 
