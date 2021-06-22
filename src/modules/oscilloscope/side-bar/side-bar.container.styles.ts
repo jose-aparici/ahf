@@ -1,6 +1,10 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useSideBarContainerStyles = makeStyles(() => ({
+  drawer: {
+    width: `255px`,
+    flexShrink: 0,
+  },
   swipePaper: {
     width: `255px`,
     overflow: 'visible',

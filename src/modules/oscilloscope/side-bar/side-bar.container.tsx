@@ -1,8 +1,9 @@
 import i18n from 'i18n';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
@@ -13,24 +14,28 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 
 interface Props {
   channels: Channel[];
+  isOpen: boolean;
+  onToggleSideBar: () => void;
 }
 
-export const AhfSideBarContainer: React.FC<Props> = ({ channels }: Props) => {
+export const AhfSideBarContainer: React.FC<Props> = ({
+  channels,
+  isOpen,
+  onToggleSideBar,
+}: Props) => {
   const classes = useSideBarContainerStyles();
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const [isOpen, setIsOpen] = useState(true);
-
-  const handleToggleSideBar = (open: boolean): void => setIsOpen(!open);
-
   return (
     <>
       <SwipeableDrawer
+        className={classes.drawer}
         anchor={'right'}
         open={isOpen}
-        onClose={() => handleToggleSideBar(isOpen)}
-        onOpen={() => handleToggleSideBar(isOpen)}
+        variant="persistent"
+        onClose={onToggleSideBar}
+        onOpen={onToggleSideBar}
         disableSwipeToOpen={false}
         ModalProps={{
           keepMounted: true,
@@ -47,7 +52,11 @@ export const AhfSideBarContainer: React.FC<Props> = ({ channels }: Props) => {
           right={0}
           left={0}
         >
-          {!isOpen && <ChevronLeftIcon onClick={() => setIsOpen(true)} />}
+          {!isOpen ? (
+            <ChevronLeftIcon onClick={onToggleSideBar} />
+          ) : (
+            <ChevronRightIcon onClick={onToggleSideBar} />
+          )}
         </Box>
         <AhfSideBarComponent
           channels={channels}

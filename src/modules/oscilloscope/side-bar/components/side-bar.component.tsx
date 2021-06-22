@@ -46,10 +46,8 @@ export const AhfSideBarComponent: React.FC<Props> = ({
             </Grid>
             <Grid container className={classes.gridValuesContainer}>
               <Grid item xs={12}>
-                <Typography>C1 = xxx</Typography>
-              </Grid>
-              <Grid item xs={12}>
-                <Typography>C2 = xxx</Typography>
+                <Typography display="inline">C1 = xxx</Typography>
+                <Typography display="inline">C2 = xxx</Typography>
               </Grid>
             </Grid>
           </Grid>

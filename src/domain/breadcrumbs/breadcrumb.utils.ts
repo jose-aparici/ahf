@@ -40,7 +40,7 @@ export const pathToBreadCrumbs = (
       if (index === 1 && item === SETTINGS_ADMIN) {
         return {
           // TODO translate this
-          label: new Array(AHF_LANGUAGES.length).fill('Settings Admin'),
+          label: new Array(AHF_LANGUAGES.length).fill('Parameter sets'),
           path: pathSplitted.slice(0, index + 4).join('/'),
         };
       }
