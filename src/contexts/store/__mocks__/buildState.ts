@@ -22,6 +22,7 @@ const DEFAULT_STATE: State = {
     settings: {
       channels: [],
       params: [],
+      trigger: undefined,
     },
   },
   settingsAdmin: { currentFile: undefined },

@@ -30,6 +30,21 @@
       "CHANNELS": {
         "TITLE": "Channels",
         "TRACE_TITLE": "Trace"
+      },
+      "DELAY": {
+        "TITLE": "Delay"
+      },
+      "MODE": {
+        "TITLE": "Mode"
+      },
+      "SAMPLE_RATE": {
+        "TITLE": "Sample rate"
+      },
+      "TRIGGER": {
+        "TITLE": "Trigger"
+      },
+      "TRIGGER_LEVEL": {
+        "TITLE": "Trigger level"
       }
     },
     "TITLE": "Device oscilloscope configuration"

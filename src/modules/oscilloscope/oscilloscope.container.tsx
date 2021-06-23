@@ -25,7 +25,11 @@ export const AhfOScilloscopeContainer: React.FC = () => {
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
         payload: {
-          settings: { channels: params.slice(0, 6), params },
+          settings: {
+            channels: params.slice(0, 6),
+            params,
+            trigger: params[0],
+          },
         },
       });
     }

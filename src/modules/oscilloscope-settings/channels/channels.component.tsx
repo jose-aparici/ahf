@@ -1,4 +1,3 @@
-import { classes } from 'istanbul-lib-coverage';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
