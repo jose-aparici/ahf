@@ -12,6 +12,7 @@ import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-p
 
 import { AhfChannelsComponent } from './channels/channels.component';
 import { useOscilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
+import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
 import { AhfTriggerComponent } from './trigger/trigger.component';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
@@ -73,6 +74,16 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           <Grid item xs={4}>
             {trigger && (
               <AhfTriggerComponent
+                params={params}
+                trigger={trigger}
+                currentLanguage={currentLanguage}
+                onTriggerChange={handleTriggerChange}
+              />
+            )}
+          </Grid>
+          <Grid item xs={4}>
+            {trigger && (
+              <AhfTriggerLevelComponent
                 params={params}
                 trigger={trigger}
                 currentLanguage={currentLanguage}
