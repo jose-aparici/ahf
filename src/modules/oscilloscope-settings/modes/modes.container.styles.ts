@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useModesComponentStyles = makeStyles(() => ({
+export const useModesContainerStyles = makeStyles(() => ({
   menuPaper: {
     top: '75px',
   },

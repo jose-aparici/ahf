@@ -1,25 +1,31 @@
-import React from 'react';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
+import { AppCommand } from 'domain/app/app.types';
 import { Mode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
-import { useModesComponentStyles } from './modes.component.styles';
+import { useModesContainerStyles } from './modes.container.styles';
 
-interface Props {
-  modes: Mode[];
-  currentMode: Mode;
-  onChange: (value: number) => void;
-}
-
-export const AhfModesComponent: React.FC<Props> = ({
-  modes,
-  currentMode,
-  onChange,
-}: Props) => {
-  const classes = useModesComponentStyles();
+export const AhfModesContainer: React.FC = () => {
+  const classes = useModesContainerStyles();
   const { t } = useTranslation();
+  const { state, dispatch } = useContext(AhfContext);
+  const { mode: currentMode } = state.oscilloscope.settings;
+
+  const handleSave = (value: number) => {
+    const settings = {
+      ...state.oscilloscope.settings,
+      mode: value,
+    };
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: { settings },
+    });
+  };
+
   return (
     <FormControl fullWidth>
       <InputLabel shrink id={`modes`} classes={{ root: classes.label }}>
@@ -30,10 +36,10 @@ export const AhfModesComponent: React.FC<Props> = ({
         labelId={`modes`}
         id={`select-modes`}
         value={currentMode}
-        onChange={(event) => onChange(event.target.value as number)}
+        onChange={(event) => handleSave(event.target.value as number)}
         MenuProps={{ classes: { paper: classes.menuPaper } }}
       >
-        {modes.map((mode, index) => {
+        {[Mode.LESS_THAN, Mode.MORE_THAN].map((mode, index) => {
           return (
             <MenuItem key={index} value={mode}>
               {t(`OSCILLOSCOPE_SETTINGS.SECTIONS.MODES.VALUES.${mode}`)}

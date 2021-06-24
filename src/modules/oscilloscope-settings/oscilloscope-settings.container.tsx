@@ -7,12 +7,11 @@ import { CardContent, Grid } from '@material-ui/core';
 import { AppCommand } from 'domain/app/app.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Mode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { AhfChannelsComponent } from './channels/channels.component';
 import { AhfDelayComponent } from './delay/delay.component';
-import { AhfModesComponent } from './modes/modes.component';
+import { AhfModesContainer } from './modes/modes.cotainer';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
 import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
 import { AhfTriggerLevelContainer } from './trigger-level/trigger-level.container';
@@ -57,23 +56,6 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
         },
       });
     }
-  };
-
-  const handleModelChange = (value: number) => {
-    dispatch({
-      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: {
-          channels,
-          params,
-          trigger,
-          triggerLevel: +value,
-          mode: value,
-          sampleRate,
-          delay,
-        },
-      },
-    });
   };
 
   const handleSampleRateChange = (value: string) => {
@@ -123,11 +105,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             <AhfTriggerLevelContainer />
           </Grid>
           <Grid item xs={4}>
-            <AhfModesComponent
-              modes={[Mode.LESS_THAN, Mode.MORE_THAN]}
-              currentMode={mode}
-              onChange={handleModelChange}
-            />
+            <AhfModesContainer />
           </Grid>
           <Grid item xs={12}>
             <AhfSampleRateComponent
