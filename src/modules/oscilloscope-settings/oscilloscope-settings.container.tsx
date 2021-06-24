@@ -13,11 +13,13 @@ import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-p
 import { AhfChannelsComponent } from './channels/channels.component';
 import { AhfDelayComponent } from './delay/delay.component';
 import { AhfModesComponent } from './modes/modes.component';
+import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
 import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
 import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
 import { AhfTriggerComponent } from './trigger/trigger.component';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
+  const classes = useOScilloscopeSettingsContainerStyles();
   const { state, dispatch } = useContext(AhfContext);
   const [editTriggerLevel, setEditTriggerLevel] = useState(false);
   const [editSampleRate, setEditSampleRate] = useState(false);
@@ -196,7 +198,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             />
           </Grid>
         </Grid>
-        <Grid container>
+        <Grid container className={classes.channelsContainer}>
           <AhfChannelsComponent
             channels={channels}
             params={params}
