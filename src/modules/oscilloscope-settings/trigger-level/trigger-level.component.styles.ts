@@ -1,10 +1,12 @@
 import { makeStyles } from '@material-ui/core';
 
 export const useTriggerLevelComponentStyles = makeStyles(() => ({
-  menuPaper: {
-    bottom: '60px',
+  labelContainer: {
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   label: {
-    color: '#1a171b',
+    color: 'black',
+    width: '315px',
   },
 }));

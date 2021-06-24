@@ -1,48 +1,59 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
+import { FormControl, TextField } from '@material-ui/core';
 
-import { Param } from 'domain/param/param.types';
+import { ParamType } from 'domain/param/param.types';
+import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
 import { useTriggerLevelComponentStyles } from './trigger-level.component.styles';
 
 interface Props {
-  params: Param[];
-  trigger: Param;
-  currentLanguage: number;
-  onTriggerChange: (value: number) => void;
+  triggerLevel: number;
+  editMode: boolean;
+  setEditMode: () => void;
+  onSave: (value: string) => void;
 }
 
 export const AhfTriggerLevelComponent: React.FC<Props> = ({
-  params,
-  trigger,
-  currentLanguage,
-  onTriggerChange,
+  triggerLevel,
+  editMode,
+  onSave,
+  setEditMode,
 }: Props) => {
   const classes = useTriggerLevelComponentStyles();
   const { t } = useTranslation();
   return (
-    <FormControl fullWidth>
-      <InputLabel shrink id={`trigger_level`} classes={{ root: classes.label }}>
-        {t('OSCILLOSCOPE_SETTINGS.SECTIONS.TRIGGER_LEVEL.TITLE')}
-      </InputLabel>
-
-      <Select
-        labelId={`trigger_level`}
-        id={`select-trigger_level`}
-        value={trigger.paramId}
-        onChange={(event) => onTriggerChange(event.target.value as number)}
-        MenuProps={{ classes: { paper: classes.menuPaper } }}
-      >
-        {params.map((param, index) => {
-          return (
-            <MenuItem key={index} value={param.paramId}>
-              {`${param.paramId} ${param.name[currentLanguage]}`}
-            </MenuItem>
-          );
-        })}
-      </Select>
-    </FormControl>
+    <>
+      <FormControl fullWidth>
+        <TextField
+          label={
+            <div className={classes.labelContainer}>
+              <div>
+                {t('OSCILLOSCOPE_SETTINGS.SECTIONS.TRIGGER_LEVEL.TITLE')}
+              </div>
+            </div>
+          }
+          value={triggerLevel}
+          onClick={setEditMode}
+          placeholder=""
+          InputLabelProps={{
+            shrink: true,
+            classes: {
+              root: classes.label,
+            },
+          }}
+        />
+      </FormControl>
+      {editMode && (
+        <AhfParamEditContainerMemoized
+          nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.TRIGGER_LEVEL.TITLE')}
+          type={ParamType.FLOATING_POINT}
+          value={triggerLevel.toString()}
+          onClose={setEditMode}
+          onSave={onSave}
+        />
+      )}
+    </>
   );
 };

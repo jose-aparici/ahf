@@ -29,6 +29,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
             channels: params.slice(0, 6),
             params,
             trigger: params[0],
+            triggerLevel: 0,
           },
         },
       });

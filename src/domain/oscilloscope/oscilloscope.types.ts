@@ -6,6 +6,7 @@ export interface Settings {
   channels: Channel[];
   params: Param[];
   trigger: Param | undefined;
+  triggerLevel: number;
 }
 
 export interface Oscilloscope {

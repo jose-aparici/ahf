@@ -31,6 +31,7 @@ export const initialState: State = {
       channels: [],
       params: [],
       trigger: undefined,
+      triggerLevel: 0,
     },
   },
   settingsAdmin: { currentFile: undefined },

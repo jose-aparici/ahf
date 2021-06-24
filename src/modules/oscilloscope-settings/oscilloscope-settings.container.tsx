@@ -1,6 +1,6 @@
 import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
@@ -17,10 +17,16 @@ import { AhfTriggerComponent } from './trigger/trigger.component';
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const { t } = useTranslation();
   const { state, dispatch } = useContext(AhfContext);
+  const [editMode, setEditMode] = useState(false);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
-  const { channels, params, trigger } = state.oscilloscope.settings;
+  const {
+    channels,
+    params,
+    trigger,
+    triggerLevel,
+  } = state.oscilloscope.settings;
 
   const handleChannelChange = (id: number, number: number) => {
     const selectedChannel = params.find((param) => param.paramId === id);
@@ -35,6 +41,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             channels: newChannels,
             params,
             trigger,
+            triggerLevel,
           },
         },
       });
@@ -52,10 +59,26 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             channels,
             params,
             trigger: selectedTrigger,
+            triggerLevel,
           },
         },
       });
     }
+  };
+
+  const handleTriggerLevelChange = (value: string) => {
+    setEditMode(false);
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: {
+        settings: {
+          channels,
+          params,
+          trigger,
+          triggerLevel: +value,
+        },
+      },
+    });
   };
 
   return (
@@ -82,10 +105,10 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           <Grid item xs={4}>
             {trigger && (
               <AhfTriggerLevelComponent
-                params={params}
-                trigger={trigger}
-                currentLanguage={currentLanguage}
-                onTriggerChange={handleTriggerChange}
+                triggerLevel={triggerLevel}
+                editMode={editMode}
+                setEditMode={() => setEditMode((prev) => !prev)}
+                onSave={handleTriggerLevelChange}
               />
             )}
           </Grid>
