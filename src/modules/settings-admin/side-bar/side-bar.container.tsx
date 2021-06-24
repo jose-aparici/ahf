@@ -73,7 +73,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const handleSelectFileList = (value: string) => {
     setOpenFileList(false);
     onClearFileList();
-    openBackdrop();
+    openBackdrop(false);
     setIsOpen(false);
     readParameterSetFile(fileList[+value]);
   };
