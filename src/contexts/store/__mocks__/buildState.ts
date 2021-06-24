@@ -26,6 +26,7 @@ const DEFAULT_STATE: State = {
       triggerLevel: 0,
       mode: 0,
       sampleRate: 0,
+      delay: 0,
     },
   },
   settingsAdmin: { currentFile: undefined },

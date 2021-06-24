@@ -11,6 +11,7 @@ import { Mode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { AhfChannelsComponent } from './channels/channels.component';
+import { AhfDelayComponent } from './delay/delay.component';
 import { AhfModesComponent } from './modes/modes.component';
 import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
 import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
@@ -20,6 +21,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const { state, dispatch } = useContext(AhfContext);
   const [editTriggerLevel, setEditTriggerLevel] = useState(false);
   const [editSampleRate, setEditSampleRate] = useState(false);
+  const [editDelay, setEditDelay] = useState(false);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
@@ -30,6 +32,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
     triggerLevel,
     mode,
     sampleRate,
+    delay,
   } = state.oscilloscope.settings;
 
   const handleChannelChange = (id: number, number: number) => {
@@ -48,6 +51,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             triggerLevel,
             mode,
             sampleRate,
+            delay,
           },
         },
       });
@@ -68,6 +72,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             triggerLevel,
             mode,
             sampleRate,
+            delay,
           },
         },
       });
@@ -86,6 +91,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           triggerLevel: +value,
           mode,
           sampleRate,
+          delay,
         },
       },
     });
@@ -102,6 +108,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           triggerLevel: +value,
           mode: value,
           sampleRate,
+          delay,
         },
       },
     });
@@ -119,6 +126,25 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           triggerLevel,
           mode,
           sampleRate: +value,
+          delay,
+        },
+      },
+    });
+  };
+
+  const handleDelayChange = (value: string) => {
+    setEditDelay(false);
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: {
+        settings: {
+          channels,
+          params,
+          trigger,
+          triggerLevel,
+          mode,
+          sampleRate,
+          delay: +value,
         },
       },
     });
@@ -159,6 +185,14 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
               editMode={editSampleRate}
               setEditMode={() => setEditSampleRate((prev) => !prev)}
               onSave={handleSampleRateChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <AhfDelayComponent
+              delay={delay}
+              editMode={editDelay}
+              setEditMode={() => setEditDelay((prev) => !prev)}
+              onSave={handleDelayChange}
             />
           </Grid>
         </Grid>

@@ -9,6 +9,7 @@ export interface Settings {
   triggerLevel: number;
   mode: number;
   sampleRate: number;
+  delay: number;
 }
 
 export interface Oscilloscope {

@@ -32,6 +32,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
             triggerLevel: 0,
             mode: 0,
             sampleRate: 0,
+            delay: 0,
           },
         },
       });
