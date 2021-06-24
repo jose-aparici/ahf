@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useTriggerComponentStyles = makeStyles(() => ({
+export const useTriggerContainerStyles = makeStyles(() => ({
   menuPaper: {
     bottom: '60px',
   },

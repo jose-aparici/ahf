@@ -16,7 +16,7 @@ import { AhfModesComponent } from './modes/modes.component';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
 import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
 import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
-import { AhfTriggerComponent } from './trigger/trigger.component';
+import { AhfTriggerContainer } from './trigger/trigger.container';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const classes = useOScilloscopeSettingsContainerStyles();
@@ -50,27 +50,6 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             channels: newChannels,
             params,
             trigger,
-            triggerLevel,
-            mode,
-            sampleRate,
-            delay,
-          },
-        },
-      });
-    }
-  };
-
-  const handleTriggerChange = (id: number) => {
-    const selectedTrigger = params.find((param) => param.paramId === id);
-
-    if (selectedTrigger) {
-      dispatch({
-        type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-        payload: {
-          settings: {
-            channels,
-            params,
-            trigger: selectedTrigger,
             triggerLevel,
             mode,
             sampleRate,
@@ -157,14 +136,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
       <CardContent>
         <Grid container spacing={3}>
           <Grid item xs={4}>
-            {trigger && (
-              <AhfTriggerComponent
-                params={params}
-                trigger={trigger}
-                currentLanguage={currentLanguage}
-                onTriggerChange={handleTriggerChange}
-              />
-            )}
+            <AhfTriggerContainer currentLanguage={currentLanguage} />
           </Grid>
           <Grid item xs={4}>
             <AhfTriggerLevelComponent
