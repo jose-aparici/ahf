@@ -13,14 +13,13 @@ import { AhfChannelsComponent } from './channels/channels.component';
 import { AhfDelayComponent } from './delay/delay.component';
 import { AhfModesContainer } from './modes/modes.cotainer';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
-import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
+import { AhfSampleRateContainer } from './sample-rate/sample-rate.container';
 import { AhfTriggerLevelContainer } from './trigger-level/trigger-level.container';
 import { AhfTriggerContainer } from './trigger/trigger.container';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const classes = useOScilloscopeSettingsContainerStyles();
   const { state, dispatch } = useContext(AhfContext);
-  const [editSampleRate, setEditSampleRate] = useState(false);
   const [editDelay, setEditDelay] = useState(false);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
@@ -58,24 +57,6 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
     }
   };
 
-  const handleSampleRateChange = (value: string) => {
-    setEditSampleRate(false);
-    dispatch({
-      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: {
-          channels,
-          params,
-          trigger,
-          triggerLevel,
-          mode,
-          sampleRate: +value,
-          delay,
-        },
-      },
-    });
-  };
-
   const handleDelayChange = (value: string) => {
     setEditDelay(false);
     dispatch({
@@ -108,12 +89,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             <AhfModesContainer />
           </Grid>
           <Grid item xs={12}>
-            <AhfSampleRateComponent
-              sampleRate={sampleRate}
-              editMode={editSampleRate}
-              setEditMode={() => setEditSampleRate((prev) => !prev)}
-              onSave={handleSampleRateChange}
-            />
+            <AhfSampleRateContainer />
           </Grid>
           <Grid item xs={12}>
             <AhfDelayComponent

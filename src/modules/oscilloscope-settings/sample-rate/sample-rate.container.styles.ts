@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useSampleRateComponentStyles = makeStyles(() => ({
+export const useSampleRateContainerStyles = makeStyles(() => ({
   labelContainer: {
     display: 'flex',
     justifyContent: 'space-between',

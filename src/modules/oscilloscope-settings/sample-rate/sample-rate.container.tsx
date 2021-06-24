@@ -1,28 +1,35 @@
-import React from 'react';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormControl, TextField } from '@material-ui/core';
 
+import { AppCommand } from 'domain/app/app.types';
 import { ParamType } from 'domain/param/param.types';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
-import { useSampleRateComponentStyles } from './sample-rate.component.styles';
+import { useSampleRateContainerStyles } from './sample-rate.container.styles';
 
-interface Props {
-  sampleRate: number;
-  editMode: boolean;
-  setEditMode: () => void;
-  onSave: (value: string) => void;
-}
-
-export const AhfSampleRateComponent: React.FC<Props> = ({
-  sampleRate,
-  editMode,
-  onSave,
-  setEditMode,
-}: Props) => {
-  const classes = useSampleRateComponentStyles();
+export const AhfSampleRateContainer: React.FC = () => {
+  const classes = useSampleRateContainerStyles();
   const { t } = useTranslation();
+  const { state, dispatch } = useContext(AhfContext);
+  const [editMode, setEditMode] = useState(false);
+
+  const { sampleRate } = state.oscilloscope.settings;
+
+  const handleSave = (value: string) => {
+    setEditMode(false);
+    const settings = {
+      ...state.oscilloscope.settings,
+      sampleRate: +value,
+    };
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: { settings },
+    });
+  };
+
   return (
     <>
       <FormControl fullWidth>
@@ -37,7 +44,7 @@ export const AhfSampleRateComponent: React.FC<Props> = ({
             </div>
           }
           value={sampleRate}
-          onClick={setEditMode}
+          onClick={() => setEditMode(true)}
           placeholder=""
           InputLabelProps={{
             shrink: true,
@@ -52,8 +59,8 @@ export const AhfSampleRateComponent: React.FC<Props> = ({
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_RATE.TITLE')}
           type={ParamType.FLOATING_POINT}
           value={sampleRate.toString()}
-          onClose={setEditMode}
-          onSave={onSave}
+          onClose={() => setEditMode(false)}
+          onSave={handleSave}
         />
       )}
     </>
