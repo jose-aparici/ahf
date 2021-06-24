@@ -11,13 +11,11 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { AhfChannelsComponent } from './channels/channels.component';
-import { useOscilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
 import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
 import { AhfTriggerComponent } from './trigger/trigger.component';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const { t } = useTranslation();
-  const classes = useOscilloscopeSettingsContainerStyles();
   const { state, dispatch } = useContext(AhfContext);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
