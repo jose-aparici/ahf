@@ -1,9 +1,8 @@
 import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
 import React, { useContext, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
-import { CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
+import { CardContent, Grid } from '@material-ui/core';
 
 import { AppCommand } from 'domain/app/app.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
@@ -13,13 +12,14 @@ import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-p
 
 import { AhfChannelsComponent } from './channels/channels.component';
 import { AhfModesComponent } from './modes/modes.component';
+import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
 import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
 import { AhfTriggerComponent } from './trigger/trigger.component';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
-  const { t } = useTranslation();
   const { state, dispatch } = useContext(AhfContext);
-  const [editMode, setEditMode] = useState(false);
+  const [editTriggerLevel, setEditTriggerLevel] = useState(false);
+  const [editSampleRate, setEditSampleRate] = useState(false);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
@@ -29,6 +29,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
     trigger,
     triggerLevel,
     mode,
+    sampleRate,
   } = state.oscilloscope.settings;
 
   const handleChannelChange = (id: number, number: number) => {
@@ -46,6 +47,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             trigger,
             triggerLevel,
             mode,
+            sampleRate,
           },
         },
       });
@@ -65,6 +67,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             trigger: selectedTrigger,
             triggerLevel,
             mode,
+            sampleRate,
           },
         },
       });
@@ -72,7 +75,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   };
 
   const handleTriggerLevelChange = (value: string) => {
-    setEditMode(false);
+    setEditTriggerLevel(false);
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
       payload: {
@@ -82,6 +85,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           trigger,
           triggerLevel: +value,
           mode,
+          sampleRate,
         },
       },
     });
@@ -97,6 +101,24 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           trigger,
           triggerLevel: +value,
           mode: value,
+          sampleRate,
+        },
+      },
+    });
+  };
+
+  const handleSampleRateChange = (value: string) => {
+    setEditSampleRate(false);
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: {
+        settings: {
+          channels,
+          params,
+          trigger,
+          triggerLevel,
+          mode,
+          sampleRate: +value,
         },
       },
     });
@@ -104,13 +126,6 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
 
   return (
     <AhfCardFullPageComponent>
-      <CardHeader
-        title={
-          <Typography variant="h3">
-            {t('OSCILLOSCOPE_SETTINGS.TITLE')}
-          </Typography>
-        }
-      ></CardHeader>
       <CardContent>
         <Grid container spacing={3}>
           <Grid item xs={4}>
@@ -126,8 +141,8 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           <Grid item xs={4}>
             <AhfTriggerLevelComponent
               triggerLevel={triggerLevel}
-              editMode={editMode}
-              setEditMode={() => setEditMode((prev) => !prev)}
+              editMode={editTriggerLevel}
+              setEditMode={() => setEditTriggerLevel((prev) => !prev)}
               onSave={handleTriggerLevelChange}
             />
           </Grid>
@@ -136,6 +151,14 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
               modes={[Mode.LESS_THAN, Mode.MORE_THAN]}
               currentMode={mode}
               onChange={handleModelChange}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <AhfSampleRateComponent
+              sampleRate={sampleRate}
+              editMode={editSampleRate}
+              setEditMode={() => setEditSampleRate((prev) => !prev)}
+              onSave={handleSampleRateChange}
             />
           </Grid>
         </Grid>

@@ -8,6 +8,7 @@ export interface Settings {
   trigger: Param | undefined;
   triggerLevel: number;
   mode: number;
+  sampleRate: number;
 }
 
 export interface Oscilloscope {

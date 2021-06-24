@@ -50,8 +50,7 @@
       "TRIGGER_LEVEL": {
         "TITLE": "Trigger level"
       }
-    },
-    "TITLE": "Device oscilloscope configuration"
+    }
   },
   "RESOURCE": {
     "MAIN": {
