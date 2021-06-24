@@ -8,9 +8,11 @@ import { CardContent, CardHeader, Grid, Typography } from '@material-ui/core';
 import { AppCommand } from 'domain/app/app.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
+import { Mode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { AhfChannelsComponent } from './channels/channels.component';
+import { AhfModesComponent } from './modes/modes.component';
 import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
 import { AhfTriggerComponent } from './trigger/trigger.component';
 
@@ -26,6 +28,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
     params,
     trigger,
     triggerLevel,
+    mode,
   } = state.oscilloscope.settings;
 
   const handleChannelChange = (id: number, number: number) => {
@@ -42,6 +45,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             params,
             trigger,
             triggerLevel,
+            mode,
           },
         },
       });
@@ -60,6 +64,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             params,
             trigger: selectedTrigger,
             triggerLevel,
+            mode,
           },
         },
       });
@@ -76,6 +81,22 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           params,
           trigger,
           triggerLevel: +value,
+          mode,
+        },
+      },
+    });
+  };
+
+  const handleModelChange = (value: number) => {
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: {
+        settings: {
+          channels,
+          params,
+          trigger,
+          triggerLevel: +value,
+          mode: value,
         },
       },
     });
@@ -103,14 +124,19 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             )}
           </Grid>
           <Grid item xs={4}>
-            {trigger && (
-              <AhfTriggerLevelComponent
-                triggerLevel={triggerLevel}
-                editMode={editMode}
-                setEditMode={() => setEditMode((prev) => !prev)}
-                onSave={handleTriggerLevelChange}
-              />
-            )}
+            <AhfTriggerLevelComponent
+              triggerLevel={triggerLevel}
+              editMode={editMode}
+              setEditMode={() => setEditMode((prev) => !prev)}
+              onSave={handleTriggerLevelChange}
+            />
+          </Grid>
+          <Grid item xs={4}>
+            <AhfModesComponent
+              modes={[Mode.LESS_THAN, Mode.MORE_THAN]}
+              currentMode={mode}
+              onChange={handleModelChange}
+            />
           </Grid>
         </Grid>
         <Grid container>

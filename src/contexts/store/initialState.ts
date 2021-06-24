@@ -32,6 +32,7 @@ export const initialState: State = {
       params: [],
       trigger: undefined,
       triggerLevel: 0,
+      mode: 0,
     },
   },
   settingsAdmin: { currentFile: undefined },

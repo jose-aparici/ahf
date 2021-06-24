@@ -34,8 +34,12 @@
       "DELAY": {
         "TITLE": "Delay"
       },
-      "MODE": {
-        "TITLE": "Mode"
+      "MODES": {
+        "TITLE": "Mode",
+        "VALUES": {
+          "0": "More than",
+          "1": "Less than"
+        }
       },
       "SAMPLE_RATE": {
         "TITLE": "Sample rate"

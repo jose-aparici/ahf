@@ -24,6 +24,7 @@ const DEFAULT_STATE: State = {
       params: [],
       trigger: undefined,
       triggerLevel: 0,
+      mode: 0,
     },
   },
   settingsAdmin: { currentFile: undefined },
