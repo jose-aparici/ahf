@@ -1,6 +1,6 @@
 import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 
 import { CardContent, Grid } from '@material-ui/core';
 
@@ -10,7 +10,7 @@ import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
 import { AhfChannelsComponent } from './channels/channels.component';
-import { AhfDelayComponent } from './delay/delay.component';
+import { AhfDelayContainer } from './delay/delay.container';
 import { AhfModesContainer } from './modes/modes.cotainer';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
 import { AhfSampleRateContainer } from './sample-rate/sample-rate.container';
@@ -20,7 +20,6 @@ import { AhfTriggerContainer } from './trigger/trigger.container';
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const classes = useOScilloscopeSettingsContainerStyles();
   const { state, dispatch } = useContext(AhfContext);
-  const [editDelay, setEditDelay] = useState(false);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
 
@@ -57,24 +56,6 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
     }
   };
 
-  const handleDelayChange = (value: string) => {
-    setEditDelay(false);
-    dispatch({
-      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: {
-          channels,
-          params,
-          trigger,
-          triggerLevel,
-          mode,
-          sampleRate,
-          delay: +value,
-        },
-      },
-    });
-  };
-
   return (
     <AhfCardFullPageComponent>
       <CardContent>
@@ -92,12 +73,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             <AhfSampleRateContainer />
           </Grid>
           <Grid item xs={12}>
-            <AhfDelayComponent
-              delay={delay}
-              editMode={editDelay}
-              setEditMode={() => setEditDelay((prev) => !prev)}
-              onSave={handleDelayChange}
-            />
+            <AhfDelayContainer />
           </Grid>
         </Grid>
         <Grid container className={classes.channelsContainer}>

@@ -1,28 +1,34 @@
-import React from 'react';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormControl, TextField } from '@material-ui/core';
 
+import { AppCommand } from 'domain/app/app.types';
 import { ParamType } from 'domain/param/param.types';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
-import { useDelayComponentStyles } from './delay.component.styles';
+import { useDelayContainerStyles } from './delay.container.styles';
 
-interface Props {
-  delay: number;
-  editMode: boolean;
-  setEditMode: () => void;
-  onSave: (value: string) => void;
-}
-
-export const AhfDelayComponent: React.FC<Props> = ({
-  delay,
-  editMode,
-  onSave,
-  setEditMode,
-}: Props) => {
-  const classes = useDelayComponentStyles();
+export const AhfDelayContainer: React.FC = () => {
+  const classes = useDelayContainerStyles();
   const { t } = useTranslation();
+  const { state, dispatch } = useContext(AhfContext);
+  const [editMode, setEditMode] = useState(false);
+  const { delay } = state.oscilloscope.settings;
+
+  const handleSave = (value: string) => {
+    setEditMode(false);
+    const settings = {
+      ...state.oscilloscope.settings,
+      delay: +value,
+    };
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: { settings },
+    });
+  };
+
   return (
     <>
       <FormControl fullWidth>
@@ -37,7 +43,7 @@ export const AhfDelayComponent: React.FC<Props> = ({
             </div>
           }
           value={delay}
-          onClick={setEditMode}
+          onClick={() => setEditMode(true)}
           placeholder=""
           InputLabelProps={{
             shrink: true,
@@ -52,8 +58,8 @@ export const AhfDelayComponent: React.FC<Props> = ({
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE')}
           type={ParamType.FLOATING_POINT}
           value={delay.toString()}
-          onClose={setEditMode}
-          onSave={onSave}
+          onClose={() => setEditMode(false)}
+          onSave={handleSave}
         />
       )}
     </>
