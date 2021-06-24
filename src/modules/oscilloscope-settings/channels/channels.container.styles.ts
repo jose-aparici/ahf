@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useChannelsComponentStyles = makeStyles(() => ({
+export const useChannelsContainerStyles = makeStyles(() => ({
   menuPaper: {
     bottom: '55px',
   },

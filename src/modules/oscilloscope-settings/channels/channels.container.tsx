@@ -1,4 +1,5 @@
-import React from 'react';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import {
@@ -10,25 +11,41 @@ import {
   Typography,
 } from '@material-ui/core';
 
-import { Param } from 'domain/param/param.types';
+import { AppCommand } from 'domain/app/app.types';
 
-import { useChannelsComponentStyles } from './channels.component.styles';
+import { useChannelsContainerStyles } from './channels.container.styles';
 
 interface Props {
-  channels: Param[];
-  params: Param[];
   currentLanguage: number;
-  onChannelChange: (value: number, index: number) => void;
 }
 
-export const AhfChannelsComponent: React.FC<Props> = ({
-  channels,
-  params,
+export const AhfChannelsContainer: React.FC<Props> = ({
   currentLanguage,
-  onChannelChange,
 }: Props) => {
   const { t } = useTranslation();
-  const classes = useChannelsComponentStyles();
+  const classes = useChannelsContainerStyles();
+
+  const { state, dispatch } = useContext(AhfContext);
+  const { channels, params } = state.oscilloscope.settings;
+
+  const handleSave = (id: number, number: number) => {
+    const selectedChannel = params.find((param) => param.paramId === id);
+
+    if (selectedChannel) {
+      const newChannels = [...channels];
+      newChannels[number] = selectedChannel;
+
+      const settings = {
+        ...state.oscilloscope.settings,
+        channels: newChannels,
+      };
+
+      dispatch({
+        type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+        payload: { settings },
+      });
+    }
+  };
 
   return (
     <Grid item container>
@@ -53,7 +70,7 @@ export const AhfChannelsComponent: React.FC<Props> = ({
                   id={`select-trace-${index}`}
                   value={channel.paramId}
                   onChange={(event) =>
-                    onChannelChange(event.target.value as number, index)
+                    handleSave(event.target.value as number, index)
                   }
                   MenuProps={{ classes: { paper: classes.menuPaper } }}
                 >

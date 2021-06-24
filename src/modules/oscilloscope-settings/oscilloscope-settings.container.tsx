@@ -1,15 +1,13 @@
-import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React, { useContext } from 'react';
+import React from 'react';
 
 import { CardContent, Grid } from '@material-ui/core';
 
-import { AppCommand } from 'domain/app/app.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
 
-import { AhfChannelsComponent } from './channels/channels.component';
+import { AhfChannelsContainer } from './channels/channels.container';
 import { AhfDelayContainer } from './delay/delay.container';
 import { AhfModesContainer } from './modes/modes.cotainer';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
@@ -19,42 +17,8 @@ import { AhfTriggerContainer } from './trigger/trigger.container';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const classes = useOScilloscopeSettingsContainerStyles();
-  const { state, dispatch } = useContext(AhfContext);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
-
-  const {
-    channels,
-    params,
-    trigger,
-    triggerLevel,
-    mode,
-    sampleRate,
-    delay,
-  } = state.oscilloscope.settings;
-
-  const handleChannelChange = (id: number, number: number) => {
-    const selectedChannel = params.find((param) => param.paramId === id);
-
-    if (selectedChannel) {
-      const newChannels = [...channels];
-      newChannels[number] = selectedChannel;
-      dispatch({
-        type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-        payload: {
-          settings: {
-            channels: newChannels,
-            params,
-            trigger,
-            triggerLevel,
-            mode,
-            sampleRate,
-            delay,
-          },
-        },
-      });
-    }
-  };
 
   return (
     <AhfCardFullPageComponent>
@@ -77,12 +41,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           </Grid>
         </Grid>
         <Grid container className={classes.channelsContainer}>
-          <AhfChannelsComponent
-            channels={channels}
-            params={params}
-            currentLanguage={currentLanguage}
-            onChannelChange={handleChannelChange}
-          />
+          <AhfChannelsContainer currentLanguage={currentLanguage} />
         </Grid>
       </CardContent>
     </AhfCardFullPageComponent>
