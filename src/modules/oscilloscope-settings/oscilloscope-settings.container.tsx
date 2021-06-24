@@ -15,13 +15,12 @@ import { AhfDelayComponent } from './delay/delay.component';
 import { AhfModesComponent } from './modes/modes.component';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
 import { AhfSampleRateComponent } from './sample-rate/sample-rate.component';
-import { AhfTriggerLevelComponent } from './trigger-level/trigger-level.component';
+import { AhfTriggerLevelContainer } from './trigger-level/trigger-level.container';
 import { AhfTriggerContainer } from './trigger/trigger.container';
 
 export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const classes = useOScilloscopeSettingsContainerStyles();
   const { state, dispatch } = useContext(AhfContext);
-  const [editTriggerLevel, setEditTriggerLevel] = useState(false);
   const [editSampleRate, setEditSampleRate] = useState(false);
   const [editDelay, setEditDelay] = useState(false);
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
@@ -58,24 +57,6 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
         },
       });
     }
-  };
-
-  const handleTriggerLevelChange = (value: string) => {
-    setEditTriggerLevel(false);
-    dispatch({
-      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: {
-          channels,
-          params,
-          trigger,
-          triggerLevel: +value,
-          mode,
-          sampleRate,
-          delay,
-        },
-      },
-    });
   };
 
   const handleModelChange = (value: number) => {
@@ -139,12 +120,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             <AhfTriggerContainer currentLanguage={currentLanguage} />
           </Grid>
           <Grid item xs={4}>
-            <AhfTriggerLevelComponent
-              triggerLevel={triggerLevel}
-              editMode={editTriggerLevel}
-              setEditMode={() => setEditTriggerLevel((prev) => !prev)}
-              onSave={handleTriggerLevelChange}
-            />
+            <AhfTriggerLevelContainer />
           </Grid>
           <Grid item xs={4}>
             <AhfModesComponent

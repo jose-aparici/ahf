@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-export const useTriggerLevelComponentStyles = makeStyles(() => ({
+export const useTriggerLevelContainerStyles = makeStyles(() => ({
   labelContainer: {
     display: 'flex',
     justifyContent: 'space-between',

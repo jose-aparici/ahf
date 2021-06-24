@@ -1,28 +1,35 @@
-import React from 'react';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormControl, TextField } from '@material-ui/core';
 
+import { AppCommand } from 'domain/app/app.types';
 import { ParamType } from 'domain/param/param.types';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
-import { useTriggerLevelComponentStyles } from './trigger-level.component.styles';
+import { useTriggerLevelContainerStyles } from './trigger-level.container.styles';
 
-interface Props {
-  triggerLevel: number;
-  editMode: boolean;
-  setEditMode: () => void;
-  onSave: (value: string) => void;
-}
-
-export const AhfTriggerLevelComponent: React.FC<Props> = ({
-  triggerLevel,
-  editMode,
-  onSave,
-  setEditMode,
-}: Props) => {
-  const classes = useTriggerLevelComponentStyles();
+export const AhfTriggerLevelContainer: React.FC = () => {
+  const classes = useTriggerLevelContainerStyles();
   const { t } = useTranslation();
+  const { state, dispatch } = useContext(AhfContext);
+  const [editMode, setEditMode] = useState(false);
+
+  const { triggerLevel } = state.oscilloscope.settings;
+
+  const handleSave = (value: string) => {
+    setEditMode(false);
+    const settings = {
+      ...state.oscilloscope.settings,
+      triggerLevel: +value,
+    };
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: { settings },
+    });
+  };
+
   return (
     <>
       <FormControl fullWidth>
@@ -35,7 +42,7 @@ export const AhfTriggerLevelComponent: React.FC<Props> = ({
             </div>
           }
           value={triggerLevel}
-          onClick={setEditMode}
+          onClick={() => setEditMode(true)}
           placeholder=""
           InputLabelProps={{
             shrink: true,
@@ -50,8 +57,8 @@ export const AhfTriggerLevelComponent: React.FC<Props> = ({
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.TRIGGER_LEVEL.TITLE')}
           type={ParamType.FLOATING_POINT}
           value={triggerLevel.toString()}
-          onClose={setEditMode}
-          onSave={onSave}
+          onClose={() => setEditMode(false)}
+          onSave={handleSave}
         />
       )}
     </>
