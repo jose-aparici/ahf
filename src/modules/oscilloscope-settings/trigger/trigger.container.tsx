@@ -51,7 +51,14 @@ export const AhfTriggerContainer: React.FC<Props> = ({
           onChange={(event) =>
             handleTriggerChange(event.target.value as number)
           }
-          MenuProps={{ classes: { paper: classes.menuPaper } }}
+          MenuProps={{
+            anchorOrigin: {
+              vertical: 'bottom',
+              horizontal: 'left',
+            },
+            getContentAnchorEl: null,
+            style: { maxHeight: '400px' },
+          }}
         >
           {params.map((param, index) => {
             return (

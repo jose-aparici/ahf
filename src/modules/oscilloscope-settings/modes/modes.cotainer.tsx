@@ -37,7 +37,14 @@ export const AhfModesContainer: React.FC = () => {
         id={`select-modes`}
         value={currentMode}
         onChange={(event) => handleSave(event.target.value as number)}
-        MenuProps={{ classes: { paper: classes.menuPaper } }}
+        MenuProps={{
+          anchorOrigin: {
+            vertical: 'bottom',
+            horizontal: 'left',
+          },
+          getContentAnchorEl: null,
+          style: { maxHeight: '400px' },
+        }}
       >
         {[Mode.LESS_THAN, Mode.MORE_THAN].map((mode, index) => {
           return (

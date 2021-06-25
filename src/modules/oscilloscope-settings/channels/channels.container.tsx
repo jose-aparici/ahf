@@ -72,7 +72,18 @@ export const AhfChannelsContainer: React.FC<Props> = ({
                   onChange={(event) =>
                     handleSave(event.target.value as number, index)
                   }
-                  MenuProps={{ classes: { paper: classes.menuPaper } }}
+                  MenuProps={{
+                    anchorOrigin: {
+                      vertical: 'top',
+                      horizontal: 'left',
+                    },
+                    transformOrigin: {
+                      vertical: 'bottom',
+                      horizontal: 'left',
+                    },
+                    getContentAnchorEl: null,
+                    style: { maxHeight: '350px' },
+                  }}
                 >
                   {params.map((param, index) => {
                     return (
