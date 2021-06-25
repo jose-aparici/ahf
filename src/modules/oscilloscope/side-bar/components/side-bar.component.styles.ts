@@ -2,6 +2,9 @@ import { makeStyles } from '@material-ui/core';
 import { blue } from '@material-ui/core/colors';
 
 export const useSideBarComponentStyles = makeStyles(() => ({
+  gridContainer: {
+    paddingLeft: '8px',
+  },
   iconsRoot: {
     display: 'flex',
     flexDirection: 'column',

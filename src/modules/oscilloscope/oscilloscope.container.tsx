@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { AppCommand } from 'domain/app/app.types';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
 
-import { AhfChartComponent } from './chart/chart-component';
+import { AhfChartContainer } from './chart/chart-container';
 import { useOscilloscopeContainer } from './oscilloscope.container.hook';
 import { AhfSideBarContainer } from './side-bar/side-bar.container';
 import { AhfTopButtonsComponent } from './top-buttons/top-buttons.component';
@@ -54,7 +54,8 @@ export const AhfOScilloscopeContainer: React.FC = () => {
           onToggleStart={handleToggleStart}
         />
       )}
-      <AhfChartComponent open={isOpen} />
+
+      <AhfChartContainer open={isOpen} />
 
       <AhfSideBarContainer
         channels={state.oscilloscope.settings.channels}

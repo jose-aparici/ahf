@@ -1,8 +1,8 @@
 import { makeStyles, Theme } from '@material-ui/core';
 
-export const useChartComponentStyles = makeStyles((theme: Theme) => ({
+export const useChartContainerStyles = makeStyles((theme: Theme) => ({
   content: {
-    maxHeight: 360,
+    maxHeight: 300,
     flexGrow: 1,
     transition: theme.transitions.create('margin', {
       easing: theme.transitions.easing.sharp,
@@ -17,5 +17,8 @@ export const useChartComponentStyles = makeStyles((theme: Theme) => ({
       duration: theme.transitions.duration.enteringScreen,
     }),
     marginRight: 290,
+  },
+  sliderLabel: {
+    position: 'unset',
   },
 }));

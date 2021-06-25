@@ -23,7 +23,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
 }: Props) => {
   const classes = useSideBarComponentStyles();
   return (
-    <Grid container>
+    <Grid container className={classes.gridContainer}>
       {channels.map((channel, index) => {
         return (
           <Grid container key={index}>
