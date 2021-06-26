@@ -1,5 +1,5 @@
 import { AhfContext } from 'contexts/store/context';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AppCommand } from 'domain/app/app.types';
@@ -16,7 +16,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   const deviceId = extractDeviceFromPath(location.pathname);
   const [start, setStart] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState<boolean>();
 
   const { params } = useOscilloscopeContainer();
 
@@ -43,7 +43,13 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     setStart((previous) => !previous);
   };
 
-  const handleToggleSideBar = (): void => setIsOpen((previous) => !previous);
+  const handleToggleSideBar = useCallback(
+    (): void =>
+      setIsOpen((current) => {
+        return current === undefined ? false : !current;
+      }),
+    [],
+  );
 
   return (
     <>
@@ -55,11 +61,11 @@ export const AhfOScilloscopeContainer: React.FC = () => {
         />
       )}
 
-      <AhfChartContainer open={isOpen} />
+      <AhfChartContainer open={isOpen === undefined ? false : isOpen} />
 
       <AhfSideBarContainer
         channels={state.oscilloscope.settings.channels}
-        isOpen={isOpen}
+        isOpen={isOpen === undefined ? false : isOpen}
         onToggleSideBar={handleToggleSideBar}
       />
     </>

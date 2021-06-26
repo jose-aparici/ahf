@@ -1,5 +1,6 @@
 import i18n from 'i18n';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
@@ -26,6 +27,11 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const classes = useSideBarContainerStyles();
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
+  const location = useLocation();
+
+  useEffect(() => {
+    onToggleSideBar();
+  }, [location, onToggleSideBar]);
 
   return (
     <>
