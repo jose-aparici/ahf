@@ -64,11 +64,20 @@ export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
   const classes = useChartContainerStyles();
   const [value, setValue] = useState<number[]>([0, 100]);
 
-  const handleChange = (event: any, newValue: number | number[]) => {
+  /* const handleChange = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);
+  }; */
+
+  const handleChange = (
+    event: React.ChangeEvent<unknown>,
+    value: number | number[],
+  ) => {
+    debugger;
+    console.log('entra', event, value);
+    setValue(value as number[]);
   };
 
-  const handleValueLabelFormat = (value: number, index: number) =>
+  const handleValueLabelFormat = (_: number, index: number) =>
     index === 0 ? `C1` : `C2`;
 
   return (

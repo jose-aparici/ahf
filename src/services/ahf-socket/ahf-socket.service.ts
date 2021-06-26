@@ -1,6 +1,7 @@
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
 
 import { AhfMessage } from 'domain/ahf/ahf.types';
+import { AHF_SOCKET_PORT } from 'domain/app/app.constants';
 
 export class AhfSocket {
   private static instance: WebSocketSubject<AhfMessage>;
@@ -10,7 +11,7 @@ export class AhfSocket {
   static getInstance(): WebSocketSubject<AhfMessage> {
     if (!AhfSocket.instance) {
       AhfSocket.instance = webSocket(
-        `ws://${window.location.hostname}:${process.env.REACT_APP_AHF_SOCKET_PORT}`,
+        `ws://${window.location.hostname}:${AHF_SOCKET_PORT}`,
       );
     }
     return AhfSocket.instance;
