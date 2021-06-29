@@ -18,6 +18,13 @@ export const useChartContainerStyles = makeStyles((theme: Theme) => ({
     }),
     marginRight: 290,
   },
+  sliderRoot: {
+    left: '32px',
+    width: '95%',
+  },
+  sliderRootShift: {
+    width: '91%',
+  },
   sliderLabel: {
     position: 'unset',
   },

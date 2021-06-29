@@ -72,13 +72,11 @@ export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
     event: React.ChangeEvent<unknown>,
     value: number | number[],
   ) => {
-    debugger;
-    console.log('entra', event, value);
     setValue(value as number[]);
   };
 
   const handleValueLabelFormat = (_: number, index: number) =>
-    index === 0 ? `C1` : `C2`;
+    index === 0 ? `C1` : `C2 `;
 
   return (
     <main
@@ -87,14 +85,23 @@ export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
       })}
     >
       <Slider
-        classes={{ valueLabel: classes.sliderLabel }}
+        classes={{
+          valueLabel: classes.sliderLabel,
+        }}
+        className={clsx(classes.sliderRoot, {
+          [classes.sliderRootShift]: open,
+        })}
         value={value}
+        marks
         valueLabelDisplay="on"
         aria-labelledby="range-slider"
         onChange={handleChange}
         valueLabelFormat={handleValueLabelFormat}
         track="inverted"
+        min={0}
+        max={5}
       />
+
       <Line type="" data={data} options={options} height={100} />
     </main>
   );
