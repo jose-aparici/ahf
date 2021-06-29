@@ -11,7 +11,7 @@ import { AhfChannelsContainer } from './channels/channels.container';
 import { AhfDelayContainer } from './delay/delay.container';
 import { AhfModesContainer } from './modes/modes.cotainer';
 import { useOScilloscopeSettingsContainerStyles } from './oscilloscope-settings.container.styles';
-import { AhfSampleRateContainer } from './sample-rate/sample-rate.container';
+import { AhfSamplePeriodContainer } from './sample-period/sample-period.container';
 import { AhfTriggerLevelContainer } from './trigger-level/trigger-level.container';
 import { AhfTriggerContainer } from './trigger/trigger.container';
 
@@ -34,7 +34,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
             <AhfModesContainer />
           </Grid>
           <Grid item xs={12}>
-            <AhfSampleRateContainer />
+            <AhfSamplePeriodContainer />
           </Grid>
           <Grid item xs={12}>
             <AhfDelayContainer />

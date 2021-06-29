@@ -8,10 +8,10 @@ import { AppCommand } from 'domain/app/app.types';
 import { ParamType } from 'domain/param/param.types';
 import { AhfParamEditContainerMemoized } from 'modules/shared/components/param-edit/param-edit.container';
 
-import { useSampleRateContainerStyles } from './sample-rate.container.styles';
+import { useSamplePeriodContainerStyles } from './sample-period.container.styles';
 
-export const AhfSampleRateContainer: React.FC = () => {
-  const classes = useSampleRateContainerStyles();
+export const AhfSamplePeriodContainer: React.FC = () => {
+  const classes = useSamplePeriodContainerStyles();
   const { t } = useTranslation();
   const { state, dispatch } = useContext(AhfContext);
   const [editMode, setEditMode] = useState(false);
