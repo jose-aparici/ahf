@@ -38,7 +38,7 @@ export const AhfSampleRateContainer: React.FC = () => {
             <div className={classes.labelContainer}>
               <div>
                 {`${t(
-                  'OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_RATE.TITLE',
+                  'OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_PERIOD.TITLE',
                 )} x0.00125 = ${sampleRate * 0.00125} ms`}
               </div>
             </div>
@@ -56,7 +56,7 @@ export const AhfSampleRateContainer: React.FC = () => {
       </FormControl>
       {editMode && (
         <AhfParamEditContainerMemoized
-          nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_RATE.TITLE')}
+          nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_PERIOD.TITLE')}
           type={ParamType.FLOATING_POINT}
           value={sampleRate.toString()}
           onClose={() => setEditMode(false)}

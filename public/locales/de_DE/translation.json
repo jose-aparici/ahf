@@ -41,8 +41,8 @@
           "1": "Less than"
         }
       },
-      "SAMPLE_RATE": {
-        "TITLE": "Sample rate"
+      "SAMPLE_PERIOD": {
+        "TITLE": "Sample period"
       },
       "TRIGGER": {
         "TITLE": "Trigger"
