@@ -33,7 +33,7 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
           <Grid item xs={4}>
             <AhfModesContainer />
           </Grid>
-          <Grid item xs={12}>
+          <Grid container item xs={12}>
             <AhfSamplePeriodContainer />
           </Grid>
           <Grid item xs={12}>

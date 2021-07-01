@@ -8,4 +8,7 @@ export const useSamplePeriodContainerStyles = makeStyles(() => ({
   label: {
     color: 'black',
   },
+  total: {
+    paddingLeft: '12px',
+  },
 }));
