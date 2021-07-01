@@ -54,9 +54,9 @@ export const AhfDelayContainer: React.FC = () => {
         </FormControl>
       </Grid>
       <Grid container item xs={4} alignItems="flex-end">
-        <Typography className={classes.total}>{`x sample period = ${
-          samplePeriod * delay
-        }`}</Typography>
+        <Typography className={classes.total}>{`x ${t(
+          t('OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_PERIOD.TITLE'),
+        )} = ${samplePeriod * delay}`}</Typography>
       </Grid>
       {editMode && (
         <AhfParamEditContainerMemoized
