@@ -61,7 +61,7 @@ export const AhfDelayContainer: React.FC = () => {
       {editMode && (
         <AhfParamEditContainerMemoized
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE')}
-          type={ParamType.FLOATING_POINT}
+          type={ParamType.UNSIGNED_INTEGER}
           value={delay.toString()}
           onClose={() => setEditMode(false)}
           onSave={handleSave}

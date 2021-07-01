@@ -63,7 +63,7 @@ export const AhfSamplePeriodContainer: React.FC = () => {
       {editMode && (
         <AhfParamEditContainerMemoized
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_PERIOD.TITLE')}
-          type={ParamType.FLOATING_POINT}
+          type={ParamType.UNSIGNED_INTEGER}
           value={samplePeriod.toString()}
           onClose={() => setEditMode(false)}
           onSave={handleSave}
