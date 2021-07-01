@@ -16,13 +16,13 @@ export const AhfSamplePeriodContainer: React.FC = () => {
   const { state, dispatch } = useContext(AhfContext);
   const [editMode, setEditMode] = useState(false);
 
-  const { sampleRate } = state.oscilloscope.settings;
+  const { samplePeriod } = state.oscilloscope.settings;
 
   const handleSave = (value: string) => {
     setEditMode(false);
     const settings = {
       ...state.oscilloscope.settings,
-      sampleRate: +value,
+      samplePeriod: +value,
     };
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
@@ -42,7 +42,7 @@ export const AhfSamplePeriodContainer: React.FC = () => {
                 </div>
               </div>
             }
-            value={sampleRate}
+            value={samplePeriod}
             onClick={() => setEditMode(true)}
             placeholder=""
             InputLabelProps={{
@@ -56,7 +56,7 @@ export const AhfSamplePeriodContainer: React.FC = () => {
       </Grid>
       <Grid container item xs={4} alignItems="flex-end">
         <Typography className={classes.total}>{`x0.00125 = ${
-          sampleRate * 0.00125
+          samplePeriod * 0.00125
         } ms`}</Typography>
       </Grid>
 
@@ -64,7 +64,7 @@ export const AhfSamplePeriodContainer: React.FC = () => {
         <AhfParamEditContainerMemoized
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.SAMPLE_PERIOD.TITLE')}
           type={ParamType.FLOATING_POINT}
-          value={sampleRate.toString()}
+          value={samplePeriod.toString()}
           onClose={() => setEditMode(false)}
           onSave={handleSave}
         />

@@ -2,7 +2,7 @@ import { AhfContext } from 'contexts/store/context';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { FormControl, TextField } from '@material-ui/core';
+import { FormControl, Grid, TextField } from '@material-ui/core';
 
 import { AppCommand } from 'domain/app/app.types';
 import { ParamType } from 'domain/param/param.types';
@@ -31,28 +31,30 @@ export const AhfDelayContainer: React.FC = () => {
 
   return (
     <>
-      <FormControl fullWidth>
-        <TextField
-          label={
-            <div className={classes.labelContainer}>
-              <div>
-                {`${t('OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE')} x???? = ${
-                  delay * 0.00125
-                } ms`}
+      <Grid item xs={4}>
+        <FormControl fullWidth>
+          <TextField
+            label={
+              <div className={classes.labelContainer}>
+                <div>
+                  {`${t(
+                    'OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE',
+                  )} x???? = ${delay * 0.00125} ms`}
+                </div>
               </div>
-            </div>
-          }
-          value={delay}
-          onClick={() => setEditMode(true)}
-          placeholder=""
-          InputLabelProps={{
-            shrink: true,
-            classes: {
-              root: classes.label,
-            },
-          }}
-        />
-      </FormControl>
+            }
+            value={delay}
+            onClick={() => setEditMode(true)}
+            placeholder=""
+            InputLabelProps={{
+              shrink: true,
+              classes: {
+                root: classes.label,
+              },
+            }}
+          />
+        </FormControl>
+      </Grid>
       {editMode && (
         <AhfParamEditContainerMemoized
           nameTitle={t('OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE')}

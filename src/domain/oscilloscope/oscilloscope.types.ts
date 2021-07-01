@@ -8,7 +8,7 @@ export interface Settings {
   trigger: Param | undefined;
   triggerLevel: number;
   mode: number;
-  sampleRate: number;
+  samplePeriod: number;
   delay: number;
 }
 

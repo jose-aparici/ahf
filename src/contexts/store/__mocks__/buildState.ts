@@ -25,7 +25,7 @@ const DEFAULT_STATE: State = {
       trigger: undefined,
       triggerLevel: 0,
       mode: 0,
-      sampleRate: 0,
+      samplePeriod: 0,
       delay: 0,
     },
   },
