@@ -2,7 +2,7 @@ import { AhfContext } from 'contexts/store/context';
 import React, { useContext, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
-import { FormControl, Grid, TextField } from '@material-ui/core';
+import { FormControl, Grid, TextField, Typography } from '@material-ui/core';
 
 import { AppCommand } from 'domain/app/app.types';
 import { ParamType } from 'domain/param/param.types';
@@ -15,7 +15,7 @@ export const AhfDelayContainer: React.FC = () => {
   const { t } = useTranslation();
   const { state, dispatch } = useContext(AhfContext);
   const [editMode, setEditMode] = useState(false);
-  const { delay } = state.oscilloscope.settings;
+  const { delay, samplePeriod } = state.oscilloscope.settings;
 
   const handleSave = (value: string) => {
     setEditMode(false);
@@ -36,11 +36,9 @@ export const AhfDelayContainer: React.FC = () => {
           <TextField
             label={
               <div className={classes.labelContainer}>
-                <div>
-                  {`${t(
-                    'OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE',
-                  )} x???? = ${delay * 0.00125} ms`}
-                </div>
+                <div>{`${t('OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.TITLE')} (${t(
+                  'OSCILLOSCOPE_SETTINGS.SECTIONS.DELAY.MAX_POINTS',
+                )})`}</div>
               </div>
             }
             value={delay}
@@ -54,6 +52,11 @@ export const AhfDelayContainer: React.FC = () => {
             }}
           />
         </FormControl>
+      </Grid>
+      <Grid container item xs={4} alignItems="flex-end">
+        <Typography className={classes.total}>{`x sample period = ${
+          samplePeriod * delay
+        }`}</Typography>
       </Grid>
       {editMode && (
         <AhfParamEditContainerMemoized

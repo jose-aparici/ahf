@@ -32,6 +32,7 @@
         "TRACE_TITLE": "Trace"
       },
       "DELAY": {
+        "MAX_POINTS": "Max points 512",
         "TITLE": "Delay"
       },
       "MODES": {

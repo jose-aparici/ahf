@@ -55,7 +55,7 @@ export const AhfSamplePeriodContainer: React.FC = () => {
         </FormControl>
       </Grid>
       <Grid container item xs={4} alignItems="flex-end">
-        <Typography className={classes.total}>{`x0.00125 = ${
+        <Typography className={classes.total}>{`x 0.00125 = ${
           samplePeriod * 0.00125
         } ms`}</Typography>
       </Grid>

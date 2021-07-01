@@ -8,4 +8,7 @@ export const useDelayContainerStyles = makeStyles(() => ({
   label: {
     color: 'black',
   },
+  total: {
+    paddingLeft: '12px',
+  },
 }));
