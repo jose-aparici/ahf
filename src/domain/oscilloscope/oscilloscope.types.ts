@@ -2,4 +2,20 @@ import { Settings } from 'domain/oscilloscope-settings/oscilloscope-settings.typ
 
 export interface Oscilloscope {
   settings: Settings;
+  data?: Data;
 }
+
+export interface Data {
+  xAxis: {
+    xFreq: number[];
+    xTime: number[];
+  };
+  yAxis: {
+    channels: ChannelData[];
+  };
+}
+
+export type ChannelData = {
+  time: number[];
+  freq: number[];
+};

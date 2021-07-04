@@ -5,6 +5,7 @@ import {
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
 import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
 import { AhfOscilloscopeSettings } from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings';
+import { AhfOscilloscopeData } from 'domain/ahf-oscilloscope/ahf-oscilloscope';
 import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand } from 'domain/ahf/ahf.types';
 import { Action, AppCommand } from 'domain/app/app.types';
@@ -86,6 +87,28 @@ export const reducer = (state: State, action: Action): State => {
         delay: settings.Delay,
         mode: (settings.Mode as unknown) as OscilloscopeMode,
       };
+      return { ...state };
+    }
+
+    case AhfCommand.READ_OSCILLOSCOPE_DATA: {
+      const data = payload as AhfOscilloscopeData;
+      state.oscilloscope.data = {
+        xAxis: {
+          xFreq: data.XAxis.XFreq,
+          xTime: data.XAxis.XTime,
+        },
+        yAxis: {
+          channels: [
+            { time: data.YAxis.CH1.Time, freq: data.YAxis.CH1.Freq },
+            { time: data.YAxis.CH2.Time, freq: data.YAxis.CH2.Freq },
+            { time: data.YAxis.CH3.Time, freq: data.YAxis.CH3.Freq },
+            { time: data.YAxis.CH4.Time, freq: data.YAxis.CH4.Freq },
+            { time: data.YAxis.CH5.Time, freq: data.YAxis.CH5.Freq },
+            { time: data.YAxis.CH6.Time, freq: data.YAxis.CH6.Freq },
+          ],
+        },
+      };
+
       return { ...state };
     }
 
