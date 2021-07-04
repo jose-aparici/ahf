@@ -2,7 +2,7 @@ import { State } from 'contexts/store/initialState';
 
 import { DeviceInfo, DevicePaths } from 'domain/device/device.types';
 import { Folder } from 'domain/folder/folder.types';
-import { OscilloscopeMode } from 'domain/oscilloscope/oscilloscope.types';
+import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 const DEFAULT_STATE: State = {
   devices: {

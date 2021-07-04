@@ -1,10 +1,8 @@
 import { Device } from 'domain/device/device.types';
 import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
-import {
-  Oscilloscope,
-  OscilloscopeMode,
-} from 'domain/oscilloscope/oscilloscope.types';
+import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { Settings } from 'domain/settings/setting.types';
 

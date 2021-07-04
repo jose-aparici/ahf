@@ -8,7 +8,7 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Channel } from 'domain/oscilloscope/oscilloscope.types';
+import { Channel } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';

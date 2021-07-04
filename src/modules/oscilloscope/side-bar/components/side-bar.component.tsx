@@ -7,8 +7,8 @@ import {
   Typography,
 } from '@material-ui/core';
 
+import { Channel } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
-import { Channel } from 'domain/oscilloscope/oscilloscope.types';
 
 import { useSideBarComponentStyles } from './side-bar.component.styles';
 
