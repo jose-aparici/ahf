@@ -23,14 +23,18 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   useEffect(() => {
     if (settings.params.length <= 0 && params.length > 0) {
-      debugger;
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
         payload: {
           settings: {
-            channels: params
-              .slice(0, 6)
-              .map((param) => ({ id: param.paramId, param })),
+            channels: settings.channels.map((channel) => {
+              const param = params.find(
+                (param) => param.paramId === channel.id,
+              );
+              return param
+                ? { id: channel.id, value: param }
+                : { id: channel.id };
+            }),
             params,
             trigger: params.find(
               (param) => param.paramId === settings.trigger.id,
