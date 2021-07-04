@@ -26,31 +26,37 @@ export const AhfSideBarComponent: React.FC<Props> = ({
     <Grid container className={classes.gridContainer}>
       {channels.map((channel, index) => {
         return (
-          <Grid container key={index}>
-            <Grid item xs={12}>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={true}
-                    onChange={() => 0}
-                    color="default"
-                    name="checkedB"
-                    classes={{
-                      root: classes.checkBox,
-                    }}
-                  />
-                }
-                label={<Typography>{channel.name[currentLanguage]}</Typography>}
-                style={{ color: Colors[index] }}
-              />
-            </Grid>
-            <Grid container className={classes.gridValuesContainer}>
+          channel.value && (
+            <Grid container key={index}>
               <Grid item xs={12}>
-                <Typography display="inline">C1 = xxx</Typography>
-                <Typography display="inline">C2 = xxx</Typography>
+                <FormControlLabel
+                  control={
+                    <Checkbox
+                      checked={true}
+                      onChange={() => 0}
+                      color="default"
+                      name="checkedB"
+                      classes={{
+                        root: classes.checkBox,
+                      }}
+                    />
+                  }
+                  label={
+                    <Typography>
+                      {channel.value.name[currentLanguage]}
+                    </Typography>
+                  }
+                  style={{ color: Colors[index] }}
+                />
+              </Grid>
+              <Grid container className={classes.gridValuesContainer}>
+                <Grid item xs={12}>
+                  <Typography display="inline">C1 = xxx</Typography>
+                  <Typography display="inline">C2 = xxx</Typography>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
+          )
         );
       })}
     </Grid>

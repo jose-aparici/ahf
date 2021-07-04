@@ -33,7 +33,8 @@ export const AhfChannelsContainer: React.FC<Props> = ({
 
     if (selectedChannel) {
       const newChannels = [...channels];
-      newChannels[number] = selectedChannel;
+      newChannels[number].id = selectedChannel.paramId;
+      newChannels[number].value = selectedChannel;
 
       const settings = {
         ...state.oscilloscope.settings,
@@ -68,7 +69,7 @@ export const AhfChannelsContainer: React.FC<Props> = ({
                 <Select
                   labelId={`trace-${index}`}
                   id={`select-trace-${index}`}
-                  value={channel.paramId}
+                  value={channel.id}
                   onChange={(event) =>
                     handleSave(event.target.value as number, index)
                   }

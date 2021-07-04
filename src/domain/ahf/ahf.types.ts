@@ -5,6 +5,7 @@ import {
 import { AhfEvent, AhfEventLogFiles } from 'domain/ahf-event/ahf-event.types';
 import { AhfFolderSelect } from 'domain/ahf-folder/ahf-folder.types';
 import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
+import { AhfOscilloscopeSettings } from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings';
 import { AhfParamRead } from 'domain/ahf-param/ahf-param.types';
 import {
   AhfSettingsAdminFile,
@@ -29,6 +30,7 @@ export enum AhfCommand {
   WRITE_PARAMETER_SET_LIST = 'WriteParameterSetList',
   READ_PARAMETER_SET_FILE = 'ReadParameterSetFile',
   WRITE_PARAMETER_SET_FILE = 'WriteParameterSetFile',
+  READ_OSCILLOSCOPE_SETTINGS = 'WriteOsciSetup',
 }
 
 export type AhfPayload =
@@ -39,7 +41,8 @@ export type AhfPayload =
   | AhfEventLogFiles
   | AhfNotification
   | AhfSettingsAdminFile
-  | AhfSettingsAdminFileList;
+  | AhfSettingsAdminFileList
+  | AhfOscilloscopeSettings;
 
 export interface AhfMessage {
   Cmd: AhfCommand;

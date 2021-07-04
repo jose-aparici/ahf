@@ -2,6 +2,7 @@ import { State } from 'contexts/store/initialState';
 
 import { DeviceInfo, DevicePaths } from 'domain/device/device.types';
 import { Folder } from 'domain/folder/folder.types';
+import { OscilloscopeMode } from 'domain/oscilloscope/oscilloscope.types';
 
 const DEFAULT_STATE: State = {
   devices: {
@@ -22,11 +23,12 @@ const DEFAULT_STATE: State = {
     settings: {
       channels: [],
       params: [],
-      trigger: undefined,
+      trigger: { id: 0 },
       triggerLevel: 0,
-      mode: 0,
+      triggerMode: 0,
       samplePeriod: 0,
       delay: 0,
+      mode: OscilloscopeMode.SINGLE_SHOT_FREQUENCY,
     },
   },
   settingsAdmin: { currentFile: undefined },

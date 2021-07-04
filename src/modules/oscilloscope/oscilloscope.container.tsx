@@ -19,25 +19,34 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>();
 
   const { params } = useOscilloscopeContainer();
+  const { settings } = state.oscilloscope;
 
   useEffect(() => {
-    if (state.oscilloscope.settings.params.length <= 0) {
+    if (settings.params.length <= 0 && params.length > 0) {
+      debugger;
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
         payload: {
           settings: {
-            channels: params.slice(0, 6),
+            channels: params
+              .slice(0, 6)
+              .map((param) => ({ id: param.paramId, param })),
             params,
-            trigger: params[0],
+            trigger: params.find(
+              (param) => param.paramId === settings.trigger.id,
+            )
+              ? { id: params[0].paramId, value: params[0] }
+              : { id: settings.trigger.id },
             triggerLevel: 0,
-            mode: 0,
+            triggerMode: 0,
             samplePeriod: 0,
             delay: 0,
+            mode: settings.mode,
           },
         },
       });
     }
-  }, [params, state.oscilloscope.settings.params, dispatch]);
+  }, [params, settings, dispatch]);
 
   const handleToggleStart = () => {
     setStart((previous) => !previous);

@@ -1,7 +1,10 @@
 import { Device } from 'domain/device/device.types';
 import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
-import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
+import {
+  Oscilloscope,
+  OscilloscopeMode,
+} from 'domain/oscilloscope/oscilloscope.types';
 import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { Settings } from 'domain/settings/setting.types';
 
@@ -30,11 +33,12 @@ export const initialState: State = {
     settings: {
       channels: [],
       params: [],
-      trigger: undefined,
+      trigger: { id: 0 },
       triggerLevel: 0,
-      mode: 0,
+      triggerMode: 0,
       samplePeriod: 0,
       delay: 0,
+      mode: OscilloscopeMode.SINGLE_SHOT_FREQUENCY,
     },
   },
   settingsAdmin: { currentFile: undefined },

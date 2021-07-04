@@ -18,7 +18,7 @@ export const AhfModesContainer: React.FC = () => {
   const handleSave = (value: number) => {
     const settings = {
       ...state.oscilloscope.settings,
-      mode: value,
+      triggerMode: value,
     };
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,

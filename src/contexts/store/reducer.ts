@@ -4,12 +4,16 @@ import {
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
 import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
+import { AhfOscilloscopeSettings } from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings';
 import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand } from 'domain/ahf/ahf.types';
 import { Action, AppCommand } from 'domain/app/app.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
-import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
+import {
+  Oscilloscope,
+  OscilloscopeMode,
+} from 'domain/oscilloscope/oscilloscope.types';
 import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
 
 import { State } from './initialState';
@@ -63,6 +67,28 @@ export const reducer = (state: State, action: Action): State => {
 
     case AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS: {
       return { ...state, oscilloscope: payload as Oscilloscope };
+    }
+
+    case AhfCommand.READ_OSCILLOSCOPE_SETTINGS: {
+      const settings = payload as AhfOscilloscopeSettings;
+      state.oscilloscope.settings = {
+        channels: [
+          { id: settings.Ch1 },
+          { id: settings.Ch2 },
+          { id: settings.Ch3 },
+          { id: settings.Ch4 },
+          { id: settings.Ch5 },
+          { id: settings.Ch6 },
+        ],
+        params: [],
+        trigger: { id: settings.TriggerSignal },
+        triggerLevel: settings.TriggerLevel,
+        triggerMode: settings.TriggerMode,
+        samplePeriod: settings.SamplingPeriod,
+        delay: settings.Delay,
+        mode: (settings.Mode as unknown) as OscilloscopeMode,
+      };
+      return { ...state };
     }
 
     default:
