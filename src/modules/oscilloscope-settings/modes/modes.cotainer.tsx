@@ -13,7 +13,7 @@ export const AhfModesContainer: React.FC = () => {
   const classes = useModesContainerStyles();
   const { t } = useTranslation();
   const { state, dispatch } = useContext(AhfContext);
-  const { mode: currentMode } = state.oscilloscope.settings;
+  const { triggerMode: currentTriggerMode } = state.oscilloscope.settings;
 
   const handleSave = (value: number) => {
     const settings = {
@@ -35,7 +35,7 @@ export const AhfModesContainer: React.FC = () => {
       <Select
         labelId={`modes`}
         id={`select-modes`}
-        value={currentMode}
+        value={currentTriggerMode}
         onChange={(event) => handleSave(event.target.value as number)}
         MenuProps={{
           anchorOrigin: {
