@@ -41,10 +41,10 @@ export const AhfOScilloscopeContainer: React.FC = () => {
             )
               ? { id: params[0].paramId, value: params[0] }
               : { id: settings.trigger.id },
-            triggerLevel: 0,
-            triggerMode: 0,
-            samplePeriod: 0,
-            delay: 0,
+            triggerLevel: settings.triggerLevel,
+            triggerMode: settings.triggerMode,
+            samplePeriod: settings.samplePeriod,
+            delay: settings.delay,
             mode: settings.mode,
           },
         },
