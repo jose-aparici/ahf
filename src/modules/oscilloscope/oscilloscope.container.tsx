@@ -32,7 +32,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
                 (param) => param.paramId === channel.id,
               );
               return param
-                ? { id: channel.id, value: param }
+                ? { id: channel.id, value: param, selected: true }
                 : { id: channel.id };
             }),
             params,
@@ -77,7 +77,6 @@ export const AhfOScilloscopeContainer: React.FC = () => {
       <AhfChartContainer open={isOpen === undefined ? false : isOpen} />
 
       <AhfSideBarContainer
-        channels={state.oscilloscope.settings.channels}
         isOpen={isOpen === undefined ? false : isOpen}
         onToggleSideBar={handleToggleSideBar}
       />

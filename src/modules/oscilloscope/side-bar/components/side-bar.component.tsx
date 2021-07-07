@@ -15,11 +15,13 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 interface Props {
   channels: Channel[];
   currentLanguage: number;
+  onToggleChannel: (index: number) => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   channels,
   currentLanguage,
+  onToggleChannel,
 }: Props) => {
   const classes = useSideBarComponentStyles();
   return (
@@ -32,10 +34,9 @@ export const AhfSideBarComponent: React.FC<Props> = ({
                 <FormControlLabel
                   control={
                     <Checkbox
-                      checked={true}
-                      onChange={() => 0}
+                      checked={channel.selected}
+                      onChange={() => onToggleChannel(index)}
                       color="default"
-                      name="checkedB"
                       classes={{
                         root: classes.checkBox,
                       }}

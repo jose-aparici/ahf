@@ -3,6 +3,7 @@ import { Param } from 'domain/param/param.types';
 export interface Channel {
   id: number;
   value?: Param;
+  selected?: boolean;
 }
 
 export interface Settings {

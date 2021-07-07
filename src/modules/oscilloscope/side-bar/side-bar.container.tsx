@@ -1,26 +1,25 @@
+import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { Box, SwipeableDrawer, Toolbar } from '@material-ui/core';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 
+import { AppCommand } from 'domain/app/app.types';
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
-import { Channel } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 import { AhfSideBarComponent } from './components/side-bar.component';
 import { useSideBarContainerStyles } from './side-bar.container.styles';
 
 interface Props {
-  channels: Channel[];
   isOpen: boolean;
   onToggleSideBar: () => void;
 }
 
 export const AhfSideBarContainer: React.FC<Props> = ({
-  channels,
   isOpen,
   onToggleSideBar,
 }: Props) => {
@@ -28,10 +27,26 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
   const location = useLocation();
+  const { state, dispatch } = useContext(AhfContext);
+
+  const { channels } = state.oscilloscope.settings;
 
   useEffect(() => {
     onToggleSideBar();
   }, [location, onToggleSideBar]);
+
+  const handleToggleChannel = (index: number) => {
+    channels[index].selected = !channels[index].selected;
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: {
+        settings: {
+          ...state.oscilloscope.settings,
+          channels: channels,
+        },
+      },
+    });
+  };
 
   return (
     <>
@@ -67,6 +82,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
         <AhfSideBarComponent
           channels={channels}
           currentLanguage={currentLanguage}
+          onToggleChannel={handleToggleChannel}
         />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
