@@ -79,6 +79,5 @@ export const useChartContainer = (): ChartContainerHook => {
     buildDataSets,
   ]);
 
-  debugger;
   return { data };
 };
