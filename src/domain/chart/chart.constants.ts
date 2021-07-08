@@ -6,21 +6,20 @@ export const OPTIONS = {
     label: {
       display: false,
     },
-    zoom: {
-      pan: {
-        enabled: true,
-        mode: 'x',
-      },
-      zoom: {
-        enabled: true,
-        drag: true,
-        mode: 'xy',
-      },
+    interaction: {
+      intersect: false,
+    },
+    decimation: {
+      enabled: true,
+      algorithm: 'lttb',
+      samples: 500,
     },
   },
   maintainAspectRatio: false,
-
   scales: {
+    x: {
+      display: true,
+    },
     yAxes: [
       {
         ticks: {

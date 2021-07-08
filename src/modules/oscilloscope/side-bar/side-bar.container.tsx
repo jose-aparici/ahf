@@ -44,6 +44,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
           ...state.oscilloscope.settings,
           channels: channels,
         },
+        data: state.oscilloscope.data,
       },
     });
   };

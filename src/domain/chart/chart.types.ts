@@ -4,6 +4,7 @@ export interface Data {
 }
 
 export interface Dataset {
+  label: string;
   data: number[];
   fill: boolean;
   backgroundColor: string;
