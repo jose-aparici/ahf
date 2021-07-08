@@ -23,9 +23,9 @@ interface ThumProps {
 
 export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
   const classes = useChartContainerStyles();
-  const [value, setValue] = useState<number[]>([0, 100]);
 
   const { data } = useChartContainer();
+  const [value, setValue] = useState<number[]>([0, data.labels.length]);
 
   /* const handleChange = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -47,25 +47,27 @@ export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
         [classes.contentShift]: open,
       })}
     >
-      <Slider
-        classes={{
-          valueLabel: classes.sliderLabel,
-        }}
-        className={clsx(classes.sliderRoot, {
-          [classes.sliderRootShift]: open,
-        })}
-        value={value}
-        marks
-        valueLabelDisplay="on"
-        aria-labelledby="range-slider"
-        onChange={handleChange}
-        valueLabelFormat={handleValueLabelFormat}
-        track="inverted"
-        min={0}
-        max={5}
-      />
-
-      {data && <Line type="line" data={data} options={OPTIONS} height={100} />}
+      {data && (
+        <>
+          <Slider
+            classes={{
+              valueLabel: classes.sliderLabel,
+            }}
+            className={clsx(classes.sliderRoot, {
+              [classes.sliderRootShift]: open,
+            })}
+            value={value}
+            valueLabelDisplay="on"
+            aria-labelledby="range-slider"
+            onChange={handleChange}
+            valueLabelFormat={handleValueLabelFormat}
+            track="inverted"
+            min={0}
+            max={data.labels.length}
+          />
+          <Line type="line" data={data} options={OPTIONS} height={100} />
+        </>
+      )}
     </main>
   );
 };

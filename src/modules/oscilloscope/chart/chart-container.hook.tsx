@@ -11,7 +11,7 @@ import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
 import { ChannelData } from 'domain/oscilloscope/oscilloscope.types';
 
 interface ChartContainerHook {
-  data: Data | undefined;
+  data: Data;
 }
 
 export const useChartContainer = (): ChartContainerHook => {
@@ -79,5 +79,9 @@ export const useChartContainer = (): ChartContainerHook => {
     buildDataSets,
   ]);
 
-  return { data };
+  if (data !== undefined) {
+    return { data };
+  } else {
+    return { data: { labels: [], datasets: [] } };
+  }
 };
