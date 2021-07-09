@@ -61,7 +61,7 @@ export const useChartContainer = (): ChartContainerHook => {
           state.oscilloscope.settings.mode === OscilloscopeMode.CONTINUOUS_TIME
             ? 'xTime'
             : 'xFreq'
-        ].map(() => ''),
+        ].map((data) => data.toFixed(5).toString()),
         datasets: buildDataSets(
           state.oscilloscope.data.yAxis.channels,
           state.oscilloscope.settings.channels,

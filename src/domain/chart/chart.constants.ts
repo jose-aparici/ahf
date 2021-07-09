@@ -9,17 +9,16 @@ export const OPTIONS = {
     interaction: {
       intersect: false,
     },
-    decimation: {
-      enabled: true,
-      algorithm: 'lttb',
-      samples: 500,
-    },
   },
   maintainAspectRatio: false,
   scales: {
-    x: {
-      display: true,
-    },
+    xAxes: [
+      {
+        ticks: {
+          maxRotation: 0,
+        },
+      },
+    ],
     yAxes: [
       {
         ticks: {
