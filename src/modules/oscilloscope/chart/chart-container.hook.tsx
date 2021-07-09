@@ -1,4 +1,3 @@
-import { AhfBackdropContext } from 'contexts/backdrop/context';
 import { AhfContext } from 'contexts/store/context';
 import { useCallback, useContext, useEffect, useState } from 'react';
 
@@ -17,11 +16,6 @@ interface ChartContainerHook {
 export const useChartContainer = (): ChartContainerHook => {
   const { state } = useContext(AhfContext);
   const [data, setData] = useState<Data>();
-  const { closeBackdrop, openBackdrop } = useContext(AhfBackdropContext);
-
-  useEffect(() => {
-    openBackdrop(false);
-  }, [openBackdrop]);
 
   const buildDataSets = useCallback(
     (
@@ -69,15 +63,9 @@ export const useChartContainer = (): ChartContainerHook => {
         ),
       };
 
-      closeBackdrop();
       return setData(data);
     }
-  }, [
-    state.oscilloscope.data,
-    state.oscilloscope.settings,
-    closeBackdrop,
-    buildDataSets,
-  ]);
+  }, [state.oscilloscope.data, state.oscilloscope.settings, buildDataSets]);
 
   if (data !== undefined) {
     return { data };

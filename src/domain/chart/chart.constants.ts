@@ -10,6 +10,9 @@ export const OPTIONS = {
       intersect: false,
     },
   },
+  animation: {
+    duration: 0,
+  },
   maintainAspectRatio: false,
   scales: {
     xAxes: [
