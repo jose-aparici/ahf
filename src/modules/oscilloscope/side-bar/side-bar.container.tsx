@@ -43,7 +43,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
       payload: {
         settings: {
           ...state.oscilloscope.settings,
-          channels: channels,
+          channels: [...channels],
         },
         chart: state.oscilloscope.chart,
       },

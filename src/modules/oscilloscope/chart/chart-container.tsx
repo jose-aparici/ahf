@@ -2,7 +2,7 @@ import 'chartjs-plugin-zoom';
 
 import clsx from 'clsx';
 import { AhfContext } from 'contexts/store/context';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 import { Slider } from '@material-ui/core';
@@ -26,10 +26,25 @@ export const AhfChartContainer: React.FC<Props> = ({
   const { state } = useContext(AhfContext);
   const { chart, settings } = state.oscilloscope;
   const [sliderValues, setSliderValues] = useState<number[]>([0, 511]);
+  const [data, setData] = useState(
+    chart && settings ? chart[settings.mode] : undefined,
+  );
 
   /* const handleChange = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);
   }; */
+
+  useEffect(() => {
+    if (chart && settings.mode) {
+      debugger;
+      setData({
+        labels: chart[settings.mode].labels,
+        datasets: chart[settings.mode].datasets.filter(
+          (_, index) => settings.channels[index].selected,
+        ),
+      });
+    }
+  }, [chart, settings.channels, settings.mode]);
 
   const handleChangeSlider = (
     event: React.ChangeEvent<unknown>,
@@ -49,7 +64,7 @@ export const AhfChartContainer: React.FC<Props> = ({
         [classes.contentShift]: open,
       })}
     >
-      {chart && settings && (
+      {data && (
         <>
           <Slider
             classes={{
@@ -67,12 +82,7 @@ export const AhfChartContainer: React.FC<Props> = ({
             min={0}
             max={512}
           />
-          <Line
-            type="line"
-            data={chart[settings.mode]}
-            options={OPTIONS}
-            height={100}
-          />
+          <Line type="line" data={data} options={OPTIONS} height={100} />
         </>
       )}
     </main>

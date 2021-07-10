@@ -26,7 +26,6 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   useEffect(() => {
     if (settings.params.length <= 0 && params.length > 0) {
-      debugger;
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
         payload: {
