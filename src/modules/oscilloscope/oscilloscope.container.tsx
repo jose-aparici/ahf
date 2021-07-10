@@ -17,9 +17,20 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const deviceId = extractDeviceFromPath(location.pathname);
   const [start, setStart] = useState(false);
   const [isOpen, setIsOpen] = useState<boolean>();
+  const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>([
+    [],
+  ]);
 
   const { params } = useOscilloscopeContainer();
-  const { settings } = state.oscilloscope;
+  const { settings, data } = state.oscilloscope;
+
+  const handleSliderValuesChange = (sliderValues: number[]) => {
+    setSliderChannelValues(
+      settings.channels.map((channel, index) => {
+        return [0, 0];
+      }),
+    );
+  };
 
   useEffect(() => {
     if (settings.params.length <= 0 && params.length > 0) {
@@ -74,7 +85,10 @@ export const AhfOScilloscopeContainer: React.FC = () => {
         />
       )}
 
-      <AhfChartContainer open={isOpen === undefined ? false : isOpen} />
+      <AhfChartContainer
+        open={isOpen === undefined ? false : isOpen}
+        onSliderValuesChange={handleSliderValuesChange}
+      />
 
       <AhfSideBarContainer
         isOpen={isOpen === undefined ? false : isOpen}

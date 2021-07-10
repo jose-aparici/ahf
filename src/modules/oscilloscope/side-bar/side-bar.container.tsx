@@ -16,6 +16,7 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 
 interface Props {
   isOpen: boolean;
+
   onToggleSideBar: () => void;
 }
 

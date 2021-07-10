@@ -13,29 +13,32 @@ import { useChartContainerStyles } from './chart-container.styles';
 
 interface Props {
   open: boolean;
+  onSliderValuesChange: (value: number[]) => void;
 }
 
-interface ThumProps {
-  children: React.ReactElement;
-  open: boolean;
-  value: number;
-}
-
-export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
+export const AhfChartContainer: React.FC<Props> = ({
+  open,
+  onSliderValuesChange,
+}: Props) => {
   const classes = useChartContainerStyles();
 
   const { data } = useChartContainer();
-  const [value, setValue] = useState<number[]>([0, data.labels.length]);
+  const [sliderValues, setSliderValues] = useState<number[]>([
+    0,
+    data.labels.length,
+  ]);
 
   /* const handleChange = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);
   }; */
 
-  const handleChange = (
+  const handleChangeSlider = (
     event: React.ChangeEvent<unknown>,
     value: number | number[],
   ) => {
-    setValue(value as number[]);
+    const sliderValues = value as number[];
+    setSliderValues(sliderValues);
+    onSliderValuesChange(sliderValues);
   };
 
   const handleValueLabelFormat = (_: number, index: number) =>
@@ -56,10 +59,10 @@ export const AhfChartContainer: React.FC<Props> = ({ open }: Props) => {
             className={clsx(classes.sliderRoot, {
               [classes.sliderRootShift]: open,
             })}
-            value={value}
+            value={sliderValues}
             valueLabelDisplay="on"
             aria-labelledby="range-slider"
-            onChange={handleChange}
+            onChange={handleChangeSlider}
             valueLabelFormat={handleValueLabelFormat}
             track="inverted"
             min={0}
