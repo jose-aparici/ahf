@@ -9,9 +9,11 @@ import { AhfOscilloscopeData } from 'domain/ahf-oscilloscope/ahf-oscilloscope';
 import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand } from 'domain/ahf/ahf.types';
 import { Action, AppCommand } from 'domain/app/app.types';
+import { Dataset } from 'domain/chart/chart.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
 import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
 
@@ -92,7 +94,45 @@ export const reducer = (state: State, action: Action): State => {
 
     case AhfCommand.READ_OSCILLOSCOPE_DATA: {
       const data = payload as AhfOscilloscopeData;
-      state.oscilloscope.data = {
+      const continuousTimeDataSets: Dataset[] = [];
+      const singleShotFrequencyDataSets: Dataset[] = [];
+      const { channels } = state.oscilloscope.settings;
+
+      Object.values(data.YAxis).forEach((channelData, index) => {
+        continuousTimeDataSets.push({
+          label: `${index}_${channels[index].id.toString()}`,
+          data: channelData.Time,
+          fill: false,
+          backgroundColor: Colors[index],
+          borderColor: Colors[index],
+          tension: 0.4,
+          borderWidth: 1,
+          radius: 0,
+        });
+
+        singleShotFrequencyDataSets.push({
+          label: `${index}_${channels[index].id.toString()}`,
+          data: channelData.Time,
+          fill: false,
+          backgroundColor: Colors[index],
+          borderColor: Colors[index],
+          tension: 0.4,
+          borderWidth: 1,
+          radius: 0,
+        });
+      });
+
+      state.oscilloscope.chart = {
+        'Continuous Time': {
+          labels: data.XAxis.XTime.map((data) => data.toFixed(5).toString()),
+          datasets: continuousTimeDataSets,
+        },
+        'Single Shot Frequency': {
+          labels: data.XAxis.XFreq.map((data) => data.toFixed(5).toString()),
+          datasets: singleShotFrequencyDataSets,
+        },
+      };
+      /* state.oscilloscope.data = {
         xAxis: {
           xFreq: data.XAxis.XFreq,
           xTime: data.XAxis.XTime,
@@ -107,7 +147,7 @@ export const reducer = (state: State, action: Action): State => {
             { time: data.YAxis.CH6.Time, freq: data.YAxis.CH6.Freq },
           ],
         },
-      };
+      }; */
 
       return { ...state };
     }

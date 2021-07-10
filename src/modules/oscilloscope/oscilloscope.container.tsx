@@ -22,18 +22,11 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   ]);
 
   const { params } = useOscilloscopeContainer();
-  const { settings, data } = state.oscilloscope;
-
-  const handleSliderValuesChange = (sliderValues: number[]) => {
-    setSliderChannelValues(
-      settings.channels.map((channel, index) => {
-        return [0, 0];
-      }),
-    );
-  };
+  const { settings, chart } = state.oscilloscope;
 
   useEffect(() => {
     if (settings.params.length <= 0 && params.length > 0) {
+      debugger;
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
         payload: {
@@ -58,10 +51,19 @@ export const AhfOScilloscopeContainer: React.FC = () => {
             delay: settings.delay,
             mode: settings.mode,
           },
+          chart: chart,
         },
       });
     }
-  }, [params, settings, dispatch]);
+  }, [params, settings, chart, dispatch]);
+
+  const handleSliderValuesChange = (sliderValues: number[]) => {
+    setSliderChannelValues(
+      settings.channels.map((channel, index) => {
+        return [0, 0];
+      }),
+    );
+  };
 
   const handleToggleStart = () => {
     setStart((previous) => !previous);

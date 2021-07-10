@@ -1,14 +1,14 @@
 import 'chartjs-plugin-zoom';
 
 import clsx from 'clsx';
-import React, { useState } from 'react';
+import { AhfContext } from 'contexts/store/context';
+import React, { useContext, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 import { Slider } from '@material-ui/core';
 
 import { OPTIONS } from 'domain/chart/chart.constants';
 
-import { useChartContainer } from './chart-container.hook';
 import { useChartContainerStyles } from './chart-container.styles';
 
 interface Props {
@@ -22,11 +22,10 @@ export const AhfChartContainer: React.FC<Props> = ({
 }: Props) => {
   const classes = useChartContainerStyles();
 
-  const { data } = useChartContainer();
-  const [sliderValues, setSliderValues] = useState<number[]>([
-    0,
-    data.labels.length,
-  ]);
+  //const { data } = useChartContainer();
+  const { state } = useContext(AhfContext);
+  const { chart, settings } = state.oscilloscope;
+  const [sliderValues, setSliderValues] = useState<number[]>([0, 511]);
 
   /* const handleChange = (event: any, newValue: number | number[]) => {
     setValue(newValue as number[]);
@@ -50,7 +49,7 @@ export const AhfChartContainer: React.FC<Props> = ({
         [classes.contentShift]: open,
       })}
     >
-      {data && (
+      {chart && settings && (
         <>
           <Slider
             classes={{
@@ -66,9 +65,14 @@ export const AhfChartContainer: React.FC<Props> = ({
             valueLabelFormat={handleValueLabelFormat}
             track="inverted"
             min={0}
-            max={data.labels.length}
+            max={512}
           />
-          <Line type="line" data={data} options={OPTIONS} height={100} />
+          <Line
+            type="line"
+            data={chart[settings.mode]}
+            options={OPTIONS}
+            height={100}
+          />
         </>
       )}
     </main>

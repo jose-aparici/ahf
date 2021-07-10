@@ -1,8 +1,9 @@
+import { Chart } from 'domain/chart/chart.types';
 import { Settings } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 export interface Oscilloscope {
   settings: Settings;
-  data?: Data;
+  chart?: Chart;
 }
 
 export interface Data {

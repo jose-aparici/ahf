@@ -1,7 +1,11 @@
-export interface Data {
+import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+
+export type Chart = Record<OscilloscopeMode, Data>;
+
+/* export interface Data {
   labels: string[];
   datasets: Dataset[];
-}
+} */
 
 export interface Dataset {
   label: string;
@@ -9,4 +13,12 @@ export interface Dataset {
   fill: boolean;
   backgroundColor: string;
   borderColor: string;
+  tension: number;
+  borderWidth: number;
+  radius: number;
+}
+
+export interface Data {
+  labels: string[];
+  datasets: Dataset[];
 }

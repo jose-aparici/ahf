@@ -1,7 +1,7 @@
 import { AhfContext } from 'contexts/store/context';
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useCallback, useContext } from 'react';
 
-import { Data, Dataset } from 'domain/chart/chart.types';
+import { Dataset } from 'domain/chart/chart.types';
 import {
   Channel,
   OscilloscopeMode,
@@ -10,12 +10,13 @@ import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
 import { ChannelData } from 'domain/oscilloscope/oscilloscope.types';
 
 interface ChartContainerHook {
-  data: Data;
+  data: string;
+  //data: Data;
 }
 
 export const useChartContainer = (): ChartContainerHook => {
   const { state } = useContext(AhfContext);
-  const [data, setData] = useState<Data>();
+  //const [data, setData] = useState<Data>();
 
   const buildDataSets = useCallback(
     (
@@ -48,7 +49,7 @@ export const useChartContainer = (): ChartContainerHook => {
     [],
   );
 
-  useEffect(() => {
+  /* useEffect(() => {
     if (state.oscilloscope.data) {
       const data: Data = {
         labels: state.oscilloscope.data?.xAxis[
@@ -65,11 +66,13 @@ export const useChartContainer = (): ChartContainerHook => {
 
       return setData(data);
     }
-  }, [state.oscilloscope.data, state.oscilloscope.settings, buildDataSets]);
+  }, [state.oscilloscope.data, state.oscilloscope.settings, buildDataSets]); */
 
-  if (data !== undefined) {
+  /* if (data !== undefined) {
     return { data };
   } else {
     return { data: { labels: [], datasets: [] } };
-  }
+  } */
+
+  return { data: '' };
 };
