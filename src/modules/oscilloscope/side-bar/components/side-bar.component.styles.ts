@@ -22,9 +22,6 @@ export const useSideBarComponentStyles = makeStyles(() => ({
   checkBox: {
     height: '12px',
     color: blue[300],
-    '&$checked': {
-      color: blue[500],
-    },
   },
   checkBoxLabelColor: {
     color: blue[300],
