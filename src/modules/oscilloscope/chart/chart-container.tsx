@@ -21,8 +21,6 @@ export const AhfChartContainer: React.FC<Props> = ({
   onSliderValuesChange,
 }: Props) => {
   const classes = useChartContainerStyles();
-
-  //const { data } = useChartContainer();
   const { state } = useContext(AhfContext);
   const { chart, settings } = state.oscilloscope;
   const [sliderValues, setSliderValues] = useState<number[]>([0, 511]);
@@ -30,13 +28,8 @@ export const AhfChartContainer: React.FC<Props> = ({
     chart && settings ? chart[settings.mode] : undefined,
   );
 
-  /* const handleChange = (event: any, newValue: number | number[]) => {
-    setValue(newValue as number[]);
-  }; */
-
   useEffect(() => {
-    if (chart && settings.mode) {
-      debugger;
+    if (chart !== undefined && settings.mode !== undefined) {
       setData({
         labels: chart[settings.mode].labels,
         datasets: chart[settings.mode].datasets.filter(

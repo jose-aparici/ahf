@@ -18,8 +18,9 @@ export interface Settings {
 }
 
 export enum OscilloscopeMode {
-  SINGLE_SHOT_FREQUENCY = 'Single Shot Frequency',
-  CONTINUOUS_TIME = 'Continuous Time',
+  SINGLE_SHOT_TIME = 0,
+  SINGLE_SHOT_FREQUENCY = 1,
+  CONTINUOUS_TIME = 2,
 }
 
 export enum Mode {

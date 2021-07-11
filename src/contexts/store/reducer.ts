@@ -87,7 +87,10 @@ export const reducer = (state: State, action: Action): State => {
         triggerMode: settings.TriggerMode,
         samplePeriod: settings.SamplingPeriod,
         delay: settings.Delay,
-        mode: (settings.Mode as unknown) as OscilloscopeMode,
+        mode:
+          settings.Mode === 'Single Shot Frequency'
+            ? OscilloscopeMode.SINGLE_SHOT_FREQUENCY
+            : OscilloscopeMode.SINGLE_SHOT_TIME,
       };
       return { ...state };
     }
@@ -123,31 +126,19 @@ export const reducer = (state: State, action: Action): State => {
       });
 
       state.oscilloscope.chart = {
-        'Continuous Time': {
+        0: {
           labels: data.XAxis.XTime.map((data) => data.toFixed(5).toString()),
           datasets: continuousTimeDataSets,
         },
-        'Single Shot Frequency': {
+        1: {
           labels: data.XAxis.XFreq.map((data) => data.toFixed(5).toString()),
           datasets: singleShotFrequencyDataSets,
         },
+        2: {
+          labels: data.XAxis.XTime.map((data) => data.toFixed(5).toString()),
+          datasets: continuousTimeDataSets,
+        },
       };
-      /* state.oscilloscope.data = {
-        xAxis: {
-          xFreq: data.XAxis.XFreq,
-          xTime: data.XAxis.XTime,
-        },
-        yAxis: {
-          channels: [
-            { time: data.YAxis.CH1.Time, freq: data.YAxis.CH1.Freq },
-            { time: data.YAxis.CH2.Time, freq: data.YAxis.CH2.Freq },
-            { time: data.YAxis.CH3.Time, freq: data.YAxis.CH3.Freq },
-            { time: data.YAxis.CH4.Time, freq: data.YAxis.CH4.Freq },
-            { time: data.YAxis.CH5.Time, freq: data.YAxis.CH5.Freq },
-            { time: data.YAxis.CH6.Time, freq: data.YAxis.CH6.Freq },
-          ],
-        },
-      }; */
 
       return { ...state };
     }

@@ -23,6 +23,15 @@
       "PARAMETERS": {
         "TITLE": "Parameters"
       }
+    },
+    "TOP_BUTTONS": {
+      "MODES": {
+        "VALUES": {
+          "0": "Single shot time",
+          "1": "Single shot frequency",
+          "2": "Continuous time"
+        }
+      }
     }
   },
   "OSCILLOSCOPE_SETTINGS": {

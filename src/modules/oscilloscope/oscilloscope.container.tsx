@@ -69,6 +69,14 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     }
   };
 
+  const handleModeChange = (mode: number) => {
+    settings.mode = mode;
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: { settings: { ...settings }, chart: chart },
+    });
+  };
+
   const handleToggleStart = () => {
     setStart((previous) => !previous);
   };
@@ -88,6 +96,8 @@ export const AhfOScilloscopeContainer: React.FC = () => {
           devicePath={state.devices[+deviceId].structure.id}
           isStart={start}
           onToggleStart={handleToggleStart}
+          currentMode={settings.mode}
+          onChangeMode={handleModeChange}
         />
       )}
 
