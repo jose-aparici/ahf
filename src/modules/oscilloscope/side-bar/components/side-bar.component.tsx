@@ -15,12 +15,14 @@ import { useSideBarComponentStyles } from './side-bar.component.styles';
 interface Props {
   channels: Channel[];
   currentLanguage: number;
+  sliderValues: number[][];
   onToggleChannel: (index: number) => void;
 }
 
 export const AhfSideBarComponent: React.FC<Props> = ({
   channels,
   currentLanguage,
+  sliderValues,
   onToggleChannel,
 }: Props) => {
   const classes = useSideBarComponentStyles();
@@ -52,8 +54,12 @@ export const AhfSideBarComponent: React.FC<Props> = ({
               </Grid>
               <Grid container className={classes.gridValuesContainer}>
                 <Grid item xs={12}>
-                  <Typography display="inline">{`C1 = xxx`}</Typography>
-                  <Typography display="inline">{`C2 = xxx`}</Typography>
+                  <Typography display="inline">
+                    {sliderValues[index] && `C1 = ${sliderValues[index][0]}`}
+                  </Typography>
+                  <Typography display="inline">
+                    {sliderValues[index] && `C2 = ${sliderValues[index][1]}`}
+                  </Typography>
                 </Grid>
               </Grid>
             </Grid>

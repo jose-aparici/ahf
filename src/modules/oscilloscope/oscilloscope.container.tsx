@@ -57,11 +57,16 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   }, [params, settings, chart, dispatch]);
 
   const handleSliderValuesChange = (sliderValues: number[]) => {
-    setSliderChannelValues(
-      settings.channels.map((channel, index) => {
-        return [0, 0];
-      }),
-    );
+    if (chart) {
+      setSliderChannelValues(
+        settings.channels.map((channel, index) => {
+          return [
+            chart[settings.mode].datasets[index].data[sliderValues[0]],
+            chart[settings.mode].datasets[index].data[sliderValues[1]],
+          ];
+        }),
+      );
+    }
   };
 
   const handleToggleStart = () => {
@@ -94,6 +99,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
       <AhfSideBarContainer
         isOpen={isOpen === undefined ? false : isOpen}
         onToggleSideBar={handleToggleSideBar}
+        sliderChannelValues={sliderChannelValues}
       />
     </>
   );

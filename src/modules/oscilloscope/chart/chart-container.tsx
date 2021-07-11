@@ -80,7 +80,7 @@ export const AhfChartContainer: React.FC<Props> = ({
             valueLabelFormat={handleValueLabelFormat}
             track="inverted"
             min={0}
-            max={512}
+            max={511}
           />
           <Line type="line" data={data} options={OPTIONS} height={100} />
         </>

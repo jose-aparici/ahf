@@ -16,12 +16,13 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 
 interface Props {
   isOpen: boolean;
-
+  sliderChannelValues: number[][];
   onToggleSideBar: () => void;
 }
 
 export const AhfSideBarContainer: React.FC<Props> = ({
   isOpen,
+  sliderChannelValues,
   onToggleSideBar,
 }: Props) => {
   const classes = useSideBarContainerStyles();
@@ -85,6 +86,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
           channels={channels}
           currentLanguage={currentLanguage}
           onToggleChannel={handleToggleChannel}
+          sliderValues={sliderChannelValues}
         />
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
