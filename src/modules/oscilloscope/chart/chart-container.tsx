@@ -39,13 +39,16 @@ export const AhfChartContainer: React.FC<Props> = ({
     }
   }, [chart, settings.channels, settings.mode]);
 
+  useEffect(() => {
+    onSliderValuesChange(sliderValues);
+  }, [onSliderValuesChange, sliderValues]);
+
   const handleChangeSlider = (
     event: React.ChangeEvent<unknown>,
     value: number | number[],
   ) => {
     const sliderValues = value as number[];
     setSliderValues(sliderValues);
-    onSliderValuesChange(sliderValues);
   };
 
   const handleValueLabelFormat = (_: number, index: number) =>
@@ -70,7 +73,6 @@ export const AhfChartContainer: React.FC<Props> = ({
             valueLabelDisplay="on"
             aria-labelledby="range-slider"
             onChange={handleChangeSlider}
-            valueLabelFormat={handleValueLabelFormat}
             track="inverted"
             min={0}
             max={511}

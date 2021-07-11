@@ -56,18 +56,21 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     }
   }, [params, settings, chart, dispatch]);
 
-  const handleSliderValuesChange = (sliderValues: number[]) => {
-    if (chart) {
-      setSliderChannelValues(
-        settings.channels.map((channel, index) => {
-          return [
-            chart[settings.mode].datasets[index].data[sliderValues[0]],
-            chart[settings.mode].datasets[index].data[sliderValues[1]],
-          ];
-        }),
-      );
-    }
-  };
+  const handleSliderValuesChange = useCallback(
+    (sliderValues: number[]) => {
+      if (chart) {
+        setSliderChannelValues(
+          settings.channels.map((channel, index) => {
+            return [
+              chart[settings.mode].datasets[index].data[sliderValues[0]],
+              chart[settings.mode].datasets[index].data[sliderValues[1]],
+            ];
+          }),
+        );
+      }
+    },
+    [chart, settings.channels, settings.mode],
+  );
 
   const handleModeChange = (mode: number) => {
     settings.mode = mode;
