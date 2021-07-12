@@ -18,6 +18,12 @@
       }
     }
   },
+  "ERROR": {
+    "BUTTONS": {
+      "TRY_AGAIN": "Try again"
+    },
+    "TITLE": "Oops! Something went wrong."
+  },
   "OSCILLOSCOPE": {
     "SIDEBAR": {
       "PARAMETERS": {
