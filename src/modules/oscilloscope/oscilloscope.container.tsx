@@ -22,7 +22,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   ]);
 
   const { params } = useOscilloscopeContainer();
-  const { settings, chart } = state.oscilloscope;
+  const { settings, chart, status } = state.oscilloscope;
 
   useEffect(() => {
     if (settings.params.length <= 0 && params.length > 0) {
@@ -51,10 +51,11 @@ export const AhfOScilloscopeContainer: React.FC = () => {
             mode: settings.mode,
           },
           chart: chart,
+          status: status,
         },
       });
     }
-  }, [params, settings, chart, dispatch]);
+  }, [params, settings, chart, status, dispatch]);
 
   const handleSliderValuesChange = useCallback(
     (sliderValues: number[]) => {
@@ -76,7 +77,11 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     settings.mode = mode;
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: { settings: { ...settings }, chart: chart },
+      payload: {
+        settings: { ...settings },
+        chart: chart,
+        status: state.oscilloscope.status,
+      },
     });
   };
 

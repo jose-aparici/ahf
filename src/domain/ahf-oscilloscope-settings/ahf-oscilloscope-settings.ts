@@ -17,3 +17,16 @@ export enum AhfOscilloscopeMode {
   SINGLE_SHOT_FREQUENCY = 'Single Shot Frequency',
   CONTINUOUS_TIME = 'Continuous Time',
 }
+
+export interface AhfOscilloscopeStatus {
+  Status: AhfStatus;
+}
+
+export enum AhfStatus {
+  Iddle = 'iddle',
+  Start = 'start',
+  WaitingForTrigger = 'waitingForTrigger',
+  TriggerFound = 'triggerFound',
+  Recording = 'recording',
+  DataReady = 'dataReady',
+}

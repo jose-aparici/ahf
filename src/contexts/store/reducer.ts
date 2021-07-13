@@ -4,7 +4,10 @@ import {
 } from 'domain/ahf-device/ahf-device.types';
 import { AhfEvent } from 'domain/ahf-event/ahf-event.types';
 import { AhfNotification } from 'domain/ahf-notification/ahf-notification.types';
-import { AhfOscilloscopeSettings } from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings';
+import {
+  AhfOscilloscopeSettings,
+  AhfOscilloscopeStatus,
+} from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings';
 import { AhfOscilloscopeData } from 'domain/ahf-oscilloscope/ahf-oscilloscope';
 import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand } from 'domain/ahf/ahf.types';
@@ -12,7 +15,10 @@ import { Action, AppCommand } from 'domain/app/app.types';
 import { Dataset } from 'domain/chart/chart.types';
 import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
-import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import {
+  OscilloscopeMode,
+  Status,
+} from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
@@ -140,6 +146,13 @@ export const reducer = (state: State, action: Action): State => {
         },
       };
 
+      return { ...state };
+    }
+
+    case AhfCommand.WRITE_OSCILLOSCOPE_STATUS: {
+      debugger;
+      const ahfOscilloscopeStatus = payload as AhfOscilloscopeStatus;
+      state.oscilloscope.status = (ahfOscilloscopeStatus.Status.toString() as unknown) as Status;
       return { ...state };
     }
 

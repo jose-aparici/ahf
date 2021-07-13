@@ -26,7 +26,7 @@ export const AhfTriggerLevelContainer: React.FC = () => {
     };
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: { settings },
+      payload: { settings, status: state.oscilloscope.status },
     });
   };
 

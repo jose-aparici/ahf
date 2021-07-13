@@ -27,3 +27,21 @@ export enum Mode {
   MORE_THAN = 0,
   LESS_THAN = 1,
 }
+
+export enum Status {
+  iddle,
+  start,
+  waitingForTrigger,
+  triggerFound,
+  recording,
+  dataReady,
+}
+
+/*
+  iddle, // display play button
+  start, // display stop button 
+  waitingForTrigger, //display stop button 
+
+
+
+*/

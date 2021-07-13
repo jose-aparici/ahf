@@ -2,7 +2,10 @@ import { State } from 'contexts/store/initialState';
 
 import { DeviceInfo, DevicePaths } from 'domain/device/device.types';
 import { Folder } from 'domain/folder/folder.types';
-import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import {
+  OscilloscopeMode,
+  Status,
+} from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 const DEFAULT_STATE: State = {
   devices: {
@@ -30,6 +33,7 @@ const DEFAULT_STATE: State = {
       delay: 0,
       mode: OscilloscopeMode.SINGLE_SHOT_FREQUENCY,
     },
+    status: Status.iddle,
   },
   settingsAdmin: { currentFile: undefined },
 };

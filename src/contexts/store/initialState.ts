@@ -1,7 +1,10 @@
 import { Device } from 'domain/device/device.types';
 import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
-import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import {
+  OscilloscopeMode,
+  Status,
+} from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { SettingsAdminFile } from 'domain/settings-admin/settings-admin.types';
 import { Settings } from 'domain/settings/setting.types';
@@ -38,6 +41,7 @@ export const initialState: State = {
       delay: 0,
       mode: OscilloscopeMode.SINGLE_SHOT_FREQUENCY,
     },
+    status: Status.iddle,
   },
   settingsAdmin: { currentFile: undefined },
 };
