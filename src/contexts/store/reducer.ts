@@ -70,7 +70,7 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state, oscilloscope: payload as Oscilloscope };
     }
 
-    case AhfCommand.READ_OSCILLOSCOPE_SETTINGS: {
+    case AhfCommand.WRITE_OSCILLOSCOPE_SETTINGS: {
       const settings = payload as AhfOscilloscopeSettings;
       state.oscilloscope.settings = {
         channels: [
@@ -95,7 +95,7 @@ export const reducer = (state: State, action: Action): State => {
       return { ...state };
     }
 
-    case AhfCommand.READ_OSCILLOSCOPE_DATA: {
+    case AhfCommand.WRITE_OSCILLOSCOPE_DATA: {
       const data = payload as AhfOscilloscopeData;
       const continuousTimeDataSets: Dataset[] = [];
       const singleShotFrequencyDataSets: Dataset[] = [];

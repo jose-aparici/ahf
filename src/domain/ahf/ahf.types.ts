@@ -31,8 +31,10 @@ export enum AhfCommand {
   WRITE_PARAMETER_SET_LIST = 'WriteParameterSetList',
   READ_PARAMETER_SET_FILE = 'ReadParameterSetFile',
   WRITE_PARAMETER_SET_FILE = 'WriteParameterSetFile',
-  READ_OSCILLOSCOPE_SETTINGS = 'WriteOsciSetup',
-  READ_OSCILLOSCOPE_DATA = 'WriteOsciData',
+  WRITE_OSCILLOSCOPE_SETTINGS = 'WriteOsciSetup',
+  WRITE_OSCILLOSCOPE_DATA = 'WriteOsciData',
+  READ_OSCILLOSCOPE_SETTINGS = 'ReadOsciSetup',
+  READ_OSCILLOSCOPE_STATUS = 'ReadOsciStatus',
 }
 
 export type AhfPayload =
