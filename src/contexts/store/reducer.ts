@@ -121,7 +121,7 @@ export const reducer = (state: State, action: Action): State => {
 
         singleShotFrequencyDataSets.push({
           label: `${index}_${channels[index].id.toString()}`,
-          data: channelData.Time,
+          data: channelData.Freq,
           fill: false,
           backgroundColor: Colors[index],
           borderColor: Colors[index],
@@ -150,7 +150,6 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     case AhfCommand.WRITE_OSCILLOSCOPE_STATUS: {
-      debugger;
       const ahfOscilloscopeStatus = payload as AhfOscilloscopeStatus;
       state.oscilloscope.status = (ahfOscilloscopeStatus.Status.toString() as unknown) as Status;
       return { ...state };
