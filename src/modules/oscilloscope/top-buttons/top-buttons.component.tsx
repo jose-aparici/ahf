@@ -14,7 +14,10 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import SettingsIcon from '@material-ui/icons/Settings';
 import StopIcon from '@material-ui/icons/Stop';
 
-import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import {
+  OscilloscopeMode,
+  OscilloscopeType,
+} from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { OSCILLOSCOPE, SETTINGS } from 'pages/App.routes';
 
 interface Props {
@@ -73,16 +76,15 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
               style: { maxHeight: '400px' },
             }}
           >
-            {[
-              OscilloscopeMode.SINGLE_SHOT_TIME,
-              OscilloscopeMode.SINGLE_SHOT_FREQUENCY,
-            ].map((mode, index) => {
-              return (
-                <MenuItem key={index} value={mode}>
-                  {t(`OSCILLOSCOPE.TOP_BUTTONS.MODES.VALUES.${mode}`)}
-                </MenuItem>
-              );
-            })}
+            {[OscilloscopeType.TIME, OscilloscopeType.FREQUENCY].map(
+              (mode, index) => {
+                return (
+                  <MenuItem key={index} value={mode}>
+                    {t(`OSCILLOSCOPE.TOP_BUTTONS.TYPES.VALUES.${mode}`)}
+                  </MenuItem>
+                );
+              },
+            )}
           </Select>
         </FormControl>
       </Grid>

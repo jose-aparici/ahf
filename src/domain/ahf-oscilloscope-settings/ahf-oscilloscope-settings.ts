@@ -14,8 +14,8 @@ export interface AhfOscilloscopeSettings {
 }
 
 export enum AhfOscilloscopeMode {
-  SINGLE_SHOT_FREQUENCY = 'Single Shot Frequency',
-  CONTINUOUS_TIME = 'Continuous Time',
+  SINGLE = 'Single',
+  CONTINUOUS = 'Continuous',
 }
 
 export interface AhfOscilloscopeStatus {

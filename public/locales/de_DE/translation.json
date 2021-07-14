@@ -31,11 +31,10 @@
       }
     },
     "TOP_BUTTONS": {
-      "MODES": {
+      "TYPES": {
         "VALUES": {
-          "0": "Single shot time",
-          "1": "Single shot frequency",
-          "2": "Continuous time"
+          "0": "Single",
+          "1": "Continuous"
         }
       }
     }

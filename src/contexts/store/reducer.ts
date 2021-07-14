@@ -94,21 +94,21 @@ export const reducer = (state: State, action: Action): State => {
         samplePeriod: settings.SamplingPeriod,
         delay: settings.Delay,
         mode:
-          settings.Mode === 'Single Shot Frequency'
-            ? OscilloscopeMode.SINGLE_SHOT_FREQUENCY
-            : OscilloscopeMode.SINGLE_SHOT_TIME,
+          settings.Mode === 'Single'
+            ? OscilloscopeMode.SINGLE
+            : OscilloscopeMode.CONTINUOUS,
       };
       return { ...state };
     }
 
     case AhfCommand.WRITE_OSCILLOSCOPE_DATA: {
       const data = payload as AhfOscilloscopeData;
-      const continuousTimeDataSets: Dataset[] = [];
-      const singleShotFrequencyDataSets: Dataset[] = [];
+      const timeDataSets: Dataset[] = [];
+      const frequencyDataSets: Dataset[] = [];
       const { channels } = state.oscilloscope.settings;
 
       Object.values(data.YAxis).forEach((channelData, index) => {
-        continuousTimeDataSets.push({
+        timeDataSets.push({
           label: `${index}_${channels[index].id.toString()}`,
           data: channelData.Time,
           fill: false,
@@ -119,7 +119,7 @@ export const reducer = (state: State, action: Action): State => {
           radius: 0,
         });
 
-        singleShotFrequencyDataSets.push({
+        frequencyDataSets.push({
           label: `${index}_${channels[index].id.toString()}`,
           data: channelData.Freq,
           fill: false,
@@ -134,15 +134,11 @@ export const reducer = (state: State, action: Action): State => {
       state.oscilloscope.chart = {
         0: {
           labels: data.XAxis.XTime.map((data) => data.toFixed(5).toString()),
-          datasets: continuousTimeDataSets,
+          datasets: timeDataSets,
         },
         1: {
           labels: data.XAxis.XFreq.map((data) => data.toFixed(5).toString()),
-          datasets: singleShotFrequencyDataSets,
-        },
-        2: {
-          labels: data.XAxis.XTime.map((data) => data.toFixed(5).toString()),
-          datasets: continuousTimeDataSets,
+          datasets: frequencyDataSets,
         },
       };
 

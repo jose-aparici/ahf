@@ -17,10 +17,14 @@ export interface Settings {
   mode: OscilloscopeMode;
 }
 
+export enum OscilloscopeType {
+  TIME = 0,
+  FREQUENCY = 1,
+}
+
 export enum OscilloscopeMode {
-  SINGLE_SHOT_TIME = 0,
-  SINGLE_SHOT_FREQUENCY = 1,
-  CONTINUOUS_TIME = 2,
+  SINGLE = 0,
+  CONTINUOUS = 1,
 }
 
 export enum Mode {
@@ -35,13 +39,14 @@ export enum Status {
   triggerFound,
   recording,
   dataReady,
+  settingsReady,
 }
 
 /*
-  iddle, // display play button
-  start, // display stop button 
+  iddle, // display play button // app send to stop osci
+  start, // display stop button  // app send to start osci
   waitingForTrigger, //display stop button 
-
-
-
+  triggerFound ///display stop button
+  recording //display stop button,
+  dataReady // display play button,
 */

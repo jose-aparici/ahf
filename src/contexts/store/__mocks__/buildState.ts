@@ -31,7 +31,7 @@ const DEFAULT_STATE: State = {
       triggerMode: 0,
       samplePeriod: 0,
       delay: 0,
-      mode: OscilloscopeMode.SINGLE_SHOT_FREQUENCY,
+      mode: OscilloscopeMode.SINGLE,
     },
     status: Status.iddle,
   },
