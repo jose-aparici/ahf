@@ -73,6 +73,7 @@ export const AhfChartContainer: React.FC<Props> = ({
             valueLabelDisplay="on"
             aria-labelledby="range-slider"
             onChange={handleChangeSlider}
+            valueLabelFormat={handleValueLabelFormat}
             track="inverted"
             min={0}
             max={511}

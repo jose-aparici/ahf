@@ -34,13 +34,13 @@ export enum Mode {
 }
 
 export enum Status {
-  iddle,
-  start,
-  waitingForTrigger,
-  triggerFound,
-  recording,
-  dataReady,
-  settingsReady,
+  iddle = 'iddle',
+  start = 'start',
+  waitingForTrigger = 'waitingForTrigger',
+  triggerFound = 'triggerFound',
+  recording = 'recording',
+  dataReady = 'dataReady',
+  settingsReady = 'settingsReady',
 }
 
 /*

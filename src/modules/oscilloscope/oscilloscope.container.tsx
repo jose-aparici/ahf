@@ -119,6 +119,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
           onToggleStart={handleToggleStart}
           currentMode={settings.mode}
           currentType={settings.type}
+          currentStatus={status}
           onChangeMode={handleModeChange}
           onChangeType={handleTypeChange}
         />

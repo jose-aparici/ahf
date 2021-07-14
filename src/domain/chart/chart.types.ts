@@ -2,11 +2,6 @@ import { OscilloscopeMode } from 'domain/oscilloscope-settings/oscilloscope-sett
 
 export type Chart = Record<OscilloscopeMode, Data>;
 
-/* export interface Data {
-  labels: string[];
-  datasets: Dataset[];
-} */
-
 export interface Dataset {
   label: string;
   data: number[];

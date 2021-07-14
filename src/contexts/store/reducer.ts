@@ -18,8 +18,8 @@ import { Notification, Severity } from 'domain/notification/notification.types';
 import {
   OscilloscopeMode,
   OscilloscopeType,
-  Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
+import { transformAhfStatusToStatus } from 'domain/oscilloscope-settings/oscilloscope-settings.utils';
 import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
@@ -149,7 +149,9 @@ export const reducer = (state: State, action: Action): State => {
 
     case AhfCommand.WRITE_OSCILLOSCOPE_STATUS: {
       const ahfOscilloscopeStatus = payload as AhfOscilloscopeStatus;
-      state.oscilloscope.status = (ahfOscilloscopeStatus.Status.toString() as unknown) as Status;
+      state.oscilloscope.status = transformAhfStatusToStatus(
+        ahfOscilloscopeStatus.Status,
+      );
       return { ...state };
     }
 

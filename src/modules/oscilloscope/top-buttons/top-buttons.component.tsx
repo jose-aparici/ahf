@@ -17,6 +17,7 @@ import StopIcon from '@material-ui/icons/Stop';
 import {
   OscilloscopeMode,
   OscilloscopeType,
+  Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { OSCILLOSCOPE, SETTINGS } from 'pages/App.routes';
 
@@ -27,6 +28,7 @@ interface Props {
   isStart: boolean;
   currentMode: OscilloscopeMode;
   currentType: OscilloscopeType;
+  currentStatus: Status;
   onChangeMode: (mode: number) => void;
   onChangeType: (mode: number) => void;
   onToggleStart: () => void;
@@ -37,6 +39,7 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
   isStart,
   currentMode,
   currentType,
+  currentStatus,
   onChangeMode,
   onChangeType,
   onToggleStart,
