@@ -20,11 +20,15 @@ import {
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { OSCILLOSCOPE, SETTINGS } from 'pages/App.routes';
 
+import { useTopButtonsComponentStyles } from './top-buttons.component.styles';
+
 interface Props {
   devicePath: string;
   isStart: boolean;
   currentMode: OscilloscopeMode;
+  currentType: OscilloscopeType;
   onChangeMode: (mode: number) => void;
+  onChangeType: (mode: number) => void;
   onToggleStart: () => void;
 }
 
@@ -32,10 +36,13 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
   devicePath,
   isStart,
   currentMode,
+  currentType,
   onChangeMode,
+  onChangeType,
   onToggleStart,
 }: Props) => {
   const { t } = useTranslation();
+  const classes = useTopButtonsComponentStyles();
 
   return (
     <Grid container alignItems="center">
@@ -60,6 +67,34 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
           {isStart ? <StopIcon /> : <PlayArrowIcon />}
         </IconButton>
       </Grid>
+      <Grid className={classes.typeSelector}>
+        <FormControl>
+          <Select
+            labelId={`types`}
+            id={`select-types`}
+            value={currentType}
+            onChange={(event) => onChangeType(event.target.value as number)}
+            MenuProps={{
+              anchorOrigin: {
+                vertical: 'bottom',
+                horizontal: 'left',
+              },
+              getContentAnchorEl: null,
+              style: { maxHeight: '400px' },
+            }}
+          >
+            {[OscilloscopeType.TIME, OscilloscopeType.FREQUENCY].map(
+              (mode, index) => {
+                return (
+                  <MenuItem key={index} value={mode}>
+                    {t(`OSCILLOSCOPE.TOP_BUTTONS.TYPES.VALUES.${mode}`)}
+                  </MenuItem>
+                );
+              },
+            )}
+          </Select>
+        </FormControl>
+      </Grid>
       <Grid>
         <FormControl>
           <Select
@@ -76,11 +111,11 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
               style: { maxHeight: '400px' },
             }}
           >
-            {[OscilloscopeType.TIME, OscilloscopeType.FREQUENCY].map(
+            {[OscilloscopeMode.SINGLE, OscilloscopeMode.CONTINUOUS].map(
               (mode, index) => {
                 return (
                   <MenuItem key={index} value={mode}>
-                    {t(`OSCILLOSCOPE.TOP_BUTTONS.TYPES.VALUES.${mode}`)}
+                    {t(`OSCILLOSCOPE.TOP_BUTTONS.MODES.VALUES.${mode}`)}
                   </MenuItem>
                 );
               },

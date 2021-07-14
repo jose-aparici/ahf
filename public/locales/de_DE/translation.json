@@ -31,10 +31,16 @@
       }
     },
     "TOP_BUTTONS": {
-      "TYPES": {
+      "MODES": {
         "VALUES": {
           "0": "Single",
           "1": "Continuous"
+        }
+      },
+      "TYPES": {
+        "VALUES": {
+          "0": "Time",
+          "1": "Frequency"
         }
       }
     }
