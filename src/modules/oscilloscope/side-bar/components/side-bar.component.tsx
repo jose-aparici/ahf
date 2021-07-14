@@ -52,13 +52,17 @@ export const AhfSideBarComponent: React.FC<Props> = ({
                   style={{ color: Colors[index] }}
                 />
               </Grid>
-              <Grid container className={classes.gridValuesContainer}>
-                <Grid item xs={12}>
+              <Grid container spacing={2}>
+                <Grid item>
                   <Typography display="inline">
-                    {sliderValues[index] && `C1 = ${sliderValues[index][0]}`}
+                    {sliderValues[index] &&
+                      `C1 = ${sliderValues[index][0].toFixed(2)}`}
                   </Typography>
+                </Grid>
+                <Grid item>
                   <Typography display="inline">
-                    {sliderValues[index] && `C2 = ${sliderValues[index][1]}`}
+                    {sliderValues[index] &&
+                      `C2 = ${sliderValues[index][1].toFixed(2)}`}
                   </Typography>
                 </Grid>
               </Grid>

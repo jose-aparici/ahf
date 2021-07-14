@@ -26,7 +26,4 @@ export const useSideBarComponentStyles = makeStyles(() => ({
   checkBoxLabelColor: {
     color: blue[300],
   },
-  gridValuesContainer: {
-    paddingLeft: '31px',
-  },
 }));
