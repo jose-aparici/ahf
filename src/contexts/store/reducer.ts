@@ -17,6 +17,7 @@ import { EventLogFileName } from 'domain/event/events.type';
 import { Notification, Severity } from 'domain/notification/notification.types';
 import {
   OscilloscopeMode,
+  OscilloscopeType,
   Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
@@ -97,6 +98,7 @@ export const reducer = (state: State, action: Action): State => {
           settings.Mode === 'Single'
             ? OscilloscopeMode.SINGLE
             : OscilloscopeMode.CONTINUOUS,
+        type: OscilloscopeType.TIME,
       };
       return { ...state };
     }

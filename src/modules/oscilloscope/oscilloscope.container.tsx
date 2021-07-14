@@ -3,7 +3,6 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AppCommand } from 'domain/app/app.types';
-import { OscilloscopeType } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
 
 import { AhfChartContainer } from './chart/chart-container';
@@ -21,8 +20,6 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>([
     [],
   ]);
-
-  const [currentType, setCurrentType] = useState(OscilloscopeType.TIME);
 
   const { params } = useOscilloscopeContainer();
   const { settings, chart, status } = state.oscilloscope;
@@ -52,6 +49,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
             samplePeriod: settings.samplePeriod,
             delay: settings.delay,
             mode: settings.mode,
+            type: settings.type,
           },
           chart: chart,
           status: status,
@@ -89,7 +87,15 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   };
 
   const handleTypeChange = (type: number) => {
-    console.log(type);
+    settings.type = type;
+    dispatch({
+      type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
+      payload: {
+        settings: { ...settings },
+        chart: chart,
+        status: state.oscilloscope.status,
+      },
+    });
   };
 
   const handleToggleStart = () => {
@@ -112,7 +118,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
           isStart={start}
           onToggleStart={handleToggleStart}
           currentMode={settings.mode}
-          currentType={currentType}
+          currentType={settings.type}
           onChangeMode={handleModeChange}
           onChangeType={handleTypeChange}
         />

@@ -4,6 +4,7 @@ import { DeviceInfo, DevicePaths } from 'domain/device/device.types';
 import { Folder } from 'domain/folder/folder.types';
 import {
   OscilloscopeMode,
+  OscilloscopeType,
   Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
@@ -32,6 +33,7 @@ const DEFAULT_STATE: State = {
       samplePeriod: 0,
       delay: 0,
       mode: OscilloscopeMode.SINGLE,
+      type: OscilloscopeType.TIME,
     },
     status: Status.iddle,
   },

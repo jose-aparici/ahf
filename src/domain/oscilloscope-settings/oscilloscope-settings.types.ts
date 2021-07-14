@@ -15,6 +15,7 @@ export interface Settings {
   samplePeriod: number;
   delay: number;
   mode: OscilloscopeMode;
+  type: OscilloscopeType;
 }
 
 export enum OscilloscopeType {

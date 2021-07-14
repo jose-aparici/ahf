@@ -3,6 +3,7 @@ import { EventLogs } from 'domain/event/events.type';
 import { Notification } from 'domain/notification/notification.types';
 import {
   OscilloscopeMode,
+  OscilloscopeType,
   Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
@@ -40,6 +41,7 @@ export const initialState: State = {
       samplePeriod: 0,
       delay: 0,
       mode: OscilloscopeMode.SINGLE,
+      type: OscilloscopeType.TIME,
     },
     status: Status.iddle,
   },

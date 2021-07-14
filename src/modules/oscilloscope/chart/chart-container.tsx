@@ -29,15 +29,15 @@ export const AhfChartContainer: React.FC<Props> = ({
   );
 
   useEffect(() => {
-    if (chart !== undefined && settings.mode !== undefined) {
+    if (chart !== undefined && settings.type !== undefined) {
       setData({
-        labels: chart[settings.mode].labels,
-        datasets: chart[settings.mode].datasets.filter(
+        labels: chart[settings.type].labels,
+        datasets: chart[settings.type].datasets.filter(
           (_, index) => settings.channels[index].selected,
         ),
       });
     }
-  }, [chart, settings.channels, settings.mode]);
+  }, [chart, settings.channels, settings.type]);
 
   useEffect(() => {
     onSliderValuesChange(sliderValues);
