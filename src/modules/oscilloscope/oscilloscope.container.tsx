@@ -15,7 +15,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const location = useLocation();
 
   const deviceId = extractDeviceFromPath(location.pathname);
-  const [start, setStart] = useState(false);
+
   const [isOpen, setIsOpen] = useState<boolean>();
   const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>([
     [],
@@ -99,7 +99,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   };
 
   const handleToggleStart = () => {
-    setStart((previous) => !previous);
+    console.log('entra');
   };
 
   const handleToggleSideBar = useCallback(

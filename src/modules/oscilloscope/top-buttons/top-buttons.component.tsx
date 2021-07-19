@@ -67,7 +67,12 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
           aria-label="menu"
           onClick={onToggleStart}
         >
-          {isStart ? <StopIcon /> : <PlayArrowIcon />}
+          {currentStatus === Status.iddle ||
+          currentStatus === Status.dataReady ? (
+            <PlayArrowIcon />
+          ) : (
+            <StopIcon />
+          )}
         </IconButton>
       </Grid>
       <Grid className={classes.typeSelector}>

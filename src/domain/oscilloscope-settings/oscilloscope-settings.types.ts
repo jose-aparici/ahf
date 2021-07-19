@@ -42,12 +42,3 @@ export enum Status {
   dataReady = 'dataReady',
   settingsReady = 'settingsReady',
 }
-
-/*
-  iddle, // display play button // app send to stop osci
-  start, // display stop button  // app send to start osci
-  waitingForTrigger, //display stop button 
-  triggerFound ///display stop button
-  recording //display stop button,
-  dataReady // display play button,
-*/
