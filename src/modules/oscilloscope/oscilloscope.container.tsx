@@ -115,7 +115,6 @@ export const AhfOScilloscopeContainer: React.FC = () => {
       {deviceId && state.devices[+deviceId].structure && (
         <AhfTopButtonsComponent
           devicePath={state.devices[+deviceId].structure.id}
-          isStart={start}
           onToggleStart={handleToggleStart}
           currentMode={settings.mode}
           currentType={settings.type}

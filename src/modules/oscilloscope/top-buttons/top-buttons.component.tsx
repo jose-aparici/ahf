@@ -25,7 +25,6 @@ import { useTopButtonsComponentStyles } from './top-buttons.component.styles';
 
 interface Props {
   devicePath: string;
-  isStart: boolean;
   currentMode: OscilloscopeMode;
   currentType: OscilloscopeType;
   currentStatus: Status;
@@ -36,7 +35,6 @@ interface Props {
 
 export const AhfTopButtonsComponent: React.FC<Props> = ({
   devicePath,
-  isStart,
   currentMode,
   currentType,
   currentStatus,
