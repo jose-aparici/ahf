@@ -64,6 +64,7 @@ export interface AhfMessage {
     | AhfParamRead
     | AhfEvent
     | AhfEventLogFiles
+    | AhfOscilloscopeSettings
     | { Len: string }
     | { FileName: string }
     | string;

@@ -2,9 +2,11 @@ import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
 import { AhfLog } from 'domain/ahf-event/ahf-event.types';
+import { transformSettingsToAhfSettings } from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings.utils';
 import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { Action } from 'domain/app/app.types';
+import { Settings } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Param } from 'domain/param/param.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
@@ -23,7 +25,7 @@ interface SocketHook {
   readParameterSetList: () => void;
   readParameterSetFile: (fileName: string) => void;
   writeParameterSetFile: (settingsAdminFile: AhfSettingsAdminFile) => void;
-  readOscilloscopeSetttings: () => void;
+  readOscilloscopeSetttings: (settings: Settings) => void;
   readOscilloscopeStatus: () => void;
 }
 
@@ -141,10 +143,11 @@ export const useSocketHook = (): SocketHook => {
     [],
   );
 
-  const readOscilloscopeSetttings = useCallback(() => {
+  const readOscilloscopeSetttings = useCallback((settings: Settings) => {
+    const ahfSettings = transformSettingsToAhfSettings(settings);
     AhfSocket.getInstance().next({
       Cmd: AhfCommand.READ_OSCILLOSCOPE_SETTINGS,
-      Data: '',
+      Data: ahfSettings,
     });
   }, []);
 

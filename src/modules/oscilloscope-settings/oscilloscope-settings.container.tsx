@@ -1,11 +1,13 @@
+import { AhfContext } from 'contexts/store/context';
 import i18n from 'i18n';
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import { CardContent, Grid } from '@material-ui/core';
 
 import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
 import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { AhfCardFullPageComponent } from 'modules/shared/components/cards/full-page/card-full-page.component';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { AhfChannelsContainer } from './channels/channels.container';
 import { AhfDelayContainer } from './delay/delay.container';
@@ -19,6 +21,13 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
   const classes = useOScilloscopeSettingsContainerStyles();
   const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
     .position;
+
+  const { state } = useContext(AhfContext);
+  const { readOscilloscopeSetttings } = useSocketHook();
+
+  useEffect(() => {
+    readOscilloscopeSetttings(state.oscilloscope.settings);
+  }, [readOscilloscopeSetttings, state.oscilloscope.settings]);
 
   return (
     <AhfCardFullPageComponent>
