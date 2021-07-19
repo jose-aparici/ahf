@@ -27,20 +27,20 @@ interface Props {
   devicePath: string;
   currentMode: OscilloscopeMode;
   currentType: OscilloscopeType;
-  currentStatus: Status;
+  isPlayStatus: boolean;
   onChangeMode: (mode: number) => void;
   onChangeType: (mode: number) => void;
-  onToggleStart: () => void;
+  onToggleStatus: (status: Status) => void;
 }
 
 export const AhfTopButtonsComponent: React.FC<Props> = ({
   devicePath,
   currentMode,
   currentType,
-  currentStatus,
+  isPlayStatus,
   onChangeMode,
   onChangeType,
-  onToggleStart,
+  onToggleStatus,
 }: Props) => {
   const { t } = useTranslation();
   const classes = useTopButtonsComponentStyles();
@@ -63,14 +63,11 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
           component={Button}
           color="inherit"
           aria-label="menu"
-          onClick={onToggleStart}
+          onClick={() =>
+            onToggleStatus(isPlayStatus ? Status.iddle : Status.start)
+          }
         >
-          {currentStatus === Status.iddle ||
-          currentStatus === Status.dataReady ? (
-            <PlayArrowIcon />
-          ) : (
-            <StopIcon />
-          )}
+          {isPlayStatus ? <PlayArrowIcon /> : <StopIcon />}
         </IconButton>
       </Grid>
       <Grid className={classes.typeSelector}>

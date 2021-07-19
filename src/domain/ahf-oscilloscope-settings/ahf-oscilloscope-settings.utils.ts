@@ -1,11 +1,13 @@
 import {
   OscilloscopeMode,
   Settings,
+  Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 import {
   AhfOscilloscopeMode,
   AhfOscilloscopeSettings,
+  AhfStatus,
 } from './ahf-oscilloscope-settings';
 
 export const transformSettingsToAhfSettings = (
@@ -28,4 +30,18 @@ export const transformSettingsToAhfSettings = (
         ? AhfOscilloscopeMode.SINGLE
         : AhfOscilloscopeMode.CONTINUOUS,
   };
+};
+
+export const transformStatusToAhfStatus = (status: Status): AhfStatus => {
+  const mapperObject: Record<string, AhfStatus> = {
+    iddle: AhfStatus.Iddle,
+    start: AhfStatus.Start,
+    waitingForTrigger: AhfStatus.WaitingForTrigger,
+    triggerFound: AhfStatus.TriggerFound,
+    recording: AhfStatus.Recording,
+    dataReady: AhfStatus.DataReady,
+    settingsReady: AhfStatus.SettingsReady,
+  };
+
+  return mapperObject[status] as AhfStatus;
 };

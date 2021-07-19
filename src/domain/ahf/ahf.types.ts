@@ -16,6 +16,8 @@ import {
   AhfSettingsAdminFileList,
 } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 
+import { AhfStatus } from '../ahf-oscilloscope-settings/ahf-oscilloscope-settings';
+
 export enum AhfCommand {
   VERSION = 'WSVer',
   SCAN = 'Scan',
@@ -65,6 +67,8 @@ export interface AhfMessage {
     | AhfEvent
     | AhfEventLogFiles
     | AhfOscilloscopeSettings
+    | AhfStatus
+    | AhfOscilloscopeStatus
     | { Len: string }
     | { FileName: string }
     | string;

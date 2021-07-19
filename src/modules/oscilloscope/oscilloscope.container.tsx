@@ -3,7 +3,9 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AppCommand } from 'domain/app/app.types';
+import { Status } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
+import { useSocketHook } from 'modules/shared/hooks/socket-hook';
 
 import { AhfChartContainer } from './chart/chart-container';
 import { useOscilloscopeContainer } from './oscilloscope.container.hook';
@@ -20,6 +22,8 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>([
     [],
   ]);
+
+  const { readOscilloscopeStatus, writeOscilloscopeStatus } = useSocketHook();
 
   const { params } = useOscilloscopeContainer();
   const { settings, chart, status } = state.oscilloscope;
@@ -98,8 +102,9 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     });
   };
 
-  const handleToggleStart = () => {
-    console.log('entra');
+  const handleToggleStatus = (status: Status) => {
+    writeOscilloscopeStatus(status);
+    readOscilloscopeStatus();
   };
 
   const handleToggleSideBar = useCallback(
@@ -115,10 +120,10 @@ export const AhfOScilloscopeContainer: React.FC = () => {
       {deviceId && state.devices[+deviceId].structure && (
         <AhfTopButtonsComponent
           devicePath={state.devices[+deviceId].structure.id}
-          onToggleStart={handleToggleStart}
+          onToggleStatus={handleToggleStatus}
           currentMode={settings.mode}
           currentType={settings.type}
-          currentStatus={status}
+          isPlayStatus={status === Status.iddle || status === Status.dataReady}
           onChangeMode={handleModeChange}
           onChangeType={handleTypeChange}
         />

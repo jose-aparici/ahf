@@ -23,11 +23,11 @@ export interface AhfOscilloscopeStatus {
 }
 
 export enum AhfStatus {
-  Iddle,
-  Start,
-  WaitingForTrigger,
-  TriggerFound,
-  Recording,
-  DataReady,
-  SettingsReady,
+  Iddle = 'Iddle',
+  Start = 'Start',
+  WaitingForTrigger = 'WaitingForTrigger',
+  TriggerFound = 'TriggerFound',
+  Recording = 'Recording',
+  DataReady = 'DataReady',
+  SettingsReady = 'SettingsReady',
 }
