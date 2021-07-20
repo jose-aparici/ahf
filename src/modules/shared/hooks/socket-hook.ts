@@ -31,7 +31,7 @@ interface SocketHook {
   readParameterSetList: () => void;
   readParameterSetFile: (fileName: string) => void;
   writeParameterSetFile: (settingsAdminFile: AhfSettingsAdminFile) => void;
-  readOscilloscopeSetttings: (settings: Settings) => void;
+  writeOscilloscopeSetttings: (settings: Settings) => void;
   readOscilloscopeStatus: () => void;
   writeOscilloscopeStatus: (status: Status) => void;
 }
@@ -150,10 +150,10 @@ export const useSocketHook = (): SocketHook => {
     [],
   );
 
-  const readOscilloscopeSetttings = useCallback((settings: Settings) => {
+  const writeOscilloscopeSetttings = useCallback((settings: Settings) => {
     const ahfSettings = transformSettingsToAhfSettings(settings);
     AhfSocket.getInstance().next({
-      Cmd: AhfCommand.READ_OSCILLOSCOPE_SETTINGS,
+      Cmd: AhfCommand.WRITE_OSCILLOSCOPE_SETTINGS,
       Data: ahfSettings,
     });
   }, []);
@@ -188,7 +188,7 @@ export const useSocketHook = (): SocketHook => {
     readParameterSetList,
     readParameterSetFile,
     writeParameterSetFile,
-    readOscilloscopeSetttings,
+    writeOscilloscopeSetttings,
     readOscilloscopeStatus,
     writeOscilloscopeStatus,
   };

@@ -64,7 +64,7 @@ export const AhfTopButtonsComponent: React.FC<Props> = ({
           color="inherit"
           aria-label="menu"
           onClick={() =>
-            onToggleStatus(isPlayStatus ? Status.iddle : Status.start)
+            onToggleStatus(isPlayStatus ? Status.start : Status.iddle)
           }
         >
           {isPlayStatus ? <PlayArrowIcon /> : <StopIcon />}

@@ -23,11 +23,11 @@ export const AhfOscilloscopeSettingsContainer: React.FC = () => {
     .position;
 
   const { state } = useContext(AhfContext);
-  const { readOscilloscopeSetttings } = useSocketHook();
+  const { writeOscilloscopeSetttings } = useSocketHook();
 
   useEffect(() => {
-    readOscilloscopeSetttings(state.oscilloscope.settings);
-  }, [readOscilloscopeSetttings, state.oscilloscope.settings]);
+    writeOscilloscopeSetttings(state.oscilloscope.settings);
+  }, [writeOscilloscopeSetttings, state.oscilloscope.settings]);
 
   return (
     <AhfCardFullPageComponent>
