@@ -19,9 +19,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
   const deviceId = extractDeviceFromPath(location.pathname);
 
   const [isOpen, setIsOpen] = useState<boolean>();
-  const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>([
-    [],
-  ]);
+  const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>();
 
   const { readOscilloscopeStatus, writeOscilloscopeStatus } = useSocketHook();
 
@@ -117,28 +115,32 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   return (
     <>
-      {deviceId && state.devices[+deviceId].structure && (
-        <AhfTopButtonsComponent
-          devicePath={state.devices[+deviceId].structure.id}
-          onToggleStatus={handleToggleStatus}
-          currentMode={settings.mode}
-          currentType={settings.type}
-          isPlayStatus={status === Status.iddle || status === Status.dataReady}
-          onChangeMode={handleModeChange}
-          onChangeType={handleTypeChange}
-        />
+      {deviceId && state.devices[+deviceId].structure && chart && (
+        <>
+          <AhfTopButtonsComponent
+            devicePath={state.devices[+deviceId].structure.id}
+            onToggleStatus={handleToggleStatus}
+            currentMode={settings.mode}
+            currentType={settings.type}
+            isPlayStatus={
+              status === Status.iddle || status === Status.dataReady
+            }
+            onChangeMode={handleModeChange}
+            onChangeType={handleTypeChange}
+          />
+          <AhfChartContainer
+            open={isOpen === undefined ? false : isOpen}
+            onSliderValuesChange={handleSliderValuesChange}
+          />
+          {sliderChannelValues && (
+            <AhfSideBarContainer
+              isOpen={isOpen === undefined ? false : isOpen}
+              onToggleSideBar={handleToggleSideBar}
+              sliderChannelValues={sliderChannelValues}
+            />
+          )}
+        </>
       )}
-
-      <AhfChartContainer
-        open={isOpen === undefined ? false : isOpen}
-        onSliderValuesChange={handleSliderValuesChange}
-      />
-
-      <AhfSideBarContainer
-        isOpen={isOpen === undefined ? false : isOpen}
-        onToggleSideBar={handleToggleSideBar}
-        sliderChannelValues={sliderChannelValues}
-      />
     </>
   );
 };
