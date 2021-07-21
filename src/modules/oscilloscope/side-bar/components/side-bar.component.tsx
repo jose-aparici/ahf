@@ -16,6 +16,8 @@ interface Props {
   channels: Channel[];
   currentLanguage: number;
   sliderValues: number[][];
+  c1Value: number;
+  c2Value: number;
   onToggleChannel: (index: number) => void;
 }
 
@@ -23,11 +25,21 @@ export const AhfSideBarComponent: React.FC<Props> = ({
   channels,
   currentLanguage,
   sliderValues,
+  c1Value,
+  c2Value,
   onToggleChannel,
 }: Props) => {
   const classes = useSideBarComponentStyles();
   return (
     <Grid container className={classes.gridContainer}>
+      <Grid container spacing={2}>
+        <Grid item>{`C1 = ${c1Value}`}</Grid>
+        <Grid item>{`C2 = ${c2Value}`}</Grid>
+      </Grid>
+      <Grid container>
+        <Grid item>{`Dt = ${c2Value - c1Value}`}</Grid>
+      </Grid>
+
       {channels.map((channel, index) => {
         return (
           channel.value && (

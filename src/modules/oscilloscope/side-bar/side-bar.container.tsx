@@ -17,12 +17,14 @@ import { useSideBarContainerStyles } from './side-bar.container.styles';
 interface Props {
   isOpen: boolean;
   sliderChannelValues: number[][];
+  sliderValues: number[];
   onToggleSideBar: () => void;
 }
 
 export const AhfSideBarContainer: React.FC<Props> = ({
   isOpen,
   sliderChannelValues,
+  sliderValues,
   onToggleSideBar,
 }: Props) => {
   const classes = useSideBarContainerStyles();
@@ -31,7 +33,9 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const location = useLocation();
   const { state, dispatch } = useContext(AhfContext);
 
-  const { channels } = state.oscilloscope.settings;
+  const { chart } = state.oscilloscope;
+
+  const { channels, mode } = state.oscilloscope.settings;
 
   useEffect(() => {
     onToggleSideBar();
@@ -83,12 +87,16 @@ export const AhfSideBarContainer: React.FC<Props> = ({
             <ChevronRightIcon onClick={onToggleSideBar} />
           )}
         </Box>
-        <AhfSideBarComponent
-          channels={channels}
-          currentLanguage={currentLanguage}
-          onToggleChannel={handleToggleChannel}
-          sliderValues={sliderChannelValues}
-        />
+        {chart && (
+          <AhfSideBarComponent
+            channels={channels}
+            currentLanguage={currentLanguage}
+            onToggleChannel={handleToggleChannel}
+            sliderValues={sliderChannelValues}
+            c1Value={+chart[mode].labels[sliderValues[0]]}
+            c2Value={+chart[mode].labels[sliderValues[1]]}
+          />
+        )}
         <Toolbar className={classes.toolBarBottom} />
       </SwipeableDrawer>
     </>

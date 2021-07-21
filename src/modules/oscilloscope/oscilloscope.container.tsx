@@ -20,6 +20,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   const [isOpen, setIsOpen] = useState<boolean>();
   const [sliderChannelValues, setSliderChannelValues] = useState<number[][]>();
+  const [sliderValues, setSliderValues] = useState<number[]>([0, 511]);
 
   const { readOscilloscopeStatus, writeOscilloscopeStatus } = useSocketHook();
 
@@ -62,6 +63,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   const handleSliderValuesChange = useCallback(
     (sliderValues: number[]) => {
+      setSliderValues(sliderValues);
       if (chart) {
         setSliderChannelValues(
           settings.channels.map((channel, index) => {
@@ -137,6 +139,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
               isOpen={isOpen === undefined ? false : isOpen}
               onToggleSideBar={handleToggleSideBar}
               sliderChannelValues={sliderChannelValues}
+              sliderValues={sliderValues}
             />
           )}
         </>
