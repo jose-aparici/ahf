@@ -35,7 +35,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
 
   const { chart } = state.oscilloscope;
 
-  const { channels, mode } = state.oscilloscope.settings;
+  const { channels, type } = state.oscilloscope.settings;
 
   useEffect(() => {
     onToggleSideBar();
@@ -93,8 +93,8 @@ export const AhfSideBarContainer: React.FC<Props> = ({
             currentLanguage={currentLanguage}
             onToggleChannel={handleToggleChannel}
             sliderValues={sliderChannelValues}
-            c1Value={+chart[mode].labels[sliderValues[0]]}
-            c2Value={+chart[mode].labels[sliderValues[1]]}
+            c1Value={+chart[type].labels[sliderValues[0]]}
+            c2Value={+chart[type].labels[sliderValues[1]]}
           />
         )}
         <Toolbar className={classes.toolBarBottom} />

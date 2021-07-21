@@ -68,14 +68,14 @@ export const AhfOScilloscopeContainer: React.FC = () => {
         setSliderChannelValues(
           settings.channels.map((channel, index) => {
             return [
-              chart[settings.mode].datasets[index].data[sliderValues[0]],
-              chart[settings.mode].datasets[index].data[sliderValues[1]],
+              chart[settings.type].datasets[index].data[sliderValues[0]],
+              chart[settings.type].datasets[index].data[sliderValues[1]],
             ];
           }),
         );
       }
     },
-    [chart, settings.channels, settings.mode],
+    [chart, settings.channels, settings.type],
   );
 
   const handleModeChange = (mode: number) => {
