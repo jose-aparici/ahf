@@ -1,9 +1,8 @@
-import 'chartjs-plugin-zoom';
-
+import zoomPlugin from 'chartjs-plugin-zoom';
 import clsx from 'clsx';
 import { AhfContext } from 'contexts/store/context';
 import React, { useContext, useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
+import { Chart, Line } from 'react-chartjs-2';
 
 import { Slider } from '@material-ui/core';
 
@@ -27,6 +26,10 @@ export const AhfChartContainer: React.FC<Props> = ({
   const [data, setData] = useState(
     chart && settings ? chart[settings.mode] : undefined,
   );
+
+  useEffect(() => {
+    Chart.register(zoomPlugin);
+  }, []);
 
   useEffect(() => {
     if (chart !== undefined && settings.type !== undefined) {
