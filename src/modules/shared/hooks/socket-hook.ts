@@ -2,9 +2,17 @@ import { Dispatch, useCallback } from 'react';
 import { Subscription } from 'rxjs';
 
 import { AhfLog } from 'domain/ahf-event/ahf-event.types';
+import {
+  transformSettingsToAhfSettings,
+  transformStatusToAhfStatus,
+} from 'domain/ahf-oscilloscope-settings/ahf-oscilloscope-settings.utils';
 import { AhfSettingsAdminFile } from 'domain/ahf-settings-admin/ahf-settings-admin.types';
 import { AhfCommand, AhfPayload } from 'domain/ahf/ahf.types';
 import { Action } from 'domain/app/app.types';
+import {
+  Settings,
+  Status,
+} from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { Param } from 'domain/param/param.types';
 import { AhfSocket } from 'services/ahf-socket/ahf-socket.service';
 
@@ -23,6 +31,9 @@ interface SocketHook {
   readParameterSetList: () => void;
   readParameterSetFile: (fileName: string) => void;
   writeParameterSetFile: (settingsAdminFile: AhfSettingsAdminFile) => void;
+  writeOscilloscopeSetttings: (settings: Settings) => void;
+  readOscilloscopeStatus: () => void;
+  writeOscilloscopeStatus: (status: Status) => void;
 }
 
 export const useSocketHook = (): SocketHook => {
@@ -139,6 +150,29 @@ export const useSocketHook = (): SocketHook => {
     [],
   );
 
+  const writeOscilloscopeSetttings = useCallback((settings: Settings) => {
+    const ahfSettings = transformSettingsToAhfSettings(settings);
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.WRITE_OSCILLOSCOPE_SETTINGS,
+      Data: ahfSettings,
+    });
+  }, []);
+
+  const writeOscilloscopeStatus = useCallback((status: Status) => {
+    const ahfStatus = transformStatusToAhfStatus(status);
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.WRITE_OSCILLOSCOPE_STATUS,
+      Data: { Status: ahfStatus },
+    });
+  }, []);
+
+  const readOscilloscopeStatus = useCallback(() => {
+    AhfSocket.getInstance().next({
+      Cmd: AhfCommand.READ_OSCILLOSCOPE_STATUS,
+      Data: undefined,
+    });
+  }, []);
+
   return {
     init,
     listen,
@@ -154,5 +188,8 @@ export const useSocketHook = (): SocketHook => {
     readParameterSetList,
     readParameterSetFile,
     writeParameterSetFile,
+    writeOscilloscopeSetttings,
+    readOscilloscopeStatus,
+    writeOscilloscopeStatus,
   };
 };

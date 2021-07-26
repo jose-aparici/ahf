@@ -1,5 +1,11 @@
+import i18n from 'i18n';
+
 import { DevicePaths } from 'domain/device/device.types';
+import { AHF_LANGUAGES } from 'domain/languages/languages.constants';
+import { findLanguageByLocale } from 'domain/languages/languages.utils';
 import { Param, ParamType } from 'domain/param/param.types';
+import { SETTINGS_DEVICE_ID } from 'domain/settings/settings.contants';
+import { DEVICES } from 'pages/App.routes';
 
 import { AhfParam, AhfParamType } from './ahf-param.types';
 
@@ -57,6 +63,24 @@ export const transformAhfParamsToParam = (
   paths: DevicePaths,
   pathId: string,
 ): Param[] => {
+  if (
+    pathId.includes(`/${DEVICES}/${SETTINGS_DEVICE_ID}`) &&
+    ahfParams.length > 0
+  ) {
+    const languageParam = ahfParams.find((param) => param.ParamID === 200);
+    if (languageParam) {
+      const currentLanguage = findLanguageByLocale(AHF_LANGUAGES, i18n.language)
+        .position;
+      if (
+        languageParam.Value !== undefined &&
+        currentLanguage !== languageParam.Value
+      ) {
+        i18n.changeLanguage(
+          AHF_LANGUAGES[languageParam.Value as number].locale,
+        );
+      }
+    }
+  }
   return ahfParams.map((ahfParam) => {
     paths[`${pathId}/${ahfParam.ParamID}`] = ahfParam.Name;
     return ({

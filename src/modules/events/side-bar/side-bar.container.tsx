@@ -59,14 +59,14 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const handleRetrieveAll = () => {
     onClearEventLogs();
     setIsOpen(false);
-    openBackdrop();
+    openBackdrop(false);
     readEvents(ALL_EVENTS_SIZE);
   };
 
   const handleRetrieveLatest = () => {
     onClearEventLogs();
     setIsOpen(false);
-    openBackdrop();
+    openBackdrop(false);
     readEvents(LATEST_EVENTS_SIZE);
   };
 
@@ -79,7 +79,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
   const handleSelectEventLogFile = (value: string) => {
     onClearEventLogs();
     onClearLogFiles();
-    openBackdrop();
+    openBackdrop(false);
     setOpenFileListEditModal(false);
     setIsOpen(false);
     readEventLogFromFile(logFiles[+value]);

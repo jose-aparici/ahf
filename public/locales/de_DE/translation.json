@@ -18,7 +18,61 @@
       }
     }
   },
-  "HEADER": "german",
+  "ERROR": {
+    "BUTTONS": {
+      "TRY_AGAIN": "Try again"
+    },
+    "TITLE": "Oops! Something went wrong."
+  },
+  "OSCILLOSCOPE": {
+    "SIDEBAR": {
+      "PARAMETERS": {
+        "TITLE": "Parameters"
+      }
+    },
+    "TOP_BUTTONS": {
+      "MODES": {
+        "VALUES": {
+          "0": "Single",
+          "1": "Continuous"
+        }
+      },
+      "TYPES": {
+        "VALUES": {
+          "0": "Time",
+          "1": "Frequency"
+        }
+      }
+    }
+  },
+  "OSCILLOSCOPE_SETTINGS": {
+    "SECTIONS": {
+      "CHANNELS": {
+        "TITLE": "Channels",
+        "TRACE_TITLE": "Trace"
+      },
+      "DELAY": {
+        "MAX_POINTS": "Max points 512",
+        "TITLE": "Delay"
+      },
+      "MODES": {
+        "TITLE": "Mode",
+        "VALUES": {
+          "0": "More than",
+          "1": "Less than"
+        }
+      },
+      "SAMPLE_PERIOD": {
+        "TITLE": "Sample period"
+      },
+      "TRIGGER": {
+        "TITLE": "Trigger"
+      },
+      "TRIGGER_LEVEL": {
+        "TITLE": "Trigger level"
+      }
+    }
+  },
   "RESOURCE": {
     "MAIN": {
       "TITLES": {
