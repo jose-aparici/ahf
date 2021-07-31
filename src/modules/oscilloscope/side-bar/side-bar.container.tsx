@@ -45,14 +45,7 @@ export const AhfSideBarContainer: React.FC<Props> = ({
     channels[index].selected = !channels[index].selected;
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: {
-          ...state.oscilloscope.settings,
-          channels: [...channels],
-        },
-        chart: state.oscilloscope.chart,
-        status: state.oscilloscope.status,
-      },
+      payload: { ...state.oscilloscope.settings, channels: [...channels] },
     });
   };
 

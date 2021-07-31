@@ -30,7 +30,7 @@ export const AhfTriggerContainer: React.FC<Props> = ({
       };
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-        payload: { settings, status: state.oscilloscope.status },
+        payload: settings,
       });
     }
   };

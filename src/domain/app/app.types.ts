@@ -7,6 +7,7 @@ import {
 import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { ResourceCommand } from 'domain/resource/resource.type';
 
+import { OscilloscopeSettings } from '../oscilloscope-settings/oscilloscope-settings.types';
 import { ResourcePayload } from '../resource/resource.type';
 
 export enum AppCommand {
@@ -16,7 +17,7 @@ export enum AppCommand {
   UPDATE_OSCILLOSCOPE_SETTINGS = 'UpdateOscilloscopeSettings',
 }
 
-export type AppPayload = EventLogFileName | Oscilloscope;
+export type AppPayload = EventLogFileName | Oscilloscope | OscilloscopeSettings;
 
 export type Action = {
   type: AhfCommand | AppCommand | ResourceCommand | EventLogsFileNamesCommand;

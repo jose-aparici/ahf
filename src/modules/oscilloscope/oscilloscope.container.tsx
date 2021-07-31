@@ -1,5 +1,5 @@
 import { AhfContext } from 'contexts/store/context';
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { AppCommand } from 'domain/app/app.types';
@@ -24,42 +24,9 @@ export const AhfOScilloscopeContainer: React.FC = () => {
 
   const { readOscilloscopeStatus, writeOscilloscopeStatus } = useSocketHook();
 
-  const { params } = useOscilloscopeContainer();
   const { settings, chart, status } = state.oscilloscope;
 
-  useEffect(() => {
-    if (settings.params.length <= 0 && params.length > 0) {
-      dispatch({
-        type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-        payload: {
-          settings: {
-            channels: settings.channels.map((channel) => {
-              const param = params.find(
-                (param) => param.paramId === channel.id,
-              );
-              return param
-                ? { id: channel.id, value: param, selected: true }
-                : { id: channel.id };
-            }),
-            params,
-            trigger: params.find(
-              (param) => param.paramId === settings.trigger.id,
-            )
-              ? { id: params[0].paramId, value: params[0] }
-              : { id: settings.trigger.id },
-            triggerLevel: settings.triggerLevel,
-            triggerMode: settings.triggerMode,
-            samplePeriod: settings.samplePeriod,
-            delay: settings.delay,
-            mode: settings.mode,
-            type: settings.type,
-          },
-          chart: chart,
-          status: status,
-        },
-      });
-    }
-  }, [params, settings, chart, status, dispatch]);
+  useOscilloscopeContainer();
 
   const handleSliderValuesChange = useCallback(
     (sliderValues: number[]) => {
@@ -82,11 +49,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     settings.mode = mode;
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: { ...settings },
-        chart: chart,
-        status: state.oscilloscope.status,
-      },
+      payload: settings,
     });
   };
 
@@ -94,11 +57,7 @@ export const AhfOScilloscopeContainer: React.FC = () => {
     settings.type = type;
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: {
-        settings: { ...settings },
-        chart: chart,
-        status: state.oscilloscope.status,
-      },
+      payload: settings,
     });
   };
 

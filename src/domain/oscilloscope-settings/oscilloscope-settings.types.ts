@@ -6,7 +6,7 @@ export interface Channel {
   selected?: boolean;
 }
 
-export interface Settings {
+export interface OscilloscopeSettings {
   channels: Channel[];
   params: Param[];
   trigger: Channel;
@@ -16,6 +16,7 @@ export interface Settings {
   delay: number;
   mode: OscilloscopeMode;
   type: OscilloscopeType;
+  deviceId?: number;
 }
 
 export enum OscilloscopeType {

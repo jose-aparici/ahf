@@ -1,9 +1,9 @@
 import {
   OscilloscopeMode,
-  Settings,
   Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
+import { OscilloscopeSettings } from '../oscilloscope-settings/oscilloscope-settings.types';
 import {
   AhfOscilloscopeMode,
   AhfOscilloscopeSettings,
@@ -11,7 +11,7 @@ import {
 } from './ahf-oscilloscope-settings';
 
 export const transformSettingsToAhfSettings = (
-  settings: Settings,
+  settings: OscilloscopeSettings,
 ): AhfOscilloscopeSettings => {
   return {
     Ch1: settings.channels[0].id,

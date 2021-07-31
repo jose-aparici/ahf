@@ -21,9 +21,9 @@ import {
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 import { transformAhfStatusToStatus } from 'domain/oscilloscope-settings/oscilloscope-settings.utils';
 import { Colors } from 'domain/oscilloscope/oscilloscope.constants';
-import { Oscilloscope } from 'domain/oscilloscope/oscilloscope.types';
 import { transformAhfCurrentFileToCurrentFile } from 'domain/settings-admin/settings-admin.utils';
 
+import { OscilloscopeSettings } from '../../domain/oscilloscope-settings/oscilloscope-settings.types';
 import { State } from './initialState';
 import { deviceInfoReducer } from './reducer_device_info';
 import { deviceStructureReducer } from './reducer_device_structure';
@@ -74,7 +74,8 @@ export const reducer = (state: State, action: Action): State => {
     }
 
     case AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS: {
-      return { ...state, oscilloscope: payload as Oscilloscope };
+      state.oscilloscope.settings = payload as OscilloscopeSettings;
+      return { ...state };
     }
 
     case AhfCommand.WRITE_OSCILLOSCOPE_SETTINGS: {
