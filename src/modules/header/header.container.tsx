@@ -38,11 +38,15 @@ export const AhfHeaderContainer: FC = () => {
     if (deviceId !== undefined) {
       if (deviceId === SETTINGS && state.settings) {
         setBreadcrumbs([
-          { label: state.settings?.label, path: AppRoutes.SettingsPage },
+          {
+            label: state.settings?.label[currentLanguage],
+            path: AppRoutes.SettingsPage,
+          },
         ]);
       } else {
         setBreadcrumbs(
           pathToBreadCrumbs(
+            currentLanguage,
             location.pathname,
             state.devices[+deviceId].paths,
             state.eventLogs.fileName,
@@ -59,6 +63,7 @@ export const AhfHeaderContainer: FC = () => {
     state.eventLogs.fileName,
     state.settingsAdmin.currentFile,
     state.settings,
+    currentLanguage,
   ]);
 
   const handleToggleSideBar = (): void => setSideBarOpen(!sideBarOpen);
@@ -82,10 +87,7 @@ export const AhfHeaderContainer: FC = () => {
             )}
 
           {location.pathname !== AppRoutes.DevicesPage && breadcrumbs && (
-            <AhfBreadcrumbsComponent
-              currentLanguage={currentLanguage}
-              breadcrumbs={breadcrumbs}
-            />
+            <AhfBreadcrumbsComponent breadcrumbs={breadcrumbs} />
           )}
 
           <div className={classes.iconsSection}>
