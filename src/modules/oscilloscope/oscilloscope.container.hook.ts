@@ -6,7 +6,7 @@ import {
   findFolderById,
   getParamsFromFolder,
 } from 'domain/folder/folder.utils';
-import { PARAMS_FOLDER } from 'domain/oscilloscope/oscilloscope.constants';
+import { PARAMS_FOLDER } from 'domain/oscilloscope-settings/oscilloscope-settings.constants';
 import { Param } from 'domain/param/param.types';
 import { extractDeviceFromPath } from 'domain/path/path.utils';
 

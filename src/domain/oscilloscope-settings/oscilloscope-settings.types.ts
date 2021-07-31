@@ -16,6 +16,7 @@ export interface Settings {
   delay: number;
   mode: OscilloscopeMode;
   type: OscilloscopeType;
+  deviceId?: number;
 }
 
 export enum OscilloscopeType {
