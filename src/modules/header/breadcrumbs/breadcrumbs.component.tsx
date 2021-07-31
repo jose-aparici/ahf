@@ -10,11 +10,9 @@ import { useBreadcrumbsComponentStyles } from './breadcrumbs.component.styles';
 
 interface Props {
   breadcrumbs: Breadcrumb[];
-  currentLanguage: number;
 }
 export const AhfBreadcrumbsComponent: React.FC<Props> = ({
   breadcrumbs,
-  currentLanguage,
 }: Props) => {
   const classes = useBreadcrumbsComponentStyles();
   return (
@@ -34,7 +32,7 @@ export const AhfBreadcrumbsComponent: React.FC<Props> = ({
             activeClassName={classes.active}
             className={classes.item}
           >
-            {breadcrumb.label[currentLanguage]}
+            {breadcrumb.label}
           </Link>
         );
       })}
