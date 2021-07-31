@@ -3,6 +3,7 @@ import { DevicePaths } from 'domain/device/device.types';
 import { EVENTS, SETTINGS } from 'pages/App.routes';
 
 import { OSCILLOSCOPE, SETTINGS_ADMIN } from '../../pages/App.routes';
+import { MAX_LENGTH } from './breadcrumbs.constants';
 
 export const pathToBreadCrumbs = (
   currentLanguage: number,
@@ -66,14 +67,25 @@ export const pathToBreadCrumbs = (
       path: breadCrumbs[breadCrumbs.length - 1].path,
     });
   }
-  debugger;
+
+  truncBreadCrumbs(breadCrumbs, 1);
 
   return breadCrumbs;
 };
 
-//AHF Sync Module - 003   21
-//"2...5 Commissioning" 19
-//"4 Compensation settings" 23
-//"Standby hystersis123" 20
+const breadCrumbMaxLength = (breadcrumbs: Breadcrumb[]) => {
+  const totalLength = breadcrumbs.reduce(
+    (acum, current) => acum + current.label.length,
+    0,
+  );
+  return totalLength > MAX_LENGTH;
+};
 
-// max 83
+const truncBreadCrumbs = (breadcrumbs: Breadcrumb[], index: number) => {
+  if (breadCrumbMaxLength(breadcrumbs) && index < breadcrumbs.length) {
+    breadcrumbs[index].label = '...';
+    truncBreadCrumbs(breadcrumbs, index + 1);
+  } else {
+    return breadcrumbs;
+  }
+};
