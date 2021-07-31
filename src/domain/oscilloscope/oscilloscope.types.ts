@@ -1,11 +1,11 @@
 import { Chart } from 'domain/chart/chart.types';
 import {
-  Settings,
+  OscilloscopeSettings,
   Status,
 } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 export interface Oscilloscope {
-  settings: Settings;
+  settings: OscilloscopeSettings;
   status: Status;
   chart?: Chart;
 }
