@@ -19,6 +19,7 @@ export const AhfTriggerLevelContainer: React.FC = () => {
   const { triggerLevel } = state.oscilloscope.settings;
 
   const handleSave = (value: string) => {
+    debugger;
     setEditMode(false);
     const settings = {
       ...state.oscilloscope.settings,
@@ -26,7 +27,7 @@ export const AhfTriggerLevelContainer: React.FC = () => {
     };
     dispatch({
       type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
-      payload: { settings, status: state.oscilloscope.status },
+      payload: settings,
     });
   };
 
