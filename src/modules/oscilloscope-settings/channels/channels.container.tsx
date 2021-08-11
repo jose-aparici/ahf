@@ -34,7 +34,7 @@ export const AhfChannelsContainer: React.FC<Props> = ({
     if (selectedChannel) {
       const newChannels = [...channels];
       newChannels[number].id = selectedChannel.paramId;
-      newChannels[number].value = selectedChannel;
+      newChannels[number].name = selectedChannel.name[currentLanguage];
 
       const settings = {
         ...state.oscilloscope.settings,

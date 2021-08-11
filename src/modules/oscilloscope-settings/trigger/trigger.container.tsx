@@ -26,7 +26,10 @@ export const AhfTriggerContainer: React.FC<Props> = ({
     if (selectedTrigger) {
       const settings = {
         ...state.oscilloscope.settings,
-        trigger: { id: selectedTrigger.paramId, value: selectedTrigger },
+        trigger: {
+          id: selectedTrigger.paramId,
+          name: selectedTrigger.name[currentLanguage],
+        },
       };
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
@@ -41,7 +44,7 @@ export const AhfTriggerContainer: React.FC<Props> = ({
         {t('OSCILLOSCOPE_SETTINGS.SECTIONS.TRIGGER.TITLE')}
       </InputLabel>
 
-      {trigger && trigger.value && (
+      {trigger && trigger.name && (
         <Select
           labelId={`trigger`}
           id={`select-trigger`}

@@ -42,7 +42,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
 
       {channels.map((channel, index) => {
         return (
-          channel.value && (
+          channel.name && (
             <Grid container key={index}>
               <Grid item xs={12}>
                 <FormControlLabel
@@ -56,11 +56,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
                       }}
                     />
                   }
-                  label={
-                    <Typography>
-                      {channel.value.name[currentLanguage]}
-                    </Typography>
-                  }
+                  label={<Typography>{channel.name}</Typography>}
                   style={{ color: Colors[index] }}
                 />
               </Grid>

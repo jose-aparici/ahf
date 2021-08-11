@@ -2,7 +2,7 @@ import { Param } from 'domain/param/param.types';
 
 export interface Channel {
   id: number;
-  value?: Param;
+  name?: string;
   selected?: boolean;
 }
 
