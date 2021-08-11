@@ -8,28 +8,23 @@ import { AppCommand } from 'domain/app/app.types';
 
 import { useTriggerContainerStyles } from './trigger.container.styles';
 
-interface Props {
-  currentLanguage: number;
-}
-
-export const AhfTriggerContainer: React.FC<Props> = ({
-  currentLanguage,
-}: Props) => {
+export const AhfTriggerContainer: React.FC = () => {
   const classes = useTriggerContainerStyles();
   const { t } = useTranslation();
   const { state, dispatch } = useContext(AhfContext);
-  const { params, trigger } = state.oscilloscope.settings;
+  const { deviceChannels, trigger } = state.oscilloscope.settings;
 
   const handleTriggerChange = (id: number) => {
-    const selectedTrigger = params.find((param) => param.paramId === id);
+    const selectedTrigger = deviceChannels.find(
+      (deviceChannel) => deviceChannel.id === id,
+    );
+
+    debugger;
 
     if (selectedTrigger) {
       const settings = {
         ...state.oscilloscope.settings,
-        trigger: {
-          id: selectedTrigger.paramId,
-          name: selectedTrigger.name[currentLanguage],
-        },
+        trigger: selectedTrigger,
       };
       dispatch({
         type: AppCommand.UPDATE_OSCILLOSCOPE_SETTINGS,
@@ -61,10 +56,10 @@ export const AhfTriggerContainer: React.FC<Props> = ({
             style: { maxHeight: '400px' },
           }}
         >
-          {params.map((param, index) => {
+          {deviceChannels.map((deviceChannel, index) => {
             return (
-              <MenuItem key={index} value={param.paramId}>
-                {`${param.paramId} ${param.name[currentLanguage]}`}
+              <MenuItem key={index} value={deviceChannel.id}>
+                {`${deviceChannel.id} ${deviceChannel.name}`}
               </MenuItem>
             );
           })}

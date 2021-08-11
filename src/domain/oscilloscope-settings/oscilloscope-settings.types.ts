@@ -1,5 +1,3 @@
-import { Param } from 'domain/param/param.types';
-
 export interface Channel {
   id: number;
   name?: string;
@@ -8,7 +6,7 @@ export interface Channel {
 
 export interface OscilloscopeSettings {
   channels: Channel[];
-  params: Param[];
+  deviceChannels: Channel[];
   trigger: Channel;
   triggerLevel: number;
   triggerMode: number;

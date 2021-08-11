@@ -22,7 +22,7 @@ export const transformAhfStatusToStatus = (ahfStatus: AhfStatus): Status => {
   return mapperObject[ahfStatus] as Status;
 };
 
-export const getParamsByDeviceId = (
+export const getParamsByFolderId = (
   rootFolder: Folder,
   folderId: string,
 ): Param[] | undefined => {

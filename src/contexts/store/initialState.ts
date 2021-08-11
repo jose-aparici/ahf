@@ -34,7 +34,7 @@ export const initialState: State = {
   oscilloscope: {
     settings: {
       channels: [],
-      params: [],
+      deviceChannels: [],
       trigger: { id: 0 },
       triggerLevel: 0,
       triggerMode: 0,

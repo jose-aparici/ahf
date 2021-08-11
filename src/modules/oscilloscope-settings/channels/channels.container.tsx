@@ -15,26 +15,21 @@ import { AppCommand } from 'domain/app/app.types';
 
 import { useChannelsContainerStyles } from './channels.container.styles';
 
-interface Props {
-  currentLanguage: number;
-}
-
-export const AhfChannelsContainer: React.FC<Props> = ({
-  currentLanguage,
-}: Props) => {
+export const AhfChannelsContainer: React.FC = () => {
   const { t } = useTranslation();
   const classes = useChannelsContainerStyles();
 
   const { state, dispatch } = useContext(AhfContext);
-  const { channels, params } = state.oscilloscope.settings;
+  const { channels, deviceChannels } = state.oscilloscope.settings;
 
   const handleSave = (id: number, number: number) => {
-    const selectedChannel = params.find((param) => param.paramId === id);
+    const selectedChannel = deviceChannels.find(
+      (deviceChannel) => deviceChannel.id === id,
+    );
 
     if (selectedChannel) {
       const newChannels = [...channels];
-      newChannels[number].id = selectedChannel.paramId;
-      newChannels[number].name = selectedChannel.name[currentLanguage];
+      newChannels[number] = selectedChannel;
 
       const settings = {
         ...state.oscilloscope.settings,
@@ -86,10 +81,10 @@ export const AhfChannelsContainer: React.FC<Props> = ({
                     style: { maxHeight: '350px' },
                   }}
                 >
-                  {params.map((param, index) => {
+                  {deviceChannels.map((deviceChannel, index) => {
                     return (
-                      <MenuItem key={index} value={param.paramId}>
-                        {`${param.paramId} ${param.name[currentLanguage]}`}
+                      <MenuItem key={index} value={deviceChannel.id}>
+                        {`${deviceChannel.id} ${deviceChannel.name}`}
                       </MenuItem>
                     );
                   })}
