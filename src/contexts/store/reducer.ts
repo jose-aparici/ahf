@@ -89,7 +89,7 @@ export const reducer = (state: State, action: Action): State => {
           { id: settings.Ch5 },
           { id: settings.Ch6 },
         ],
-        params: [],
+        deviceChannels: [],
         trigger: { id: settings.TriggerSignal },
         triggerLevel: settings.TriggerLevel,
         triggerMode: settings.TriggerMode,
