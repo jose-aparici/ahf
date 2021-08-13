@@ -1,10 +1,11 @@
 import { AhfContext } from 'contexts/store/context';
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import { FormControl, InputLabel, MenuItem, Select } from '@material-ui/core';
 
 import { AppCommand } from 'domain/app/app.types';
+import { Channel } from 'domain/oscilloscope-settings/oscilloscope-settings.types';
 
 import { useTriggerContainerStyles } from './trigger.container.styles';
 
@@ -14,12 +15,25 @@ export const AhfTriggerContainer: React.FC = () => {
   const { state, dispatch } = useContext(AhfContext);
   const { deviceChannels, trigger } = state.oscilloscope.settings;
 
+  const [triggerChannels, setTriggerChannels] = useState<Channel[]>();
+
+  useEffect(() => {
+    const exists = deviceChannels.find(
+      (deviceChannel) => deviceChannel.id === trigger.id,
+    );
+
+    exists
+      ? setTriggerChannels(deviceChannels)
+      : setTriggerChannels([
+          ...deviceChannels,
+          { id: 0, name: '---', selected: false },
+        ]);
+  }, [deviceChannels, trigger]);
+
   const handleTriggerChange = (id: number) => {
     const selectedTrigger = deviceChannels.find(
       (deviceChannel) => deviceChannel.id === id,
     );
-
-    debugger;
 
     if (selectedTrigger) {
       const settings = {
@@ -39,7 +53,7 @@ export const AhfTriggerContainer: React.FC = () => {
         {t('OSCILLOSCOPE_SETTINGS.SECTIONS.TRIGGER.TITLE')}
       </InputLabel>
 
-      {trigger && trigger.name && (
+      {trigger && trigger.name && triggerChannels && (
         <Select
           labelId={`trigger`}
           id={`select-trigger`}
@@ -56,10 +70,12 @@ export const AhfTriggerContainer: React.FC = () => {
             style: { maxHeight: '400px' },
           }}
         >
-          {deviceChannels.map((deviceChannel, index) => {
+          {triggerChannels.map((deviceChannel, index) => {
             return (
               <MenuItem key={index} value={deviceChannel.id}>
-                {`${deviceChannel.id} ${deviceChannel.name}`}
+                {deviceChannel.id === 0
+                  ? `${deviceChannel.name}`
+                  : `${deviceChannel.id} ${deviceChannel.name}`}
               </MenuItem>
             );
           })}

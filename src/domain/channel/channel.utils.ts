@@ -11,9 +11,13 @@ export const getChannelsByDevice = (
   if (params === undefined) {
     return undefined;
   } else {
-    return params.map((param) => ({
+    const channels = params.map((param) => ({
       id: param.paramId,
       name: param.name[currentLanguage],
     }));
+
+    channels.unshift({ id: 0, name: '---' });
+
+    return channels;
   }
 };

@@ -46,8 +46,8 @@ export const useOscilloscopeContainer = (): void => {
             }),
             deviceChannels,
             trigger: foundedTrigger
-              ? { ...foundedTrigger, selected: true }
-              : { id: 0, name: '---', selected: false },
+              ? { ...foundedTrigger }
+              : { id: 0, name: '---' },
             triggerLevel: settings.triggerLevel,
             triggerMode: settings.triggerMode,
             samplePeriod: settings.samplePeriod,

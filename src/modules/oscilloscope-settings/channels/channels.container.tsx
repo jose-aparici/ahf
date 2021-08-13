@@ -29,7 +29,10 @@ export const AhfChannelsContainer: React.FC = () => {
 
     if (selectedChannel) {
       const newChannels = [...channels];
-      newChannels[number] = selectedChannel;
+      newChannels[number] =
+        selectedChannel.id === 0
+          ? selectedChannel
+          : { ...selectedChannel, selected: true };
 
       const settings = {
         ...state.oscilloscope.settings,
@@ -84,7 +87,9 @@ export const AhfChannelsContainer: React.FC = () => {
                   {deviceChannels.map((deviceChannel, index) => {
                     return (
                       <MenuItem key={index} value={deviceChannel.id}>
-                        {`${deviceChannel.id} ${deviceChannel.name}`}
+                        {deviceChannel.id === 0
+                          ? `${deviceChannel.name}`
+                          : `${deviceChannel.id} ${deviceChannel.name}`}
                       </MenuItem>
                     );
                   })}

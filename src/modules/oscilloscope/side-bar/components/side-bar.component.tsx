@@ -48,6 +48,7 @@ export const AhfSideBarComponent: React.FC<Props> = ({
                 <FormControlLabel
                   control={
                     <Checkbox
+                      disabled={channel.id === 0}
                       checked={channel.selected}
                       onChange={() => onToggleChannel(index)}
                       color="default"
